@@ -1,13 +1,16 @@
-public class HOGGameLoader : HOGMonoBehaviour
+namespace Core
 {
-    private void Start()
+    public class HOGGameLoader : HOGMonoBehaviour
     {
-        Invoke("DelayStart", 0.1f);
-    }
+        private void Start()
+        {
+            Invoke("DelayStart", 0.1f);
+        }
 
-    private void DelayStart()
-    {
-        new HOGManager();
-        Destroy(this.gameObject);
+        private void DelayStart()
+        {
+            new HOGManager();
+            Destroy(this.gameObject);
+        }
     }
 }

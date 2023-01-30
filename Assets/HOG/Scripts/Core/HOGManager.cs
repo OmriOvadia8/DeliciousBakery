@@ -1,17 +1,20 @@
-public class HOGManager
+namespace Core
 {
-    public static HOGManager Instance;
-
-    public HOGManager()
+    public class HOGManager
     {
-        if (Instance == null)
+        public static HOGManager Instance;
+
+        public HOGManager()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
         }
-    }
 
-    public int GetNumber()
-    {
-        return 3;
+        public int GetNumber()
+        {
+            return 3;
+        }
     }
 }
