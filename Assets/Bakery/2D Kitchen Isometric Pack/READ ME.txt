@@ -1,0 +1,29 @@
+Hello!
+
+There is three tile palettes for walls, floor and kitchen tables. Create more if you need for other furniture.
+
+To create Tile Palette go to "Window" -> "2D" -> "Tile Palette". In Tile Palette window click "Create New Palette". Name it, choose Grid "Isometric Z as Y" and Cell Size "Automatic". Create and save it.
+
+Next, drag assets you want in created Tile Palette and save it.
+
+To create grid to draw on, in Hierarchy window click "Create" -> "2D Object" -> "Isometric Z as Y Tilemap". 
+
+For drawing, select asset in Tile Palette, choose brush button and draw in Scene.
+
+I choose Pixels per Unit 256 and Max Size 512 for assets, but you can change it.
+
+To mirror asset horizontally press "{".
+
+2D Kitchen Isometric Pack and 2D Casual Isometric Pack have the same kitchen table outer and inner corners, but other things are different and don't have same names.
+
+
+If you find any mistakes in asssets (random spot on transparent background or holes) or have any questions, contact me!
+
+Email: marinatim2008@yandex.ru
+
+
+--------------
+
+I hope you like this 2D Kitchen Isometric Pack! Please rate and review it. It will help me to create more and better assets in future :)
+
+--------------
