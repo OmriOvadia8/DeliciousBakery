@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Core;
 using UnityEngine;
 
-public class CookFoodEvent : MonoBehaviour
+public class Events : MonoBehaviour
 {
     public HOGEvent cookFood;
 
