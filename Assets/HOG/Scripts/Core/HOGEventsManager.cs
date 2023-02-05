@@ -5,28 +5,28 @@ namespace Core
 {
     public class HOGEventsManager
     {
-        private Dictionary<string, List<HOGEvent>> activeListeners = new();
+        private Dictionary<string, List<Action<object>>> activeListeners = new();
 
-        public void AddListener(HOGEvent actualEvent)
+        public void AddListener(string eventName, Action<object> onGameStart)
         {
-            if (activeListeners.TryGetValue(actualEvent.eventName, out var listOfEvents))
+            if (activeListeners.TryGetValue(eventName, out var listOfEvents))
             {
-                listOfEvents.Add(actualEvent);
+                listOfEvents.Add(onGameStart);
                 return;
             }
 
-            activeListeners.Add(actualEvent.eventName, new List<HOGEvent> { actualEvent });
+            activeListeners.Add(eventName, new List<Action<object>> { onGameStart});
         }
 
-        public void RemoveListener(HOGEvent actualEvent)
+        public void RemoveListener(string eventName, Action<object> onGameStart)
         {
-            if (activeListeners.TryGetValue(actualEvent.eventName, out var listOfEvents))
+            if (activeListeners.TryGetValue(eventName, out var listOfEvents))
             {
-                listOfEvents.Remove(actualEvent);
+                listOfEvents.Remove(onGameStart);
 
                 if (listOfEvents.Count <= 0)
                 {
-                    activeListeners.Remove(actualEvent.eventName);
+                    activeListeners.Remove(eventName);
                 }
             }
         }
@@ -35,9 +35,9 @@ namespace Core
         {
             if (activeListeners.TryGetValue(eventName, out var listOfEvents))
             {
-                foreach (var hogEvent in listOfEvents)
+                foreach (var action in listOfEvents)
                 {
-                    hogEvent.eventAction.Invoke(obj);
+                    action.Invoke(obj);
                 }
             }
         }

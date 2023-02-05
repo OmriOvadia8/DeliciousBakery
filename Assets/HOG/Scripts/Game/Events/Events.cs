@@ -3,24 +3,16 @@ using System.Collections.Generic;
 using Core;
 using UnityEngine;
 
-public class Events : MonoBehaviour
+public class Events : HOGMonoBehaviour
 {
-    public HOGEvent cookFood;
-
     private void Start()
     {
-        cookFood = new HOGEvent
-        {
-            eventName = "CookFood",
-            eventAction = CookFood
-        };
-
-        HOGManager.Instance.EventsManager.AddListener(cookFood);
+        AddListener("CookFood", CookFood);
     }
 
     private void OnDestroy()
     {
-        HOGManager.Instance.EventsManager.RemoveListener(cookFood);
+        Manager.EventsManager.RemoveListener("CookFood", CookFood);
     }
 
     public void CookFood(object obj)
@@ -30,7 +22,7 @@ public class Events : MonoBehaviour
 
     public void StartCooking()
     {
-        HOGManager.Instance.EventsManager.InvokeEvent("CookFood", null);
+        Manager.EventsManager.InvokeEvent("CookFood", null);
     }
 }
 
