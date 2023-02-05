@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CurrencyManager : MonoBehaviour
+public abstract class CurrencyManager : MonoBehaviour
 {
     public PlayerData playerData;
     public static CurrencyManager Instance;
