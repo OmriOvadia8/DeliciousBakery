@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GemsManager : CurrencyManager
+public class StarsManager : CurrencyManager
 {
 
 }

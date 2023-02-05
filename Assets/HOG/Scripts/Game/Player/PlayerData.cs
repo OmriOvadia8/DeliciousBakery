@@ -4,10 +4,34 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
-    public float currency = 0;
+    protected CurrencyManager Money => MoneyManager.Instance;
+    protected CurrencyManager Stars => StarsManager.Instance;
 
-    public PlayerData(float startingCurrency)
+    public int currency;
+    
+
+    public PlayerData(int startingCurrency)
     {
         currency = startingCurrency;
+    }
+
+    public void SellFood(FoodData food)
+    {
+        Money.IncreaseCurrency(food.profit);
+    }
+
+    public void BuyRecipe(int recipeCost)
+    {
+        Money.DecreaseCurrency(recipeCost);
+    }
+
+    public void FoodUpgrade(int foodUpgradeCost)
+    {
+        Money.DecreaseCurrency(foodUpgradeCost);
+    }
+
+    public void EquipUpgrade(int equipUpgradeCost)
+    {
+        Money.DecreaseCurrency(equipUpgradeCost);
     }
 }

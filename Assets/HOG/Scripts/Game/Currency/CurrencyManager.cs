@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,13 +21,18 @@ public abstract class CurrencyManager : MonoBehaviour
     }
 
 
-    public void IncreaseCurrency(float amount)
+    public void IncreaseCurrency(int amount)
     {
         playerData.currency += amount;
     }
 
-    public void DecreaseCurrency(float amount)
+    public void DecreaseCurrency(int amount)
     {
         playerData.currency -= amount;
+    }
+
+    public int GetCurrency()
+    {
+        return playerData.currency;
     }
 }

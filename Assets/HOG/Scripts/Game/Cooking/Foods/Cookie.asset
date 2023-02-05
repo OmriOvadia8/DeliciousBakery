@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 255f484c80611c14a9a93afd7acdf9f7, type: 3}
-  m_Name: Bread
+  m_Name: Cookie
   m_EditorClassIdentifier: 
-  foodName: bread
+  foodName: Cookie
   level: 1
   profit: 100
   cookingTime: 2
