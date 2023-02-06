@@ -7,15 +7,15 @@ namespace Core
     {
         private Dictionary<string, List<Action<object>>> activeListeners = new();
 
-        public void AddListener(string eventName, Action<object> onGameStart)
+        public void AddListener(string eventName, Action<object> listener)
         {
             if (activeListeners.TryGetValue(eventName, out var listOfEvents))
             {
-                listOfEvents.Add(onGameStart);
+                listOfEvents.Add(listener);
                 return;
             }
 
-            activeListeners.Add(eventName, new List<Action<object>> { onGameStart});
+            activeListeners.Add(eventName, new List<Action<object>> { listener});
         }
 
         public void RemoveListener(string eventName, Action<object> onGameStart)
@@ -31,7 +31,7 @@ namespace Core
             }
         }
 
-        public void InvokeEvent(string eventName, object obj)
+        public void InvokeEvent(string eventName, object obj = null)
         {
             if (activeListeners.TryGetValue(eventName, out var listOfEvents))
             {

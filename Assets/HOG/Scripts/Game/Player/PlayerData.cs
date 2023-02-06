@@ -15,11 +15,6 @@ public class PlayerData : MonoBehaviour
         currency = startingCurrency;
     }
 
-    public void SellFood(FoodData food)
-    {
-        Money.IncreaseCurrency(food.profit);
-    }
-
     public void BuyRecipe(int recipeCost)
     {
         Money.DecreaseCurrency(recipeCost);

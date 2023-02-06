@@ -7,4 +7,5 @@ public class FoodData : ScriptableObject
     public int level;
     public int profit;
     public float cookingTime;
+    public int levelUpCost;
 }

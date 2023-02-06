@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Core;
 
-public class CookingManager : MonoBehaviour
+public class CookingManager : HOGMonoBehaviour
 {
     public FoodData[] foods;
     private bool[] isFoodOnCooldown;
     public TMP_Text moneyText;
 
+
     private void Start()
     {
         isFoodOnCooldown = new bool[foods.Length];
     }
+
 
     public void CookFood(int foodIndex)
     {
