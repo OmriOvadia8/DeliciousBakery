@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cookie
   m_EditorClassIdentifier: 
   foodName: Cookie
-  level: 1
+  level: 2
   profit: 100
   cookingTime: 2
+  levelUpCost: 300

@@ -18,11 +18,11 @@ namespace Core
             activeListeners.Add(eventName, new List<Action<object>> { listener});
         }
 
-        public void RemoveListener(string eventName, Action<object> onGameStart)
+        public void RemoveListener(string eventName, Action<object> listener)
         {
             if (activeListeners.TryGetValue(eventName, out var listOfEvents))
             {
-                listOfEvents.Remove(onGameStart);
+                listOfEvents.Remove(listener);
 
                 if (listOfEvents.Count <= 0)
                 {
@@ -31,7 +31,7 @@ namespace Core
             }
         }
 
-        public void InvokeEvent(string eventName, object obj = null)
+        public void InvokeEvent(string eventName, object obj)
         {
             if (activeListeners.TryGetValue(eventName, out var listOfEvents))
             {

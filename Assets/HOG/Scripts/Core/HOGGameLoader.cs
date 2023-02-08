@@ -1,3 +1,5 @@
+using UnityEngine.SceneManagement;
+
 namespace Core
 {
     public class HOGGameLoader : HOGMonoBehaviour
@@ -10,6 +12,7 @@ namespace Core
         private void DelayStart()
         {
             new HOGManager();
+            SceneManager.LoadScene(1);
             Destroy(this.gameObject);
         }
     }

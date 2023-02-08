@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
+    public static PlayerData Instance;
     protected CurrencyManager Money => MoneyManager.Instance;
     protected CurrencyManager Stars => StarsManager.Instance;
 
     public int currency;
-    
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
 
     public PlayerData(int startingCurrency)
     {
