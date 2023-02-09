@@ -5,46 +5,48 @@ using UnityEngine;
 using Core;
 using TMPro;
 
-public abstract class CurrencyManager : HOGMonoBehaviour
+namespace Game
 {
-    public static string UpdateCurrency = "UpdateCurrency";
-    public static CurrencyManager Instance;
-    public TMP_Text moneyText;
-
-    private void Awake()
+    public abstract class CurrencyManager : HOGMonoBehaviour
     {
-        if (Instance == null)
+        public static CurrencyManager Instance;
+        public TMP_Text moneyText;
+
+        private void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
+
+        private void Start()
         {
-            Destroy(gameObject);
+            AddListener(HOGEventNames.UpdateCurrency, UpdateCurrencyDisplay);
         }
-    }
 
-    private void Start()
-    {
-        AddListener(UpdateCurrency, UpdateCurrencyDisplay);
-    }
+        private void UpdateCurrencyDisplay(object obj)
+        {
+            moneyText.text = obj.ToString();
+        }
 
-    private void UpdateCurrencyDisplay(object obj)
-    {
-        moneyText.text = obj.ToString();
-    }
+        public void IncreaseCurrency(int amount)
+        {
+            PlayerData.Instance.currency += amount;
+        }
 
-    public void IncreaseCurrency(int amount)
-    {
-        PlayerData.Instance.currency += amount;
-    }
+        public void DecreaseCurrency(int amount)
+        {
+            PlayerData.Instance.currency -= amount;
+        }
 
-    public void DecreaseCurrency(int amount)
-    {
-        PlayerData.Instance.currency -= amount;
-    }
-
-    public int GetCurrency()
-    {
-        return PlayerData.Instance.currency;
+        public int GetCurrency()
+        {
+            return PlayerData.Instance.currency;
+        }
     }
 }

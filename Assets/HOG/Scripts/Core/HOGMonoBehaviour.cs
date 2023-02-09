@@ -7,10 +7,8 @@ namespace Core
     {
         protected HOGManager Manager => HOGManager.Instance;
 
-        protected void AddListener(string eventName, Action<object> listener) => Manager.EventsManager.AddListener(eventName, listener);
-        protected void RemoveListener(string eventName, Action<object> listener) => Manager.EventsManager.RemoveListener(eventName, listener);
-        protected void InvokeEvent(string eventName, object obj) => Manager.EventsManager.InvokeEvent(eventName, obj);
-
-
+        protected void AddListener(HOGEventNames eventName, Action<object> onGameStart) => Manager.EventsManager.AddListener(eventName, onGameStart);
+        protected void RemoveListener(HOGEventNames eventName, Action<object> onGameStart) => Manager.EventsManager.RemoveListener(eventName, onGameStart);
+        protected void InvokeEvent(HOGEventNames eventName, object obj) => Manager.EventsManager.InvokeEvent(eventName, obj);
     }
 }

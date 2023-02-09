@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StarsManager : CurrencyManager
+namespace Game
 {
 
+    public class StarsManager : CurrencyManager
+    {
+
+    }
 }

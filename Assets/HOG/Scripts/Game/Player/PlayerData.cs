@@ -2,44 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour
+
+namespace Game
 {
-    public static PlayerData Instance;
-    protected CurrencyManager Money => MoneyManager.Instance;
-    protected CurrencyManager Stars => StarsManager.Instance;
-
-    public int currency;
-
-    private void Awake()
+    public class PlayerData : MonoBehaviour
     {
-        if (Instance == null)
+        public static PlayerData Instance;
+        protected CurrencyManager Money => MoneyManager.Instance;
+        protected CurrencyManager Stars => StarsManager.Instance;
+
+        public int currency;
+
+        private void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
+
+
+        public PlayerData(int startingCurrency)
         {
-            Destroy(gameObject);
+            currency = startingCurrency;
         }
-    }
 
+        public void BuyRecipe(int recipeCost)
+        {
+            Money.DecreaseCurrency(recipeCost);
+        }
 
-    public PlayerData(int startingCurrency)
-    {
-        currency = startingCurrency;
-    }
+        public void FoodUpgrade(int foodUpgradeCost)
+        {
+            Money.DecreaseCurrency(foodUpgradeCost);
+        }
 
-    public void BuyRecipe(int recipeCost)
-    {
-        Money.DecreaseCurrency(recipeCost);
-    }
-
-    public void FoodUpgrade(int foodUpgradeCost)
-    {
-        Money.DecreaseCurrency(foodUpgradeCost);
-    }
-
-    public void EquipUpgrade(int equipUpgradeCost)
-    {
-        Money.DecreaseCurrency(equipUpgradeCost);
+        public void EquipUpgrade(int equipUpgradeCost)
+        {
+            Money.DecreaseCurrency(equipUpgradeCost);
+        }
     }
 }

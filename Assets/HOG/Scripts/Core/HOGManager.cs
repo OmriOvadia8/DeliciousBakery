@@ -1,6 +1,8 @@
+using System;
+
 namespace Core
 {
-    public class HOGManager
+    public class HOGManager : IHOGBaseManager
     {
         public static HOGManager Instance;
 
@@ -16,10 +18,20 @@ namespace Core
             }
 
             Instance = this;
+        }
 
+        public void LoadManager(Action onComplete)
+        {
             EventsManager = new HOGEventsManager();
             FactoryManager = new HOGFactoryManager();
             PoolManager = new HOGPoolManager();
+
+            onComplete.Invoke();
         }
+    }
+
+    public interface IHOGBaseManager
+    {
+        public void LoadManager(Action onComplete);
     }
 }

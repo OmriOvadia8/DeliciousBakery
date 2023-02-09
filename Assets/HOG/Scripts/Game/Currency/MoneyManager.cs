@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoneyManager : CurrencyManager
+namespace Game
 {
-     
+    public class MoneyManager : CurrencyManager
+    {
+
+    }
 }

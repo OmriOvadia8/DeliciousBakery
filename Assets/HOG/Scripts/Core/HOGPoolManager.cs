@@ -7,37 +7,50 @@ namespace Core
     {
         private Dictionary<string, HOGPool> Pools = new();
 
-        public void InitPool(IHOGPoolable original, int amount, int maxAmount)
+        private Transform rootPools;
+
+        public HOGPoolManager()
+        {
+            rootPools = new GameObject().transform;
+            Object.DontDestroyOnLoad(rootPools);
+        }
+
+        public void InitPool(HOGPoolable original, int amount, int maxAmount)
         {
             HOGManager.Instance.FactoryManager.MultiCreateAsync(original, Vector3.zero, amount,
-                delegate (List<IHOGPoolable> list)
+                delegate (List<HOGPoolable> list)
                 {
                     foreach (var poolable in list)
                     {
                         poolable.name = original.name;
+                        poolable.transform.parent = rootPools;
+                        poolable.gameObject.SetActive(false);
                     }
 
                     var pool = new HOGPool
                     {
-                        AllPoolables = new Queue<IHOGPoolable>(list),
-                        UsedPoolables = new Queue<IHOGPoolable>(),
-                        AvailablePoolables = new Queue<IHOGPoolable>(list),
+                        AllPoolables = new Queue<HOGPoolable>(list),
+                        UsedPoolables = new Queue<HOGPoolable>(),
+                        AvailablePoolables = new Queue<HOGPoolable>(list),
                         MaxPoolables = maxAmount
                     };
 
-                    Pools.Add(original.gameObject.name, pool);
+                    Pools.Add(original.poolName, pool);
                 });
         }
 
-        public IHOGPoolable GetPoolable(string poolName)
+        public HOGPoolable GetPoolable(string poolName)
         {
             if (Pools.TryGetValue(poolName, out HOGPool pool))
             {
-                if (pool.AvailablePoolables.TryDequeue(out IHOGPoolable poolable))
+                if (pool.AvailablePoolables.TryDequeue(out HOGPoolable poolable))
                 {
+                    Debug.Log($"GetPoolable - {poolName}");
+
                     poolable.OnTakenFromPool();
 
                     pool.UsedPoolables.Enqueue(poolable);
+                    poolable.gameObject.SetActive(true);
                     return poolable;
                 }
 
@@ -52,12 +65,13 @@ namespace Core
         }
 
 
-        public void ReturnPoolable(IHOGPoolable poolable)
+        public void ReturnPoolable(HOGPoolable poolable)
         {
             if (Pools.TryGetValue(poolable.poolName, out HOGPool pool))
             {
                 pool.AvailablePoolables.Enqueue(poolable);
                 poolable.OnReturnedToPool();
+                poolable.gameObject.SetActive(false);
             }
         }
 
@@ -86,30 +100,11 @@ namespace Core
         }
     }
 
-    public class IHOGPoolable : HOGMonoBehaviour
-    {
-        public string poolName;
-
-        public virtual void OnReturnedToPool()
-        {
-            this.gameObject.SetActive(false);
-        }
-
-        public virtual void OnTakenFromPool()
-        {
-            this.gameObject.SetActive(true);
-        }
-
-        public virtual void PreDestroy()
-        {
-        }
-    }
-
     public class HOGPool
     {
-        public Queue<IHOGPoolable> AllPoolables = new();
-        public Queue<IHOGPoolable> UsedPoolables = new();
-        public Queue<IHOGPoolable> AvailablePoolables = new();
+        public Queue<HOGPoolable> AllPoolables = new();
+        public Queue<HOGPoolable> UsedPoolables = new();
+        public Queue<HOGPoolable> AvailablePoolables = new();
 
         public int MaxPoolables = 100;
     }

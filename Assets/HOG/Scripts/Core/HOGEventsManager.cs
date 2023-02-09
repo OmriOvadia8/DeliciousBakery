@@ -5,24 +5,24 @@ namespace Core
 {
     public class HOGEventsManager
     {
-        private Dictionary<string, List<Action<object>>> activeListeners = new();
+        private Dictionary<HOGEventNames, List<Action<object>>> activeListeners = new();
 
-        public void AddListener(string eventName, Action<object> listener)
+        public void AddListener(HOGEventNames eventName, Action<object> onGameStart)
         {
             if (activeListeners.TryGetValue(eventName, out var listOfEvents))
             {
-                listOfEvents.Add(listener);
+                listOfEvents.Add(onGameStart);
                 return;
             }
 
-            activeListeners.Add(eventName, new List<Action<object>> { listener});
+            activeListeners.Add(eventName, new List<Action<object>> { onGameStart });
         }
 
-        public void RemoveListener(string eventName, Action<object> listener)
+        public void RemoveListener(HOGEventNames eventName, Action<object> onGameStart)
         {
             if (activeListeners.TryGetValue(eventName, out var listOfEvents))
             {
-                listOfEvents.Remove(listener);
+                listOfEvents.Remove(onGameStart);
 
                 if (listOfEvents.Count <= 0)
                 {
@@ -31,10 +31,11 @@ namespace Core
             }
         }
 
-        public void InvokeEvent(string eventName, object obj)
+        public void InvokeEvent(HOGEventNames eventName, object obj)
         {
             if (activeListeners.TryGetValue(eventName, out var listOfEvents))
             {
+                //TODO: Do For Loop
                 foreach (var action in listOfEvents)
                 {
                     action.Invoke(obj);
@@ -43,10 +44,12 @@ namespace Core
         }
     }
 
-    public class HOGEvent
+    public enum HOGEventNames
     {
-        public string eventName;
-        public Action<object> eventAction;
-
+        UpdateCurrency = 0,
+        OnScoreSet,
+        OnGameStart,
+        OnUpgraded,
+        TriangleTaken
     }
 }
