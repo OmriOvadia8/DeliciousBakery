@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using Core;
+using UnityEngine;
 
 namespace Game
 {
@@ -64,8 +65,7 @@ namespace Game
 
     public enum ScoreTags
     {
-        MainScore = 0,
-        KillsScore = 1,
-        ShaharScore = 2,
+        GameCurrency,
+        PremiumCurrency
     }
 }

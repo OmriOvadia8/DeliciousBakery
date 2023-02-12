@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Core;
 
 namespace Game
@@ -9,7 +10,9 @@ namespace Game
 
         public HOGScoreManager ScoreManager;
         public HOGUpgradeManager UpgradeManager;
-
+        public HOGMoneyHolder PlayerMoney;
+        public UIManager UI;
+        
         public HOGGameLogic()
         {
             if (Instance != null)
@@ -24,7 +27,9 @@ namespace Game
         {
             ScoreManager = new HOGScoreManager();
             UpgradeManager = new HOGUpgradeManager();
-
+            PlayerMoney = new HOGMoneyHolder();
+            UI = new UIManager();
+            
             onComplete.Invoke();
         }
     }

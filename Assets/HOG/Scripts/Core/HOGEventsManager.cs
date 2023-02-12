@@ -46,10 +46,8 @@ namespace Core
 
     public enum HOGEventNames
     {
-        UpdateCurrency = 0,
         OnScoreSet,
         OnGameStart,
         OnUpgraded,
-        TriangleTaken
     }
 }

@@ -1,11 +1,24 @@
+using Core;
+using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Food", menuName = "Food Data")]
-public class FoodData : ScriptableObject
+namespace Game
 {
-    public string foodName;
-    public int level;
-    public int profit;
-    public float cookingTime;
-    public int levelUpCost;
+    public class FoodData
+    {
+        public string name;
+        public int level;
+        public float cookingTime;
+        public int profit;
+        public int levelUpCost;
+
+        public FoodData(string name, int level, float cookingTime, int profit, int levelUpCost)
+        {
+            this.name = name;
+            this.level = level;
+            this.cookingTime = cookingTime;
+            this.profit = profit;
+            this.levelUpCost = levelUpCost;
+        }
+    }
 }

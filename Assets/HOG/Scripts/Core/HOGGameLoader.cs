@@ -15,6 +15,7 @@ namespace Core
 
         private void DelayStart()
         {
+
             var manager = new HOGManager();
 
             manager.LoadManager(() =>

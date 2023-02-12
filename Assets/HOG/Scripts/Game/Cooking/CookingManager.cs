@@ -10,41 +10,35 @@ namespace Game
     {
         public FoodData[] foods;
         private bool[] isFoodOnCooldown;
-        public Button[] levelUpButtons;
 
-
+        public HOGMoneyHolder Currency => HOGGameLogic.Instance.PlayerMoney;
 
         void Start()
         {
 
-            isFoodOnCooldown = new bool[foods.Length];
-            for (int i = 0; i < foods.Length; i++)
-            {
-                int foodIndex = i;
-                levelUpButtons[i].onClick.AddListener(() => LevelUpFood(foodIndex));
-            }
-        }
+            int foodCount = 5;
+            foods = new FoodData[foodCount];
+            isFoodOnCooldown = new bool[foodCount];
 
-        private void OnDisable()
-        {
-            for (int i = 0; i < foods.Length; i++)
+            for (int i = 0; i < foodCount; i++)
             {
-                int foodIndex = i;
-                levelUpButtons[i].onClick.RemoveListener(() => LevelUpFood(foodIndex));
-            }
-        }
-
-        private void Update()
-        {
-            for (int i = 0; i < foods.Length; i++)
-            {
-                if (CurrencyManager.Instance.GetCurrency() >= foods[i].levelUpCost)
+                switch (i)
                 {
-                    levelUpButtons[i].interactable = true;
-                }
-                else
-                {
-                    levelUpButtons[i].interactable = false;
+                    case 0:
+                        foods[i] = new FoodData("Burger", 1, 5, 10, 100);
+                        break;
+                    case 1:
+                        foods[i] = new FoodData("Bread", 1, 1, 5, 50);
+                        break;
+                    case 2:
+                        foods[i] = new FoodData("Candy", 1, 1, 3, 20);
+                        break;
+                    case 3:
+                        foods[i] = new FoodData("Pizza", 1, 3, 15, 200);
+                        break;
+                    case 4:
+                        foods[i] = new FoodData("Ice Cream", 1, 2, 8, 80);
+                        break;
                 }
             }
         }
@@ -57,9 +51,10 @@ namespace Game
             }
 
             float cookingTime = foods[foodIndex].cookingTime;
-            int profit = foods[foodIndex].profit;
+            int profit = foods[foodIndex].profit * foods[foodIndex].level;
 
             StartCoroutine(StartCooking(cookingTime, profit, foodIndex));
+
         }
 
         private IEnumerator StartCooking(float cookingTime, int profit, int foodIndex)
@@ -68,26 +63,15 @@ namespace Game
 
             yield return new WaitForSeconds(cookingTime);
 
-            CurrencyManager.Instance.IncreaseCurrency(profit);
-            CurrencyManager.Instance.moneyText.text = CurrencyManager.Instance.GetCurrency().ToString();
+            HOGGameLogic.Instance.PlayerMoney.UpdateCurrency(profit);
 
+            Debug.Log(foodIndex); 
+            
             isFoodOnCooldown[foodIndex] = false;
         }
-
-        public void LevelUpFood(int foodIndex)
-        {
-            // Check if the player has enough currency to level up the food item
-            if (CurrencyManager.Instance.GetCurrency() >= foods[foodIndex].levelUpCost)
-            {
-                PlayerData.Instance.currency -= foods[foodIndex].levelUpCost;
-                foods[foodIndex].level++;
-                Debug.Log(foods[foodIndex].level);
-
-                InvokeEvent(HOGEventNames.UpdateCurrency, CurrencyManager.Instance.GetCurrency());
-
-
-            }
-        }
-
     }
 }
+
+
+
+
