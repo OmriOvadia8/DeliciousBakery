@@ -7,6 +7,7 @@ namespace Game
 {
     public class HOGScoreManager
     {
+       
         public HOGPlayerScoreData PlayerScoreData;
 
         public bool TryGetScoreByTag(ScoreTags tag, ref int scoreOut)

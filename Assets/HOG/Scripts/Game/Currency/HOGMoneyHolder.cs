@@ -10,16 +10,19 @@ namespace Game
     public class HOGMoneyHolder : HOGMonoBehaviour
     {
         public HOGScoreManager Score => HOGGameLogic.Instance.ScoreManager;
-        public int startingCurrency;
+        public int startingCurrency = 0;
         private void OnEnable()
         {
             PlayerCurrency();
-            HOGGameLogic.Instance.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, 20);
+            
         }
-
+        private void Start()
+        {
+            UpdateCurrency(20);
+        }
         public void PlayerCurrency()
         {
-            InvokeEvent(HOGEventNames.OnScoreSet, (ScoreTags.GameCurrency, startingCurrency = 0));
+            Score.SetScoreByTag(ScoreTags.GameCurrency, startingCurrency);
         }
         public void UpdateCurrency(int foodProfit)
         {

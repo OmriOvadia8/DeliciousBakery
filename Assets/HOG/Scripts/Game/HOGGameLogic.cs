@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using Core;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace Game
 {
@@ -12,6 +13,7 @@ namespace Game
         public HOGUpgradeManager UpgradeManager;
         public HOGMoneyHolder PlayerMoney;
         public UIManager UI;
+        public HOGPlayerScoreData CurrencyDictionary;
         
         public HOGGameLogic()
         {
@@ -19,7 +21,6 @@ namespace Game
             {
                 return;
             }
-
             Instance = this;
         }
 
@@ -29,7 +30,7 @@ namespace Game
             UpgradeManager = new HOGUpgradeManager();
             PlayerMoney = new HOGMoneyHolder();
             UI = new UIManager();
-            
+       
             onComplete.Invoke();
         }
     }
