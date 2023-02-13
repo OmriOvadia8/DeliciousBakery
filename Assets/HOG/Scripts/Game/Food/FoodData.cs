@@ -11,6 +11,7 @@ namespace Game
         public float cookingTime;
         public int profit;
         public int levelUpCost;
+        
 
         public FoodData(string name, int level, float cookingTime, int profit, int levelUpCost)
         {
