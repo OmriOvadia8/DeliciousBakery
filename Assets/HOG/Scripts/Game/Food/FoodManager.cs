@@ -8,26 +8,18 @@ namespace Game
 {
     public class FoodManager : MonoBehaviour
     {
-        public FoodData[] foods;
+        private FoodData[] foods;
         private const int FOOD_COUNT = 10;
-        private bool[] isFoodOnCooldown;
+
         void Start()
         {
             foods = new FoodData[FOOD_COUNT];
-            isFoodOnCooldown = new bool[FOOD_COUNT];
 
-            foods[(int)FoodType.Burger] = new FoodData("Burger", 1, 2, 10, 10);
-            foods[(int)FoodType.Bread] = new FoodData("Bread", 1, 1, 5, 50);
-            foods[(int)FoodType.Candy] = new FoodData("Candy", 1, 1, 3, 20);
-            foods[(int)FoodType.Pizza] = new FoodData("Pizza", 1, 3, 15, 200);
-            foods[(int)FoodType.IceCream] = new FoodData("Ice Cream", 1, 2, 8, 80);
-            
-
-
-            for (int i = 0; i < FOOD_COUNT; i++)
-            {
-                isFoodOnCooldown[i] = false;
-            }
+            foods[(int)FoodType.Burger] = new FoodData("Burger", 2, 10, 10);
+            foods[(int)FoodType.Bread] = new FoodData("Bread", 1, 5, 50);
+            foods[(int)FoodType.Candy] = new FoodData("Candy", 1, 3, 20);
+            foods[(int)FoodType.Pizza] = new FoodData("Pizza", 3, 15, 200);
+            foods[(int)FoodType.IceCream] = new FoodData("Ice Cream", 2, 8, 80);
 
         }
 
@@ -38,12 +30,12 @@ namespace Game
 
         public bool IsFoodOnCooldown(int foodIndex)
         {
-            return isFoodOnCooldown[foodIndex];
+            return foods[foodIndex].IsOnCooldown;
         }
 
         public void SetFoodOnCooldown(int foodIndex, bool value)
         {
-            isFoodOnCooldown[foodIndex] = value;
+            foods[foodIndex].IsOnCooldown = value;
         }
 
     }
