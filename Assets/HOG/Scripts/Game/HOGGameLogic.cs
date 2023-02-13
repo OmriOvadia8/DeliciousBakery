@@ -13,7 +13,7 @@ namespace Game
         public HOGUpgradeManager UpgradeManager;
         public HOGMoneyHolder PlayerMoney;
         public UIManager UI;
-        public HOGPlayerScoreData CurrencyDictionary;
+        
         
         public HOGGameLogic()
         {
@@ -29,7 +29,6 @@ namespace Game
             ScoreManager = new HOGScoreManager();
             UpgradeManager = new HOGUpgradeManager();
             PlayerMoney = new HOGMoneyHolder();
-            UI = new UIManager();
        
             onComplete.Invoke();
         }

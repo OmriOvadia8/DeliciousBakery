@@ -11,6 +11,7 @@ namespace Game
             var hogGameLogic = new HOGGameLogic();
             hogGameLogic.LoadManager(() =>
             {
+                
                 base.StartLoad(onComplete);
             });
 
