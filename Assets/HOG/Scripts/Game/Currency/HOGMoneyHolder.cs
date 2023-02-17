@@ -21,7 +21,7 @@ namespace Game
 
         public void UpdateCurrency(int foodProfit)
         {
-            GameLogic.ScoreManager.SetScoreByTag(ScoreTags.GameCurrency, startingCurrency + foodProfit);
+            GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, foodProfit);
             if (HOGGameLogic.Instance.ScoreManager.TryGetScoreByTag(ScoreTags.GameCurrency, ref startingCurrency))
             {
                 InvokeEvent(HOGEventNames.OnCurrencySet, startingCurrency);
