@@ -9,17 +9,11 @@ namespace Game
     public class UIManager : HOGLogicMonoBehaviour
     {
         [SerializeField] TMP_Text moneyText;
-        private HOGMoneyHolder playerMoney;
+        [SerializeField] private HOGMoneyHolder playerMoney;
 
         private void OnEnable()
         {
-
             AddListener(HOGEventNames.OnCurrencySet, OnMoneyUpdate);
-        }
-
-        private void Start()
-        {
-            playerMoney = FindObjectOfType<HOGMoneyHolder>();
         }
 
         private void OnDisable()
@@ -27,7 +21,6 @@ namespace Game
             RemoveListener(HOGEventNames.OnCurrencySet, OnMoneyUpdate);
         }
 
-  
         private void OnMoneyUpdate(object obj)
         {
             if (GameLogic.ScoreManager.TryGetScoreByTag(ScoreTags.GameCurrency, ref playerMoney.startingCurrency))

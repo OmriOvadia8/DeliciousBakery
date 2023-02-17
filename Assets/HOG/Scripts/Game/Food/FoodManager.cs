@@ -37,7 +37,6 @@ namespace Game
         {
             foods[foodIndex].IsOnCooldown = value;
         }
-
     }
 
     public enum FoodType

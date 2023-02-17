@@ -9,14 +9,8 @@ namespace Game
 {
     public class CookingManager : HOGLogicMonoBehaviour
     {
-        private FoodManager foodManager;
-        private HOGMoneyHolder playerMoney;
-
-        void Start()
-        {
-            playerMoney = FindObjectOfType<HOGMoneyHolder>();
-            foodManager = FindObjectOfType<FoodManager>();
-        }
+        [SerializeField] private FoodManager foodManager;
+        [SerializeField] private HOGMoneyHolder playerMoney;
 
         public void CookFood(int foodIndex)
         {
@@ -40,7 +34,5 @@ namespace Game
                         
             foodManager.SetFoodOnCooldown(foodIndex, false);
         }
-
-
     }
 }

@@ -12638,6 +12638,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6b7becdac7fec4e95908425af20a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodManager: {fileID: 1432630589}
+  playerMoney: {fileID: 68174596}
 --- !u!1 &1347072870
 GameObject:
   m_ObjectHideFlags: 0
@@ -15975,6 +15977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyText: {fileID: 350408838}
+  playerMoney: {fileID: 68174596}
 --- !u!1 &1690067882
 GameObject:
   m_ObjectHideFlags: 0
