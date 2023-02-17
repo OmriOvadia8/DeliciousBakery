@@ -20,7 +20,6 @@ namespace Game
             foods[(int)FoodType.Candy] = new FoodData("Candy", 1, 3, 20);
             foods[(int)FoodType.Pizza] = new FoodData("Pizza", 3, 15, 200);
             foods[(int)FoodType.IceCream] = new FoodData("Ice Cream", 2, 8, 80);
-
         }
 
         public FoodData GetFoodData(int foodIndex)

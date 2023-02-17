@@ -9,6 +9,11 @@ namespace Game
     {
         public int startingCurrency = 0;
 
+        private void OnEnable()
+        {
+            PlayerCurrency();
+        }
+
         public void PlayerCurrency()
         {
             GameLogic.ScoreManager.SetScoreByTag(ScoreTags.GameCurrency, startingCurrency);
@@ -16,9 +21,11 @@ namespace Game
 
         public void UpdateCurrency(int foodProfit)
         {
-            GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, foodProfit);
-            InvokeEvent(HOGEventNames.OnCurrencySet, startingCurrency);
-            Debug.Log(startingCurrency);
+            GameLogic.ScoreManager.SetScoreByTag(ScoreTags.GameCurrency, startingCurrency + foodProfit);
+            if (HOGGameLogic.Instance.ScoreManager.TryGetScoreByTag(ScoreTags.GameCurrency, ref startingCurrency))
+            {
+                InvokeEvent(HOGEventNames.OnCurrencySet, startingCurrency);
+            }
         }
     }
 }

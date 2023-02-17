@@ -9,8 +9,8 @@ namespace Game
 {
     public class CookingManager : HOGLogicMonoBehaviour
     {
-        [SerializeField] private FoodManager foodManager;
-        [SerializeField] private HOGMoneyHolder playerMoney;
+        [SerializeField] FoodManager foodManager;
+        [SerializeField] HOGMoneyHolder playerMoney;
 
         public void CookFood(int foodIndex)
         {
