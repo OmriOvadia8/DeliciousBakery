@@ -70,8 +70,5 @@ namespace Game
             get { return levelUpCost; }
             set { levelUpCost = value; }
         }
-
-
-
     }
 }

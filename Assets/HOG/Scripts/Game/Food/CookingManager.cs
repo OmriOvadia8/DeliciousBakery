@@ -7,11 +7,8 @@ using UnityEngine.UI;
 
 namespace Game
 {
-    public class CookingManager : HOGMonoBehaviour
+    public class CookingManager : HOGLogicMonoBehaviour
     {
-        private HOGMoneyHolder Currency => HOGGameLogic.Instance.PlayerMoney;
-
- 
         private FoodManager foodManager;
 
         void Start()
@@ -37,7 +34,7 @@ namespace Game
         {
             yield return new WaitForSeconds(cookingTime);
 
-            Currency.UpdateCurrency(profit);
+            GameLogic.PlayerMoney.UpdateCurrency(profit);
 
             foodManager.SetFoodOnCooldown(foodIndex, false);
         }

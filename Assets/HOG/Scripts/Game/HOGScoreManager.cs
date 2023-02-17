@@ -7,7 +7,7 @@ namespace Game
 {
     public class HOGScoreManager
     {
-        public HOGPlayerScoreData PlayerScoreData = new();
+        private readonly HOGPlayerScoreData PlayerScoreData = new();
 
         public bool TryGetScoreByTag(ScoreTags tag, ref int scoreOut)
         {
@@ -60,8 +60,7 @@ namespace Game
 
     public class HOGPlayerScoreData
     {
-        public Dictionary<ScoreTags, int> ScoreByTag = new();
-        
+        public Dictionary<ScoreTags, int> ScoreByTag = new();     
     }
 
     public enum ScoreTags

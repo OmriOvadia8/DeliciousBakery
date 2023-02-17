@@ -5,19 +5,18 @@ using System;
 
 namespace Game
 {
-    public class HOGMoneyHolder
+    public class HOGMoneyHolder : HOGLogicMonoBehaviour
     {
-        private HOGScoreManager Score => HOGGameLogic.Instance.ScoreManager;
         public int startingCurrency = 0;
 
         public void PlayerCurrency()
         {
-            Score.SetScoreByTag(ScoreTags.GameCurrency, startingCurrency);
+            GameLogic.ScoreManager.SetScoreByTag(ScoreTags.GameCurrency, startingCurrency);
         }
 
         public void UpdateCurrency(int foodProfit)
         {
-            Score.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, foodProfit);
+            GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, foodProfit);
         }
 
 
