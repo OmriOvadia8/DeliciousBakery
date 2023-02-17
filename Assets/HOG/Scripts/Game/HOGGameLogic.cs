@@ -11,8 +11,8 @@ namespace Game
 
         public HOGScoreManager ScoreManager;
         public HOGUpgradeManager UpgradeManager;
-        public HOGMoneyHolder PlayerMoney;
-        public UIManager UI;
+        //public HOGMoneyHolder PlayerMoney;
+        //public UIManager UI;
         
         
         public HOGGameLogic()
@@ -28,7 +28,7 @@ namespace Game
         {
             ScoreManager = new HOGScoreManager();
             UpgradeManager = new HOGUpgradeManager();
-            PlayerMoney = new HOGMoneyHolder();
+           // PlayerMoney = new HOGMoneyHolder();
        
             onComplete.Invoke();
         }

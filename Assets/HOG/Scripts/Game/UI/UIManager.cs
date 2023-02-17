@@ -2,23 +2,39 @@ using Core;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using System;
 
 namespace Game
 {
-    public class UIManager : MonoBehaviour
+    public class UIManager : HOGLogicMonoBehaviour
     {
-        private HOGScoreManager Score => HOGGameLogic.Instance.ScoreManager;
-        private HOGMoneyHolder Money => HOGGameLogic.Instance.PlayerMoney;
-
         [SerializeField] TMP_Text moneyText;
+        private HOGMoneyHolder playerMoney;
 
-        private void Update()
-        {        
-            if (Score.TryGetScoreByTag(ScoreTags.GameCurrency, ref Money.startingCurrency))
+        private void OnEnable()
+        {
+
+            AddListener(HOGEventNames.OnCurrencySet, OnMoneyUpdate);
+        }
+
+        private void Start()
+        {
+            playerMoney = FindObjectOfType<HOGMoneyHolder>();
+        }
+
+        private void OnDisable()
+        {
+            RemoveListener(HOGEventNames.OnCurrencySet, OnMoneyUpdate);
+        }
+
+  
+        private void OnMoneyUpdate(object obj)
+        {
+            if (GameLogic.ScoreManager.TryGetScoreByTag(ScoreTags.GameCurrency, ref playerMoney.startingCurrency))
             {
-                moneyText.text = Money.startingCurrency.ToString();
+                moneyText.text = playerMoney.startingCurrency.ToString();
             }
         }
+
     }
 }

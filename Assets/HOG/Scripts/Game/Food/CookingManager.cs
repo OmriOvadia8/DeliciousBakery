@@ -10,9 +10,11 @@ namespace Game
     public class CookingManager : HOGLogicMonoBehaviour
     {
         private FoodManager foodManager;
+        private HOGMoneyHolder playerMoney;
 
         void Start()
         {
+            playerMoney = FindObjectOfType<HOGMoneyHolder>();
             foodManager = FindObjectOfType<FoodManager>();
         }
 
@@ -34,8 +36,8 @@ namespace Game
         {
             yield return new WaitForSeconds(cookingTime);
 
-            GameLogic.PlayerMoney.UpdateCurrency(profit);
-
+            playerMoney.UpdateCurrency(profit);
+                        
             foodManager.SetFoodOnCooldown(foodIndex, false);
         }
 

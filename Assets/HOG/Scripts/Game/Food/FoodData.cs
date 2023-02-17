@@ -8,7 +8,7 @@ namespace Game
 {
     public class FoodData
     {
-        private string name;
+        private readonly string name;
         private int level;
         private float cookingTime;
         private int profit;

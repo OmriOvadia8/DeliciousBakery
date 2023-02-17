@@ -22,7 +22,7 @@ namespace Game
 
         public void SetScoreByTag(ScoreTags tag, int amount = 0)
         {
-            HOGManager.Instance.EventsManager.InvokeEvent(HOGEventNames.OnScoreSet, (tag, amount));
+            HOGManager.Instance.EventsManager.InvokeEvent(HOGEventNames.OnCurrencySet, (tag, amount));
             PlayerScoreData.ScoreByTag[tag] = amount;
         }
 

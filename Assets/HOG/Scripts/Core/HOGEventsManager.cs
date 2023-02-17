@@ -5,7 +5,7 @@ namespace Core
 {
     public class HOGEventsManager
     {
-        private Dictionary<HOGEventNames, List<Action<object>>> activeListeners = new();
+        private readonly Dictionary<HOGEventNames, List<Action<object>>> activeListeners = new();
 
         public void AddListener(HOGEventNames eventName, Action<object> onGameStart)
         {
@@ -46,7 +46,7 @@ namespace Core
 
     public enum HOGEventNames
     {
-        OnScoreSet,
+        OnCurrencySet,
         OnGameStart,
         OnUpgraded,
     }
