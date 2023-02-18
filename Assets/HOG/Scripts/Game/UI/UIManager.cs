@@ -11,6 +11,7 @@ namespace Game
         [SerializeField] TMP_Text moneyText;
         [SerializeField] TMP_Text[] foodProfitText;
         [SerializeField] TMP_Text[] foodLevelText;
+        [SerializeField] TMP_Text[] upgradeCostText;
         [SerializeField] FoodManager foodManager;
 
         private void OnEnable()
@@ -38,8 +39,11 @@ namespace Game
         {
             int foodLevel = foodManager.GetFoodData((int)obj).Level;
             int foodProfit = foodManager.GetFoodData((int)obj).Profit;
+            int upgradeCost = foodManager.GetFoodData((int)obj).LevelUpCost;
+            
             foodLevelText[(int)obj].text = "Lv. " +foodLevel.ToString();
             foodProfitText[(int)obj].text = foodProfit.ToString();
+            upgradeCostText[(int)obj].text = upgradeCost.ToString();
         }
     }
 }
