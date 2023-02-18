@@ -8,16 +8,17 @@ namespace Game
 {
     public class FoodManager : HOGLogicMonoBehaviour
     {
-        private FoodData[] foods;
+        public FoodData[] foods;
         private const int FOOD_COUNT = 10;
         private readonly Dictionary<int, HOGUpgradeableData> foodUpgradeMap = new();
+        private const float profitIncrease = 1.1f;
         void Awake()
         {
             foods = new FoodData[FOOD_COUNT];
 
-            foods[(int)FoodType.Burger] = new FoodData("Burger", 2, 10, 10, 0);
-            foods[(int)FoodType.Bread] = new FoodData("Bread", 1, 5, 50, 1);
-            foods[(int)FoodType.Candy] = new FoodData("Candy", 1, 3, 20, 2);
+            foods[(int)FoodType.Burger] = new FoodData("Burger", 2, 20, 10, 0);
+            foods[(int)FoodType.Bread] = new FoodData("Bread", 1, 14, 50, 1);
+            foods[(int)FoodType.Candy] = new FoodData("Candy", 1, 12, 20, 2);
             foods[(int)FoodType.Pizza] = new FoodData("Pizza", 3, 15, 200, 3);
             foods[(int)FoodType.IceCream] = new FoodData("Ice Cream", 2, 8, 80, 4);
 
@@ -31,6 +32,14 @@ namespace Game
                         CurrentLevel = 1
                     };
                 }
+            }
+        }
+
+        private void Start()
+        {
+            for (int i = 0; i < FOOD_COUNT; i++)
+            {
+                InvokeEvent(HOGEventNames.OnUpgraded, i);
             }
         }
 
@@ -59,8 +68,9 @@ namespace Game
 
                 upgradeable.CurrentLevel++;
                 foodData.Level = upgradeable.CurrentLevel;
+                foodData.Profit = (int)(foodData.Profit * profitIncrease);
 
-                Debug.Log(foodData.Level);
+                InvokeEvent(HOGEventNames.OnUpgraded, foodID);
             }
         }
     }

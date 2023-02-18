@@ -9,7 +9,8 @@ namespace Game
     public class UIManager : HOGLogicMonoBehaviour
     {
         [SerializeField] TMP_Text moneyText;
-        [SerializeField] TMP_Text[] foodLevelTextFields;
+        [SerializeField] TMP_Text[] foodProfitText;
+        [SerializeField] TMP_Text[] foodLevelText;
         [SerializeField] FoodManager foodManager;
 
         private void OnEnable()
@@ -35,9 +36,10 @@ namespace Game
 
         private void OnUpgradeUpdate(object obj)
         {
-   
+            int foodLevel = foodManager.GetFoodData((int)obj).Level;
+            int foodProfit = foodManager.GetFoodData((int)obj).Profit;
+            foodLevelText[(int)obj].text = "Lv. " +foodLevel.ToString();
+            foodProfitText[(int)obj].text = foodProfit.ToString();
         }
-
-
     }
 }
