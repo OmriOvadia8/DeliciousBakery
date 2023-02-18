@@ -14,16 +14,32 @@ namespace Game
         private int profit;
         private int levelUpCost;
         private bool isOnCooldown;
+        private int foodID;
         private const int STARTING_LEVEL = 1;
 
-        public FoodData(string name, float cookingTime, int profit, int levelUpCost)
+        public FoodData(string name, float cookingTime, int profit, int levelUpCost, int foodID)
         {
             this.name = name;
             level = STARTING_LEVEL;
             this.cookingTime = cookingTime;
-            this.profit = profit;
+            this.profit = profit * level;
             this.levelUpCost = levelUpCost;
             isOnCooldown = false;
+            this.foodID = foodID;
+        }
+
+        public void Upgrade(int profitIncrease, int levelUpCostIncrease, float cookingTimeDecrease)
+        {
+            Profit += profitIncrease;
+            LevelUpCost += levelUpCostIncrease;
+            CookingTime -= cookingTimeDecrease;
+            Level++;
+        }
+
+        public int FoodID
+        {
+            get { return foodID; }
+            set { foodID = value; }
         }
 
         public int Level

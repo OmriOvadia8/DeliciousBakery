@@ -30,7 +30,7 @@ namespace Game
         {
             yield return new WaitForSeconds(cookingTime);
 
-            playerMoney.UpdateCurrency(profit);
+            playerMoney.UpdateCurrency(profit, foodManager.GetFoodData(foodIndex).Level);
                         
             foodManager.SetFoodOnCooldown(foodIndex, false);
         }

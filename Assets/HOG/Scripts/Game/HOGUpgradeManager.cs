@@ -11,26 +11,40 @@ namespace Game
         public HOGPlayerUpgradeInventoryData PlayerUpgradeInventoryData; //Player Saved Data
         public HOGUpgradeManagerConfig UpgradeConfig; //From cloud
 
+        public HOGUpgradeManager()
+        {
+            PlayerUpgradeInventoryData = new HOGPlayerUpgradeInventoryData
+            {
+                Upgradeables = new List<HOGUpgradeableData>(){new HOGUpgradeableData
+                    {
+                        upgradableTypeID = UpgradeablesTypeID.Food,
+                        CurrentLevel = 1
+                    }
+                }
+            };
+        }
+
         public void UpgradeItemByID(UpgradeablesTypeID typeID)
         {
             var upgradeable = GetUpgradeableByID(typeID);
 
             if (upgradeable != null)
             {
-                var upgradeableConfig = GetHogUpgradeableConfigByID(typeID);
-                HOGUpgradeableLevelData levelData = upgradeableConfig.UpgradableLevelData[upgradeable.CurrentLevel + 1];
-                int amountToReduce = levelData.CoinsNeeded;
-                ScoreTags coinsType = levelData.CurrencyTag;
+                //var upgradeableConfig = GetHogUpgradeableConfigByID(typeID);
+                //HOGUpgradeableLevelData levelData = upgradeableConfig.UpgradableLevelData[upgradeable.CurrentLevel + 1];
+                //int amountToReduce = levelData.CoinsNeeded;
+                //ScoreTags coinsType = levelData.CurrencyTag;
 
-                if (HOGGameLogic.Instance.ScoreManager.TryUseScore(coinsType, amountToReduce))
+                //if (HOGGameLogic.Instance.ScoreManager.TryUseScore(coinsType, amountToReduce))
                 {
                     upgradeable.CurrentLevel++;
                     HOGManager.Instance.EventsManager.InvokeEvent(HOGEventNames.OnUpgraded, typeID);
+                    
                 }
-                else
-                {
-                    Debug.LogError($"UpgradeItemByID {typeID} tried upgrade and there is no enough");
-                }
+                //else
+                //{
+                //    Debug.LogError($"UpgradeItemByID {typeID} tried upgrade and there is no enough");
+                //}
             }
         }
 
@@ -63,8 +77,8 @@ namespace Game
         public int Level;
         public int CoinsNeeded;
         public ScoreTags CurrencyTag;
-        public string ArtItem;
-        public int Power;
+        public float cookingTime;
+        public int costIncrease;
     }
 
     //Per Item Config
@@ -92,7 +106,8 @@ namespace Game
     [Serializable]
     public enum UpgradeablesTypeID
     {
-        Upgradable1 = 0,
-        Upgradeable2 = 1
+        Food = 0,
+        Baker = 1,
+        Equipment =2
     }
 }
