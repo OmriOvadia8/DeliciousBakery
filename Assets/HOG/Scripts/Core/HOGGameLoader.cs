@@ -10,12 +10,11 @@ namespace Core
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
-            Invoke("DelayStart", 1f);
+            Invoke("DelayStart", 1.25f);
         }
 
         private void DelayStart()
         {
-
             var manager = new HOGManager();
 
             manager.LoadManager(() =>

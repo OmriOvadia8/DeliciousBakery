@@ -9,7 +9,7 @@ namespace Game
     public class FoodManager : HOGLogicMonoBehaviour
     {
         private FoodData[] foods;
-        private const int FOOD_COUNT = 10; // total food types count in game
+        public const int FOOD_COUNT = 10; // total food types count in game
         private const float PROFIT_INCREASE = 1.1f; // increasing the food's profit by 10% each upgrade
         private const float COST_INCREASE = 1.15f; // increasing the upgrade's cost by 15% each upgrade
  

@@ -23,6 +23,8 @@ namespace Game
             float cookingTime = foodData.CookingTime;
             int profit = foodData.Profit;
             foodManager.SetFoodOnCooldown(foodIndex, true);
+            InvokeEvent(HOGEventNames.OnCookFood, foodIndex);
+       
             StartCoroutine(StartCooking(cookingTime, profit, foodIndex));
         }
 

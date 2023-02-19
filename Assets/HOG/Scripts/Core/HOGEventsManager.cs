@@ -49,5 +49,6 @@ namespace Core
         OnCurrencySet,
         OnGameStart,
         OnUpgraded,
+        OnCookFood
     }
 }
