@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 
 namespace Game
 {
@@ -17,16 +18,17 @@ namespace Game
             {
                 Upgradeables = new List<HOGUpgradeableData>(){new HOGUpgradeableData
                     {
-                        upgradableTypeID = UpgradeablesTypeID.Food,
-                        CurrentLevel = 1
+                    upgradableTypeID = UpgradeablesTypeID.Food,
+                    CurrentLevel = 1,
+                    foodID = 0
                     }
                 }
             };
         }
 
-        public void UpgradeItemByID(UpgradeablesTypeID typeID)
+        public void UpgradeItemByID(UpgradeablesTypeID typeID, int foodID)
         {
-            var upgradeable = GetUpgradeableByID(typeID);
+            var upgradeable = GetUpgradeableByID(typeID, foodID);
 
             if (upgradeable != null)
             {
@@ -36,11 +38,10 @@ namespace Game
                 //ScoreTags coinsType = levelData.CurrencyTag;
 
                 //if (HOGGameLogic.Instance.ScoreManager.TryUseScore(coinsType, amountToReduce))
-                {
+                //{
                     upgradeable.CurrentLevel++;
                     HOGManager.Instance.EventsManager.InvokeEvent(HOGEventNames.OnUpgraded, typeID);
-                    
-                }
+                //}
                 //else
                 //{
                 //    Debug.LogError($"UpgradeItemByID {typeID} tried upgrade and there is no enough");
@@ -54,11 +55,12 @@ namespace Game
             return upgradeableConfig;
         }
 
-        public HOGUpgradeableData GetUpgradeableByID(UpgradeablesTypeID typeID)
+        public HOGUpgradeableData GetUpgradeableByID(UpgradeablesTypeID typeID, int foodID)
         {
-            var upgradeable = PlayerUpgradeInventoryData.Upgradeables.FirstOrDefault(x => x.upgradableTypeID == typeID);
+            var upgradeable = PlayerUpgradeInventoryData.Upgradeables.FirstOrDefault(x => x.upgradableTypeID == typeID &&  x.foodID == foodID);
             return upgradeable;
         }
+
     }
 
 
@@ -68,6 +70,7 @@ namespace Game
     {
         public UpgradeablesTypeID upgradableTypeID;
         public int CurrentLevel;
+        public int foodID;
     }
 
     //Per Level in Item config
@@ -108,6 +111,6 @@ namespace Game
     {
         Food = 0,
         Baker = 1,
-        Equipment =2
+        Equipment = 2
     }
 }

@@ -1,90 +1,27 @@
-using Core;
-using System.Collections;
-using System.Runtime.ConstrainedExecution;
-using UnityEngine;
-using System;
-
 namespace Game
 {
     public class FoodData
     {
-        private readonly string name;
-        private int level;
-        private float cookingTime;
-        private int profit;
-        private int levelUpCost;
-        private bool isOnCooldown;
-        private int foodID;
-        private const int STARTING_LEVEL = 1;
+        private bool _isOnCooldown;
 
-        public FoodData(string name, float cookingTime, int profit, int levelUpCost, int foodID)
-        {
-            this.name = name;
-            level = STARTING_LEVEL;
-            this.cookingTime = cookingTime;
-            this.profit = profit * level;
-            this.levelUpCost = levelUpCost;
-            isOnCooldown = false;
-            this.foodID = foodID;
-        }
+        public string Name { get; }
+        public float CookingTime { get; set; }
+        public int Profit { get; set; }
+        public int LevelUpCost { get; set; }
 
-        public void Upgrade(int profitIncrease, int levelUpCostIncrease, float cookingTimeDecrease)
+        public FoodData(float cookingTime, int profit, int levelUpCost)
         {
-            Profit += profitIncrease;
-            LevelUpCost += levelUpCostIncrease;
-            CookingTime -= cookingTimeDecrease;
-            Level++;
-        }
+            CookingTime = cookingTime;
+            Profit = profit;
+            LevelUpCost = levelUpCost;
 
-        public int FoodID
-        {
-            get { return foodID; }
-            set { foodID = value; }
-        }
-
-        public int Level
-        {
-            get { return level; }
-            set { level = value; }
+            _isOnCooldown = false;
         }
 
         public bool IsOnCooldown
         {
-            get { return isOnCooldown; }
-            set
-            {
-                if (value)
-                {
-                    isOnCooldown = true;
-                }
-                else
-                {
-                    isOnCooldown = false;
-                }
-            }
-        }
-
-        public string Name
-        {
-            get { return name; }
-        }
-
-        public float CookingTime
-        {
-            get { return cookingTime; }
-            set { cookingTime = value; }
-        }
-
-        public int Profit
-        {
-            get { return profit; }
-            set { profit = value; }
-        }
-
-        public int LevelUpCost
-        {
-            get { return levelUpCost; }
-            set { levelUpCost = value; }
+            get { return _isOnCooldown; }
+            set { _isOnCooldown = value; }
         }
     }
 }

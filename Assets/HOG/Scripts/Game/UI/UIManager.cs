@@ -37,7 +37,7 @@ namespace Game
 
         private void OnUpgradeUpdate(object obj)
         {
-            int foodLevel = foodManager.GetFoodData((int)obj).Level;
+            int foodLevel = GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, (int)obj).CurrentLevel;
             int foodProfit = foodManager.GetFoodData((int)obj).Profit;
             int upgradeCost = foodManager.GetFoodData((int)obj).LevelUpCost;
             

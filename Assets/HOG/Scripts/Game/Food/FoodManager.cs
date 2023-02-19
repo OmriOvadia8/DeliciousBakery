@@ -8,42 +8,58 @@ namespace Game
 {
     public class FoodManager : HOGLogicMonoBehaviour
     {
-        public FoodData[] foods;
-        private const int FOOD_COUNT = 10;
-        private readonly Dictionary<int, HOGUpgradeableData> foodUpgradeMap = new();
-        private const float profitIncrease = 1.1f;
-        private const float levelUpCostIncrease = 1.2f;
-
+        private FoodData[] foods;
+        private const int FOOD_COUNT = 10; // total food types count in game
+        private const float PROFIT_INCREASE = 1.1f; // increasing the food's profit by 10% each upgrade
+        private const float COST_INCREASE = 1.15f; // increasing the upgrade's cost by 20% each upgrade
+ 
         void Awake()
         {
             foods = new FoodData[FOOD_COUNT];
 
-            foods[(int)FoodType.Burger] = new FoodData("Burger", 2, 20, 100, 0);
-            foods[(int)FoodType.Bread] = new FoodData("Bread", 1, 14, 30, 1);
-            foods[(int)FoodType.Candy] = new FoodData("Candy", 1, 12, 20, 2);
-            foods[(int)FoodType.Pizza] = new FoodData("Pizza", 3, 15, 200, 3);
-            foods[(int)FoodType.IceCream] = new FoodData("Ice Cream", 2, 8, 80, 4);
-
-            foreach (var foodItem in foods)
-            {
-                if (foodItem != null)
-                {
-                    foodUpgradeMap[foodItem.FoodID] = new HOGUpgradeableData
-                    {
-                        upgradableTypeID = UpgradeablesTypeID.Food,
-                        CurrentLevel = 1
-                    };
-                }
-            }
+            foods[(int)FoodType.Burger] = new FoodData(2, 30, 100);
+            foods[(int)FoodType.Bread] = new FoodData(1, 23, 72);
+            foods[(int)FoodType.Candy] = new FoodData(1, 15, 40);
+            foods[(int)FoodType.Pizza] = new FoodData(3, 15, 200);
+            foods[(int)FoodType.IceCream] = new FoodData(2, 8, 80);
+            foods[(int)FoodType.Donut] = new FoodData(2, 8, 80);
+            foods[(int)FoodType.Cookie] = new FoodData(2, 8, 80);
+            foods[(int)FoodType.Cupcake] = new FoodData(2, 8, 80);
+            foods[(int)FoodType.Cake] = new FoodData(2, 8, 80);
+            foods[(int)FoodType.Brownie] = new FoodData(2, 8, 80);
         }
 
         private void Start()
         {
             for (int i = 0; i < FOOD_COUNT; i++)
             {
+                AddNewFoodItem(i);
                 InvokeEvent(HOGEventNames.OnUpgraded, i);
-                Debug.Log(foods[i].LevelUpCost); 
             }
+        }
+
+        public void AddNewFoodItem(int foodID)
+        {
+            GameLogic.UpgradeManager.PlayerUpgradeInventoryData.Upgradeables.Add(new HOGUpgradeableData
+            {
+                upgradableTypeID = UpgradeablesTypeID.Food,
+                CurrentLevel = 1,
+                foodID = foodID
+            });
+        }
+
+        public void UpgradeFood(int foodID)
+        {
+            var foodData = foods[foodID];
+            var upgradeableType = UpgradeablesTypeID.Food;
+
+            GameLogic.UpgradeManager.UpgradeItemByID(upgradeableType, foodID);
+
+            foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE);
+            foodData.LevelUpCost = (int)(foodData.LevelUpCost * COST_INCREASE);
+
+            InvokeEvent(HOGEventNames.OnUpgraded, foodID);
+            Debug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(upgradeableType, foodID).CurrentLevel);
         }
 
         public FoodData GetFoodData(int foodIndex)
@@ -60,23 +76,6 @@ namespace Game
         {
             foods[foodIndex].IsOnCooldown = value;
         }
-
-        public void UpgradeFood(int foodID)
-        {
-            if (foodUpgradeMap.TryGetValue(foodID, out var upgradeable))
-            {
-                GameLogic.UpgradeManager.UpgradeItemByID(upgradeable.upgradableTypeID);
-
-                var foodData = foods[foodID];
-
-                upgradeable.CurrentLevel++;
-                foodData.Level = upgradeable.CurrentLevel;
-                foodData.Profit = (int)(foodData.Profit * profitIncrease);
-                foodData.LevelUpCost = (int)(foodData.LevelUpCost * levelUpCostIncrease);
-
-                InvokeEvent(HOGEventNames.OnUpgraded, foodID);
-            }
-        }
     }
 
     public enum FoodType
@@ -85,7 +84,11 @@ namespace Game
         Bread = 1,
         Candy = 2,
         Pizza = 3,
-        IceCream = 4
+        IceCream = 4,
+        Donut = 5,
+        Cookie = 6,
+        Cupcake = 7,
+        Cake = 8,
+        Brownie = 9
     }
-
 }
