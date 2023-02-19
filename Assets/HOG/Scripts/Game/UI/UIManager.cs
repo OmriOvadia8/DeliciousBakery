@@ -41,7 +41,7 @@ namespace Game
             int foodProfit = foodManager.GetFoodData((int)obj).Profit;
             int upgradeCost = foodManager.GetFoodData((int)obj).LevelUpCost;
             
-            foodLevelText[(int)obj].text = "Lv. " +foodLevel.ToString();
+            foodLevelText[(int)obj].text = "Lv. " + foodLevel.ToString();
             foodProfitText[(int)obj].text = foodProfit.ToString();
             upgradeCostText[(int)obj].text = upgradeCost.ToString();
         }
