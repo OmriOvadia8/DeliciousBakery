@@ -10,7 +10,7 @@ namespace Core
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
-            Invoke("DelayStart", 0.1f);
+            Invoke("DelayStart", 1f);
         }
 
         private void DelayStart()
