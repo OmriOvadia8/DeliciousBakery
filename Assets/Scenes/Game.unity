@@ -860,6 +860,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 389719262}
     m_Modifications:
+    - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601694608294, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 842ad060401c3dc4884a1a540983b89c, type: 3}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2757,7 +2769,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 51,486,486,486
+  m_text: 51,486,486
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4365,6 +4377,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 389719262}
     m_Modifications:
+    - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601694608294, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: da0b36d6e59739346886be3510f60480, type: 3}
     - target: {fileID: 1588827601848755865, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Button3

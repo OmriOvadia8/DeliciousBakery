@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core;
-using UnityEngine;
-using UnityEngine.Diagnostics;
 
 namespace Game
 {
@@ -26,9 +24,9 @@ namespace Game
             };
         }
 
-        public void UpgradeItemByID(UpgradeablesTypeID typeID, int foodID)
+        public void UpgradeItemByID(UpgradeablesTypeID typeID, int index) // OVERLOAD orginal UpgradeItemByID method
         {
-            var upgradeable = GetUpgradeableByID(typeID, foodID);
+            var upgradeable = GetUpgradeableByID(typeID, index);
 
             if (upgradeable != null)
             {
@@ -49,20 +47,48 @@ namespace Game
             }
         }
 
+        public HOGUpgradeableData GetUpgradeableByID(UpgradeablesTypeID typeID, int index) // OVERLOAD Original  GetUpgradeableByID method
+        {
+            var upgradeable = PlayerUpgradeInventoryData.Upgradeables.FirstOrDefault(x => x.upgradableTypeID == typeID && x.foodID == index);
+            return upgradeable;
+        }
+
+        public void UpgradeItemByID(UpgradeablesTypeID typeID)  
+        {
+            var upgradeable = GetUpgradeableByID(typeID);
+
+            if (upgradeable != null)
+            {
+                //TODO:Config + Reduce Score
+                //var upgradeableConfig = GetHogUpgradeableConfigByID(typeID);
+                //HOGUpgradeableLevelData levelData = upgradeableConfig.UpgradableLevelData[upgradeable.CurrentLevel + 1];
+                //int amountToReduce = levelData.CoinsNeeded;
+                //ScoreTags coinsType = levelData.CurrencyTag;
+
+                //if (HOGGameLogic.Instance.ScoreManager.TryUseScore(coinsType, amountToReduce))
+                {
+                    upgradeable.CurrentLevel++;
+                    HOGManager.Instance.EventsManager.InvokeEvent(HOGEventNames.OnUpgraded, typeID);
+                }
+                //else
+                //{
+                //    Debug.LogError($"UpgradeItemByID {typeID.ToString()} tried upgrade and there is no enough");
+                //}
+            }
+        }
+
         public HOGUpgradeableConfig GetHogUpgradeableConfigByID(UpgradeablesTypeID typeID)
         {
             HOGUpgradeableConfig upgradeableConfig = UpgradeConfig.UpgradeableConfigs.FirstOrDefault(upgradable => upgradable.upgradableTypeID == typeID);
             return upgradeableConfig;
-        }
+        }    
 
-        public HOGUpgradeableData GetUpgradeableByID(UpgradeablesTypeID typeID, int foodID)
+        public HOGUpgradeableData GetUpgradeableByID(UpgradeablesTypeID typeID) 
         {
-            var upgradeable = PlayerUpgradeInventoryData.Upgradeables.FirstOrDefault(x => x.upgradableTypeID == typeID &&  x.foodID == foodID);
+            var upgradeable = PlayerUpgradeInventoryData.Upgradeables.FirstOrDefault(x => x.upgradableTypeID == typeID);
             return upgradeable;
         }
-
     }
-
 
     //Per Player Owned Item
     [Serializable]

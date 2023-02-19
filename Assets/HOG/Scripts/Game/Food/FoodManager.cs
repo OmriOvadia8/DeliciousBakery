@@ -13,7 +13,7 @@ namespace Game
         private const float PROFIT_INCREASE = 1.1f; // increasing the food's profit by 10% each upgrade
         private const float COST_INCREASE = 1.15f; // increasing the upgrade's cost by 15% each upgrade
  
-        void Awake()
+        void Awake() // on awake creating an array with all foods with their stats: Cooking Time, Profit, Upgrade Cost.
         {
             foods = new FoodData[FOOD_COUNT];
 
@@ -29,7 +29,7 @@ namespace Game
             foods[(int)FoodType.Brownie] = new FoodData(2, 8, 80);
         }
 
-        private void Start()
+        private void Start() // On start loop to add all the foods to the list and update text to each food's stats
         {
             for (int i = 0; i < FOOD_COUNT; i++)
             {
@@ -38,7 +38,7 @@ namespace Game
             }
         }
 
-        public void AddNewFoodItem(int foodID)
+        public void AddNewFoodItem(int foodID) // adding each food from the array to the upgradeables list
         {
             GameLogic.UpgradeManager.PlayerUpgradeInventoryData.Upgradeables.Add(new HOGUpgradeableData
             {
@@ -48,7 +48,7 @@ namespace Game
             });
         }
 
-        public void UpgradeFood(int foodID)
+        public void UpgradeFood(int foodID) // upgrading food results in increasing the level by 1 which then affects the other stats
         {
             var foodData = foods[foodID];
             var upgradeableType = UpgradeablesTypeID.Food;
@@ -62,17 +62,17 @@ namespace Game
             Debug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(upgradeableType, foodID).CurrentLevel);
         }
 
-        public FoodData GetFoodData(int foodIndex)
+        public FoodData GetFoodData(int foodIndex) // gather the food's stats info
         {
             return foods[foodIndex];
         }
 
-        public bool IsFoodOnCooldown(int foodIndex)
+        public bool IsFoodOnCooldown(int foodIndex) // checks if food is being cooked
         {
             return foods[foodIndex].IsOnCooldown;
         }
 
-        public void SetFoodOnCooldown(int foodIndex, bool value)
+        public void SetFoodOnCooldown(int foodIndex, bool value) // set food to being cooked or not
         {
             foods[foodIndex].IsOnCooldown = value;
         }

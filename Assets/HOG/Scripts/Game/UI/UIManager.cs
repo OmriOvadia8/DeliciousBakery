@@ -26,7 +26,7 @@ namespace Game
             RemoveListener(HOGEventNames.OnUpgraded, OnUpgradeUpdate);
         }
 
-        private void OnMoneyUpdate(object obj)
+        private void OnMoneyUpdate(object obj) // updates player's current money amount text
         {
             int currency = 0;
             if (GameLogic.ScoreManager.TryGetScoreByTag(ScoreTags.GameCurrency, ref currency))
@@ -35,7 +35,7 @@ namespace Game
             }
         }
 
-        private void OnUpgradeUpdate(object obj)
+        private void OnUpgradeUpdate(object obj) // update the foods stats after each upgrade
         {
             int foodLevel = GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, (int)obj).CurrentLevel;
             int foodProfit = foodManager.GetFoodData((int)obj).Profit;
