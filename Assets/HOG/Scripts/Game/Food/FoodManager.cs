@@ -11,7 +11,7 @@ namespace Game
         private FoodData[] foods;
         private const int FOOD_COUNT = 10; // total food types count in game
         private const float PROFIT_INCREASE = 1.1f; // increasing the food's profit by 10% each upgrade
-        private const float COST_INCREASE = 1.15f; // increasing the upgrade's cost by 20% each upgrade
+        private const float COST_INCREASE = 1.15f; // increasing the upgrade's cost by 15% each upgrade
  
         void Awake()
         {
@@ -19,7 +19,7 @@ namespace Game
 
             foods[(int)FoodType.Burger] = new FoodData(2, 30, 100);
             foods[(int)FoodType.Bread] = new FoodData(1, 23, 72);
-            foods[(int)FoodType.Candy] = new FoodData(1, 15, 40);
+            foods[(int)FoodType.Candy] = new FoodData(1, 17, 40);
             foods[(int)FoodType.Pizza] = new FoodData(3, 15, 200);
             foods[(int)FoodType.IceCream] = new FoodData(2, 8, 80);
             foods[(int)FoodType.Donut] = new FoodData(2, 8, 80);
