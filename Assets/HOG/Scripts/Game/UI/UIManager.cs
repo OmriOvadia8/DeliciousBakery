@@ -10,6 +10,11 @@ namespace Game
 {
     public class UIManager : HOGLogicMonoBehaviour
     {
+        private readonly Dictionary<int, Tweener> tweener = new();
+
+        private readonly float minValue = 0f; 
+        private readonly float maxValue = 1f;
+
         [SerializeField] FoodManager foodManager;
 
         [SerializeField] TMP_Text moneyText;
@@ -21,26 +26,18 @@ namespace Game
         [SerializeField] Slider[] cookingSliderBar;
         [SerializeField] TMP_Text[] cookingTimeText;
 
-        private readonly Dictionary<int, Tweener> tweener = new();
-
-        private readonly float minValue = 0f;
-        private readonly float maxValue = 1f;
-
-
         private void OnEnable()
         {
             AddListener(HOGEventNames.OnCurrencySet, OnMoneyUpdate);
             AddListener(HOGEventNames.OnUpgraded, OnUpgradeUpdate);
             AddListener(HOGEventNames.OnCookFood, CookingLoadingBarAnimation);
+            AddListener(HOGEventNames.OnCookFood, CookingTimer);
 
             for (int i = 0; i < FoodManager.FOOD_COUNT; i++)
             {
-                cookingSliderBar[i].value = minValue;
-                // get the cooking time for the food item
-                float cookingTime = foodManager.GetFoodData(i).CookingTime;
-
-                // set the cooking time in the timer text
-                cookingTimeText[i].text = TimeSpan.FromSeconds(cookingTime).ToString("mm':'ss");
+                cookingSliderBar[i].value = minValue; // sets all bars to 0 (empty)      
+                float cookingTime = GetFoodData(i).CookingTime; // get the cooking time for the food item            
+                cookingTimeText[i].text = TimeSpan.FromSeconds(cookingTime).ToString("mm':'ss"); // set the cooking time in the timer text
             }
         }
 
@@ -49,6 +46,7 @@ namespace Game
             RemoveListener(HOGEventNames.OnCurrencySet, OnMoneyUpdate);
             RemoveListener(HOGEventNames.OnUpgraded, OnUpgradeUpdate);
             RemoveListener(HOGEventNames.OnCookFood, CookingLoadingBarAnimation);
+            RemoveListener(HOGEventNames.OnCookFood, CookingTimer);
         }
 
         private void OnMoneyUpdate(object obj) // updates player's current money amount text
@@ -63,8 +61,8 @@ namespace Game
         private void OnUpgradeUpdate(object obj) // update the foods stats after each upgrade
         {
             int foodLevel = GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, (int)obj).CurrentLevel;
-            int foodProfit = foodManager.GetFoodData((int)obj).Profit;
-            int upgradeCost = foodManager.GetFoodData((int)obj).LevelUpCost;
+            int foodProfit = GetFoodData((int)obj).Profit;
+            int upgradeCost = GetFoodData((int)obj).LevelUpCost;
 
             foodLevelText[(int)obj].text = "Lv. " + foodLevel.ToString();
             foodProfitText[(int)obj].text = foodProfit.ToString();
@@ -73,27 +71,41 @@ namespace Game
 
         private void CookingLoadingBarAnimation(object obj) // activates loading bar with DOTween
         {
-            float foodCookingTime = foodManager.GetFoodData((int)obj).CookingTime;
-            TimeSpan timeLeft = TimeSpan.FromSeconds(foodCookingTime);
-
-            string timeLeftString = string.Format("{0:D2}:{1:D2}", timeLeft.Minutes, timeLeft.Seconds);
-            cookingTimeText[(int)obj].text = timeLeftString;
-
+            float foodCookingTime = GetFoodData((int)obj).CookingTime;
+   
             cookingSliderBar[(int)obj].value = minValue;
             tweener[(int)obj] = cookingSliderBar[(int)obj].DOValue(maxValue, foodCookingTime);
-
-            tweener[(int)obj].OnUpdate(() =>
-            {
-                timeLeft = TimeSpan.FromSeconds(tweener[(int)obj].Duration() - tweener[(int)obj].Elapsed());
-                timeLeftString = string.Format("{0:D2}:{1:D2}", timeLeft.Minutes, timeLeft.Seconds);
-                cookingTimeText[(int)obj].text = timeLeftString;
-            });
 
             tweener[(int)obj].OnComplete(() =>
             {
                 cookingSliderBar[(int)obj].value = minValue;
-                cookingTimeText[(int)obj].text = TimeSpan.FromSeconds(foodCookingTime).ToString("mm':'ss");
+                cookingTimeText[(int)obj].text = FormatTimeSpan(TimeSpan.FromSeconds(foodCookingTime));
             });
+        }
+
+        private void CookingTimer(object obj) // activates the cooking timer countdown
+        {
+            float foodCookingTime = GetFoodData((int)obj).CookingTime;
+            TimeSpan timeLeft = TimeSpan.FromSeconds(foodCookingTime);
+
+            string timeLeftString = FormatTimeSpan(timeLeft);
+            cookingTimeText[(int)obj].text = timeLeftString;
+
+            tweener[(int)obj].OnUpdate(() =>
+            {
+                timeLeft = TimeSpan.FromSeconds(tweener[(int)obj].Duration() - tweener[(int)obj].Elapsed());
+                timeLeftString = FormatTimeSpan(timeLeft);
+                cookingTimeText[(int)obj].text = timeLeftString;
+            });
+        }
+
+        private FoodData GetFoodData(int index)
+        {
+            return foodManager.GetFoodData(index);
+        }
+        private string FormatTimeSpan(TimeSpan timeSpan)
+        {
+            return string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
         }
     }
 }
