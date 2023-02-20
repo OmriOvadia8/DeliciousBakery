@@ -17,8 +17,8 @@ namespace Game
         {
             foods = new FoodData[FOOD_COUNT];
 
-            foods[(int)FoodType.Burger] = new FoodData(2, 30, 100);
-            foods[(int)FoodType.Bread] = new FoodData(1, 23, 72);
+            foods[(int)FoodType.Burger] = new FoodData(3, 30, 100);
+            foods[(int)FoodType.Bread] = new FoodData(2, 23, 72);
             foods[(int)FoodType.Candy] = new FoodData(1, 17, 40);
             foods[(int)FoodType.Pizza] = new FoodData(3, 15, 200);
             foods[(int)FoodType.IceCream] = new FoodData(2, 8, 80);

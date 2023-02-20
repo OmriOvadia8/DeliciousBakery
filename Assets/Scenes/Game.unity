@@ -860,6 +860,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 389719262}
     m_Modifications:
+    - target: {fileID: 1588827601323837829, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Timer 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_SizeDelta.x
       value: 150
@@ -1438,6 +1442,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 389719262}
     m_Modifications:
+    - target: {fileID: 1588827601323837829, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Timer 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1588827601848755865, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Button2
@@ -1594,6 +1602,17 @@ MonoBehaviour:
 --- !u!114 &154389236 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1309061383483501422, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 154389232}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &154389237 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588827601323837831, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
   m_PrefabInstance: {fileID: 154389232}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -3192,6 +3211,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 337620999}
   m_CullTransparentMesh: 1
+--- !u!114 &338219180 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588827601323837831, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 446521283}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &344971540
 GameObject:
   m_ObjectHideFlags: 0
@@ -4419,6 +4449,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 389719262}
     m_Modifications:
+    - target: {fileID: 1588827601323837829, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Timer 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_SizeDelta.x
       value: 125
@@ -6398,6 +6432,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650757469}
   m_CullTransparentMesh: 1
+--- !u!114 &660492060 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588827601323837831, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 94691873}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &664254590
 GameObject:
   m_ObjectHideFlags: 0
@@ -16366,6 +16411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c2c1d4844fe904180c3f0969f750b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodManager: {fileID: 1432630589}
   moneyText: {fileID: 350408838}
   foodProfitText:
   - {fileID: 154389235}
@@ -16379,11 +16425,14 @@ MonoBehaviour:
   - {fileID: 154389236}
   - {fileID: 446521287}
   - {fileID: 94691877}
-  foodManager: {fileID: 1432630589}
   cookingSliderBar:
   - {fileID: 154389239}
   - {fileID: 446521288}
   - {fileID: 94691878}
+  cookingTimeText:
+  - {fileID: 154389237}
+  - {fileID: 338219180}
+  - {fileID: 660492060}
 --- !u!1 &1690067882
 GameObject:
   m_ObjectHideFlags: 0
