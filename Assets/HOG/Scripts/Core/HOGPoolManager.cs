@@ -5,17 +5,29 @@ namespace Core
 {
     public class HOGPoolManager
     {
-        private Dictionary<string, HOGPool> Pools = new();
+        private readonly Dictionary<PoolNames, HOGPool> Pools = new();
 
-        private Transform rootPools;
+       // private Transform rootPools;
 
         public HOGPoolManager()
         {
-            rootPools = new GameObject().transform;
-            Object.DontDestroyOnLoad(rootPools);
+           // rootPools = new GameObject().transform;
+           // Object.DontDestroyOnLoad(rootPools);
         }
 
-        public void InitPool(HOGPoolable original, int amount, int maxAmount)
+        //public void InitPool(PoolNames poolName, int amount, Transform parentTransform)
+        //{
+        //    //List Of Originals 
+        //    //Linq where PoolNames == poolName
+        //}
+
+        public void InitPool(string resourceName, int amount, Transform parentTransform, int maxAmount = 100)
+        {
+            var original = Resources.Load<HOGPoolable>(resourceName);
+            InitPool(original, amount, parentTransform, maxAmount);
+        }
+
+        public void InitPool(HOGPoolable original, int amount, Transform parentTransform, int maxAmount)
         {
             HOGManager.Instance.FactoryManager.MultiCreateAsync(original, Vector3.zero, amount,
                 delegate (List<HOGPoolable> list)
@@ -23,7 +35,7 @@ namespace Core
                     foreach (var poolable in list)
                     {
                         poolable.name = original.name;
-                        poolable.transform.parent = rootPools;
+                        poolable.transform.SetParent(parentTransform, false);
                         poolable.gameObject.SetActive(false);
                     }
 
@@ -39,7 +51,7 @@ namespace Core
                 });
         }
 
-        public HOGPoolable GetPoolable(string poolName)
+        public HOGPoolable GetPoolable(PoolNames poolName)
         {
             if (Pools.TryGetValue(poolName, out HOGPool pool))
             {
@@ -76,7 +88,7 @@ namespace Core
         }
 
 
-        public void DestroyPool(string name)
+        public void DestroyPool(PoolNames name)
         {
             if (Pools.TryGetValue(name, out HOGPool pool))
             {
@@ -107,5 +119,11 @@ namespace Core
         public Queue<HOGPoolable> AvailablePoolables = new();
 
         public int MaxPoolables = 100;
+    }
+
+    public enum PoolNames
+    {
+        NA = -1,
+        MoneyToast = 0,
     }
 }

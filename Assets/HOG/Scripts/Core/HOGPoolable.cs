@@ -2,7 +2,7 @@ namespace Core
 {
     public class HOGPoolable : HOGMonoBehaviour
     {
-        public string poolName;
+        public PoolNames poolName;
 
         public virtual void OnReturnedToPool()
         {

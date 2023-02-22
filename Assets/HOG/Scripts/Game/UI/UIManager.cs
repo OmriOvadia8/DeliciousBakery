@@ -15,6 +15,9 @@ namespace Game
         private readonly float minValue = 0f; 
         private readonly float maxValue = 1f;
 
+        [SerializeField] HOGTweenMoneyComponent moneyComponent;
+        [SerializeField] RectTransform moneyToastPosition;
+
         [SerializeField] FoodManager foodManager;
 
         [SerializeField] TMP_Text moneyText;
@@ -32,6 +35,7 @@ namespace Game
             AddListener(HOGEventNames.OnUpgraded, OnUpgradeUpdate);
             AddListener(HOGEventNames.OnCookFood, CookingLoadingBarAnimation);
             AddListener(HOGEventNames.OnCookFood, CookingTimer);
+            AddListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
 
             for (int i = 0; i < FoodManager.FOOD_COUNT; i++)
             {
@@ -41,12 +45,18 @@ namespace Game
             }
         }
 
+        private void Awake()
+        {
+            Manager.PoolManager.InitPool("MoneyToast", 15, moneyToastPosition);
+        }
+
         private void OnDisable()
         {
             RemoveListener(HOGEventNames.OnCurrencySet, OnMoneyUpdate);
             RemoveListener(HOGEventNames.OnUpgraded, OnUpgradeUpdate);
             RemoveListener(HOGEventNames.OnCookFood, CookingLoadingBarAnimation);
             RemoveListener(HOGEventNames.OnCookFood, CookingTimer);
+            RemoveListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
         }
 
         private void OnMoneyUpdate(object obj) // updates player's current money amount text
@@ -97,6 +107,20 @@ namespace Game
                 timeLeftString = FormatTimeSpan(timeLeft);
                 cookingTimeText[(int)obj].text = timeLeftString;
             });
+        }
+
+        private void MoneyTextToastAfterCooking(object obj)
+        {
+            int foodIndex = (int)obj;
+            int foodProfit = GetFoodData(foodIndex).Profit;
+            var moneyToast = (HOGTweenMoneyComponent)Manager.PoolManager.GetPoolable(PoolNames.MoneyToast);
+
+            //Vector3 toastPosition = moneyToastPosition.TransformPoint(moneyToastPosition.rect.width / 2f, moneyToastPosition.rect.height / 2f, 0f);
+            Vector3 toastPosition = moneyToastPosition.position + Vector3.up * 3;
+            moneyToast.transform.position = toastPosition;
+
+            moneyToast.Init(foodProfit);
+            Debug.Log(foodProfit);
         }
 
         private FoodData GetFoodData(int index)
