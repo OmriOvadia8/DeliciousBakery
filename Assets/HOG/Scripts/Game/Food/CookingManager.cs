@@ -1,9 +1,6 @@
 using Core;
 using System.Collections;
 using UnityEngine;
-using System;
-using UnityEngine.UI;
-
 
 namespace Game
 {
@@ -23,7 +20,8 @@ namespace Game
             float cookingTime = foodData.CookingTime;
             int profit = foodData.Profit;
             foodManager.SetFoodOnCooldown(foodIndex, true);
-            InvokeEvent(HOGEventNames.OnCookFood, foodIndex);
+
+            InvokeEvent(HOGEventNames.OnCookFood, foodIndex); // starts the loading bar and timer of cooking
        
             StartCoroutine(StartCooking(cookingTime, profit, foodIndex));
         }

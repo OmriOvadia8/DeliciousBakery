@@ -10,7 +10,7 @@ namespace Game
 {
     public class UIManager : HOGLogicMonoBehaviour
     {
-        private readonly Dictionary<int, Tweener> tweener = new();
+        private readonly Dictionary<int, Tweener> tweener = new(); // DOTween dictionary - Tween for each cooking food bar
 
         private readonly float minValue = 0f; 
         private readonly float maxValue = 1f;
@@ -58,7 +58,7 @@ namespace Game
             }
         }
 
-        private void OnUpgradeUpdate(object obj) // update the foods stats after each upgrade
+        private void OnUpgradeUpdate(object obj) // update the foods stats text after each upgrade
         {
             int foodLevel = GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, (int)obj).CurrentLevel;
             int foodProfit = GetFoodData((int)obj).Profit;
@@ -103,6 +103,7 @@ namespace Game
         {
             return foodManager.GetFoodData(index);
         }
+
         private string FormatTimeSpan(TimeSpan timeSpan)
         {
             return string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);

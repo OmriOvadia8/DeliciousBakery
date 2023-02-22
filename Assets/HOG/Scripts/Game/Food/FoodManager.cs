@@ -14,16 +14,16 @@ namespace Game
         {
             foods = new FoodData[FOOD_COUNT];
 
-            foods[(int)FoodType.Burger] = new FoodData(3, 30, 100);
-            foods[(int)FoodType.Bread] = new FoodData(2, 23, 72);
-            foods[(int)FoodType.Candy] = new FoodData(1, 17, 40);
-            foods[(int)FoodType.Pizza] = new FoodData(3, 15, 200);
-            foods[(int)FoodType.IceCream] = new FoodData(2, 8, 80);
-            foods[(int)FoodType.Donut] = new FoodData(2, 8, 80);
-            foods[(int)FoodType.Cookie] = new FoodData(2, 8, 80);
-            foods[(int)FoodType.Cupcake] = new FoodData(2, 8, 80);
-            foods[(int)FoodType.Cake] = new FoodData(2, 8, 80);
-            foods[(int)FoodType.Brownie] = new FoodData(2, 8, 80);
+            foods[(int)FoodType.Cookie] = new FoodData(2, 18, 60);
+            foods[(int)FoodType.Chocolates] = new FoodData(2, 25, 100);
+            foods[(int)FoodType.Donut] = new FoodData(3, 36, 200);
+            foods[(int)FoodType.Icecream] = new FoodData(4, 45, 240);
+            foods[(int)FoodType.Cupcake] = new FoodData(4, 60, 350);
+            foods[(int)FoodType.Brownie] = new FoodData(5, 80, 500);
+            foods[(int)FoodType.Cheesecake] = new FoodData(7, 110, 850);
+            foods[(int)FoodType.Pizza] = new FoodData(10, 160, 1100);
+            foods[(int)FoodType.Cake] = new FoodData(10, 200, 1500);
+            foods[(int)FoodType.Teabox] = new FoodData(15, 350, 2000);
         }
 
         private void Start() // On start loop to add all the foods to the list and update text to each food's stats
@@ -35,7 +35,7 @@ namespace Game
             }
         }
 
-        public void AddNewFoodItem(int foodID) // adding each food from the array to the upgradeables list
+        private void AddNewFoodItem(int foodID) // adding each food from the array to the upgradeables list
         {
             GameLogic.UpgradeManager.PlayerUpgradeInventoryData.Upgradeables.Add(new HOGUpgradeableData
             {
@@ -52,10 +52,11 @@ namespace Game
 
             GameLogic.UpgradeManager.UpgradeItemByID(upgradeableType, foodID);
 
-            foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE);
-            foodData.LevelUpCost = (int)(foodData.LevelUpCost * COST_INCREASE);
+            foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE); // 10% increase income
+            foodData.LevelUpCost = (int)(foodData.LevelUpCost * COST_INCREASE); // 15% increase upgrade cost
 
-            InvokeEvent(HOGEventNames.OnUpgraded, foodID);
+            InvokeEvent(HOGEventNames.OnUpgraded, foodID); // updates UI
+
             Debug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(upgradeableType, foodID).CurrentLevel);
         }
 
@@ -77,15 +78,15 @@ namespace Game
 
     public enum FoodType
     {
-        Burger = 0,
-        Bread = 1,
-        Candy = 2,
-        Pizza = 3,
-        IceCream = 4,
-        Donut = 5,
-        Cookie = 6,
-        Cupcake = 7,
+        Cookie = 0,
+        Chocolates = 1,
+        Donut = 2,
+        Icecream = 3,
+        Cupcake = 4,
+        Brownie = 5,
+        Cheesecake = 6,
+        Pizza = 7,
         Cake = 8,
-        Brownie = 9
+        Teabox = 9
     }
 }
