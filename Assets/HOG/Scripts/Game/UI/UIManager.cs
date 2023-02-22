@@ -10,7 +10,7 @@ namespace Game
 {
     public class UIManager : HOGLogicMonoBehaviour
     {
-        private readonly Dictionary<int, Tweener> tweener = new(); // DOTween dictionary - Tween for each cooking food bar
+        private readonly Dictionary<int, Tweener> foodLoadingBarTweens = new(); // DOTween dictionary - Tween for each cooking food loading bar
 
         private readonly float minValue = 0f; 
         private readonly float maxValue = 1f;
@@ -39,8 +39,8 @@ namespace Game
 
             for (int i = 0; i < FoodManager.FOOD_COUNT; i++)
             {
-                cookingSliderBar[i].value = minValue; // sets all bars to 0 (empty)      
-                float cookingTime = GetFoodData(i).CookingTime; // get the cooking time for the food item            
+                cookingSliderBar[i].value = minValue;      
+                float cookingTime = GetFoodData(i).CookingTime;            
                 cookingTimeText[i].text = TimeSpan.FromSeconds(cookingTime).ToString("mm':'ss"); // set the cooking time in the timer text
             }
         }
@@ -59,12 +59,12 @@ namespace Game
             RemoveListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
         }
 
-        private void OnMoneyUpdate(object obj) // updates player's current money amount text
+        private void OnMoneyUpdate(object obj) 
         {
             int currency = 0;
             if (GameLogic.ScoreManager.TryGetScoreByTag(ScoreTags.GameCurrency, ref currency))
             {
-                moneyText.text = currency.ToString();
+                moneyText.text = $"{currency:N0}";
             }
         }
 
@@ -84,9 +84,9 @@ namespace Game
             float foodCookingTime = GetFoodData((int)obj).CookingTime;
    
             cookingSliderBar[(int)obj].value = minValue;
-            tweener[(int)obj] = cookingSliderBar[(int)obj].DOValue(maxValue, foodCookingTime);
+            foodLoadingBarTweens[(int)obj] = cookingSliderBar[(int)obj].DOValue(maxValue, foodCookingTime);
 
-            tweener[(int)obj].OnComplete(() =>
+            foodLoadingBarTweens[(int)obj].OnComplete(() =>
             {
                 cookingSliderBar[(int)obj].value = minValue;
                 cookingTimeText[(int)obj].text = FormatTimeSpan(TimeSpan.FromSeconds(foodCookingTime));
@@ -101,21 +101,20 @@ namespace Game
             string timeLeftString = FormatTimeSpan(timeLeft);
             cookingTimeText[(int)obj].text = timeLeftString;
 
-            tweener[(int)obj].OnUpdate(() =>
+            foodLoadingBarTweens[(int)obj].OnUpdate(() =>
             {
-                timeLeft = TimeSpan.FromSeconds(tweener[(int)obj].Duration() - tweener[(int)obj].Elapsed());
+                timeLeft = TimeSpan.FromSeconds(foodLoadingBarTweens[(int)obj].Duration() - foodLoadingBarTweens[(int)obj].Elapsed());
                 timeLeftString = FormatTimeSpan(timeLeft);
                 cookingTimeText[(int)obj].text = timeLeftString;
             });
         }
 
-        private void MoneyTextToastAfterCooking(object obj)
+        private void MoneyTextToastAfterCooking(object obj) // toasting profit text after cooking
         {
             int foodIndex = (int)obj;
             int foodProfit = GetFoodData(foodIndex).Profit;
             var moneyToast = (HOGTweenMoneyComponent)Manager.PoolManager.GetPoolable(PoolNames.MoneyToast);
-
-            //Vector3 toastPosition = moneyToastPosition.TransformPoint(moneyToastPosition.rect.width / 2f, moneyToastPosition.rect.height / 2f, 0f);
+;
             Vector3 toastPosition = moneyToastPosition.position + Vector3.up * 3;
             moneyToast.transform.position = toastPosition;
 

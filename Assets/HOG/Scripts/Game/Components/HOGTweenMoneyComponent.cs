@@ -10,7 +10,7 @@ namespace Game
         [SerializeField] TMP_Text moneyToastText;
 
         [SerializeField] private float tweenTime = 1f;
-        [SerializeField] private Vector3 moveAmount = new Vector3(0f, 1f, 0f);
+        [SerializeField] private Vector3 moveAmount = Vector3.up;
         [SerializeField] private float fadeTarget = 0f;
 
         [SerializeField] private float scaleStart = 0f;
@@ -22,7 +22,7 @@ namespace Game
 
         public void Init(int amount)
         {
-            moneyToastText.text = $"+{amount:N0}"; ;
+            moneyToastText.text = $"+{amount:N0}";
             DoAnimation();
         }
 
