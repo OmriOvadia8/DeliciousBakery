@@ -7,14 +7,12 @@ namespace Game
     public class HOGMoneyHolder : HOGLogicMonoBehaviour
     {
         public int startingCurrency = 0;
-        CurrencySaveData currencySaveData = new CurrencySaveData(0);
+        CurrencySaveData currencySaveData = new(0);
 
         private void Awake()
         {
-            PlayerCurrency();
             LoadCurrency();
         }
-
 
         public void PlayerCurrency()
         {
@@ -31,13 +29,13 @@ namespace Game
             SaveCurrency();
         }
 
-        public void SaveCurrency()
+        public void SaveCurrency() // saving the current player's currency
         {
             HOGManager.Instance.SaveManager.Save(currencySaveData);
             Debug.Log(currencySaveData.CurrencyAmount + " saved");
         }
 
-        public void LoadCurrency()
+        public void LoadCurrency() // loading the latest player's currency and if there is no save then starts at 0
         {
             HOGManager.Instance.SaveManager.Load<CurrencySaveData>(data =>
             {
@@ -48,7 +46,6 @@ namespace Game
                 }
                 else
                     PlayerCurrency();
-
             });
         }
 

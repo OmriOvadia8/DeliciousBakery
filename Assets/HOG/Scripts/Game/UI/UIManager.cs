@@ -42,7 +42,6 @@ namespace Game
 
             for (int i = 0; i < FoodManager.FOOD_COUNT; i++)
             {
-                //OnUpgradeUpdate(i);
                 cookingSliderBar[i].value = minValue;
                 float cookingTime = GetFoodData(i).CookingTime;
                 cookingTimeText[i].text = TimeSpan.FromSeconds(cookingTime).ToString("mm':'ss"); // set the cooking time in the timer text
@@ -51,8 +50,7 @@ namespace Game
 
         private void Start()
         {
-            Manager.PoolManager.InitPool("MoneyToast", 15, moneyToastPosition);
-            
+            Manager.PoolManager.InitPool("MoneyToast", 15, moneyToastPosition);  
         }
 
         private void OnDisable()

@@ -8,7 +8,8 @@ namespace Game
     public class FoodManager : HOGLogicMonoBehaviour
     {
         [SerializeField] HOGMoneyHolder moneyHolder;
-        private FoodDataCollection foods;
+        private FoodDataCollection foods; // fooddatacollection sub class in FoodData.cs (array of foods)
+
         public const int FOOD_COUNT = 10; // total food types count in game
         private const float PROFIT_INCREASE = 1.1f; // increasing the food's profit by 10% each upgrade
         private const float COST_INCREASE = 1.15f; // increasing the upgrade's cost by 15% each upgrade
@@ -16,30 +17,26 @@ namespace Game
 
         private void Awake()
         {
-            
+            // loading the latest food data list stats
             HOGManager.Instance.SaveManager.Load<FoodDataCollection>(data =>
             {
                 if (data != null)
                 {
                     foods = data;
                 }
-                else
+                else // or default if there isnt one
                 HOGManager.Instance.ConfigManager.GetConfigAsync<FoodDataCollection>(FOOD_CONFIG_PATH, OnConfigLoaded);
-
             });
         }
 
         private void Start()
         {
-
             // Add all foods to the upgradeables list and update UI
             for (int i = 0; i < FOOD_COUNT; i++)
             {
                 AddNewFoodItem(i);
                 InvokeEvent(HOGEventNames.OnUpgraded, i);
             }
-
-     
         }
 
         private void OnConfigLoaded(FoodDataCollection configData)
@@ -90,22 +87,19 @@ namespace Game
 
             GameLogic.UpgradeManager.UpgradeItemByID(UpgradeablesTypeID.Food, foodID, ScoreTags.GameCurrency, initialUpgradeCost);
 
-            if (initialLevel < GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel)
+            if (initialLevel < GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel) // checks if the item leveled up and if so increases stats
             {
                 foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE);
                 foodData.UpgradeCost = (int)(foodData.UpgradeCost * COST_INCREASE);
 
                 InvokeEvent(HOGEventNames.OnUpgraded, foodID);
                 
-                HOGManager.Instance.SaveManager.Save(foods);
+                HOGManager.Instance.SaveManager.Save(foods); // Saving the current food data list stats
                 moneyHolder.UpdateCurrency(moneyHolder.startingCurrency);
             }
 
-            
             Debug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel);
         }
-
-
 
         public bool IsFoodOnCooldown(int foodID)
         {
@@ -139,20 +133,5 @@ namespace Game
                 Debug.LogError("Food data not loaded");
             }
         }
-
     }
 }
-//// Load saved food data
-//GameLogic.FoodDataManager.LoadFoods((foodData) =>
-//{
-//    if (foodData != null)
-//    {
-//        // If saved data exists, update the Foods dictionary with the loaded data
-//        GameLogic.FoodDataManager.Foods = foodData;
-//    }
-//    else
-//    {
-//        // If no saved data exists, initialize the Foods dictionary with default data
-//        GameLogic.FoodDataManager.Foods = new Dictionary<int, FoodData>();
-//    }
-//});
