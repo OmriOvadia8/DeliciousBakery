@@ -64,7 +64,7 @@ namespace Game
 
         private void OnGameLoad()
         {
-            moneyHolder.LoadCurrency();
+            moneyHolder.LoadCurrency(); // loads latest currency
             moneyText.text = $"{moneyHolder.startingCurrency:N0}";
         }
 
