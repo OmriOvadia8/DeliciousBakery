@@ -5,7 +5,23 @@ namespace Game
 {
     public class HOGScoreManager
     {
-        private readonly HOGPlayerScoreData PlayerScoreData = new();
+        public HOGPlayerScoreData PlayerScoreData = new();
+
+        public HOGScoreManager()
+        {
+            HOGManager.Instance.SaveManager.Load<HOGPlayerScoreData>(delegate (HOGPlayerScoreData data)
+            {
+                PlayerScoreData = data ?? new HOGPlayerScoreData();
+                //if (data == null)
+                //{
+                //    PlayerScoreData = new HOGPlayerScoreData();
+                //}
+                //else
+                //{
+                //    PlayerScoreData = data;
+                //}
+            });
+        }
 
         public bool TryGetScoreByTag(ScoreTags tag, ref int scoreOut)
         {
@@ -22,6 +38,8 @@ namespace Game
         {
             HOGManager.Instance.EventsManager.InvokeEvent(HOGEventNames.OnCurrencySet, (tag, amount));
             PlayerScoreData.ScoreByTag[tag] = amount;
+
+            HOGManager.Instance.SaveManager.Save(PlayerScoreData);
         }
 
         public void ChangeScoreByTagByAmount(ScoreTags tag, int amount = 0)
@@ -56,7 +74,7 @@ namespace Game
         }
     }
 
-    public class HOGPlayerScoreData
+    public class HOGPlayerScoreData : IHOGSaveData
     {
         public Dictionary<ScoreTags, int> ScoreByTag = new();     
     }

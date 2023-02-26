@@ -3285,8 +3285,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.62200004, y: 0.5}
   m_AnchorMax: {x: 0.62200004, y: 0.5}
-  m_AnchoredPosition: {x: 185, y: 0}
-  m_SizeDelta: {x: 370, y: 90}
+  m_AnchoredPosition: {x: 157.3, y: 0}
+  m_SizeDelta: {x: 300, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &309103002
 MonoBehaviour:
@@ -3308,7 +3308,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 51,486,486
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5d9befe22dfa970418b9aa15dbc9f4ba, type: 2}
   m_sharedMaterial: {fileID: -7769912929738174819, guid: 5d9befe22dfa970418b9aa15dbc9f4ba, type: 2}
@@ -15016,6 +15016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79764c0389ac907449c847cedb92898f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moneyHolder: {fileID: 68174596}
 --- !u!4 &1432630590
 Transform:
   m_ObjectHideFlags: 0
@@ -17948,6 +17949,7 @@ MonoBehaviour:
   moneyComponent: {fileID: 6681014376655726399, guid: be990fa58eb59d44cb37034f3973ad9e, type: 3}
   moneyToastPosition: {fileID: 350408837}
   foodManager: {fileID: 1432630589}
+  moneyHolder: {fileID: 68174596}
   moneyText: {fileID: 350408838}
   foodProfitText:
   - {fileID: 154389235}

@@ -1,0 +1,64 @@
+{
+  "Foods": [
+    {
+      "Index": 0,
+      "CookingTime": 2,
+      "Profit": 60,
+      "UpgradeCost": 60
+    },
+    {
+      "Index": 1,
+      "CookingTime": 2,
+      "Profit": 25,
+      "UpgradeCost": 100
+    },
+    {
+      "Index": 2,
+      "CookingTime": 3,
+      "Profit": 36,
+      "UpgradeCost": 200
+    },
+    {
+      "Index": 3,
+      "CookingTime": 4,
+      "Profit": 45,
+      "UpgradeCost": 240
+    },
+    {
+      "Index": 4,
+      "CookingTime": 4,
+      "Profit": 60,
+      "UpgradeCost": 350
+    },
+    {
+      "Index": 5,
+      "CookingTime": 5,
+      "Profit": 80,
+      "UpgradeCost": 500
+    },
+    {
+      "Index": 6,
+      "CookingTime": 7,
+      "Profit": 110,
+      "UpgradeCost": 850
+    },
+    {
+      "Index": 7,
+      "CookingTime": 10,
+      "Profit": 160,
+      "UpgradeCost": 1100
+    },
+    {
+      "Index": 8,
+      "CookingTime": 10,
+      "Profit": 200,
+      "UpgradeCost": 1500
+    },
+    {
+      "Index": 9,
+      "CookingTime": 15,
+      "Profit": 350,
+      "UpgradeCost": 2000
+    }
+  ]
+}

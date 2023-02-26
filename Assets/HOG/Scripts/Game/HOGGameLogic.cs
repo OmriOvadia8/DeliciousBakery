@@ -10,6 +10,8 @@ namespace Game
 
         public HOGScoreManager ScoreManager;
         public HOGUpgradeManager UpgradeManager;
+        public FoodDataManager FoodDataManager;
+        
             
         public HOGGameLogic()
         {
@@ -24,6 +26,8 @@ namespace Game
         {
             ScoreManager = new HOGScoreManager();
             UpgradeManager = new HOGUpgradeManager();
+            FoodDataManager = new FoodDataManager();  
+           
        
             onComplete.Invoke();
         }

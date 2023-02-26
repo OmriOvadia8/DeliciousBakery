@@ -1,41 +1,53 @@
 using Core;
+using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     public class FoodManager : HOGLogicMonoBehaviour
     {
-        private FoodData[] foods;
+        [SerializeField] HOGMoneyHolder moneyHolder;
+        private FoodDataCollection foods;
         public const int FOOD_COUNT = 10; // total food types count in game
         private const float PROFIT_INCREASE = 1.1f; // increasing the food's profit by 10% each upgrade
         private const float COST_INCREASE = 1.15f; // increasing the upgrade's cost by 15% each upgrade
- 
-        void Awake() // on awake creating an array with all foods with their stats: Cooking Time, Profit, Upgrade Cost.
-        {
-            foods = new FoodData[FOOD_COUNT];
+        private const string FOOD_CONFIG_PATH = "food_data"; // the name of the config file to load
 
-            foods[(int)FoodType.Cookie] = new FoodData(2, 18, 60);
-            foods[(int)FoodType.Chocolates] = new FoodData(2, 25, 100);
-            foods[(int)FoodType.Donut] = new FoodData(3, 36, 200);
-            foods[(int)FoodType.Icecream] = new FoodData(4, 45, 240);
-            foods[(int)FoodType.Cupcake] = new FoodData(4, 60, 350);
-            foods[(int)FoodType.Brownie] = new FoodData(5, 80, 500);
-            foods[(int)FoodType.Cheesecake] = new FoodData(7, 110, 850);
-            foods[(int)FoodType.Pizza] = new FoodData(10, 160, 1100);
-            foods[(int)FoodType.Cake] = new FoodData(10, 200, 1500);
-            foods[(int)FoodType.Teabox] = new FoodData(15, 350, 2000);
+        private void Awake()
+        {
+            
+            HOGManager.Instance.SaveManager.Load<FoodDataCollection>(data =>
+            {
+                if (data != null)
+                {
+                    foods = data;
+                }
+                else
+                HOGManager.Instance.ConfigManager.GetConfigAsync<FoodDataCollection>(FOOD_CONFIG_PATH, OnConfigLoaded);
+
+            });
         }
 
-        private void Start() // On start loop to add all the foods to the list and update text to each food's stats
+        private void Start()
         {
+
+            // Add all foods to the upgradeables list and update UI
             for (int i = 0; i < FOOD_COUNT; i++)
             {
                 AddNewFoodItem(i);
                 InvokeEvent(HOGEventNames.OnUpgraded, i);
             }
+
+     
         }
 
-        private void AddNewFoodItem(int foodID) // adding each food from the array to the upgradeables list
+        private void OnConfigLoaded(FoodDataCollection configData)
+        { 
+            foods = configData;
+        }
+
+        private void AddNewFoodItem(int foodID)
         {
             GameLogic.UpgradeManager.PlayerUpgradeInventoryData.Upgradeables.Add(new HOGUpgradeableData
             {
@@ -45,48 +57,102 @@ namespace Game
             });
         }
 
-        public void UpgradeFood(int foodID) // upgrading food results in increasing the level by 1 which then affects the other stats
+        public FoodData GetFoodData(int foodID)
         {
-            var foodData = foods[foodID];
-            var upgradeableType = UpgradeablesTypeID.Food;
+            var foodData = foods?.Foods.FirstOrDefault(fd => fd.Index == foodID);
 
-            GameLogic.UpgradeManager.UpgradeItemByID(upgradeableType, foodID);
+            if (foodData == null)
+            {
+                Debug.LogError("Invalid food ID: " + foodID);
+            }
 
-            foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE); // 10% increase income
-            foodData.LevelUpCost = (int)(foodData.LevelUpCost * COST_INCREASE); // 15% increase upgrade cost
-
-            InvokeEvent(HOGEventNames.OnUpgraded, foodID); // updates UI
-
-            Debug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(upgradeableType, foodID).CurrentLevel);
+            return foodData;
         }
 
-        public FoodData GetFoodData(int foodIndex) // gather the food's stats info
+        public void UpgradeFood(int foodID)
         {
-            return foods[foodIndex];
+            if (foods == null)
+            {
+                Debug.LogError("Food data not loaded");
+                return;
+            }
+
+            var foodData = GetFoodData(foodID);
+
+            if (foodData == null)
+            {
+                Debug.LogError("Invalid food ID: " + foodID);
+                return;
+            }
+
+            int initialLevel = GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel;
+            int initialUpgradeCost = foodData.UpgradeCost;
+
+            GameLogic.UpgradeManager.UpgradeItemByID(UpgradeablesTypeID.Food, foodID, ScoreTags.GameCurrency, initialUpgradeCost);
+
+            if (initialLevel < GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel)
+            {
+                foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE);
+                foodData.UpgradeCost = (int)(foodData.UpgradeCost * COST_INCREASE);
+
+                InvokeEvent(HOGEventNames.OnUpgraded, foodID);
+                
+                HOGManager.Instance.SaveManager.Save(foods);
+                moneyHolder.UpdateCurrency(moneyHolder.startingCurrency);
+            }
+
+            
+            Debug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel);
         }
 
-        public bool IsFoodOnCooldown(int foodIndex) // checks if food is being cooked
+
+
+        public bool IsFoodOnCooldown(int foodID)
         {
-            return foods[foodIndex].IsOnCooldown;
+            var foodData = GetFoodData(foodID);
+
+            if (foodData == null)
+            {
+                return false;
+            }
+
+            return foodData.IsOnCooldown;
         }
 
-        public void SetFoodOnCooldown(int foodIndex, bool value) // set food to being cooked or not
+        public void SetFoodOnCooldown(int foodID, bool value)
         {
-            foods[foodIndex].IsOnCooldown = value;
-        }
-    }
+            if (foods != null)
+            {
+                FoodData foodData = GetFoodData(foodID);
 
-    public enum FoodType
-    {
-        Cookie = 0,
-        Chocolates = 1,
-        Donut = 2,
-        Icecream = 3,
-        Cupcake = 4,
-        Brownie = 5,
-        Cheesecake = 6,
-        Pizza = 7,
-        Cake = 8,
-        Teabox = 9
+                if (foodData != null)
+                {
+                    foodData.IsOnCooldown = value;
+                }
+                else
+                {
+                    Debug.LogError("Invalid food ID: " + foodID);
+                }
+            }
+            else
+            {
+                Debug.LogError("Food data not loaded");
+            }
+        }
+
     }
 }
+//// Load saved food data
+//GameLogic.FoodDataManager.LoadFoods((foodData) =>
+//{
+//    if (foodData != null)
+//    {
+//        // If saved data exists, update the Foods dictionary with the loaded data
+//        GameLogic.FoodDataManager.Foods = foodData;
+//    }
+//    else
+//    {
+//        // If no saved data exists, initialize the Foods dictionary with default data
+//        GameLogic.FoodDataManager.Foods = new Dictionary<int, FoodData>();
+//    }
+//});

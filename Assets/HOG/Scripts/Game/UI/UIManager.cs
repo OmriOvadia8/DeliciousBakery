@@ -12,13 +12,14 @@ namespace Game
     {
         private readonly Dictionary<int, Tweener> foodLoadingBarTweens = new(); // DOTween dictionary - Tween for each cooking food loading bar
 
-        private readonly float minValue = 0f; 
+        private readonly float minValue = 0f;
         private readonly float maxValue = 1f;
 
         [SerializeField] HOGTweenMoneyComponent moneyComponent;
         [SerializeField] RectTransform moneyToastPosition;
 
         [SerializeField] FoodManager foodManager;
+        [SerializeField] HOGMoneyHolder moneyHolder;
 
         [SerializeField] TMP_Text moneyText;
 
@@ -37,17 +38,21 @@ namespace Game
             AddListener(HOGEventNames.OnCookFood, CookingTimer);
             AddListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
 
+            OnGameLoad();
+
             for (int i = 0; i < FoodManager.FOOD_COUNT; i++)
             {
-                cookingSliderBar[i].value = minValue;      
-                float cookingTime = GetFoodData(i).CookingTime;            
+                //OnUpgradeUpdate(i);
+                cookingSliderBar[i].value = minValue;
+                float cookingTime = GetFoodData(i).CookingTime;
                 cookingTimeText[i].text = TimeSpan.FromSeconds(cookingTime).ToString("mm':'ss"); // set the cooking time in the timer text
             }
         }
 
-        private void Awake()
+        private void Start()
         {
             Manager.PoolManager.InitPool("MoneyToast", 15, moneyToastPosition);
+            
         }
 
         private void OnDisable()
@@ -59,7 +64,13 @@ namespace Game
             RemoveListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
         }
 
-        private void OnMoneyUpdate(object obj) 
+        private void OnGameLoad()
+        {
+            moneyHolder.LoadCurrency();
+            moneyText.text = $"{moneyHolder.startingCurrency:N0}";
+        }
+
+        private void OnMoneyUpdate(object obj)
         {
             int currency = 0;
             if (GameLogic.ScoreManager.TryGetScoreByTag(ScoreTags.GameCurrency, ref currency))
@@ -72,7 +83,7 @@ namespace Game
         {
             int foodLevel = GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, (int)obj).CurrentLevel;
             int foodProfit = GetFoodData((int)obj).Profit;
-            int upgradeCost = GetFoodData((int)obj).LevelUpCost;
+            int upgradeCost = GetFoodData((int)obj).UpgradeCost;
 
             foodLevelText[(int)obj].text = "Lv. " + foodLevel.ToString();
             foodProfitText[(int)obj].text = foodProfit.ToString();
@@ -82,7 +93,7 @@ namespace Game
         private void CookingLoadingBarAnimation(object obj) // activates loading bar with DOTween
         {
             float foodCookingTime = GetFoodData((int)obj).CookingTime;
-   
+
             cookingSliderBar[(int)obj].value = minValue;
             foodLoadingBarTweens[(int)obj] = cookingSliderBar[(int)obj].DOValue(maxValue, foodCookingTime);
 
@@ -114,7 +125,7 @@ namespace Game
             int foodIndex = (int)obj;
             int foodProfit = GetFoodData(foodIndex).Profit;
             var moneyToast = (HOGTweenMoneyComponent)Manager.PoolManager.GetPoolable(PoolNames.MoneyToast);
-;
+            ;
             Vector3 toastPosition = moneyToastPosition.position + Vector3.up * 3;
             moneyToast.transform.position = toastPosition;
 
@@ -133,4 +144,3 @@ namespace Game
         }
     }
 }
-  

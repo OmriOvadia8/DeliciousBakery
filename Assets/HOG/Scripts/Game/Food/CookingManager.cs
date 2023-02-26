@@ -22,7 +22,7 @@ namespace Game
             foodManager.SetFoodOnCooldown(foodIndex, true);
 
             InvokeEvent(HOGEventNames.OnCookFood, foodIndex); // starts the loading bar and timer of cooking
-       
+
             StartCoroutine(StartCooking(cookingTime, profit, foodIndex));
         }
 
@@ -30,7 +30,7 @@ namespace Game
         {
             yield return new WaitForSeconds(cookingTime);
 
-            playerMoney.UpdateCurrency(profit);        
+            playerMoney.UpdateCurrency(profit);
             foodManager.SetFoodOnCooldown(foodIndex, false);
 
             InvokeEvent(HOGEventNames.MoneyToastOnCook, foodIndex);

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core;
+using UnityEngine;
 
 namespace Game
 {
@@ -12,39 +13,40 @@ namespace Game
 
         public HOGUpgradeManager()
         {
-            PlayerUpgradeInventoryData = new HOGPlayerUpgradeInventoryData
+              HOGManager.Instance.SaveManager.Load(delegate(HOGPlayerUpgradeInventoryData data)
             {
-                Upgradeables = new List<HOGUpgradeableData>(){new HOGUpgradeableData
-                    {
-                    upgradableTypeID = UpgradeablesTypeID.Food,
-                    CurrentLevel = 1,
-                    foodID = 0
+                PlayerUpgradeInventoryData = data ?? new HOGPlayerUpgradeInventoryData
+                {
+                    Upgradeables = new List<HOGUpgradeableData>(){new HOGUpgradeableData
+                        {
+                            upgradableTypeID = UpgradeablesTypeID.Food,
+                            CurrentLevel = 1,
+                            foodID = 0
+                        }
                     }
-                }
-            };
+                };
+            });
         }
 
-        public void UpgradeItemByID(UpgradeablesTypeID typeID, int index) // OVERLOAD orginal UpgradeItemByID method
+        public void UpgradeItemByID(UpgradeablesTypeID typeID, int index, ScoreTags currencyType, int upgradeCost) // OVERLOAD orginal UpgradeItemByID method
         {
             var upgradeable = GetUpgradeableByID(typeID, index);
 
             if (upgradeable != null)
             {
-                //var upgradeableConfig = GetHogUpgradeableConfigByID(typeID);
-                //HOGUpgradeableLevelData levelData = upgradeableConfig.UpgradableLevelData[upgradeable.CurrentLevel + 1];
-                //int amountToReduce = levelData.CoinsNeeded;
-                //ScoreTags coinsType = levelData.CurrencyTag;
 
-                //if (HOGGameLogic.Instance.ScoreManager.TryUseScore(coinsType, amountToReduce))
-                //{
+                if (HOGGameLogic.Instance.ScoreManager.TryUseScore(currencyType, upgradeCost))
+                {
                     upgradeable.CurrentLevel++;
+                    HOGManager.Instance.EventsManager.InvokeEvent(HOGEventNames.OnCurrencySet, upgradeCost);
                     HOGManager.Instance.EventsManager.InvokeEvent(HOGEventNames.OnUpgraded, typeID);
-                //}
-                //else
-                //{
-                //    Debug.LogError($"UpgradeItemByID {typeID} tried upgrade and there is no enough");
-                //}
+                    HOGManager.Instance.SaveManager.Save(PlayerUpgradeInventoryData);
+                }
+            else
+            {
+                Debug.LogError($"UpgradeItemByID {typeID} tried upgrade and there is no enough");
             }
+        }
         }
 
         public HOGUpgradeableData GetUpgradeableByID(UpgradeablesTypeID typeID, int index) // OVERLOAD Original  GetUpgradeableByID method
@@ -53,7 +55,7 @@ namespace Game
             return upgradeable;
         }
 
-        public void UpgradeItemByID(UpgradeablesTypeID typeID)  
+        public void UpgradeItemByID(UpgradeablesTypeID typeID)
         {
             var upgradeable = GetUpgradeableByID(typeID);
 
@@ -81,9 +83,9 @@ namespace Game
         {
             HOGUpgradeableConfig upgradeableConfig = UpgradeConfig.UpgradeableConfigs.FirstOrDefault(upgradable => upgradable.upgradableTypeID == typeID);
             return upgradeableConfig;
-        }    
+        }
 
-        public HOGUpgradeableData GetUpgradeableByID(UpgradeablesTypeID typeID) 
+        public HOGUpgradeableData GetUpgradeableByID(UpgradeablesTypeID typeID)
         {
             var upgradeable = PlayerUpgradeInventoryData.Upgradeables.FirstOrDefault(x => x.upgradableTypeID == typeID);
             return upgradeable;
@@ -127,7 +129,7 @@ namespace Game
 
     //All player saved data
     [Serializable]
-    public class HOGPlayerUpgradeInventoryData
+    public class HOGPlayerUpgradeInventoryData : IHOGSaveData
     {
         public List<HOGUpgradeableData> Upgradeables;
     }
