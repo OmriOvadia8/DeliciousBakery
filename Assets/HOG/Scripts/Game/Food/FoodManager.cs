@@ -15,7 +15,7 @@ namespace Game
         private const float COST_INCREASE = 1.15f; // increasing the upgrade's cost by 15% each upgrade
         private const string FOOD_CONFIG_PATH = "food_data"; // the name of the config file to load
 
-        private void Awake()
+        private void OnEnable()
         {
             // loading the latest food data list stats
             HOGManager.Instance.SaveManager.Load<FoodDataCollection>(data =>
@@ -23,9 +23,11 @@ namespace Game
                 if (data != null)
                 {
                     foods = data;
+                    Debug.Log("Loaded upgrade cost: " + data.Foods[0].UpgradeCost);
+
                 }
                 else // or default if there isnt one
-                HOGManager.Instance.ConfigManager.GetConfigAsync<FoodDataCollection>(FOOD_CONFIG_PATH, OnConfigLoaded);
+                    HOGManager.Instance.ConfigManager.GetConfigAsync<FoodDataCollection>(FOOD_CONFIG_PATH, OnConfigLoaded);
             });
         }
 
@@ -91,6 +93,7 @@ namespace Game
             {
                 foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE);
                 foodData.UpgradeCost = (int)(foodData.UpgradeCost * COST_INCREASE);
+                
 
                 InvokeEvent(HOGEventNames.OnUpgraded, foodID);
                 
