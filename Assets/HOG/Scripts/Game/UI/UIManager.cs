@@ -16,6 +16,7 @@ namespace Game
         private readonly float maxValue = 1f;
 
         [SerializeField] HOGTweenMoneyComponent moneyComponent;
+        [SerializeField] HOGTweenMoneyComponent SpendMoneyComponent;
         [SerializeField] RectTransform moneyToastPosition;
 
         [SerializeField] FoodManager foodManager;
@@ -37,6 +38,7 @@ namespace Game
             AddListener(HOGEventNames.OnCookFood, CookingLoadingBarAnimation);
             AddListener(HOGEventNames.OnCookFood, CookingTimer);
             AddListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
+            AddListener(HOGEventNames.OnMoneySpentToast, SpendMoneyTextToast);
 
             OnGameLoad();
 
@@ -50,7 +52,8 @@ namespace Game
 
         private void Start()
         {
-            Manager.PoolManager.InitPool("MoneyToast", 15, moneyToastPosition);  
+            Manager.PoolManager.InitPool("MoneyToast", 10, moneyToastPosition);
+            Manager.PoolManager.InitPool("SpendMoneyToast", 10, moneyToastPosition);
         }
 
         private void OnDisable()
@@ -60,6 +63,7 @@ namespace Game
             RemoveListener(HOGEventNames.OnCookFood, CookingLoadingBarAnimation);
             RemoveListener(HOGEventNames.OnCookFood, CookingTimer);
             RemoveListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
+            RemoveListener(HOGEventNames.OnMoneySpentToast, SpendMoneyTextToast);
         }
 
         private void OnGameLoad()
@@ -123,12 +127,24 @@ namespace Game
             int foodIndex = (int)obj;
             int foodProfit = GetFoodData(foodIndex).Profit;
             var moneyToast = (HOGTweenMoneyComponent)Manager.PoolManager.GetPoolable(PoolNames.MoneyToast);
-            ;
+
             Vector3 toastPosition = moneyToastPosition.position + Vector3.up * 3;
             moneyToast.transform.position = toastPosition;
 
             moneyToast.Init(foodProfit);
             Debug.Log(foodProfit);
+        }
+
+        public void SpendMoneyTextToast(object obj)
+        {
+            int foodIndex = (int)obj;
+            int upgradeCost = GetFoodData(foodIndex).UpgradeCost;
+            var moneyToast = (HOGTweenMoneyComponent)Manager.PoolManager.GetPoolable(PoolNames.SpendMoneyToast);
+
+            Vector3 toastPosition = moneyToastPosition.position + Vector3.up * 3;
+            moneyToast.transform.position = toastPosition;
+
+            moneyToast.SpendInit(upgradeCost);
         }
 
         private FoodData GetFoodData(int index)

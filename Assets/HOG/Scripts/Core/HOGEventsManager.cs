@@ -50,7 +50,8 @@ namespace Core
         OnGameStart,
         OnUpgraded,
         OnCookFood,
-        MoneyToastOnCook
+        MoneyToastOnCook,
+        OnMoneySpentToast
 
     }
 }

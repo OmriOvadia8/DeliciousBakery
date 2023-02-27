@@ -26,6 +26,12 @@ namespace Game
             DoAnimation();
         }
 
+        public void SpendInit(int amount)
+        {
+            moneyToastText.text = $"-{amount:N0}";
+            DoAnimation();
+        }
+
         public void DoAnimation()
         {
             transform.localScale = scaleStart * Vector3.one;

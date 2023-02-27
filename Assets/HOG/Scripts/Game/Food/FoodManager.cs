@@ -24,7 +24,6 @@ namespace Game
                 {
                     foods = data;
                     Debug.Log("Loaded upgrade cost: " + data.Foods[0].UpgradeCost);
-
                 }
                 else // or default if there isnt one
                     HOGManager.Instance.ConfigManager.GetConfigAsync<FoodDataCollection>(FOOD_CONFIG_PATH, OnConfigLoaded);
@@ -91,16 +90,16 @@ namespace Game
 
             if (initialLevel < GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel) // checks if the item leveled up and if so increases stats
             {
+                InvokeEvent(HOGEventNames.OnMoneySpentToast, foodID);
+
                 foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE);
                 foodData.UpgradeCost = (int)(foodData.UpgradeCost * COST_INCREASE);
                 
-
                 InvokeEvent(HOGEventNames.OnUpgraded, foodID);
-                
+                               
                 HOGManager.Instance.SaveManager.Save(foods); // Saving the current food data list stats
                 moneyHolder.UpdateCurrency(moneyHolder.startingCurrency);
             }
-
             Debug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel);
         }
 

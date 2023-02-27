@@ -125,5 +125,6 @@ namespace Core
     {
         NA = -1,
         MoneyToast = 0,
+        SpendMoneyToast = 1
     }
 }

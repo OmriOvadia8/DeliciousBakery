@@ -635,6 +635,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingCurrency: 0
+  currencySaveData:
+    CurrencyAmount: 0
 --- !u!1 &69083085
 GameObject:
   m_ObjectHideFlags: 0
@@ -17946,8 +17948,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c2c1d4844fe904180c3f0969f750b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyComponent: {fileID: 6681014376655726399, guid: be990fa58eb59d44cb37034f3973ad9e, type: 3}
+  moneyComponent: {fileID: 6681014376655726399, guid: d54c4514f0f880945abe65c9e739ce04, type: 3}
+  SpendMoneyComponent: {fileID: 6681014376655726399, guid: be990fa58eb59d44cb37034f3973ad9e, type: 3}
   moneyToastPosition: {fileID: 350408837}
+  spendMoneyToastPosition: {fileID: 350408837}
   foodManager: {fileID: 1432630589}
   moneyHolder: {fileID: 68174596}
   moneyText: {fileID: 350408838}
