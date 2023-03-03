@@ -13,19 +13,19 @@ namespace Game
 
         public HOGUpgradeManager()
         {
-              HOGManager.Instance.SaveManager.Load(delegate(HOGPlayerUpgradeInventoryData data)
-            {
-                PlayerUpgradeInventoryData = data ?? new HOGPlayerUpgradeInventoryData
-                {
-                    Upgradeables = new List<HOGUpgradeableData>(){new HOGUpgradeableData
+            HOGManager.Instance.SaveManager.Load(delegate (HOGPlayerUpgradeInventoryData data)
+          {
+              PlayerUpgradeInventoryData = data ?? new HOGPlayerUpgradeInventoryData
+              {
+                  Upgradeables = new List<HOGUpgradeableData>(){new HOGUpgradeableData
                         {
                             upgradableTypeID = UpgradeablesTypeID.Food,
                             CurrentLevel = 1,
                             foodID = 0
                         }
-                    }
-                };
-            });
+                  }
+              };
+          });
         }
 
         public void UpgradeItemByID(UpgradeablesTypeID typeID, int index, ScoreTags currencyType, int upgradeCost) // OVERLOAD orginal UpgradeItemByID method
@@ -34,7 +34,6 @@ namespace Game
 
             if (upgradeable != null)
             {
-
                 if (HOGGameLogic.Instance.ScoreManager.TryUseScore(currencyType, upgradeCost))
                 {
                     upgradeable.CurrentLevel++;
@@ -42,12 +41,18 @@ namespace Game
                     HOGManager.Instance.EventsManager.InvokeEvent(HOGEventNames.OnUpgraded, typeID);
                     HOGManager.Instance.SaveManager.Save(PlayerUpgradeInventoryData);
                 }
+                else
+                {
+                    Debug.LogError($"UpgradeItemByID {typeID} tried upgrade and there is no enough");
+                }
+            }
             else
             {
-                Debug.LogError($"UpgradeItemByID {typeID} tried upgrade and there is no enough");
+                HOGManager.Instance.CrashManager.LogExceptionHandling($"UpgradeItemByID {typeID.ToString()} failed because upgradable was null");
             }
+
         }
-        }
+    
 
         public HOGUpgradeableData GetUpgradeableByID(UpgradeablesTypeID typeID, int index) // OVERLOAD Original  GetUpgradeableByID method
         {

@@ -1,9 +1,12 @@
 using System;
+using Firebase.Crashlytics;
+using Firebase.Extensions;
 
 namespace Core
 {
     public class HOGManager : IHOGBaseManager
     {
+
         public static HOGManager Instance;
 
         public HOGEventsManager EventsManager;
@@ -11,6 +14,9 @@ namespace Core
         public HOGPoolManager PoolManager;
         public HOGSaveManager SaveManager;
         public HOGConfigManager ConfigManager;
+        public HOGCrashManager CrashManager;
+
+        public Action onInitAction;
 
         public HOGManager()
         {
@@ -24,18 +30,56 @@ namespace Core
 
         public void LoadManager(Action onComplete)
         {
-            EventsManager = new HOGEventsManager();
-            FactoryManager = new HOGFactoryManager();
-            PoolManager = new HOGPoolManager();
-            SaveManager = new HOGSaveManager();
-            ConfigManager = new HOGConfigManager();
-
-            onComplete.Invoke();
+            onInitAction = onComplete;
+            InitFirebase(delegate
+            {
+                InitManagers();
+            });
         }
-    }
 
-    public interface IHOGBaseManager
-    {
-        public void LoadManager(Action onComplete);
+        public void InitFirebase(Action onComplete)
+        {
+            Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
+                var dependencyStatus = task.Result;
+                if (dependencyStatus == Firebase.DependencyStatus.Available)
+                {
+                    var app = Firebase.FirebaseApp.DefaultInstance;
+                    HOGDebug.Log($"Firebase was initialized");
+                    onComplete.Invoke();
+                }
+                else
+                {
+                    HOGDebug.LogException($"Could not resolve all Firebase dependencies: {dependencyStatus}");
+                }
+            });
+        }
+
+        private void InitManagers()
+        {
+            HOGDebug.Log($"InitManagers");
+
+            CrashManager = new HOGCrashManager();
+            HOGDebug.Log($"After CrashManager");
+
+            EventsManager = new HOGEventsManager();
+            HOGDebug.Log($"After HOGEventsManager");
+
+            FactoryManager = new HOGFactoryManager();
+            HOGDebug.Log($"After HOGFactoryManager");
+
+            PoolManager = new HOGPoolManager();
+            HOGDebug.Log($"After HOGPoolManager");
+
+            SaveManager = new HOGSaveManager();
+            HOGDebug.Log($"After HOGSaveManager");
+
+            HOGDebug.Log($"Before Config Manager");
+
+            ConfigManager = new HOGConfigManager(delegate
+            {
+                onInitAction.Invoke();
+            });
+
+        }
     }
 }

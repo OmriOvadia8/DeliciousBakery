@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "277927223031",
+    "project_id": "delicious-bakery",
+    "storage_bucket": "delicious-bakery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277927223031:android:f5833c7122e73095b1fdf2",
+        "android_client_info": {
+          "package_name": "com.omri.deliciousbakery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277927223031-76e0tcr9vmtrpau8pr0q1e4qugdvp5th.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF-xmvA72LdRdCp49g7WkD0woG7IimNNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277927223031-76e0tcr9vmtrpau8pr0q1e4qugdvp5th.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,21 +5,21 @@ namespace Core
 {
     public class HOGPoolManager
     {
-        private readonly Dictionary<PoolNames, HOGPool> Pools = new();
+        private Dictionary<PoolNames, HOGPool> Pools = new();
 
-       // private Transform rootPools;
+        private Transform rootPools;
 
         public HOGPoolManager()
         {
-           // rootPools = new GameObject().transform;
-           // Object.DontDestroyOnLoad(rootPools);
+            rootPools = new GameObject().transform;
+            Object.DontDestroyOnLoad(rootPools);
         }
 
-        //public void InitPool(PoolNames poolName, int amount, Transform parentTransform)
-        //{
-        //    //List Of Originals 
-        //    //Linq where PoolNames == poolName
-        //}
+        public void InitPool(PoolNames poolName, int amount)
+        {
+            //List Of Originals 
+            //Linq where PoolNames == poolName
+        }
 
         public void InitPool(string resourceName, int amount, Transform parentTransform, int maxAmount = 100)
         {
@@ -57,7 +57,7 @@ namespace Core
             {
                 if (pool.AvailablePoolables.TryDequeue(out HOGPoolable poolable))
                 {
-                    Debug.Log($"GetPoolable - {poolName}");
+                    HOGDebug.Log($"GetPoolable - {poolName}");
 
                     poolable.OnTakenFromPool();
 
@@ -67,12 +67,12 @@ namespace Core
                 }
 
                 //Create more
-                Debug.Log($"pool - {poolName} no enough poolables, used poolables {pool.UsedPoolables.Count}");
+                HOGDebug.Log($"pool - {poolName} no enough poolables, used poolables {pool.UsedPoolables.Count}");
 
                 return null;
             }
 
-            Debug.Log($"pool - {poolName} wasn't initialized");
+            HOGDebug.Log($"pool - {poolName} wasn't initialized");
             return null;
         }
 

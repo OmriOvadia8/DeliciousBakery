@@ -70,6 +70,7 @@ namespace Game
                 ChangeScoreByTagByAmount(scoreTag, -amountToReduce);
             }
 
+            HOGManager.Instance.CrashManager.LogBreadcrumb($"User Doesn't have enough coins of type {scoreTag.ToString()}");
             return hasEnough;
         }
     }
