@@ -22,6 +22,7 @@ namespace Core
                 gameLogicLoader.StartLoad(() =>
                 {
                     SceneManager.LoadScene(1);
+                    Manager.AnalyticsManager.ReportEvent(HOGEventType.app_loaded);
                     Destroy(gameObject);
                 });
             });

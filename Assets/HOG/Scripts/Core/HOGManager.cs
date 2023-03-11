@@ -15,6 +15,7 @@ namespace Core
         public HOGSaveManager SaveManager;
         public HOGConfigManager ConfigManager;
         public HOGCrashManager CrashManager;
+        public HOGAnalyticsManager AnalyticsManager;
 
         public Action onInitAction;
 
@@ -63,6 +64,8 @@ namespace Core
 
             EventsManager = new HOGEventsManager();
             HOGDebug.Log($"After HOGEventsManager");
+
+            AnalyticsManager = new HOGAnalyticsManager();
 
             FactoryManager = new HOGFactoryManager();
             HOGDebug.Log($"After HOGFactoryManager");

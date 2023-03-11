@@ -2,12 +2,16 @@
   <packages>
     <package>com.google.android.gms:play-services-base:18.1.0</package>
     <package>com.google.firebase:firebase-analytics:21.2.0</package>
+    <package>com.google.firebase:firebase-analytics-unity:10.5.0</package>
     <package>com.google.firebase:firebase-app-unity:10.5.0</package>
     <package>com.google.firebase:firebase-common:20.3.0</package>
     <package>com.google.firebase:firebase-config:21.2.1</package>
     <package>com.google.firebase:firebase-config-unity:10.5.0</package>
     <package>com.google.firebase:firebase-crashlytics-ndk:18.3.4</package>
     <package>com.google.firebase:firebase-crashlytics-unity:10.5.0</package>
+    <package>com.google.firebase:firebase-iid:21.1.0</package>
+    <package>com.google.firebase:firebase-messaging:23.1.1</package>
+    <package>com.google.firebase:firebase-messaging-unity:10.5.0</package>
   </packages>
   <files>
     <file>Assets/Plugins/Android/androidx.annotation.annotation-1.5.0.jar</file>
@@ -44,6 +48,7 @@
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-ads-identifier-18.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-base-18.1.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-basement-18.1.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.android.gms.play-services-cloud-messaging-17.0.1.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-measurement-21.2.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-measurement-api-21.2.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-measurement-base-21.2.0.aar</file>
@@ -55,6 +60,7 @@
     <file>Assets/Plugins/Android/com.google.errorprone.error_prone_annotations-2.9.0.jar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-abt-21.1.0.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-analytics-21.2.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.firebase.firebase-analytics-unity-10.5.0.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-annotations-16.2.0.jar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-app-unity-10.5.0.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-common-20.3.0.aar</file>
@@ -64,12 +70,17 @@
     <file>Assets/Plugins/Android/com.google.firebase.firebase-crashlytics-18.3.4.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-crashlytics-ndk-18.3.4.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-crashlytics-unity-10.5.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.firebase.firebase-datatransport-18.1.7.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-encoders-17.0.0.jar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-encoders-json-18.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-encoders-proto-16.0.0.jar</file>
+    <file>Assets/Plugins/Android/com.google.firebase.firebase-iid-21.1.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.firebase.firebase-iid-interop-17.1.0.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-installations-17.1.1.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-installations-interop-17.1.0.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-measurement-connector-19.0.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.firebase.firebase-messaging-23.1.1.aar</file>
+    <file>Assets/Plugins/Android/com.google.firebase.firebase-messaging-unity-10.5.0.aar</file>
     <file>Assets/Plugins/Android/com.google.guava.listenablefuture-1.0.jar</file>
     <file>Assets/Plugins/Android/javax.inject.javax.inject-1.jar</file>
     <file>Assets/Plugins/Android/org.jetbrains.annotations-13.0.jar</file>

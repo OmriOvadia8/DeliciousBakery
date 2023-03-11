@@ -40,9 +40,22 @@ namespace Game
                     HOGManager.Instance.EventsManager.InvokeEvent(HOGEventNames.OnCurrencySet, upgradeCost);
                     HOGManager.Instance.EventsManager.InvokeEvent(HOGEventNames.OnUpgraded, typeID);
                     HOGManager.Instance.SaveManager.Save(PlayerUpgradeInventoryData);
+
+                    HOGManager.Instance.AnalyticsManager.ReportEvent(HOGEventType.upgrade_item, new Dictionary<HOGDataKeys, object>()
+                    {
+                        {HOGDataKeys.type_id, typeID.ToString()},
+                        {HOGDataKeys.upgrade_level, upgradeable.CurrentLevel}
+                    });
+
                 }
                 else
                 {
+                    HOGManager.Instance.AnalyticsManager.ReportEvent(HOGEventType.try_upgrade_out_of, new Dictionary<HOGDataKeys, object>()
+                    {
+                        {HOGDataKeys.type_id, typeID.ToString()},
+                        {HOGDataKeys.upgrade_level, upgradeable.CurrentLevel}
+                    });
+
                     Debug.LogError($"UpgradeItemByID {typeID} tried upgrade and there is no enough");
                 }
             }
