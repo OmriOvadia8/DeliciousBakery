@@ -1,5 +1,5 @@
 using Core;
-
+// TODO: Hire Cost to json, not interactable upgrades when not enough $, working baker upgrade system (increase profit x Times), sleep on it...
 namespace Game
 {
     public class FoodData
