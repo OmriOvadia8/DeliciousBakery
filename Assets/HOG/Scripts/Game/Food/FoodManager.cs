@@ -9,6 +9,7 @@ namespace Game
     {
         [SerializeField] HOGMoneyHolder moneyHolder;
         [SerializeField] CookingManager cookingManager;
+        [SerializeField] UIManager uiManager;
 
         private FoodDataCollection foods; // fooddatacollection sub class in FoodData.cs (array of foods)
         public bool[] isIdleUnlocked = new bool[FOOD_COUNT];
@@ -40,6 +41,7 @@ namespace Game
             {
                 AddNewFoodItem(i);
                 InvokeEvent(HOGEventNames.OnUpgraded, i);
+                uiManager.UpgradeButtonsCheck();
 
                 var foodData = GetFoodData(i);
                 if (foodData.IsIdleFood == true)
@@ -109,6 +111,7 @@ namespace Game
                                
                 HOGManager.Instance.SaveManager.Save(foods); // Saving the current food data list stats
                 moneyHolder.UpdateCurrency(moneyHolder.startingCurrency);
+                uiManager.UpgradeButtonsCheck();
             }
             Debug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel);
         }

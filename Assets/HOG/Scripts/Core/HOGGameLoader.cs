@@ -10,7 +10,8 @@ namespace Core
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
-            Invoke(nameof(DelayStart), 0.1f);
+            //Invoke(nameof(DelayStart), 0.1f);
+            WaitForFrame(DelayStart);
         }
 
         private void DelayStart()

@@ -22,6 +22,9 @@ namespace Game
         [SerializeField] FoodManager foodManager;
         [SerializeField] HOGMoneyHolder moneyHolder;
 
+        [SerializeField] Button[] upgradeButtons;
+        [SerializeField] Button[] hireButtons;
+
         [SerializeField] TMP_Text moneyText;
 
         [SerializeField] TMP_Text[] foodProfitText;
@@ -39,6 +42,7 @@ namespace Game
             AddListener(HOGEventNames.OnCookFood, CookingTimer);
             AddListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
             AddListener(HOGEventNames.OnMoneySpentToast, SpendMoneyTextToast);
+
 
             OnGameLoad();
 
@@ -68,7 +72,6 @@ namespace Game
 
         private void OnGameLoad()
         {
-            moneyHolder.LoadCurrency(); // loads latest currency
             moneyText.text = $"{moneyHolder.currencySaveData.CurrencyAmount:N0}";
         }
 
@@ -146,6 +149,41 @@ namespace Game
 
             moneyToast.SpendInit(upgradeCost);
         }
+
+        public void UpgradeButtonsCheck()
+        {
+            for (int i = 0; i < upgradeButtons.Length; i++)
+            {
+                int upgradeCost = GetFoodData(i).UpgradeCost;
+                if (moneyHolder.currencySaveData.CurrencyAmount >= upgradeCost)
+                {
+                    upgradeButtons[i].interactable = true;
+                }
+                else
+                {
+                    upgradeButtons[i].interactable = false;
+                }
+            }
+        }
+
+        public void HireButtonCheck(object obj)
+        {
+            int buttonIndex = (int)obj;
+            int hireCost = GetFoodData(buttonIndex).UpgradeCost;
+
+            foreach (var button in upgradeButtons)
+            {
+                if (moneyHolder.startingCurrency >= hireCost)
+                {
+                    button.interactable = true;
+                }
+                else
+                {
+                    button.interactable = false;
+                }
+            }
+        }
+
 
         private FoodData GetFoodData(int index)
         {

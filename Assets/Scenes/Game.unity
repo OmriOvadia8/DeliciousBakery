@@ -475,6 +475,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25799381}
   m_CullTransparentMesh: 1
+--- !u!114 &29884347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 154389232}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &29946236 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1588827603130948454, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
@@ -1410,6 +1421,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2907940649482807551, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: LevelUp2
+      objectReference: {fileID: 0}
     - target: {fileID: 6135725605140196437, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Profit.text(2)
@@ -2048,6 +2063,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2907940649482807551, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: LevelUp0
+      objectReference: {fileID: 0}
     - target: {fileID: 6135725605140196437, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Profit.text(0)
@@ -2539,6 +2558,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2907940649482807551, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: LevelUp9
+      objectReference: {fileID: 0}
     - target: {fileID: 6135725605140196437, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Profit.text(9)
@@ -2910,6 +2933,10 @@ PrefabInstance:
     - target: {fileID: 1588827603130948454, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940649482807551, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: LevelUp7
       objectReference: {fileID: 0}
     - target: {fileID: 6135725605140196437, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
@@ -4759,6 +4786,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 353278914}
   m_CullTransparentMesh: 1
+--- !u!114 &355050598 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 509836343}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &356015686
 GameObject:
   m_ObjectHideFlags: 0
@@ -5993,6 +6031,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2907940649482807551, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: LevelUp1
+      objectReference: {fileID: 0}
     - target: {fileID: 6135725605140196437, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Profit.text(1)
@@ -6282,6 +6324,10 @@ PrefabInstance:
     - target: {fileID: 1588827603130948454, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940649482807551, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: LevelUp8
       objectReference: {fileID: 0}
     - target: {fileID: 6135725605140196437, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
@@ -6806,6 +6852,10 @@ PrefabInstance:
     - target: {fileID: 1588827603130948454, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940649482807551, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: LevelUp6
       objectReference: {fileID: 0}
     - target: {fileID: 6135725605140196437, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
@@ -8435,6 +8485,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 640931945}
   m_CullTransparentMesh: 1
+--- !u!114 &643185337 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 461121574}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &648534310
 GameObject:
   m_ObjectHideFlags: 0
@@ -8965,6 +9026,10 @@ PrefabInstance:
     - target: {fileID: 1588827603130948454, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940649482807551, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: LevelUp5
       objectReference: {fileID: 0}
     - target: {fileID: 6135725605140196437, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
@@ -11184,6 +11249,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 897870180}
   m_CullTransparentMesh: 1
+--- !u!114 &899852044 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 94691873}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &902164943
 GameObject:
   m_ObjectHideFlags: 0
@@ -16248,6 +16324,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326779205}
   m_CullTransparentMesh: 1
+--- !u!114 &1328608678 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 682689297}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1330915118
 GameObject:
   m_ObjectHideFlags: 0
@@ -16370,6 +16457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodManager: {fileID: 1432630589}
   playerMoney: {fileID: 68174596}
+  uiManager: {fileID: 1686217519}
 --- !u!1 &1347072870
 GameObject:
   m_ObjectHideFlags: 0
@@ -17163,6 +17251,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2907940649482807551, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: LevelUp4
+      objectReference: {fileID: 0}
     - target: {fileID: 6135725605140196437, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Profit.text(4)
@@ -17485,6 +17577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyHolder: {fileID: 68174596}
   cookingManager: {fileID: 1330954666}
+  uiManager: {fileID: 1686217519}
   isIdleUnlocked: 00000000000000000000
 --- !u!4 &1432630590
 Transform:
@@ -18201,6 +18294,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1467130077}
   m_CullTransparentMesh: 1
+--- !u!114 &1478794507 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 1391866681}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1489304038
 GameObject:
   m_ObjectHideFlags: 0
@@ -18547,6 +18651,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524273701}
   m_CullTransparentMesh: 1
+--- !u!114 &1526736997 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 170367074}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1542550378
 GameObject:
   m_ObjectHideFlags: 0
@@ -20498,6 +20613,18 @@ MonoBehaviour:
   moneyToastPosition: {fileID: 350408837}
   foodManager: {fileID: 1432630589}
   moneyHolder: {fileID: 68174596}
+  upgradeButtons:
+  - {fileID: 29884347}
+  - {fileID: 2105014747}
+  - {fileID: 899852044}
+  - {fileID: 1836065872}
+  - {fileID: 1478794507}
+  - {fileID: 1328608678}
+  - {fileID: 355050598}
+  - {fileID: 2088317708}
+  - {fileID: 643185337}
+  - {fileID: 1526736997}
+  hireButtons: []
   moneyText: {fileID: 350408838}
   foodProfitText:
   - {fileID: 154389235}
@@ -21193,6 +21320,10 @@ PrefabInstance:
     - target: {fileID: 1588827603130948454, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940649482807551, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: LevelUp3
       objectReference: {fileID: 0}
     - target: {fileID: 6135725605140196437, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
@@ -21959,6 +22090,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823773608}
   m_CullTransparentMesh: 1
+--- !u!114 &1836065872 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 1764614942}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1839159205
 GameObject:
   m_ObjectHideFlags: 0
@@ -24396,6 +24538,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087787776}
   m_CullTransparentMesh: 1
+--- !u!114 &2088317708 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 183907027}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2089525188
 GameObject:
   m_ObjectHideFlags: 0
@@ -24856,6 +25009,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2104912994}
   m_CullTransparentMesh: 1
+--- !u!114 &2105014747 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 446521283}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6807725537756875283 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3008656256552165230, guid: b363f863231cd0f429cbd97959952a78, type: 3}

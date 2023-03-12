@@ -51,7 +51,6 @@ namespace Core
         OnUpgraded,
         OnCookFood,
         MoneyToastOnCook,
-        OnMoneySpentToast
-
+        OnMoneySpentToast,
     }
 }

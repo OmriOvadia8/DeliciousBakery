@@ -8,6 +8,8 @@ namespace Game
     {
         [SerializeField] FoodManager foodManager;
         [SerializeField] HOGMoneyHolder playerMoney;
+        [SerializeField] UIManager uiManager;
+
         private FoodData foodData;
 
         public void CookFood(int foodIndex)
@@ -36,12 +38,13 @@ namespace Game
             playerMoney.UpdateCurrency(profit);
             foodManager.SetFoodOnCooldown(foodIndex, false);
 
-            InvokeEvent(HOGEventNames.MoneyToastOnCook, foodIndex);
-
             if(foodData.IsIdleFood == true)
             {
                 foodManager.UnlockIdleFood(foodIndex);
             }
+
+            InvokeEvent(HOGEventNames.MoneyToastOnCook, foodIndex);
+            uiManager.UpgradeButtonsCheck();
         }
     }
 }
