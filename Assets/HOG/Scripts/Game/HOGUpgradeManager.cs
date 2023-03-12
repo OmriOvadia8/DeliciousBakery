@@ -9,6 +9,7 @@ namespace Game
     public class HOGUpgradeManager
     {
         public HOGPlayerUpgradeInventoryData PlayerUpgradeInventoryData; //Player Saved Data
+        public HOGPlayerIdleFoodInventoryData PlayerIdleFoodInventoryData; // Player Saved Idle Food Data
         public HOGUpgradeManagerConfig UpgradeConfig; //From cloud
 
         public HOGUpgradeManager()
@@ -150,6 +151,12 @@ namespace Game
     public class HOGPlayerUpgradeInventoryData : IHOGSaveData
     {
         public List<HOGUpgradeableData> Upgradeables;
+    }
+
+    [Serializable]
+    public class HOGPlayerIdleFoodInventoryData : IHOGSaveData
+    {
+        public List<HOGUpgradeableData> IdleFood;
     }
 
     [Serializable]

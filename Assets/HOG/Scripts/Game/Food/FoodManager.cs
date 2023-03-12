@@ -8,7 +8,10 @@ namespace Game
     public class FoodManager : HOGLogicMonoBehaviour
     {
         [SerializeField] HOGMoneyHolder moneyHolder;
+        [SerializeField] CookingManager cookingManager;
+
         private FoodDataCollection foods; // fooddatacollection sub class in FoodData.cs (array of foods)
+        public bool[] isIdleUnlocked = new bool[FOOD_COUNT];
 
         public const int FOOD_COUNT = 10; // total food types count in game
         private const float PROFIT_INCREASE = 1.1f; // increasing the food's profit by 10% each upgrade
@@ -37,6 +40,13 @@ namespace Game
             {
                 AddNewFoodItem(i);
                 InvokeEvent(HOGEventNames.OnUpgraded, i);
+
+                var foodData = GetFoodData(i);
+                if (foodData.IsIdleFood == true)
+                {
+                    foodData.IsOnCooldown = false;
+                    cookingManager.CookFood(i);
+                }
             }
         }
 
@@ -101,6 +111,14 @@ namespace Game
                 moneyHolder.UpdateCurrency(moneyHolder.startingCurrency);
             }
             Debug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel);
+        }
+
+        public void UnlockIdleFood(int foodIndex)
+        {
+            var foodData = GetFoodData(foodIndex);
+            foodData.IsIdleFood = true;
+            cookingManager.CookFood(foodIndex);
+            HOGManager.Instance.SaveManager.Save(foods);
         }
 
         public bool IsFoodOnCooldown(int foodID)

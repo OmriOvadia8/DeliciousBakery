@@ -8,10 +8,12 @@ namespace Game
     {
         [SerializeField] FoodManager foodManager;
         [SerializeField] HOGMoneyHolder playerMoney;
+        private FoodData foodData;
 
         public void CookFood(int foodIndex)
         {
-            FoodData foodData = foodManager.GetFoodData(foodIndex);
+            foodData = foodManager.GetFoodData(foodIndex);
+            
             if (foodManager.IsFoodOnCooldown(foodIndex))
             {
                 return;
@@ -24,6 +26,7 @@ namespace Game
             InvokeEvent(HOGEventNames.OnCookFood, foodIndex); // starts the loading bar and timer of cooking
 
             StartCoroutine(StartCooking(cookingTime, profit, foodIndex));
+        
         }
 
         private IEnumerator StartCooking(float cookingTime, int profit, int foodIndex)
@@ -34,6 +37,11 @@ namespace Game
             foodManager.SetFoodOnCooldown(foodIndex, false);
 
             InvokeEvent(HOGEventNames.MoneyToastOnCook, foodIndex);
+
+            if(foodData.IsIdleFood == true)
+            {
+                foodManager.UnlockIdleFood(foodIndex);
+            }
         }
     }
 }

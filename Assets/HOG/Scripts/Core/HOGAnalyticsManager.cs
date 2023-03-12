@@ -1,11 +1,10 @@
 using Firebase.Analytics;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Core
 {
-    public class HOGAnalyticsManager : HOGMonoBehaviour
+    public class HOGAnalyticsManager
     {
         public HOGAnalyticsManager()
         {
