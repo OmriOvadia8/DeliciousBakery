@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace Game
 {
     public class UIManager : HOGLogicMonoBehaviour
-    {
+    {   // make loading and own cooking time to bakers
         private readonly Dictionary<int, Tweener> foodLoadingBarTweens = new(); // DOTween dictionary - Tween for each cooking food loading bar
 
         private readonly float minValue = 0f;
@@ -30,6 +30,9 @@ namespace Game
         [SerializeField] TMP_Text[] foodProfitText;
         [SerializeField] TMP_Text[] foodLevelText;
         [SerializeField] TMP_Text[] upgradeCostText;
+        [SerializeField] TMP_Text[] cookFoodTimesText;
+        [SerializeField] TMP_Text[] hireCostText;
+        [SerializeField] TMP_Text[] bakersCountText;
 
         [SerializeField] Slider[] cookingSliderBar;
         [SerializeField] TMP_Text[] cookingTimeText;
@@ -41,8 +44,9 @@ namespace Game
             AddListener(HOGEventNames.OnCookFood, CookingLoadingBarAnimation);
             AddListener(HOGEventNames.OnCookFood, CookingTimer);
             AddListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
-            AddListener(HOGEventNames.OnMoneySpentToast, SpendMoneyTextToast);
-
+            AddListener(HOGEventNames.OnUpgradeMoneySpentToast, SpendUpgradeMoneyTextToast);
+            AddListener(HOGEventNames.OnHireMoneySpentToast, SpendHireMoneyTextToast);
+            AddListener(HOGEventNames.OnHired, OnHireUpdate);
 
             OnGameLoad();
 
@@ -56,8 +60,8 @@ namespace Game
 
         private void Start()
         {
-            Manager.PoolManager.InitPool("MoneyToast", 10, moneyToastPosition);
-            Manager.PoolManager.InitPool("SpendMoneyToast", 10, moneyToastPosition);
+            Manager.PoolManager.InitPool("MoneyToast", 20, moneyToastPosition);
+            Manager.PoolManager.InitPool("SpendMoneyToast", 20, moneyToastPosition);
         }
 
         private void OnDisable()
@@ -67,7 +71,9 @@ namespace Game
             RemoveListener(HOGEventNames.OnCookFood, CookingLoadingBarAnimation);
             RemoveListener(HOGEventNames.OnCookFood, CookingTimer);
             RemoveListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
-            RemoveListener(HOGEventNames.OnMoneySpentToast, SpendMoneyTextToast);
+            RemoveListener(HOGEventNames.OnUpgradeMoneySpentToast, SpendUpgradeMoneyTextToast);
+            RemoveListener(HOGEventNames.OnHireMoneySpentToast, SpendHireMoneyTextToast);
+            RemoveListener(HOGEventNames.OnHired, OnHireUpdate);
         }
 
         private void OnGameLoad()
@@ -96,6 +102,22 @@ namespace Game
 
             moneyHolder.UpdateCurrency(moneyHolder.startingCurrency);
             UpgradeButtonsCheck();
+            HireButtonCheck();
+        }
+
+        private void OnHireUpdate(object obj)
+        {
+            int hireCost = GetFoodData((int)obj).HireCost;
+            int cookFoodTimes = GetFoodData((int)obj).CookFoodTimes;
+            int bakersCount = GetFoodData((int)obj).BakersCount;
+
+            bakersCountText[(int)obj].text = bakersCount.ToString() + "x";
+            cookFoodTimesText[(int)obj].text = cookFoodTimes.ToString() + "x";
+            hireCostText[(int)obj].text = hireCost.ToString();
+
+            moneyHolder.UpdateCurrency(moneyHolder.startingCurrency);
+            UpgradeButtonsCheck();
+            HireButtonCheck();
         }
 
         private void CookingLoadingBarAnimation(object obj) // activates loading bar with DOTween
@@ -140,11 +162,12 @@ namespace Game
             moneyToast.Init(foodProfit);
 
             UpgradeButtonsCheck();
+            HireButtonCheck();
 
             Debug.Log(foodProfit);
         }
 
-        public void SpendMoneyTextToast(object obj)
+        public void SpendUpgradeMoneyTextToast(object obj)
         {
             int foodIndex = (int)obj;
             int upgradeCost = GetFoodData(foodIndex).UpgradeCost;
@@ -156,7 +179,19 @@ namespace Game
             moneyToast.SpendInit(upgradeCost);
         }
 
-        public void UpgradeButtonsCheck()
+        public void SpendHireMoneyTextToast(object obj)
+        {
+            int foodIndex = (int)obj;
+            int hireCost = GetFoodData(foodIndex).HireCost;
+            var moneyToast = (HOGTweenMoneyComponent)Manager.PoolManager.GetPoolable(PoolNames.SpendMoneyToast);
+
+            Vector3 toastPosition = moneyToastPosition.position + Vector3.up * 3;
+            moneyToast.transform.position = toastPosition;
+
+            moneyToast.SpendInit(hireCost);
+        }
+
+        private void UpgradeButtonsCheck()
         {
             for (int i = 0; i < upgradeButtons.Length; i++)
             {
@@ -172,18 +207,18 @@ namespace Game
             }
         }
 
-        public void HireButtonCheck()
+        private void HireButtonCheck()
         {
             for (int i = 0; i < hireButtons.Length; i++)
             {
-                int upgradeCost = GetFoodData(i).UpgradeCost;
-                if (moneyHolder.currencySaveData.CurrencyAmount >= upgradeCost)
+                int hireCost = GetFoodData(i).HireCost;
+                if (moneyHolder.currencySaveData.CurrencyAmount >= hireCost)
                 {
-                    upgradeButtons[i].interactable = true;
+                    hireButtons[i].interactable = true;
                 }
                 else
                 {
-                    upgradeButtons[i].interactable = false;
+                    hireButtons[i].interactable = false;
                 }
             }
         }

@@ -41,9 +41,10 @@ namespace Game
             {
                 AddNewFoodItem(i);
                 InvokeEvent(HOGEventNames.OnUpgraded, i);
+                InvokeEvent(HOGEventNames.OnHired, i);
 
                 var foodData = GetFoodData(i);
-                if (foodData.IsIdleFood == true)
+                if (foodData.IsIdleFood == true) // for now resets all cooking timers on start till i learn how to run courotine while offline
                 {
                     foodData.IsOnCooldown = false;
                     cookingManager.CookFood(i);
@@ -101,7 +102,7 @@ namespace Game
 
             if (initialLevel < GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel) // checks if the item leveled up and if so increases stats
             {
-                InvokeEvent(HOGEventNames.OnMoneySpentToast, foodID);
+                InvokeEvent(HOGEventNames.OnUpgradeMoneySpentToast, foodID);
 
                 foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE);
                 foodData.UpgradeCost = (int)(foodData.UpgradeCost * COST_INCREASE);
@@ -114,11 +115,27 @@ namespace Game
             Debug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel);
         }
 
-        public void UnlockIdleFood(int foodIndex)
+        public void UnlockOrUpgradeIdleFood(int foodIndex)
         {
             var foodData = GetFoodData(foodIndex);
-            foodData.IsIdleFood = true;
-            cookingManager.CookFood(foodIndex);
+
+            if (HOGGameLogic.Instance.ScoreManager.TryUseScore(ScoreTags.GameCurrency, foodData.HireCost))
+            {
+                InvokeEvent(HOGEventNames.OnHireMoneySpentToast, foodIndex);
+
+                foodData.IsIdleFood = true;
+                cookingManager.CookFood(foodIndex);
+
+                foodData.HireCost = (int)(foodData.HireCost * COST_INCREASE);
+
+                foodData.BakersCount++;
+                InvokeEvent(HOGEventNames.OnHired, foodIndex);
+            }
+            else
+            {
+                HOGDebug.LogException("something's wrong here");
+            }
+
             HOGManager.Instance.SaveManager.Save(foods);
         }
 

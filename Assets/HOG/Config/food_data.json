@@ -6,7 +6,9 @@
       "Profit": 60,
       "UpgradeCost": 60,
       "IsIdleFood": false,
-      "HireCost": 100
+      "HireCost": 100,
+      "BakersCount": 0,
+      "CookFoodTimes": 1
     },
     {
       "Index": 1,
@@ -14,7 +16,9 @@
       "Profit": 25,
       "UpgradeCost": 100,
       "IsIdleFood": false,
-      "HireCost": 200
+      "HireCost": 200,
+      "BakersCount": 0,
+      "CookFoodTimes": 1
     },
     {
       "Index": 2,
@@ -22,7 +26,9 @@
       "Profit": 36,
       "UpgradeCost": 200,
       "IsIdleFood": false,
-      "HireCost": 400
+      "HireCost": 400,
+      "BakersCount": 0,
+      "CookFoodTimes": 1
     },
     {
       "Index": 3,
@@ -30,7 +36,9 @@
       "Profit": 45,
       "UpgradeCost": 240,
       "IsIdleFood": false,
-      "HireCost": 800
+      "HireCost": 800,
+      "BakersCount": 0,
+      "CookFoodTimes": 1
     },
     {
       "Index": 4,
@@ -38,7 +46,9 @@
       "Profit": 60,
       "UpgradeCost": 350,
       "IsIdleFood": false,
-      "HireCost": 1000
+      "HireCost": 1000,
+      "BakersCount": 0,
+      "CookFoodTimes": 1
     },
     {
       "Index": 5,
@@ -46,7 +56,9 @@
       "Profit": 80,
       "UpgradeCost": 500,
       "IsIdleFood": false,
-      "HireCost": 2000
+      "HireCost": 2000,
+      "BakersCount": 0,
+      "CookFoodTimes": 1
     },
     {
       "Index": 6,
@@ -54,7 +66,9 @@
       "Profit": 110,
       "UpgradeCost": 850,
       "IsIdleFood": false,
-      "HireCost": 3500
+      "HireCost": 3500,
+      "BakersCount": 0,
+      "CookFoodTimes": 1
     },
     {
       "Index": 7,
@@ -62,7 +76,9 @@
       "Profit": 160,
       "UpgradeCost": 1100,
       "IsIdleFood": false,
-      "HireCost": 4000
+      "HireCost": 4000,
+      "BakersCount": 0,
+      "CookFoodTimes": 1
     },
     {
       "Index": 8,
@@ -70,7 +86,9 @@
       "Profit": 200,
       "UpgradeCost": 1500,
       "IsIdleFood": false,
-      "HireCost": 4500
+      "HireCost": 4500,
+      "BakersCount": 0,
+      "CookFoodTimes": 1
     },
     {
       "Index": 9,
@@ -78,7 +96,9 @@
       "Profit": 350,
       "UpgradeCost": 2000,
       "IsIdleFood": false,
-      "HireCost": 8000
+      "HireCost": 8000,
+      "BakersCount": 0,
+      "CookFoodTimes": 1
     }
   ]
 }

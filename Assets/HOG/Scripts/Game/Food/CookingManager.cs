@@ -28,7 +28,6 @@ namespace Game
             InvokeEvent(HOGEventNames.OnCookFood, foodIndex); // starts the loading bar and timer of cooking
 
             StartCoroutine(StartCooking(cookingTime, profit, foodIndex));
-        
         }
 
         private IEnumerator StartCooking(float cookingTime, int profit, int foodIndex)
@@ -40,7 +39,8 @@ namespace Game
 
             if(foodData.IsIdleFood == true)
             {
-                foodManager.UnlockIdleFood(foodIndex);
+               // foodManager.UnlockOrUpgradeIdleFood(foodIndex);
+                CookFood(foodIndex);
             }
 
             InvokeEvent(HOGEventNames.MoneyToastOnCook, foodIndex);
