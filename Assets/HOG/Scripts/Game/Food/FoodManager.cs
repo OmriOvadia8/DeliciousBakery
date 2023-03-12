@@ -41,7 +41,6 @@ namespace Game
             {
                 AddNewFoodItem(i);
                 InvokeEvent(HOGEventNames.OnUpgraded, i);
-                uiManager.UpgradeButtonsCheck();
 
                 var foodData = GetFoodData(i);
                 if (foodData.IsIdleFood == true)
@@ -110,9 +109,8 @@ namespace Game
                 InvokeEvent(HOGEventNames.OnUpgraded, foodID);
                                
                 HOGManager.Instance.SaveManager.Save(foods); // Saving the current food data list stats
-                moneyHolder.UpdateCurrency(moneyHolder.startingCurrency);
-                uiManager.UpgradeButtonsCheck();
             }
+
             Debug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel);
         }
 

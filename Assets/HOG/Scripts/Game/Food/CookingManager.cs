@@ -44,7 +44,6 @@ namespace Game
             }
 
             InvokeEvent(HOGEventNames.MoneyToastOnCook, foodIndex);
-            uiManager.UpgradeButtonsCheck();
         }
     }
 }

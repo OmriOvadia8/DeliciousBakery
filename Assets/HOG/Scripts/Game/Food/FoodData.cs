@@ -10,18 +10,20 @@ namespace Game
         public int Profit { get; set; }
         public int UpgradeCost { get; set; }
         public bool IsIdleFood { get; set; }  
+        public int HireCost { get; set; }
 
         public FoodData()
         {
         }
 
-        public FoodData(int index, float cookingTime, int profit, int upgradeCost, bool isIdleFood)
+        public FoodData(int index, float cookingTime, int profit, int upgradeCost, bool isIdleFood, int hireCost)
         {
             Index = index;
             CookingTime = cookingTime;
             Profit = profit;
             UpgradeCost = upgradeCost;
             IsIdleFood = isIdleFood;
+            HireCost = hireCost;
         }
 
         public bool IsOnCooldown

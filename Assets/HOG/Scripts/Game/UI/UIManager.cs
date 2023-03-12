@@ -93,6 +93,9 @@ namespace Game
             foodLevelText[(int)obj].text = "Lv. " + foodLevel.ToString();
             foodProfitText[(int)obj].text = foodProfit.ToString();
             upgradeCostText[(int)obj].text = upgradeCost.ToString();
+
+            moneyHolder.UpdateCurrency(moneyHolder.startingCurrency);
+            UpgradeButtonsCheck();
         }
 
         private void CookingLoadingBarAnimation(object obj) // activates loading bar with DOTween
@@ -135,6 +138,9 @@ namespace Game
             moneyToast.transform.position = toastPosition;
 
             moneyToast.Init(foodProfit);
+
+            UpgradeButtonsCheck();
+
             Debug.Log(foodProfit);
         }
 
@@ -166,20 +172,18 @@ namespace Game
             }
         }
 
-        public void HireButtonCheck(object obj)
+        public void HireButtonCheck()
         {
-            int buttonIndex = (int)obj;
-            int hireCost = GetFoodData(buttonIndex).UpgradeCost;
-
-            foreach (var button in upgradeButtons)
+            for (int i = 0; i < hireButtons.Length; i++)
             {
-                if (moneyHolder.startingCurrency >= hireCost)
+                int upgradeCost = GetFoodData(i).UpgradeCost;
+                if (moneyHolder.currencySaveData.CurrencyAmount >= upgradeCost)
                 {
-                    button.interactable = true;
+                    upgradeButtons[i].interactable = true;
                 }
                 else
                 {
-                    button.interactable = false;
+                    upgradeButtons[i].interactable = false;
                 }
             }
         }
