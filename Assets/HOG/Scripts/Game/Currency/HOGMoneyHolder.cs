@@ -23,6 +23,7 @@ namespace Game
                 SaveCurrency();
             }
         }
+
         public void SaveCurrency() // saving the current player's currency
         {
             HOGManager.Instance.SaveManager.Save(currencySaveData);

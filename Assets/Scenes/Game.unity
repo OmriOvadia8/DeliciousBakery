@@ -1393,9 +1393,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cost.text(2)
       objectReference: {fileID: 0}
+    - target: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Flicker animation2
+      objectReference: {fileID: 0}
     - target: {fileID: 1588827601323837829, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Timer 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601406178872, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Food2
       objectReference: {fileID: 0}
     - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1991,9 +1999,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cost.text(0)
       objectReference: {fileID: 0}
+    - target: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Flicker animation0
+      objectReference: {fileID: 0}
     - target: {fileID: 1588827601323837829, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Timer 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601406178872, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Food0
       objectReference: {fileID: 0}
     - target: {fileID: 1588827601848755865, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
@@ -2626,9 +2642,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cost.text(9)
       objectReference: {fileID: 0}
+    - target: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Flicker animation9
+      objectReference: {fileID: 0}
     - target: {fileID: 1588827601323837829, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Timer 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601406178872, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Food9
       objectReference: {fileID: 0}
     - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3024,9 +3048,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cost.text(7)
       objectReference: {fileID: 0}
+    - target: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Flicker animation7
+      objectReference: {fileID: 0}
     - target: {fileID: 1588827601323837829, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Timer 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601406178872, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Food7
       objectReference: {fileID: 0}
     - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3603,6 +3635,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220655835}
   m_CullTransparentMesh: 1
+--- !u!114 &221899073 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 682689297}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &225651420
 GameObject:
   m_ObjectHideFlags: 0
@@ -6144,6 +6187,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437320452}
   m_CullTransparentMesh: 1
+--- !u!114 &441060466 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 461121574}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &443003101
 GameObject:
   m_ObjectHideFlags: 0
@@ -6231,9 +6285,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cost.text(1)
       objectReference: {fileID: 0}
+    - target: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Flicker animation1
+      objectReference: {fileID: 0}
     - target: {fileID: 1588827601323837829, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Timer 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601406178872, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Food1
       objectReference: {fileID: 0}
     - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -6533,9 +6595,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cost.text(8)
       objectReference: {fileID: 0}
+    - target: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Flicker animation8
+      objectReference: {fileID: 0}
     - target: {fileID: 1588827601323837829, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Timer 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601406178872, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Food8
       objectReference: {fileID: 0}
     - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -7061,9 +7131,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cost.text(6)
       objectReference: {fileID: 0}
+    - target: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Flicker animation6
+      objectReference: {fileID: 0}
     - target: {fileID: 1588827601323837829, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Timer 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601406178872, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Food6
       objectReference: {fileID: 0}
     - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -8285,6 +8363,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580587380}
   m_CullTransparentMesh: 1
+--- !u!114 &591679269 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 154389232}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &607804966
 GameObject:
   m_ObjectHideFlags: 0
@@ -8854,6 +8943,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &647262921 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 1391866681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &648534310
 GameObject:
   m_ObjectHideFlags: 0
@@ -9257,9 +9351,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cost.text(5)
       objectReference: {fileID: 0}
+    - target: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Flicker animation5
+      objectReference: {fileID: 0}
     - target: {fileID: 1588827601323837829, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Timer 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601406178872, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Food5
       objectReference: {fileID: 0}
     - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -9698,6 +9800,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713010082}
   m_CullTransparentMesh: 1
+--- !u!114 &719564224 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 183907027}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &720480357
 GameObject:
   m_ObjectHideFlags: 0
@@ -9774,6 +9887,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720480357}
   m_CullTransparentMesh: 1
+--- !u!1 &723943278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 461121574}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &733358809
 GameObject:
   m_ObjectHideFlags: 0
@@ -10155,6 +10273,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770735830}
   m_CullTransparentMesh: 1
+--- !u!1 &808523536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 509836343}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &813339974 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3736479058626963551, guid: b363f863231cd0f429cbd97959952a78, type: 3}
@@ -11945,6 +12068,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910640142}
   m_CullTransparentMesh: 1
+--- !u!114 &912520940 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 446521283}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &916034272
 GameObject:
   m_ObjectHideFlags: 0
@@ -12330,6 +12464,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929670338}
   m_CullTransparentMesh: 1
+--- !u!114 &929759188 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 170367074}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &938380541
 GameObject:
   m_ObjectHideFlags: 0
@@ -12598,6 +12743,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946549506}
   m_CullTransparentMesh: 1
+--- !u!1 &946716153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 183907027}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &951228940
 GameObject:
   m_ObjectHideFlags: 0
@@ -13700,6 +13850,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1041810234}
   m_CullTransparentMesh: 1
+--- !u!1 &1045542754 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 682689297}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1058427535
 GameObject:
   m_ObjectHideFlags: 0
@@ -15391,6 +15546,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205147630}
   m_CullTransparentMesh: 1
+--- !u!114 &1205488904 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 1391866681}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1222816883
 GameObject:
   m_ObjectHideFlags: 0
@@ -16152,6 +16318,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273657797}
   m_CullTransparentMesh: 1
+--- !u!1 &1274188152 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 94691873}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1283453558
 GameObject:
   m_ObjectHideFlags: 0
@@ -17942,9 +18113,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cost.text(4)
       objectReference: {fileID: 0}
+    - target: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Flicker animation4
+      objectReference: {fileID: 0}
     - target: {fileID: 1588827601323837829, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Timer 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601406178872, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Food4
       objectReference: {fileID: 0}
     - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -18289,6 +18468,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395298769}
   m_CullTransparentMesh: 1
+--- !u!1 &1403762860 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 170367074}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1420527016
 GameObject:
   m_ObjectHideFlags: 0
@@ -21498,6 +21682,17 @@ MonoBehaviour:
   moneyToastPosition: {fileID: 350408837}
   foodManager: {fileID: 1432630589}
   moneyHolder: {fileID: 68174596}
+  cookFoodButtons:
+  - {fileID: 591679269}
+  - {fileID: 912520940}
+  - {fileID: 1951558342}
+  - {fileID: 1885365662}
+  - {fileID: 1205488904}
+  - {fileID: 221899073}
+  - {fileID: 1833774947}
+  - {fileID: 719564224}
+  - {fileID: 441060466}
+  - {fileID: 929759188}
   upgradeButtons:
   - {fileID: 29884347}
   - {fileID: 2105014747}
@@ -21520,6 +21715,17 @@ MonoBehaviour:
   - {fileID: 167831960}
   - {fileID: 1126055735}
   - {fileID: 1897932581}
+  cookButtonAnimation:
+  - {fileID: 2100093493}
+  - {fileID: 2016134595}
+  - {fileID: 1274188152}
+  - {fileID: 1933808023}
+  - {fileID: 647262921}
+  - {fileID: 1045542754}
+  - {fileID: 808523536}
+  - {fileID: 946716153}
+  - {fileID: 723943278}
+  - {fileID: 1403762860}
   moneyText: {fileID: 350408838}
   foodProfitText:
   - {fileID: 154389235}
@@ -22143,9 +22349,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cost.text(3)
       objectReference: {fileID: 0}
+    - target: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Flicker animation3
+      objectReference: {fileID: 0}
     - target: {fileID: 1588827601323837829, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_Name
       value: Timer 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827601406178872, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_Name
+      value: Food3
       objectReference: {fileID: 0}
     - target: {fileID: 1588827601694608293, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -23040,6 +23254,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823773608}
   m_CullTransparentMesh: 1
+--- !u!114 &1833774947 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 509836343}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1836065872 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
@@ -23843,6 +24068,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883606856}
   m_CullTransparentMesh: 1
+--- !u!114 &1885365662 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 1764614942}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1897932577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24213,6 +24449,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922587031}
   m_CullTransparentMesh: 1
+--- !u!1 &1933808023 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 1764614942}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1949396069
 GameObject:
   m_ObjectHideFlags: 0
@@ -24365,6 +24606,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950548188}
   m_CullTransparentMesh: 1
+--- !u!114 &1951558342 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 94691873}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1958861160
 GameObject:
   m_ObjectHideFlags: 0
@@ -24794,6 +25046,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2013474651}
   m_CullTransparentMesh: 1
+--- !u!1 &2016134595 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 446521283}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2020486909
 GameObject:
   m_ObjectHideFlags: 0
@@ -26067,6 +26324,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098476606}
   m_CullTransparentMesh: 1
+--- !u!1 &2100093493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 786625079836218391, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+  m_PrefabInstance: {fileID: 154389232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2104912994
 GameObject:
   m_ObjectHideFlags: 0

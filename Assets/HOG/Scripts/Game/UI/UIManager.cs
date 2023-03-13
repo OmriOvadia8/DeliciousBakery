@@ -23,8 +23,11 @@ namespace Game
         [SerializeField] FoodManager foodManager;
         [SerializeField] HOGMoneyHolder moneyHolder;
 
+        [SerializeField] Button[] cookFoodButtons;
         [SerializeField] Button[] upgradeButtons;
         [SerializeField] Button[] hireButtons;
+
+        [SerializeField] GameObject[] cookButtonAnimation;
 
         [SerializeField] TMP_Text moneyText;
 
@@ -135,6 +138,7 @@ namespace Game
 
         private void CookingLoadingBarAnimation(object obj) // activates loading bar with DOTween (ACTIVE cooking)
         {
+            CookFoodButtonCheck();
             float foodCookingTime = GetFoodData((int)obj).CookingTime;
 
             cookingSliderBar[(int)obj].value = minValue;
@@ -195,6 +199,7 @@ namespace Game
 
         private void MoneyTextToastAfterCooking(object obj) // toasting profit text after cooking (ACTIVE cooking)
         {
+            CookFoodButtonCheck();
             int foodIndex = (int)obj;
             int foodProfit = GetFoodData(foodIndex).Profit;
             var moneyToast = (HOGTweenMoneyComponent)Manager.PoolManager.GetPoolable(PoolNames.MoneyToast);
@@ -274,11 +279,28 @@ namespace Game
                 }
                 else
                 {
-                    hireButtons[i].interactable = false;
+                    hireButtons[i].interactable = false;  
                 }
             }
         }
 
+        private void CookFoodButtonCheck()
+        {
+            for (int i = 0; i < cookFoodButtons.Length; i++)
+            {
+                bool isOnCooldown = GetFoodData(i).IsOnCooldown;
+                if (isOnCooldown == false)
+                {
+                    cookFoodButtons[i].interactable = true;
+                    cookButtonAnimation[i].SetActive(true);
+                }
+                else
+                {
+                    cookFoodButtons[i].interactable = false;
+                    cookButtonAnimation[i].SetActive(false);
+                }
+            }
+        }
 
         private FoodData GetFoodData(int index)
         {

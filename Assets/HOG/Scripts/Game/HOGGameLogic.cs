@@ -27,7 +27,6 @@ namespace Game
             UpgradeManager = new HOGUpgradeManager();
             FoodDataManager = new FoodDataManager();  
            
-       
             onComplete.Invoke();
         }
     }
