@@ -17,6 +17,7 @@ namespace Game
         public const int FOOD_COUNT = 10; // total food types count in game
         private const float PROFIT_INCREASE = 1.1f; // increasing the food's profit by 10% each upgrade
         private const float COST_INCREASE = 1.15f; // increasing the upgrade's cost by 15% each upgrade
+        private const float BAKER_COST_INCREASE = 1.3f;
         private const string FOOD_CONFIG_PATH = "food_data"; // the name of the config file to load
 
         private void OnEnable()
@@ -46,8 +47,8 @@ namespace Game
                 var foodData = GetFoodData(i);
                 if (foodData.IsIdleFood == true) // for now resets all cooking timers on start till i learn how to run courotine while offline
                 {
-                    foodData.IsOnCooldown = false;
-                    cookingManager.CookFood(i);
+                    foodData.IsAutoOnCooldown = false;
+                    cookingManager.AutoCookFood(i);
                 }
             }
         }
@@ -124,11 +125,17 @@ namespace Game
                 InvokeEvent(HOGEventNames.OnHireMoneySpentToast, foodIndex);
 
                 foodData.IsIdleFood = true;
-                cookingManager.CookFood(foodIndex);
+                cookingManager.AutoCookFood(foodIndex);
 
-                foodData.HireCost = (int)(foodData.HireCost * COST_INCREASE);
+                foodData.HireCost = (int)(foodData.HireCost * BAKER_COST_INCREASE);     
+
+                if (foodData.BakersCount % 3 == 0) // check if baker count is a multiple of 3
+                {
+                    foodData.CookFoodTimes++; // increase CookFoodTimes by 1
+                }
 
                 foodData.BakersCount++;
+
                 InvokeEvent(HOGEventNames.OnHired, foodIndex);
             }
             else
@@ -171,5 +178,39 @@ namespace Game
                 Debug.LogError("Food data not loaded");
             }
         }
+
+        public bool IsAutoFoodOnCooldown(int foodID)
+        {
+            var foodData = GetFoodData(foodID);
+
+            if (foodData == null)
+            {
+                return false;
+            }
+
+            return foodData.IsAutoOnCooldown;
+        }
+
+        public void SetAutoFoodOnCooldown(int foodID, bool value)
+        {
+            if (foods != null)
+            {
+                FoodData foodData = GetFoodData(foodID);
+
+                if (foodData != null)
+                {
+                    foodData.IsAutoOnCooldown = value;
+                }
+                else
+                {
+                    Debug.LogError("Invalid food ID: " + foodID);
+                }
+            }
+            else
+            {
+                Debug.LogError("Food data not loaded");
+            }
+        }
+
     }
 }

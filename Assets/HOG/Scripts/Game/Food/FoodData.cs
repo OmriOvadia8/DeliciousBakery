@@ -5,6 +5,7 @@ namespace Game
     public class FoodData
     {
         private bool _isOnCooldown;
+        private bool _isAutoOnCooldown;
         public int Index { get; set; }
         public float CookingTime { get; set; }
         public int Profit { get; set; }
@@ -34,6 +35,11 @@ namespace Game
         {
             get { return _isOnCooldown; }
             set { _isOnCooldown = value; }
+        }
+        public bool IsAutoOnCooldown
+        {
+            get { return _isAutoOnCooldown; }
+            set { _isAutoOnCooldown = value; }
         }
     }
 

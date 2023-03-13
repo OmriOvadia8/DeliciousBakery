@@ -11,6 +11,7 @@ namespace Game
     public class UIManager : HOGLogicMonoBehaviour
     {   // make loading and own cooking time to bakers
         private readonly Dictionary<int, Tweener> foodLoadingBarTweens = new(); // DOTween dictionary - Tween for each cooking food loading bar
+        private readonly Dictionary<int, Tweener> bakerLoadingBarTweens = new(); // DOTween dictionary - Tween for each cooking food loading bar
 
         private readonly float minValue = 0f;
         private readonly float maxValue = 1f;
@@ -36,6 +37,8 @@ namespace Game
 
         [SerializeField] Slider[] cookingSliderBar;
         [SerializeField] TMP_Text[] cookingTimeText;
+        [SerializeField] Slider[] bakerSliderBar;
+        [SerializeField] TMP_Text[] bakerTimeText;
 
         private void OnEnable()
         {
@@ -44,23 +47,19 @@ namespace Game
             AddListener(HOGEventNames.OnCookFood, CookingLoadingBarAnimation);
             AddListener(HOGEventNames.OnCookFood, CookingTimer);
             AddListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
+            AddListener(HOGEventNames.MoneyToastOnAutoCook, MoneyTextToastAfterAutoCooking);
             AddListener(HOGEventNames.OnUpgradeMoneySpentToast, SpendUpgradeMoneyTextToast);
             AddListener(HOGEventNames.OnHireMoneySpentToast, SpendHireMoneyTextToast);
             AddListener(HOGEventNames.OnHired, OnHireUpdate);
+            AddListener(HOGEventNames.OnAutoCookFood, BakerCookingLoadingBarAnimation);
+            AddListener(HOGEventNames.OnAutoCookFood, BakerCookingTimer);
 
             OnGameLoad();
-
-            for (int i = 0; i < FoodManager.FOOD_COUNT; i++)
-            {
-                cookingSliderBar[i].value = minValue;
-                float cookingTime = GetFoodData(i).CookingTime;
-                cookingTimeText[i].text = TimeSpan.FromSeconds(cookingTime).ToString("mm':'ss"); // set the cooking time in the timer text
-            }
         }
 
         private void Start()
         {
-            Manager.PoolManager.InitPool("MoneyToast", 20, moneyToastPosition);
+            Manager.PoolManager.InitPool("MoneyToast", 30, moneyToastPosition);
             Manager.PoolManager.InitPool("SpendMoneyToast", 20, moneyToastPosition);
         }
 
@@ -71,14 +70,28 @@ namespace Game
             RemoveListener(HOGEventNames.OnCookFood, CookingLoadingBarAnimation);
             RemoveListener(HOGEventNames.OnCookFood, CookingTimer);
             RemoveListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
+            RemoveListener(HOGEventNames.MoneyToastOnAutoCook, MoneyTextToastAfterAutoCooking);
             RemoveListener(HOGEventNames.OnUpgradeMoneySpentToast, SpendUpgradeMoneyTextToast);
             RemoveListener(HOGEventNames.OnHireMoneySpentToast, SpendHireMoneyTextToast);
             RemoveListener(HOGEventNames.OnHired, OnHireUpdate);
+            RemoveListener(HOGEventNames.OnAutoCookFood, BakerCookingLoadingBarAnimation);
+            RemoveListener(HOGEventNames.OnAutoCookFood, BakerCookingTimer);
         }
 
         private void OnGameLoad()
         {
             moneyText.text = $"{moneyHolder.currencySaveData.CurrencyAmount:N0}";
+
+            for (int i = 0; i < FoodManager.FOOD_COUNT; i++)
+            {
+                cookingSliderBar[i].value = minValue;
+                float cookingTime = GetFoodData(i).CookingTime;
+                cookingTimeText[i].text = TimeSpan.FromSeconds(cookingTime).ToString("mm':'ss"); // set the cooking time in the timer text
+
+                bakerSliderBar[i].value = minValue;
+                float bakerCookingTime = GetFoodData(i).CookingTime * CookingManager.BAKER_TIME_MULTIPLIER;
+                bakerTimeText[i].text = TimeSpan.FromSeconds(bakerCookingTime).ToString("mm':'ss"); // set the cooking time in the timer text
+            }
         }
 
         private void OnMoneyUpdate(object obj)
@@ -150,6 +163,36 @@ namespace Game
             });
         }
 
+        private void BakerCookingLoadingBarAnimation(object obj) // activates loading bar with DOTween
+        {
+            float foodCookingTime = GetFoodData((int)obj).CookingTime * CookingManager.BAKER_TIME_MULTIPLIER;
+
+            bakerSliderBar[(int)obj].value = minValue;
+            bakerLoadingBarTweens[(int)obj] = bakerSliderBar[(int)obj].DOValue(maxValue, foodCookingTime);
+
+            bakerLoadingBarTweens[(int)obj].OnComplete(() =>
+            {
+                bakerSliderBar[(int)obj].value = minValue;
+                bakerTimeText[(int)obj].text = FormatTimeSpan(TimeSpan.FromSeconds(foodCookingTime));
+            });
+        }
+
+        private void BakerCookingTimer(object obj) // activates the cooking timer countdown
+        {
+            float foodCookingTime = GetFoodData((int)obj).CookingTime * CookingManager.BAKER_TIME_MULTIPLIER;
+            TimeSpan timeLeft = TimeSpan.FromSeconds(foodCookingTime);
+
+            string timeLeftString = FormatTimeSpan(timeLeft);
+            bakerTimeText[(int)obj].text = timeLeftString;
+
+            bakerLoadingBarTweens[(int)obj].OnUpdate(() =>
+            {
+                timeLeft = TimeSpan.FromSeconds(bakerLoadingBarTweens[(int)obj].Duration() - bakerLoadingBarTweens[(int)obj].Elapsed());
+                timeLeftString = FormatTimeSpan(timeLeft);
+                bakerTimeText[(int)obj].text = timeLeftString;
+            });
+        }
+
         private void MoneyTextToastAfterCooking(object obj) // toasting profit text after cooking
         {
             int foodIndex = (int)obj;
@@ -163,8 +206,21 @@ namespace Game
 
             UpgradeButtonsCheck();
             HireButtonCheck();
+        }
 
-            Debug.Log(foodProfit);
+        private void MoneyTextToastAfterAutoCooking(object obj) // toasting profit text after cooking
+        {
+            int foodIndex = (int)obj;
+            int foodProfit = GetFoodData(foodIndex).Profit * GetFoodData(foodIndex).CookFoodTimes;
+            var moneyToast = (HOGTweenMoneyComponent)Manager.PoolManager.GetPoolable(PoolNames.MoneyToast);
+
+            Vector3 toastPosition = moneyToastPosition.position + Vector3.up * 3;
+            moneyToast.transform.position = toastPosition;
+
+            moneyToast.Init(foodProfit);
+
+            UpgradeButtonsCheck();
+            HireButtonCheck();
         }
 
         public void SpendUpgradeMoneyTextToast(object obj)

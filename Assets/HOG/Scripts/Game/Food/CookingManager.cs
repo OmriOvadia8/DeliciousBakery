@@ -8,7 +8,8 @@ namespace Game
     {
         [SerializeField] FoodManager foodManager;
         [SerializeField] HOGMoneyHolder playerMoney;
-        [SerializeField] UIManager uiManager;
+
+        public const int BAKER_TIME_MULTIPLIER = 2;
 
         private FoodData foodData;
 
@@ -30,6 +31,24 @@ namespace Game
             StartCoroutine(StartCooking(cookingTime, profit, foodIndex));
         }
 
+        public void AutoCookFood(int foodIndex)
+        {
+            foodData = foodManager.GetFoodData(foodIndex);
+
+            if (foodManager.IsAutoFoodOnCooldown(foodIndex))
+            {
+                return;
+            }
+
+            float cookingTime = foodData.CookingTime * BAKER_TIME_MULTIPLIER;
+            int profit = foodData.Profit;
+            foodManager.SetAutoFoodOnCooldown(foodIndex, true);
+
+            InvokeEvent(HOGEventNames.OnAutoCookFood, foodIndex); // starts the loading bar and timer of cooking
+
+            StartCoroutine(StartAutoCooking(cookingTime, profit, foodIndex));
+        }
+
         private IEnumerator StartCooking(float cookingTime, int profit, int foodIndex)
         {
             yield return new WaitForSeconds(cookingTime);
@@ -37,13 +56,22 @@ namespace Game
             playerMoney.UpdateCurrency(profit);
             foodManager.SetFoodOnCooldown(foodIndex, false);
 
-            if(foodData.IsIdleFood == true)
-            {
-               // foodManager.UnlockOrUpgradeIdleFood(foodIndex);
-                CookFood(foodIndex);
-            }
-
             InvokeEvent(HOGEventNames.MoneyToastOnCook, foodIndex);
         }
+
+        private IEnumerator StartAutoCooking(float cookingTime, int profit, int foodIndex)
+        {
+            int index = foodIndex; // created a local copy of the foodIndex variable
+            foodData = foodManager.GetFoodData(index);
+            yield return new WaitForSeconds(cookingTime);
+
+            playerMoney.UpdateCurrency(profit * foodData.CookFoodTimes);
+            foodManager.SetAutoFoodOnCooldown(index, false);
+
+            AutoCookFood(index);
+            
+            InvokeEvent(HOGEventNames.MoneyToastOnAutoCook, index);
+        }
+
     }
 }
