@@ -13,7 +13,7 @@ namespace Game
 
         private FoodData foodData;
 
-        public void CookFood(int foodIndex)
+        public void CookFood(int foodIndex) // Active cooking by clicking
         {
             foodData = foodManager.GetFoodData(foodIndex);
             
@@ -31,7 +31,7 @@ namespace Game
             StartCoroutine(StartCooking(cookingTime, profit, foodIndex));
         }
 
-        public void AutoCookFood(int foodIndex)
+        public void AutoCookFood(int foodIndex) // Cooking automatically courotine loop after baker unlocked
         {
             foodData = foodManager.GetFoodData(foodIndex);
 
@@ -61,16 +61,16 @@ namespace Game
 
         private IEnumerator StartAutoCooking(float cookingTime, int profit, int foodIndex)
         {
-            int index = foodIndex; // created a local copy of the foodIndex variable
+            int index = foodIndex; // created a local copy of the foodIndex variable so courotines won't get mixed up
             foodData = foodManager.GetFoodData(index);
             yield return new WaitForSeconds(cookingTime);
 
             playerMoney.UpdateCurrency(profit * foodData.CookFoodTimes);
             foodManager.SetAutoFoodOnCooldown(index, false);
-
-            AutoCookFood(index);
             
             InvokeEvent(HOGEventNames.MoneyToastOnAutoCook, index);
+
+            AutoCookFood(index); // Go on the loop
         }
 
     }

@@ -66,7 +66,6 @@ namespace Game
             }
 
         }
-    
 
         public HOGUpgradeableData GetUpgradeableByID(UpgradeablesTypeID typeID, int index) // OVERLOAD Original  GetUpgradeableByID method
         {
@@ -80,7 +79,6 @@ namespace Game
 
             if (upgradeable != null)
             {
-                //TODO:Config + Reduce Score
                 //var upgradeableConfig = GetHogUpgradeableConfigByID(typeID);
                 //HOGUpgradeableLevelData levelData = upgradeableConfig.UpgradableLevelData[upgradeable.CurrentLevel + 1];
                 //int amountToReduce = levelData.CoinsNeeded;
@@ -164,6 +162,5 @@ namespace Game
     {
         Food = 0,
         Baker = 1,
-        Equipment = 2
     }
 }

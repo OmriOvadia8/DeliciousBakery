@@ -12,7 +12,6 @@ namespace Game
         public HOGUpgradeManager UpgradeManager;
         public FoodDataManager FoodDataManager;
         
-            
         public HOGGameLogic()
         {
             if (Instance != null)

@@ -9,9 +9,9 @@ using System.Collections.Generic;
 namespace Game
 {
     public class UIManager : HOGLogicMonoBehaviour
-    {   // make loading and own cooking time to bakers
+    {   
         private readonly Dictionary<int, Tweener> foodLoadingBarTweens = new(); // DOTween dictionary - Tween for each cooking food loading bar
-        private readonly Dictionary<int, Tweener> bakerLoadingBarTweens = new(); // DOTween dictionary - Tween for each cooking food loading bar
+        private readonly Dictionary<int, Tweener> bakerLoadingBarTweens = new(); // DOTween dictionary - Tween for each cooking baker loading bar
 
         private readonly float minValue = 0f;
         private readonly float maxValue = 1f;
@@ -90,7 +90,7 @@ namespace Game
 
                 bakerSliderBar[i].value = minValue;
                 float bakerCookingTime = GetFoodData(i).CookingTime * CookingManager.BAKER_TIME_MULTIPLIER;
-                bakerTimeText[i].text = TimeSpan.FromSeconds(bakerCookingTime).ToString("mm':'ss"); // set the cooking time in the timer text
+                bakerTimeText[i].text = TimeSpan.FromSeconds(bakerCookingTime).ToString("mm':'ss"); // set the cooking baker time in the timer text
             }
         }
 
@@ -118,7 +118,7 @@ namespace Game
             HireButtonCheck();
         }
 
-        private void OnHireUpdate(object obj)
+        private void OnHireUpdate(object obj) // update stats after hiring
         {
             int hireCost = GetFoodData((int)obj).HireCost;
             int cookFoodTimes = GetFoodData((int)obj).CookFoodTimes;
@@ -133,7 +133,7 @@ namespace Game
             HireButtonCheck();
         }
 
-        private void CookingLoadingBarAnimation(object obj) // activates loading bar with DOTween
+        private void CookingLoadingBarAnimation(object obj) // activates loading bar with DOTween (ACTIVE cooking)
         {
             float foodCookingTime = GetFoodData((int)obj).CookingTime;
 
@@ -147,7 +147,7 @@ namespace Game
             });
         }
 
-        private void CookingTimer(object obj) // activates the cooking timer countdown
+        private void CookingTimer(object obj) // activates the cooking timer countdown (ACTIVE cooking)
         {
             float foodCookingTime = GetFoodData((int)obj).CookingTime;
             TimeSpan timeLeft = TimeSpan.FromSeconds(foodCookingTime);
@@ -163,7 +163,7 @@ namespace Game
             });
         }
 
-        private void BakerCookingLoadingBarAnimation(object obj) // activates loading bar with DOTween
+        private void BakerCookingLoadingBarAnimation(object obj) // activates loading bar with DOTween (PASSIVE cooking)
         {
             float foodCookingTime = GetFoodData((int)obj).CookingTime * CookingManager.BAKER_TIME_MULTIPLIER;
 
@@ -177,7 +177,7 @@ namespace Game
             });
         }
 
-        private void BakerCookingTimer(object obj) // activates the cooking timer countdown
+        private void BakerCookingTimer(object obj) // activates the cooking timer countdown (PASSIVE cooking)
         {
             float foodCookingTime = GetFoodData((int)obj).CookingTime * CookingManager.BAKER_TIME_MULTIPLIER;
             TimeSpan timeLeft = TimeSpan.FromSeconds(foodCookingTime);
@@ -193,7 +193,7 @@ namespace Game
             });
         }
 
-        private void MoneyTextToastAfterCooking(object obj) // toasting profit text after cooking
+        private void MoneyTextToastAfterCooking(object obj) // toasting profit text after cooking (ACTIVE cooking)
         {
             int foodIndex = (int)obj;
             int foodProfit = GetFoodData(foodIndex).Profit;
@@ -208,7 +208,7 @@ namespace Game
             HireButtonCheck();
         }
 
-        private void MoneyTextToastAfterAutoCooking(object obj) // toasting profit text after cooking
+        private void MoneyTextToastAfterAutoCooking(object obj) // toasting profit text after cooking (PASSIVE cooking)
         {
             int foodIndex = (int)obj;
             int foodProfit = GetFoodData(foodIndex).Profit * GetFoodData(foodIndex).CookFoodTimes;

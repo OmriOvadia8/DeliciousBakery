@@ -211,6 +211,5 @@ namespace Game
                 Debug.LogError("Food data not loaded");
             }
         }
-
     }
 }
