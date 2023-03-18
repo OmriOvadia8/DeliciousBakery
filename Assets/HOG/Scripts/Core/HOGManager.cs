@@ -6,7 +6,6 @@ namespace Core
 {
     public class HOGManager : IHOGBaseManager
     {
-
         public static HOGManager Instance;
 
         public HOGEventsManager EventsManager;
@@ -16,6 +15,9 @@ namespace Core
         public HOGConfigManager ConfigManager;
         public HOGCrashManager CrashManager;
         public HOGAnalyticsManager AnalyticsManager;
+        public HOGTimeManager TimerManager;
+        public HOGMonoManager MonoManager;
+       // public HOGPopupManager PopupManager;
 
         public Action onInitAction;
 
@@ -57,6 +59,7 @@ namespace Core
 
         private void InitManagers()
         {
+            MonoManager = new HOGMonoManager();
             HOGDebug.Log($"InitManagers");
 
             CrashManager = new HOGCrashManager();
@@ -78,11 +81,14 @@ namespace Core
 
             HOGDebug.Log($"Before Config Manager");
 
+            TimerManager = new HOGTimeManager();
+
+           // PopupManager = new HOGPopupManager();
+
             ConfigManager = new HOGConfigManager(delegate
             {
                 onInitAction.Invoke();
             });
-
         }
     }
 }

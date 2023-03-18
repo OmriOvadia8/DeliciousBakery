@@ -11,7 +11,7 @@ namespace Core
 
         public HOGPoolManager()
         {
-            rootPools = new GameObject().transform;
+            rootPools = new GameObject("PoolsHolder").transform;
             Object.DontDestroyOnLoad(rootPools);
         }
 

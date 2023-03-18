@@ -1,6 +1,6 @@
-using Firebase.Analytics;
 using System.Collections.Generic;
-using UnityEngine;
+using Firebase.Analytics;
+using UnityEngine.Device;
 
 namespace Core
 {
@@ -74,13 +74,17 @@ namespace Core
     {
         app_loaded,
         upgrade_item,
-        try_upgrade_out_of
+        try_upgrade_out_of,
+        popup_open,
+        popup_impression,
+        popup_close
     }
 
     public enum HOGDataKeys
     {
         type_id,
-        upgrade_level
+        upgrade_level,
+        popup_type
     }
 
 }

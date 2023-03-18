@@ -56,5 +56,9 @@ namespace Core
         OnHireMoneySpentToast,
         OnHired,
         OnAutoCookFood,
+        OnPause,
+        OfflineTimeRefreshed,
+        OnPopupOpen,
+        OnPopupClose
     }
 }
