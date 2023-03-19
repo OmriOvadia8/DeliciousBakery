@@ -15,12 +15,13 @@ namespace Game
         public int HireCost { get; set; }
         public int BakersCount { get; set; }
         public int CookFoodTimes { get; set; }
+        public bool IsFoodLocked { get; set; }
 
         public FoodData()
         {
         }
 
-        public FoodData(int index, float cookingTime, int profit, int upgradeCost, bool isIdleFood, int hireCost, int bakersCount, int cookFoodTimes)
+        public FoodData(int index, float cookingTime, int profit, int upgradeCost, bool isIdleFood, int hireCost, int bakersCount, int cookFoodTimes, bool isFoodUnlocked)
         {
             Index = index;
             CookingTime = cookingTime;
@@ -30,6 +31,7 @@ namespace Game
             HireCost = hireCost;
             BakersCount = bakersCount;
             CookFoodTimes = cookFoodTimes;
+            IsFoodLocked = isFoodUnlocked;
         }
 
         public bool IsOnCooldown

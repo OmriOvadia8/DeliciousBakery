@@ -59,6 +59,8 @@ namespace Core
         OnPause,
         OfflineTimeRefreshed,
         OnPopupOpen,
-        OnPopupClose
+        OnPopupClose,
+        OnLearnRecipe,
+        OnLearnRecipeSpentToast
     }
 }

@@ -10,11 +10,14 @@ namespace Game
         [SerializeField] HOGMoneyHolder moneyHolder;
         [SerializeField] CookingManager cookingManager;
         [SerializeField] UIManager uiManager;
+        [SerializeField] GameObject[] LockedFoodBars;
 
         private FoodDataCollection foods; // fooddatacollection sub class in FoodData.cs (array of foods)
+
         public bool[] isIdleUnlocked = new bool[FOOD_COUNT];
 
         public const int FOOD_COUNT = 10; // total food types count in game
+        public const int LEARN_MULTI_COST = 1; // upgrade cost * this int = learn recipe cost
         private const float PROFIT_INCREASE = 1.1f; // increasing the food's profit by 10% each upgrade
         private const float COST_INCREASE = 1.15f; // increasing the upgrade's cost by 15% each upgrade
         private const float BAKER_COST_INCREASE = 1.3f;
@@ -43,8 +46,15 @@ namespace Game
                 AddNewFoodItem(i);
                 InvokeEvent(HOGEventNames.OnUpgraded, i);
                 InvokeEvent(HOGEventNames.OnHired, i);
+                InvokeEvent(HOGEventNames.OnLearnRecipe, i);
 
                 var foodData = GetFoodData(i);
+
+                if(foodData.IsFoodLocked == false) // setting the locked/unlocked saved food on launch
+                {
+                    LockedFoodBars[i].SetActive(false);
+                }
+
                 if (foodData.IsIdleFood == true) // for now resets all cooking timers on start till i learn how to run courotine while offline
                 {
                     foodData.IsAutoOnCooldown = false;
@@ -78,6 +88,25 @@ namespace Game
             }
 
             return foodData;
+        }
+
+        public void LearnRecipe(int foodID)
+        {
+            var foodData = GetFoodData(foodID);
+
+            if (HOGGameLogic.Instance.ScoreManager.TryUseScore(ScoreTags.GameCurrency, foodData.UpgradeCost * LEARN_MULTI_COST))
+            {
+                foodData.IsFoodLocked = false;
+                LockedFoodBars[foodID].SetActive(false);
+   
+                InvokeEvent(HOGEventNames.OnLearnRecipeSpentToast, foodID);
+
+                HOGManager.Instance.SaveManager.Save(foods);
+            }
+            else
+            {
+                HOGDebug.LogException("Not enough money to unlock recipe!");
+            }     
         }
 
         public void UpgradeFood(int foodID)

@@ -6,13 +6,25 @@ namespace Game
 {
     public class HOGPassedTimeBonusComponent : HOGLogicMonoBehaviour
     {
+        [SerializeField] HOGMoneyHolder playerCurrency;
         [SerializeField] private int rewardPerSecond = 10;
         [SerializeField] private int maxReward = 5000;
         [SerializeField] private TMP_Text rewardText;
+        [SerializeField] private float xOffsetPerDigit = 10f;
+        [SerializeField] private RectTransform coinRectTransform;
+
+        private int returnBonus = 0;
+
+        private float initialXPos;
+
+        private void Awake()
+        {
+            initialXPos = coinRectTransform.anchoredPosition.x;
+        }
 
         private void Start()
         {
-            GiveBonusAccordingToTimePassed(Manager.TimerManager.GetLastOfflineTimeSeconds());
+            OpenOfflineRewardWindow(Manager.TimerManager.GetLastOfflineTimeSeconds());
 
             Manager.EventsManager.AddListener(HOGEventNames.OfflineTimeRefreshed, OnRefreshedTime);
         }
@@ -24,24 +36,34 @@ namespace Game
 
         private void OnRefreshedTime(object timePassed)
         {
-            GiveBonusAccordingToTimePassed((int)timePassed);
+            OpenOfflineRewardWindow((int)timePassed);
         }
 
-        private void GiveBonusAccordingToTimePassed(int timePassed)
+        public void GivePassiveBonusAccordingToTimePassed()
         {
-            var returnBonus = timePassed / rewardPerSecond;
+            GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, returnBonus);
+            playerCurrency.UpdateCurrency(playerCurrency.startingCurrency);
+        }
+
+        private void OpenOfflineRewardWindow(int timePassed)
+        {
+            returnBonus = timePassed / rewardPerSecond;
             rewardText.text = returnBonus.ToString();
 
             if (returnBonus > 0)
             {
                 this.gameObject.SetActive(true);
                 returnBonus = Mathf.Min(returnBonus, maxReward);
-                GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, returnBonus);
+                GivePassiveBonusAccordingToTimePassed();
             }
+
             else
             {
                 HideWindow();
             }
+
+            float xPos = initialXPos - (returnBonus.ToString().Length - 1) * xOffsetPerDigit;
+            coinRectTransform.anchoredPosition = new Vector2(xPos, coinRectTransform.anchoredPosition.y);
         }
 
         public void HideWindow()

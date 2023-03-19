@@ -16,32 +16,38 @@ namespace Game
         private readonly float minValue = 0f;
         private readonly float maxValue = 1f;
 
+        [Header("Components")]
         [SerializeField] HOGTweenMoneyComponent moneyComponent;
         [SerializeField] HOGTweenMoneyComponent SpendMoneyComponent;
         [SerializeField] RectTransform moneyToastPosition;
 
+        [Header("Managers")]
         [SerializeField] FoodManager foodManager;
         [SerializeField] HOGMoneyHolder moneyHolder;
 
+        [Header("Buttons")]
         [SerializeField] Button[] cookFoodButtons;
         [SerializeField] Button[] upgradeButtons;
         [SerializeField] Button[] hireButtons;
-
+        [SerializeField] Button[] learnRecipeButtons;
         [SerializeField] GameObject[] cookButtonAnimation;
 
+        [Header("Texts")]
         [SerializeField] TMP_Text moneyText;
-
         [SerializeField] TMP_Text[] foodProfitText;
         [SerializeField] TMP_Text[] foodLevelText;
         [SerializeField] TMP_Text[] upgradeCostText;
         [SerializeField] TMP_Text[] cookFoodTimesText;
         [SerializeField] TMP_Text[] hireCostText;
         [SerializeField] TMP_Text[] bakersCountText;
+        [SerializeField] TMP_Text[] learnRecipeCostText;
 
+        [Header("Sliders")]
         [SerializeField] Slider[] cookingSliderBar;
         [SerializeField] TMP_Text[] cookingTimeText;
         [SerializeField] Slider[] bakerSliderBar;
         [SerializeField] TMP_Text[] bakerTimeText;
+
 
         private void OnEnable()
         {
@@ -56,6 +62,8 @@ namespace Game
             AddListener(HOGEventNames.OnHired, OnHireUpdate);
             AddListener(HOGEventNames.OnAutoCookFood, BakerCookingLoadingBarAnimation);
             AddListener(HOGEventNames.OnAutoCookFood, BakerCookingTimer);
+            AddListener(HOGEventNames.OnLearnRecipe, LearnRecipeTextUpdate);
+            AddListener(HOGEventNames.OnLearnRecipeSpentToast, SpendLearnRecipeMoneyTextToast);
 
             OnGameLoad();
         }
@@ -79,6 +87,8 @@ namespace Game
             RemoveListener(HOGEventNames.OnHired, OnHireUpdate);
             RemoveListener(HOGEventNames.OnAutoCookFood, BakerCookingLoadingBarAnimation);
             RemoveListener(HOGEventNames.OnAutoCookFood, BakerCookingTimer);
+            RemoveListener(HOGEventNames.OnLearnRecipe, LearnRecipeTextUpdate);
+            RemoveListener(HOGEventNames.OnLearnRecipeSpentToast, SpendLearnRecipeMoneyTextToast);
         }
 
         private void OnGameLoad()
@@ -117,8 +127,17 @@ namespace Game
             upgradeCostText[(int)obj].text = upgradeCost.ToString();
 
             moneyHolder.UpdateCurrency(moneyHolder.startingCurrency);
-            UpgradeButtonsCheck();
-            HireButtonCheck();
+            BuyButtonsCheck();
+        }
+
+        private void LearnRecipeTextUpdate(object obj) // update the foods stats text after each upgrade
+        {
+            int learnCost = GetFoodData((int)obj).UpgradeCost * FoodManager.LEARN_MULTI_COST;
+
+            learnRecipeCostText[(int)obj].text = learnCost.ToString();
+
+            
+            BuyButtonsCheck();
         }
 
         private void OnHireUpdate(object obj) // update stats after hiring
@@ -132,8 +151,7 @@ namespace Game
             hireCostText[(int)obj].text = hireCost.ToString();
 
             moneyHolder.UpdateCurrency(moneyHolder.startingCurrency);
-            UpgradeButtonsCheck();
-            HireButtonCheck();
+            BuyButtonsCheck();
         }
 
         private void CookingLoadingBarAnimation(object obj) // activates loading bar with DOTween (ACTIVE cooking)
@@ -209,8 +227,7 @@ namespace Game
 
             moneyToast.Init(foodProfit);
 
-            UpgradeButtonsCheck();
-            HireButtonCheck();
+            BuyButtonsCheck();
         }
 
         private void MoneyTextToastAfterAutoCooking(object obj) // toasting profit text after cooking (PASSIVE cooking)
@@ -224,11 +241,10 @@ namespace Game
 
             moneyToast.Init(foodProfit);
 
-            UpgradeButtonsCheck();
-            HireButtonCheck();
+            BuyButtonsCheck();
         }
 
-        public void SpendUpgradeMoneyTextToast(object obj)
+        private void SpendUpgradeMoneyTextToast(object obj)
         {
             int foodIndex = (int)obj;
             int upgradeCost = GetFoodData(foodIndex).UpgradeCost;
@@ -240,7 +256,23 @@ namespace Game
             moneyToast.SpendInit(upgradeCost);
         }
 
-        public void SpendHireMoneyTextToast(object obj)
+        private void SpendLearnRecipeMoneyTextToast(object obj)
+        {
+            int foodIndex = (int)obj;
+            int learnCost = GetFoodData(foodIndex).UpgradeCost * FoodManager.LEARN_MULTI_COST;
+            var moneyToast = (HOGTweenMoneyComponent)Manager.PoolManager.GetPoolable(PoolNames.SpendMoneyToast);
+
+            Vector3 toastPosition = moneyToastPosition.position + Vector3.up * 3;
+            moneyToast.transform.position = toastPosition;
+
+            moneyToast.SpendInit(learnCost);
+
+            moneyHolder.UpdateCurrency(moneyHolder.startingCurrency);
+
+            BuyButtonsCheck();
+        }
+
+        private void SpendHireMoneyTextToast(object obj)
         {
             int foodIndex = (int)obj;
             int hireCost = GetFoodData(foodIndex).HireCost;
@@ -250,6 +282,13 @@ namespace Game
             moneyToast.transform.position = toastPosition;
 
             moneyToast.SpendInit(hireCost);
+        }
+
+        private void BuyButtonsCheck()
+        {
+            UpgradeButtonsCheck();
+            HireButtonCheck();
+            LearnRecipeButtonCheck();
         }
 
         private void UpgradeButtonsCheck()
@@ -264,6 +303,22 @@ namespace Game
                 else
                 {
                     upgradeButtons[i].interactable = false;
+                }
+            }
+        }
+
+        private void LearnRecipeButtonCheck()
+        {
+            for (int i = 0; i < learnRecipeButtons.Length; i++)
+            {
+                int learnCost = GetFoodData(i).UpgradeCost * FoodManager.LEARN_MULTI_COST;
+                if (moneyHolder.currencySaveData.CurrencyAmount >= learnCost)
+                {
+                    learnRecipeButtons[i].interactable = true;
+                }
+                else
+                {
+                    learnRecipeButtons[i].interactable = false;
                 }
             }
         }
