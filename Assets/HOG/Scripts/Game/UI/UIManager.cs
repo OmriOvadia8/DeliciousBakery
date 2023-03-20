@@ -20,6 +20,7 @@ namespace Game
         [SerializeField] HOGTweenMoneyComponent moneyComponent;
         [SerializeField] HOGTweenMoneyComponent SpendMoneyComponent;
         [SerializeField] RectTransform moneyToastPosition;
+        
 
         [Header("Managers")]
         [SerializeField] FoodManager foodManager;
@@ -41,6 +42,8 @@ namespace Game
         [SerializeField] TMP_Text[] hireCostText;
         [SerializeField] TMP_Text[] bakersCountText;
         [SerializeField] TMP_Text[] learnRecipeCostText;
+        [SerializeField] TMP_Text[] learnRecipeText;
+        [SerializeField] Image[] coinIcons;
 
         [Header("Sliders")]
         [SerializeField] Slider[] cookingSliderBar;
@@ -132,7 +135,7 @@ namespace Game
 
         private void LearnRecipeTextUpdate(object obj) // update the foods stats text after each upgrade
         {
-            int learnCost = GetFoodData((int)obj).UpgradeCost * FoodManager.LEARN_MULTI_COST;
+            int learnCost = GetFoodData((int)obj).UnlockCost;
 
             learnRecipeCostText[(int)obj].text = learnCost.ToString();
 
@@ -259,7 +262,7 @@ namespace Game
         private void SpendLearnRecipeMoneyTextToast(object obj)
         {
             int foodIndex = (int)obj;
-            int learnCost = GetFoodData(foodIndex).UpgradeCost * FoodManager.LEARN_MULTI_COST;
+            int learnCost = GetFoodData(foodIndex).UnlockCost;
             var moneyToast = (HOGTweenMoneyComponent)Manager.PoolManager.GetPoolable(PoolNames.SpendMoneyToast);
 
             Vector3 toastPosition = moneyToastPosition.position + Vector3.up * 3;
@@ -298,11 +301,11 @@ namespace Game
                 int upgradeCost = GetFoodData(i).UpgradeCost;
                 if (moneyHolder.currencySaveData.CurrencyAmount >= upgradeCost)
                 {
-                    upgradeButtons[i].interactable = true;
+                    upgradeButtons[i].interactable = true; 
                 }
                 else
                 {
-                    upgradeButtons[i].interactable = false;
+                    upgradeButtons[i].interactable = false; 
                 }
             }
         }
@@ -311,14 +314,18 @@ namespace Game
         {
             for (int i = 0; i < learnRecipeButtons.Length; i++)
             {
-                int learnCost = GetFoodData(i).UpgradeCost * FoodManager.LEARN_MULTI_COST;
+                int learnCost = GetFoodData(i).UnlockCost;
                 if (moneyHolder.currencySaveData.CurrencyAmount >= learnCost)
                 {
                     learnRecipeButtons[i].interactable = true;
+                    learnRecipeText[i].color = Color.white;
+                    coinIcons[i].color = Color.white;
                 }
                 else
                 {
                     learnRecipeButtons[i].interactable = false;
+                    learnRecipeText[i].color = Color.gray;
+                    coinIcons[i].color = Color.gray;
                 }
             }
         }
@@ -328,7 +335,9 @@ namespace Game
             for (int i = 0; i < hireButtons.Length; i++)
             {
                 int hireCost = GetFoodData(i).HireCost;
-                if (moneyHolder.currencySaveData.CurrencyAmount >= hireCost)
+                bool isLocked = GetFoodData(i).IsFoodLocked;
+
+                if (moneyHolder.currencySaveData.CurrencyAmount >= hireCost && isLocked == false)
                 {
                     hireButtons[i].interactable = true;
                 }

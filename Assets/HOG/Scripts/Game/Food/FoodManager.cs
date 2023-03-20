@@ -11,13 +11,13 @@ namespace Game
         [SerializeField] CookingManager cookingManager;
         [SerializeField] UIManager uiManager;
         [SerializeField] GameObject[] LockedFoodBars;
+        [SerializeField] GameObject[] LockedBakersBars;
 
         private FoodDataCollection foods; // fooddatacollection sub class in FoodData.cs (array of foods)
 
         public bool[] isIdleUnlocked = new bool[FOOD_COUNT];
 
         public const int FOOD_COUNT = 10; // total food types count in game
-        public const int LEARN_MULTI_COST = 1; // upgrade cost * this int = learn recipe cost
         private const float PROFIT_INCREASE = 1.1f; // increasing the food's profit by 10% each upgrade
         private const float COST_INCREASE = 1.15f; // increasing the upgrade's cost by 15% each upgrade
         private const float BAKER_COST_INCREASE = 1.3f;
@@ -53,6 +53,7 @@ namespace Game
                 if(foodData.IsFoodLocked == false) // setting the locked/unlocked saved food on launch
                 {
                     LockedFoodBars[i].SetActive(false);
+                    LockedBakersBars[i].SetActive(false);
                 }
 
                 if (foodData.IsIdleFood == true) // for now resets all cooking timers on start till i learn how to run courotine while offline
@@ -94,10 +95,11 @@ namespace Game
         {
             var foodData = GetFoodData(foodID);
 
-            if (HOGGameLogic.Instance.ScoreManager.TryUseScore(ScoreTags.GameCurrency, foodData.UpgradeCost * LEARN_MULTI_COST))
+            if (HOGGameLogic.Instance.ScoreManager.TryUseScore(ScoreTags.GameCurrency, foodData.UnlockCost))
             {
                 foodData.IsFoodLocked = false;
                 LockedFoodBars[foodID].SetActive(false);
+                LockedBakersBars[foodID].SetActive(false);
    
                 InvokeEvent(HOGEventNames.OnLearnRecipeSpentToast, foodID);
 

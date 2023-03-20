@@ -49,21 +49,21 @@ namespace Game
         {
             returnBonus = timePassed / rewardPerSecond;
             rewardText.text = returnBonus.ToString();
+            returnBonus = Mathf.Min(returnBonus, maxReward);
+            float xPos = initialXPos - (returnBonus.ToString().Length - 1) * xOffsetPerDigit;
+            coinRectTransform.anchoredPosition = new Vector2(xPos, coinRectTransform.anchoredPosition.y);
 
             if (returnBonus > 0)
             {
                 this.gameObject.SetActive(true);
-                returnBonus = Mathf.Min(returnBonus, maxReward);
+                
                 GivePassiveBonusAccordingToTimePassed();
             }
 
             else
             {
                 HideWindow();
-            }
-
-            float xPos = initialXPos - (returnBonus.ToString().Length - 1) * xOffsetPerDigit;
-            coinRectTransform.anchoredPosition = new Vector2(xPos, coinRectTransform.anchoredPosition.y);
+            }  
         }
 
         public void HideWindow()
