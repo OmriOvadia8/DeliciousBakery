@@ -41,7 +41,7 @@ namespace Game
             }
 
             float cookingTime = foodData.CookingTime * BAKER_TIME_MULTIPLIER;
-            int profit = foodData.Profit;
+            int profit = foodData.Profit * foodData.CookFoodTimes;
             foodManager.SetAutoFoodOnCooldown(foodIndex, true);
 
             InvokeEvent(HOGEventNames.OnAutoCookFood, foodIndex); // starts the loading bar and timer of cooking
@@ -65,7 +65,7 @@ namespace Game
             foodData = foodManager.GetFoodData(index);
             yield return new WaitForSeconds(cookingTime);
 
-            playerMoney.UpdateCurrency(profit * foodData.CookFoodTimes);
+            playerMoney.UpdateCurrency(profit);
             foodManager.SetAutoFoodOnCooldown(index, false);
             
             InvokeEvent(HOGEventNames.MoneyToastOnAutoCook, index);

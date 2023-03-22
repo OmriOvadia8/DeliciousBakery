@@ -8,7 +8,7 @@ namespace Game
     {
         [SerializeField] HOGMoneyHolder playerCurrency;
         [SerializeField] private int rewardPerSecond = 10;
-        [SerializeField] private int maxReward = 5000;
+        [SerializeField] private int maxReward = 10000;
         [SerializeField] private TMP_Text rewardText;
         [SerializeField] private float xOffsetPerDigit = 10f;
         [SerializeField] private RectTransform coinRectTransform;
@@ -48,8 +48,8 @@ namespace Game
         private void OpenOfflineRewardWindow(int timePassed)
         {
             returnBonus = timePassed / rewardPerSecond;
-            rewardText.text = returnBonus.ToString();
             returnBonus = Mathf.Min(returnBonus, maxReward);
+            rewardText.text = returnBonus.ToString();
             float xPos = initialXPos - (returnBonus.ToString().Length - 1) * xOffsetPerDigit;
             coinRectTransform.anchoredPosition = new Vector2(xPos, coinRectTransform.anchoredPosition.y);
 

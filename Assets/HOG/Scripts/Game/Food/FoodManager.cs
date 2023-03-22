@@ -54,7 +54,8 @@ namespace Game
                 {
                     LockedFoodBars[i].SetActive(false);
                     LockedBakersBars[i].SetActive(false);
-                }
+                    foodData.IsOnCooldown = false;
+                } 
 
                 if (foodData.IsIdleFood == true) // for now resets all cooking timers on start till i learn how to run courotine while offline
                 {
@@ -100,7 +101,7 @@ namespace Game
                 foodData.IsFoodLocked = false;
                 LockedFoodBars[foodID].SetActive(false);
                 LockedBakersBars[foodID].SetActive(false);
-   
+
                 InvokeEvent(HOGEventNames.OnLearnRecipeSpentToast, foodID);
 
                 HOGManager.Instance.SaveManager.Save(foods);

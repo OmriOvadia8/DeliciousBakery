@@ -20,7 +20,6 @@ namespace Game
         [SerializeField] HOGTweenMoneyComponent moneyComponent;
         [SerializeField] HOGTweenMoneyComponent SpendMoneyComponent;
         [SerializeField] RectTransform moneyToastPosition;
-        
 
         [Header("Managers")]
         [SerializeField] FoodManager foodManager;
@@ -31,7 +30,7 @@ namespace Game
         [SerializeField] Button[] upgradeButtons;
         [SerializeField] Button[] hireButtons;
         [SerializeField] Button[] learnRecipeButtons;
-        [SerializeField] GameObject[] cookButtonAnimation;
+        [SerializeField] CanvasGroup[] cookButtonAnimation;
 
         [Header("Texts")]
         [SerializeField] TMP_Text moneyText;
@@ -107,6 +106,11 @@ namespace Game
                 bakerSliderBar[i].value = minValue;
                 float bakerCookingTime = GetFoodData(i).CookingTime * CookingManager.BAKER_TIME_MULTIPLIER;
                 bakerTimeText[i].text = TimeSpan.FromSeconds(bakerCookingTime).ToString("mm':'ss"); // set the cooking baker time in the timer text
+
+                if(GetFoodData(i).IsFoodLocked == true)
+                {
+                    cookButtonAnimation[i].alpha = 0;
+                }
             }
         }
 
@@ -139,7 +143,6 @@ namespace Game
 
             learnRecipeCostText[(int)obj].text = learnCost.ToString();
 
-            
             BuyButtonsCheck();
         }
 
@@ -263,6 +266,8 @@ namespace Game
         {
             int foodIndex = (int)obj;
             int learnCost = GetFoodData(foodIndex).UnlockCost;
+            cookButtonAnimation[foodIndex].alpha = 1;
+
             var moneyToast = (HOGTweenMoneyComponent)Manager.PoolManager.GetPoolable(PoolNames.SpendMoneyToast);
 
             Vector3 toastPosition = moneyToastPosition.position + Vector3.up * 3;
@@ -356,12 +361,12 @@ namespace Game
                 if (isOnCooldown == false)
                 {
                     cookFoodButtons[i].interactable = true;
-                    cookButtonAnimation[i].SetActive(true);
+                    cookButtonAnimation[i].alpha = 1;
                 }
                 else
                 {
                     cookFoodButtons[i].interactable = false;
-                    cookButtonAnimation[i].SetActive(false);
+                    cookButtonAnimation[i].alpha = 0;
                 }
             }
         }
