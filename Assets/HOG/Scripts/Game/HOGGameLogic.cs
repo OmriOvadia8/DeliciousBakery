@@ -1,7 +1,6 @@
 using System;
 using Core;
 
-
 namespace Game
 {
     public class HOGGameLogic : IHOGBaseManager
@@ -10,14 +9,15 @@ namespace Game
 
         public HOGScoreManager ScoreManager;
         public HOGUpgradeManager UpgradeManager;
-        public FoodDataManager FoodDataManager;
-        
+        public HOGStoreManager StoreManager;
+
         public HOGGameLogic()
         {
             if (Instance != null)
             {
                 return;
             }
+
             Instance = this;
         }
 
@@ -25,8 +25,8 @@ namespace Game
         {
             ScoreManager = new HOGScoreManager();
             UpgradeManager = new HOGUpgradeManager();
-            FoodDataManager = new FoodDataManager();  
-           
+            StoreManager = new HOGStoreManager();
+
             onComplete.Invoke();
         }
     }

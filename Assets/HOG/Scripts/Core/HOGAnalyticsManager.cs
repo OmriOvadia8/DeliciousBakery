@@ -77,14 +77,20 @@ namespace Core
         try_upgrade_out_of,
         popup_open,
         popup_impression,
-        popup_close
+        popup_close,
+        ad_show_start,
+        ad_show_click,
+        ad_show_complete,
+        purchase_complete
     }
 
     public enum HOGDataKeys
     {
         type_id,
         upgrade_level,
-        popup_type
+        popup_type,
+        product_id,
+        product_receipt
     }
 
 }

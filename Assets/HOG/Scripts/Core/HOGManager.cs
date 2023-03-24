@@ -1,5 +1,4 @@
 using System;
-using Firebase.Crashlytics;
 using Firebase.Extensions;
 
 namespace Core
@@ -17,7 +16,8 @@ namespace Core
         public HOGAnalyticsManager AnalyticsManager;
         public HOGTimeManager TimerManager;
         public HOGMonoManager MonoManager;
-       // public HOGPopupManager PopupManager;
+        public HOGInAppPurchase PurchaseManager;
+        public HOGAdsManager AdsManager;
 
         public Action onInitAction;
 
@@ -83,12 +83,16 @@ namespace Core
 
             TimerManager = new HOGTimeManager();
 
-           // PopupManager = new HOGPopupManager();
+            PurchaseManager = new HOGInAppPurchase();
+
+            AdsManager = new HOGAdsManager();
 
             ConfigManager = new HOGConfigManager(delegate
             {
                 onInitAction.Invoke();
             });
+
         }
+
     }
 }
