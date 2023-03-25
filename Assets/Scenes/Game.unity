@@ -11253,7 +11253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &827254815
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11288,8 +11288,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCurrency: {fileID: 68174596}
-  rewardPerSecond: 1
-  maxReward: 10000
+  foodManager: {fileID: 1432630589}
+  rewardPerSecond: 300
+  baseMaxReward: 1500
   rewardText: {fileID: 2038304497}
   xOffsetPerDigit: 10
   coinRectTransform: {fileID: 2064359731}
@@ -13281,6 +13282,18 @@ MonoBehaviour:
       - m_Target: {fileID: 827254816}
         m_TargetAssemblyTypeName: Game.HOGPassedTimeBonusComponent, Game
         m_MethodName: GivePassiveBonusAccordingToTimePassed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1558726934}
+        m_TargetAssemblyTypeName: Game.PremStoreActions, Game
+        m_MethodName: WatchAd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
