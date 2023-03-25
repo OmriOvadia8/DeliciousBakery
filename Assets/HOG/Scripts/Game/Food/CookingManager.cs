@@ -16,7 +16,7 @@ namespace Game
         public void CookFood(int foodIndex) // Active cooking by clicking
         {
             foodData = foodManager.GetFoodData(foodIndex);
-            
+
             if (foodManager.IsFoodOnCooldown(foodIndex))
             {
                 return;
@@ -41,12 +41,28 @@ namespace Game
             }
 
             float cookingTime = foodData.CookingTime * BAKER_TIME_MULTIPLIER;
-            int profit = foodData.Profit * foodData.CookFoodTimes;
-            foodManager.SetAutoFoodOnCooldown(foodIndex, true);
 
-            InvokeEvent(HOGEventNames.OnAutoCookFood, foodIndex); // starts the loading bar and timer of cooking
+            if (foodData.CookFoodTimes == 0)
+            {
+                int profit = foodData.Profit * (foodData.CookFoodTimes + 1);
 
-            StartCoroutine(StartAutoCooking(cookingTime, profit, foodIndex));
+                foodManager.SetAutoFoodOnCooldown(foodIndex, true);
+
+                InvokeEvent(HOGEventNames.OnAutoCookFood, foodIndex); // starts the loading bar and timer of cooking
+
+                StartCoroutine(StartAutoCooking(cookingTime, profit, foodIndex));
+            }
+
+            else
+            {
+                int profit = foodData.Profit * foodData.CookFoodTimes;
+
+                foodManager.SetAutoFoodOnCooldown(foodIndex, true);
+
+                InvokeEvent(HOGEventNames.OnAutoCookFood, foodIndex); // starts the loading bar and timer of cooking
+
+                StartCoroutine(StartAutoCooking(cookingTime, profit, foodIndex));
+            }
         }
 
         private IEnumerator StartCooking(float cookingTime, int profit, int foodIndex)
@@ -67,7 +83,7 @@ namespace Game
 
             playerMoney.UpdateCurrency(profit);
             foodManager.SetAutoFoodOnCooldown(index, false);
-            
+
             InvokeEvent(HOGEventNames.MoneyToastOnAutoCook, index);
 
             AutoCookFood(index); // Go on the loop

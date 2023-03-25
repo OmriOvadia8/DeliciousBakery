@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace Game
 {
     public class UIManager : HOGLogicMonoBehaviour
-    {   
+    {
         private readonly Dictionary<int, Tweener> foodLoadingBarTweens = new(); // DOTween dictionary - Tween for each cooking food loading bar
         private readonly Dictionary<int, Tweener> bakerLoadingBarTweens = new(); // DOTween dictionary - Tween for each cooking baker loading bar
 
@@ -107,7 +107,7 @@ namespace Game
                 float bakerCookingTime = GetFoodData(i).CookingTime * CookingManager.BAKER_TIME_MULTIPLIER;
                 bakerTimeText[i].text = TimeSpan.FromSeconds(bakerCookingTime).ToString("mm':'ss"); // set the cooking baker time in the timer text
 
-                if(GetFoodData(i).IsFoodLocked == true)
+                if (GetFoodData(i).IsFoodLocked == true)
                 {
                     cookButtonAnimation[i].alpha = 0;
                 }
@@ -306,11 +306,11 @@ namespace Game
                 int upgradeCost = GetFoodData(i).UpgradeCost;
                 if (moneyHolder.currencySaveData.CurrencyAmount >= upgradeCost)
                 {
-                    upgradeButtons[i].interactable = true; 
+                    upgradeButtons[i].interactable = true;
                 }
                 else
                 {
-                    upgradeButtons[i].interactable = false; 
+                    upgradeButtons[i].interactable = false;
                 }
             }
         }
@@ -348,7 +348,7 @@ namespace Game
                 }
                 else
                 {
-                    hireButtons[i].interactable = false;  
+                    hireButtons[i].interactable = false;
                 }
             }
         }

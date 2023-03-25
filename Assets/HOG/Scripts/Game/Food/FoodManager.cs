@@ -50,12 +50,12 @@ namespace Game
 
                 var foodData = GetFoodData(i);
 
-                if(foodData.IsFoodLocked == false) // setting the locked/unlocked saved food on launch
+                if (foodData.IsFoodLocked == false) // setting the locked/unlocked saved food on launch
                 {
                     LockedFoodBars[i].SetActive(false);
                     LockedBakersBars[i].SetActive(false);
                     foodData.IsOnCooldown = false;
-                } 
+                }
 
                 if (foodData.IsIdleFood == true) // for now resets all cooking timers on start till i learn how to run courotine while offline
                 {
@@ -66,7 +66,7 @@ namespace Game
         }
 
         private void OnConfigLoaded(FoodDataCollection configData)
-        { 
+        {
             foods = configData;
         }
 
@@ -109,7 +109,7 @@ namespace Game
             else
             {
                 HOGDebug.LogException("Not enough money to unlock recipe!");
-            }     
+            }
         }
 
         public void UpgradeFood(int foodID)
@@ -139,9 +139,9 @@ namespace Game
 
                 foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE);
                 foodData.UpgradeCost = (int)(foodData.UpgradeCost * COST_INCREASE);
-                
+
                 InvokeEvent(HOGEventNames.OnUpgraded, foodID);
-                               
+
                 HOGManager.Instance.SaveManager.Save(foods); // Saving the current food data list stats
             }
 
@@ -157,13 +157,14 @@ namespace Game
                 InvokeEvent(HOGEventNames.OnHireMoneySpentToast, foodIndex);
 
                 foodData.IsIdleFood = true;
+
                 cookingManager.AutoCookFood(foodIndex);
 
-                foodData.HireCost = (int)(foodData.HireCost * BAKER_COST_INCREASE);     
+                foodData.HireCost = (int)(foodData.HireCost * BAKER_COST_INCREASE);
 
                 if (foodData.BakersCount % 3 == 0) // check if baker count is a multiple of 3
                 {
-                    foodData.CookFoodTimes++; // increase CookFoodTimes by 1
+                    foodData.CookFoodTimes++;
                 }
 
                 foodData.BakersCount++;
