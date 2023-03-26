@@ -1,3 +1,5 @@
+using UnityEditor;
+
 namespace Core
 {
     public class HOGMonoManagerObject : HOGMonoBehaviour

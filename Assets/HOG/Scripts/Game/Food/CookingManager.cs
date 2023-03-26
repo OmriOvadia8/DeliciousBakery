@@ -65,6 +65,29 @@ namespace Game
             }
         }
 
+        public void AutoCookFoodAfterOffline(int foodIndex)
+        {
+            foodData = foodManager.GetFoodData(foodIndex);
+
+            if (!foodManager.IsAutoFoodOnCooldown(foodIndex))
+            {
+                return;
+            }
+
+            int offlineTime = Manager.TimerManager.GetLastOfflineTimeSeconds();
+            float cookingTime = foodData.CookingTime * BAKER_TIME_MULTIPLIER;
+
+            float timeLeftToCook = cookingTime - (offlineTime % cookingTime + cookingTime) % cookingTime;
+
+            int profit = foodData.Profit * foodData.CookFoodTimes;
+
+            foodManager.SetAutoFoodOnCooldown(foodIndex, true);
+
+            InvokeEvent(HOGEventNames.OnAutoCookOnResume, foodIndex); // starts the loading bar and timer of cooking with the time left
+
+            StartCoroutine(StartAutoCooking(timeLeftToCook, profit, foodIndex));
+        }
+
         private IEnumerator StartCooking(float cookingTime, int profit, int foodIndex)
         {
             yield return new WaitForSeconds(cookingTime);

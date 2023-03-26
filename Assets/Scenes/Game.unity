@@ -11287,6 +11287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0305bac6d9cc2ae4e8aaecbf16c2000e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cookingManager: {fileID: 1330954666}
   playerCurrency: {fileID: 68174596}
   foodManager: {fileID: 1432630589}
   rewardPerSecond: 300
@@ -18821,6 +18822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodManager: {fileID: 1432630589}
   playerMoney: {fileID: 68174596}
+  pauseWindow: {fileID: 0}
 --- !u!114 &1332144756 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 45031781346865465, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}

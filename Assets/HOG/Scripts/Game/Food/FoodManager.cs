@@ -57,10 +57,10 @@ namespace Game
                     foodData.IsOnCooldown = false;
                 }
 
-                if (foodData.IsIdleFood == true) // for now resets all cooking timers on start till i learn how to run courotine while offline
+                if (foodData.IsIdleFood == true)
                 {
-                    foodData.IsAutoOnCooldown = false;
-                    cookingManager.AutoCookFood(i);
+                    foodData.IsAutoOnCooldown = true;
+                    cookingManager.AutoCookFoodAfterOffline(i);
                 }
             }
         }
@@ -79,6 +79,7 @@ namespace Game
                 foodID = foodID
             });
         }
+
 
         public FoodData GetFoodData(int foodID)
         {

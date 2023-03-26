@@ -62,6 +62,8 @@ namespace Core
         OnPopupClose,
         OnLearnRecipe,
         OnLearnRecipeSpentToast,
-        MoneyToastOnDoubleReward
+        MoneyToastOnDoubleReward,
+        OnAutoCookOnResume,
+        OnAutoCookAfterPause
     }
 }

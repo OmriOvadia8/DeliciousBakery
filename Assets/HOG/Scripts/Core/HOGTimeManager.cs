@@ -37,17 +37,13 @@ namespace Core
 
         private void OnPause(object pauseStatus)
         {
-            if (!(bool)pauseStatus)
-            {
-                CheckOfflineTime();
-            }
+            CheckOfflineTime();
         }
 
         ~HOGTimeManager()
         {
             isLooping = false;
             HOGManager.Instance.EventsManager.RemoveListener(HOGEventNames.OnPause, OnPause);
-
         }
 
         private void CheckOfflineTime()
@@ -57,7 +53,7 @@ namespace Core
             hogOfflineTime.LastCheck = DateTime.Now;
             HOGManager.Instance.SaveManager.Save(hogOfflineTime);
 
-            HOGDebug.Log($"Last offline time is {offlineSeconds}");
+            HOGDebug.LogException($"Last offline time is {offlineSeconds}");
 
             HOGManager.Instance.EventsManager.InvokeEvent(HOGEventNames.OfflineTimeRefreshed, offlineSeconds);
         }
@@ -158,7 +154,6 @@ namespace Core
         {
             hogOfflineTime.LeftOverTimes[timeType] = timeAmount;
         }
-
     }
 
     public class HOGTimerData
