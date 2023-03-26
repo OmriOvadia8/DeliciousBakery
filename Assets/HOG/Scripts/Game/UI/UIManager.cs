@@ -16,7 +16,7 @@ namespace Game
         private readonly float minValue = 0f;
         private readonly float maxValue = 1f;
 
-        private float savedCookingTime = 0;
+        private float[] savedCookingTime;
 
         [Header("Components")]
         [SerializeField] HOGTweenMoneyComponent moneyComponent;
@@ -71,13 +71,15 @@ namespace Game
             AddListener(HOGEventNames.OnAutoCookOnResume, BakerLoadingBarAnimationOnResume);
             AddListener(HOGEventNames.OnAutoCookOnResume, BakerCookingTimerOnResume);
 
-            OnGameLoad();
+            
         }
 
         private void Start()
         {
             Manager.PoolManager.InitPool("MoneyToast", 30, moneyToastPosition);
             Manager.PoolManager.InitPool("SpendMoneyToast", 20, moneyToastPosition);
+            savedCookingTime = new float[FoodManager.FOOD_COUNT];
+            OnGameLoad();
         }
 
         private void OnDisable()
@@ -112,13 +114,18 @@ namespace Game
                 bakerSliderBar[i].value = minValue;
                 float bakerCookingTime = GetFoodData(i).CookingTime * CookingManager.BAKER_TIME_MULTIPLIER;
 
-                // Adjust baking time based on time saved while offline
                 if (Manager.TimerManager.GetLastOfflineTimeSeconds() > 0)
                 {
-                    savedCookingTime = bakerCookingTime - (Manager.TimerManager.GetLastOfflineTimeSeconds() % bakerCookingTime + bakerCookingTime) % bakerCookingTime;
-                    bakerCookingTime -= savedCookingTime;
-                    bakerSliderBar[i].value = savedCookingTime / bakerCookingTime;
-                    bakerTimeText[i].text = TimeSpan.FromSeconds(bakerCookingTime).ToString("mm':'ss"); // set the baking time in the timer text
+                    float adjustedBakerCookingTime = bakerCookingTime;
+                    if (savedCookingTime[i] > 0)
+                    {
+                        adjustedBakerCookingTime -= savedCookingTime[i];
+                    }
+                    savedCookingTime[i] = adjustedBakerCookingTime - (Manager.TimerManager.GetLastOfflineTimeSeconds() % adjustedBakerCookingTime + adjustedBakerCookingTime) % adjustedBakerCookingTime;
+                    bakerSliderBar[i].value = savedCookingTime[i] / adjustedBakerCookingTime;
+
+                    TimeSpan adjustedBakingTime = TimeSpan.FromSeconds(adjustedBakerCookingTime - savedCookingTime[i]);
+                    bakerTimeText[i].text = adjustedBakingTime.ToString("mm':'ss"); // set the adjusted baking time in the timer text
                 }
 
                 if (GetFoodData(i).IsIdleFood == false)

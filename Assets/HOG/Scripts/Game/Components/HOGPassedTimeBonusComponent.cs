@@ -67,7 +67,7 @@ namespace Game
             float xPos = initialXPos - (totalReturnBonus.ToString().Length - 1) * xOffsetPerDigit;
             coinRectTransform.anchoredPosition = new Vector2(xPos, coinRectTransform.anchoredPosition.y);
 
-            if (totalReturnBonus > 100)
+            if (totalReturnBonus > 200)
             {
                 this.gameObject.SetActive(true);
 
