@@ -1,4 +1,5 @@
 using Core;
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -22,13 +23,11 @@ namespace Game
                 return;
             }
 
-            float cookingTime = foodData.CookingTime;
-            int profit = foodData.Profit;
-            foodManager.SetFoodOnCooldown(foodIndex, true);
+            foodData.IsOnCooldown = true;
+
+            HOGManager.Instance.SaveManager.Save(foodManager.foods);
 
             InvokeEvent(HOGEventNames.OnCookFood, foodIndex); // starts the loading bar and timer of cooking
-
-            StartCoroutine(StartCooking(cookingTime, profit, foodIndex));
         }
 
         public void AutoCookFood(int foodIndex) // Cooking automatically courotine loop after baker unlocked
@@ -86,16 +85,6 @@ namespace Game
             InvokeEvent(HOGEventNames.OnAutoCookOnResume, foodIndex); // starts the loading bar and timer of cooking with the time left
 
             StartCoroutine(StartAutoCooking(timeLeftToCook, profit, foodIndex));
-        }
-
-        private IEnumerator StartCooking(float cookingTime, int profit, int foodIndex)
-        {
-            yield return new WaitForSeconds(cookingTime);
-
-            playerMoney.UpdateCurrency(profit);
-            foodManager.SetFoodOnCooldown(foodIndex, false);
-
-            InvokeEvent(HOGEventNames.MoneyToastOnCook, foodIndex);
         }
 
         private IEnumerator StartAutoCooking(float cookingTime, int profit, int foodIndex)

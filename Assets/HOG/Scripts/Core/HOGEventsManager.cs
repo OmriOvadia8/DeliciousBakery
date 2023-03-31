@@ -64,6 +64,8 @@ namespace Core
         OnLearnRecipeSpentToast,
         MoneyToastOnDoubleReward,
         OnAutoCookOnResume,
-        OnAutoCookAfterPause
+        OnAutoCookAfterPause,
+        CookFoodAfterOffline,
+        Letstrythisout
     }
 }

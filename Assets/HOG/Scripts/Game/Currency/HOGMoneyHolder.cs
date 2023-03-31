@@ -27,7 +27,6 @@ namespace Game
         public void SaveCurrency() // saving the current player's currency
         {
             HOGManager.Instance.SaveManager.Save(currencySaveData);
-            HOGDebug.Log(currencySaveData.CurrencyAmount + " saved");
         }
 
         public void LoadCurrency() // loading the latest player's currency and if there is no save then starts at 0

@@ -13,7 +13,7 @@ namespace Game
         [SerializeField] GameObject[] LockedFoodBars;
         [SerializeField] GameObject[] LockedBakersBars;
 
-        private FoodDataCollection foods; // fooddatacollection sub class in FoodData.cs (array of foods)
+        public FoodDataCollection foods; // fooddatacollection sub class in FoodData.cs (array of foods)
 
         public bool[] isIdleUnlocked = new bool[FOOD_COUNT];
 
@@ -31,7 +31,6 @@ namespace Game
                 if (data != null)
                 {
                     foods = data;
-                    Debug.Log("Loaded upgrade cost: " + data.Foods[0].UpgradeCost);
                 }
                 else // or default if there isnt one
                     HOGManager.Instance.ConfigManager.GetConfigAsync<FoodDataCollection>(FOOD_CONFIG_PATH, OnConfigLoaded);
@@ -43,24 +42,26 @@ namespace Game
             // Add all foods to the upgradeables list and update UI
             for (int i = 0; i < FOOD_COUNT; i++)
             {
+                var foodData = GetFoodData(i);
+
                 AddNewFoodItem(i);
+
                 InvokeEvent(HOGEventNames.OnUpgraded, i);
                 InvokeEvent(HOGEventNames.OnHired, i);
                 InvokeEvent(HOGEventNames.OnLearnRecipe, i);
 
-                var foodData = GetFoodData(i);
+                
 
                 if (foodData.IsFoodLocked == false) // setting the locked/unlocked saved food on launch
                 {
                     LockedFoodBars[i].SetActive(false);
                     LockedBakersBars[i].SetActive(false);
-                    foodData.IsOnCooldown = false;
                 }
 
                 if (foodData.IsIdleFood == true)
                 {
                     foodData.IsAutoOnCooldown = true;
-                    cookingManager.AutoCookFoodAfterOffline(i);
+                   // cookingManager.AutoCookFoodAfterOffline(i);
                 }
             }
         }

@@ -92,7 +92,8 @@ namespace Game
 
                 if(foodID.IsFoodLocked == false && foodID.IsIdleFood == true)
                 {
-                    returnFoodBonus[i] = (int)((timePassed / (foodID.CookingTime * CookingManager.BAKER_TIME_MULTIPLIER) * foodID.CookFoodTimes) * foodID.Profit * 0.1f); // 10% of offline time divided by baker cooking time for the specific food and the amount of time he bakes it * its profit 
+                    returnFoodBonus[i] = (int)((timePassed / (foodID.CookingTime * CookingManager.BAKER_TIME_MULTIPLIER) 
+                        * foodID.CookFoodTimes) * foodID.Profit * 0.1f); // 10% of offline time divided by baker cooking time for the specific food and the amount of time he bakes it * its profit 
                     maxFoodReward[i] = baseMaxReward * foodID.CookFoodTimes; // capacity for reward so it won't be exploit
                     returnFoodBonus[i] = Mathf.Min(returnFoodBonus[i], maxFoodReward[i]);
 

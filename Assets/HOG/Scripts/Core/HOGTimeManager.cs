@@ -25,7 +25,7 @@ namespace Core
             {
                 hogOfflineTime = data ?? new HOGOfflineTime
                 {
-                    LastCheck = DateTime.Now
+                    LastCheck = DateTime.UtcNow,
                 };
 
                 HOGManager.Instance.SaveManager.Save(hogOfflineTime);
@@ -48,9 +48,9 @@ namespace Core
 
         private void CheckOfflineTime()
         {
-            var timePassed = DateTime.Now - hogOfflineTime.LastCheck;
+            var timePassed = DateTime.UtcNow - hogOfflineTime.LastCheck;
             offlineSeconds = (int)timePassed.TotalSeconds;
-            hogOfflineTime.LastCheck = DateTime.Now;
+            hogOfflineTime.LastCheck = DateTime.UtcNow;
             HOGManager.Instance.SaveManager.Save(hogOfflineTime);
 
             HOGDebug.LogException($"Last offline time is {offlineSeconds}");
@@ -97,7 +97,7 @@ namespace Core
             {
                 var alarmData = activeAlarms[index];
 
-                if (DateTime.Compare(alarmData.AlarmTime, DateTime.Now) < 0)
+                if (DateTime.Compare(alarmData.AlarmTime, DateTime.UtcNow) < 0)
                 {
                     alarmData.AlarmAction.Invoke();
                     activeAlarms.Remove(alarmData);
@@ -127,7 +127,7 @@ namespace Core
             var alarmData = new HOGAlarmData
             {
                 ID = alarmCounter,
-                AlarmTime = DateTime.Now.AddSeconds(seconds),
+                AlarmTime = DateTime.UtcNow.AddSeconds(seconds),
                 AlarmAction = onAlarmAction
             };
 
@@ -187,4 +187,5 @@ namespace Core
         DailyBonus,
         ExtraBonus
     }
+
 }

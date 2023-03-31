@@ -2,19 +2,21 @@
   "Foods": [
     {
       "Index": 0,
-      "CookingTime": 2,
-      "Profit": 60,
+      "CookingTime": 1,
+      "Profit": 1000,
       "UpgradeCost": 60,
       "IsIdleFood": false,
       "HireCost": 100,
       "BakersCount": 0,
       "CookFoodTimes": 0,
       "IsFoodLocked": true,
-      "UnlockCost": 0
+      "UnlockCost": 0,
+      "IsOnCooldown": false,
+      "RemainingCookingTime": 1
     },
     {
       "Index": 1,
-      "CookingTime": 2,
+      "CookingTime": 15,
       "Profit": 25,
       "UpgradeCost": 100,
       "IsIdleFood": false,
@@ -22,11 +24,13 @@
       "BakersCount": 0,
       "CookFoodTimes": 0,
       "IsFoodLocked": true,
-      "UnlockCost": 150
+      "UnlockCost": 150,
+      "IsOnCooldown": false,
+      "RemainingCookingTime": 15
     },
     {
       "Index": 2,
-      "CookingTime": 3,
+      "CookingTime": 333,
       "Profit": 36,
       "UpgradeCost": 200,
       "IsIdleFood": false,
@@ -34,7 +38,9 @@
       "BakersCount": 0,
       "CookFoodTimes": 0,
       "IsFoodLocked": true,
-      "UnlockCost": 400
+      "UnlockCost": 400,
+      "IsOnCooldown": false,
+      "RemainingCookingTime": 333
     },
     {
       "Index": 3,
@@ -46,7 +52,9 @@
       "BakersCount": 0,
       "CookFoodTimes": 0,
       "IsFoodLocked": true,
-      "UnlockCost": 750
+      "UnlockCost": 750,
+      "IsOnCooldown": false,
+      "RemainingCookingTime": 4
     },
     {
       "Index": 4,
@@ -58,7 +66,9 @@
       "BakersCount": 0,
       "CookFoodTimes": 0,
       "IsFoodLocked": true,
-      "UnlockCost": 1100
+      "UnlockCost": 1100,
+      "IsOnCooldown": false,
+      "RemainingCookingTime": 4
     },
     {
       "Index": 5,
@@ -70,7 +80,9 @@
       "BakersCount": 0,
       "CookFoodTimes": 0,
       "IsFoodLocked": true,
-      "UnlockCost": 1500
+      "UnlockCost": 1500,
+      "IsOnCooldown": false,
+      "RemainingCookingTime": 5
     },
     {
       "Index": 6,
@@ -82,7 +94,9 @@
       "BakersCount": 0,
       "CookFoodTimes": 0,
       "IsFoodLocked": true,
-      "UnlockCost": 3000
+      "UnlockCost": 3000,
+      "IsOnCooldown": false,
+      "RemainingCookingTime": 7
     },
     {
       "Index": 7,
@@ -94,7 +108,9 @@
       "BakersCount": 0,
       "CookFoodTimes": 0,
       "IsFoodLocked": true,
-      "UnlockCost": 4500
+      "UnlockCost": 4500,
+      "IsOnCooldown": false,
+      "RemainingCookingTime": 10
     },
     {
       "Index": 8,
@@ -106,7 +122,9 @@
       "BakersCount": 0,
       "CookFoodTimes": 0,
       "IsFoodLocked": true,
-      "UnlockCost": 7000
+      "UnlockCost": 7000,
+      "IsOnCooldown": false,
+      "RemainingCookingTime": 10
     },
     {
       "Index": 9,
@@ -118,7 +136,9 @@
       "BakersCount": 0,
       "CookFoodTimes": 0,
       "IsFoodLocked": true,
-      "UnlockCost": 10000
+      "UnlockCost": 10000,
+      "IsOnCooldown": false,
+      "RemainingCookingTime": 15
     }
   ]
 }

@@ -16,7 +16,10 @@ namespace Game
         private readonly float minValue = 0f;
         private readonly float maxValue = 1f;
 
-        private float[] savedCookingTime;
+        private int offlineTime;
+        private float[] timeLeftToCook = new float[FoodManager.FOOD_COUNT];
+
+        TimeSpan remainingTime;
 
         [Header("Components")]
         [SerializeField] HOGTweenMoneyComponent moneyComponent;
@@ -57,8 +60,8 @@ namespace Game
         {
             AddListener(HOGEventNames.OnCurrencySet, OnMoneyUpdate);
             AddListener(HOGEventNames.OnUpgraded, OnUpgradeUpdate);
-            AddListener(HOGEventNames.OnCookFood, CookingLoadingBarAnimation);
-            AddListener(HOGEventNames.OnCookFood, CookingTimer);
+            AddListener(HOGEventNames.OnCookFood, StartTimer);
+            AddListener(HOGEventNames.OnPause, CookingPauseCheck);
             AddListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
             AddListener(HOGEventNames.MoneyToastOnAutoCook, MoneyTextToastAfterAutoCooking);
             AddListener(HOGEventNames.OnUpgradeMoneySpentToast, SpendUpgradeMoneyTextToast);
@@ -70,24 +73,23 @@ namespace Game
             AddListener(HOGEventNames.OnLearnRecipeSpentToast, SpendLearnRecipeMoneyTextToast);
             AddListener(HOGEventNames.OnAutoCookOnResume, BakerLoadingBarAnimationOnResume);
             AddListener(HOGEventNames.OnAutoCookOnResume, BakerCookingTimerOnResume);
-
-            
         }
 
         private void Start()
         {
             Manager.PoolManager.InitPool("MoneyToast", 30, moneyToastPosition);
             Manager.PoolManager.InitPool("SpendMoneyToast", 20, moneyToastPosition);
-            savedCookingTime = new float[FoodManager.FOOD_COUNT];
             OnGameLoad();
+
+            CookingPauseCheck(false);
         }
 
         private void OnDisable()
         {
             RemoveListener(HOGEventNames.OnCurrencySet, OnMoneyUpdate);
             RemoveListener(HOGEventNames.OnUpgraded, OnUpgradeUpdate);
-            RemoveListener(HOGEventNames.OnCookFood, CookingLoadingBarAnimation);
-            RemoveListener(HOGEventNames.OnCookFood, CookingTimer);
+            RemoveListener(HOGEventNames.OnCookFood, StartTimer);
+            RemoveListener(HOGEventNames.OnPause, CookingPauseCheck);
             RemoveListener(HOGEventNames.MoneyToastOnCook, MoneyTextToastAfterCooking);
             RemoveListener(HOGEventNames.MoneyToastOnAutoCook, MoneyTextToastAfterAutoCooking);
             RemoveListener(HOGEventNames.OnUpgradeMoneySpentToast, SpendUpgradeMoneyTextToast);
@@ -114,19 +116,19 @@ namespace Game
                 bakerSliderBar[i].value = minValue;
                 float bakerCookingTime = GetFoodData(i).CookingTime * CookingManager.BAKER_TIME_MULTIPLIER;
 
-                if (Manager.TimerManager.GetLastOfflineTimeSeconds() > 0)
-                {
-                    float adjustedBakerCookingTime = bakerCookingTime;
-                    if (savedCookingTime[i] > 0)
-                    {
-                        adjustedBakerCookingTime -= savedCookingTime[i];
-                    }
-                    savedCookingTime[i] = adjustedBakerCookingTime - (Manager.TimerManager.GetLastOfflineTimeSeconds() % adjustedBakerCookingTime + adjustedBakerCookingTime) % adjustedBakerCookingTime;
-                    bakerSliderBar[i].value = savedCookingTime[i] / adjustedBakerCookingTime;
+                //if (Manager.TimerManager.GetLastOfflineTimeSeconds() > 0)
+                //{
+                //    float adjustedBakerCookingTime = bakerCookingTime;
+                //    if (savedCookingTime[i] > 0)
+                //    {
+                //        adjustedBakerCookingTime -= savedCookingTime[i];
+                //    }
+                //    savedCookingTime[i] = adjustedBakerCookingTime - (Manager.TimerManager.GetLastOfflineTimeSeconds() % adjustedBakerCookingTime + adjustedBakerCookingTime) % adjustedBakerCookingTime;
+                //    bakerSliderBar[i].value = savedCookingTime[i] / adjustedBakerCookingTime;
 
-                    TimeSpan adjustedBakingTime = TimeSpan.FromSeconds(adjustedBakerCookingTime - savedCookingTime[i]);
-                    bakerTimeText[i].text = adjustedBakingTime.ToString("mm':'ss"); // set the adjusted baking time in the timer text
-                }
+                //    TimeSpan adjustedBakingTime = TimeSpan.FromSeconds(adjustedBakerCookingTime - savedCookingTime[i]);
+                //    bakerTimeText[i].text = adjustedBakingTime.ToString("mm':'ss"); // set the adjusted baking time in the timer text
+                //}
 
                 if (GetFoodData(i).IsIdleFood == false)
                 {
@@ -192,35 +194,149 @@ namespace Game
             BuyButtonsCheck();
         }
 
-        private void CookingLoadingBarAnimation(object obj) // activates loading bar with DOTween (ACTIVE cooking)
+        private void StartTimer(object obj)
         {
+            var foodIndex = foodManager.GetFoodData((int)obj);
+            float cookingTime = foodIndex.CookingTime;
+            foodIndex.IsOnCooldown = true;
+
             CookFoodButtonCheck();
-            float foodCookingTime = GetFoodData((int)obj).CookingTime;
 
-            cookingSliderBar[(int)obj].value = minValue;
-            foodLoadingBarTweens[(int)obj] = cookingSliderBar[(int)obj].DOValue(maxValue, foodCookingTime);
+            timeLeftToCook[(int)obj] = cookingTime;
 
-            foodLoadingBarTweens[(int)obj].OnComplete(() =>
+            var countdownTween = DOTween.To(() => timeLeftToCook[(int)obj], x => timeLeftToCook[(int)obj] = x, 0, timeLeftToCook[(int)obj]).SetEase(Ease.Linear);
+
+            cookingTimeText[(int)obj].text = timeLeftToCook[(int)obj].ToString("mm':'ss");
+            // Use a DOTween animation to update the value of the slider to the calculated fill value
+            // Set the initial value of the slider to minValue
+            cookingSliderBar[(int)obj].value = cookingSliderBar[(int)obj].minValue;
+            // Animate the slider's value to maxValue over timeLeftToCook duration
+            cookingSliderBar[(int)obj].DOValue(maxValue, timeLeftToCook[(int)obj]).SetEase(Ease.Linear);
+
+
+            float previousTime = timeLeftToCook[(int)obj];
+            // Update the timer text on each frame
+            countdownTween.OnUpdate(() =>
             {
-                cookingSliderBar[(int)obj].value = minValue;
-                cookingTimeText[(int)obj].text = FormatTimeSpan(TimeSpan.FromSeconds(foodCookingTime));
+                remainingTime = TimeSpan.FromSeconds(timeLeftToCook[(int)obj]);
+
+                if (previousTime != timeLeftToCook[(int)obj])
+                {
+                    foodIndex.RemainingCookingTime = timeLeftToCook[(int)obj];
+                    HOGManager.Instance.SaveManager.Save(foodManager.foods);
+                    previousTime = timeLeftToCook[(int)obj];
+                }
+
+                cookingTimeText[(int)obj].text = string.Format("{0:D2}:{1:D2}", remainingTime.Minutes, remainingTime.Seconds);
             });
+
+            countdownTween.OnComplete(() => OnTimerComplete((int)obj));
         }
 
-        private void CookingTimer(object obj) // activates the cooking timer countdown (ACTIVE cooking)
+
+        private void StartTimerAfterPause(object obj)
         {
-            float foodCookingTime = GetFoodData((int)obj).CookingTime;
-            TimeSpan timeLeft = TimeSpan.FromSeconds(foodCookingTime);
+            var foodIndex = foodManager.GetFoodData((int)obj);
+            float cookingTime = foodIndex.CookingTime;
+            offlineTime = HOGManager.Instance.TimerManager.GetLastOfflineTimeSeconds();
 
-            string timeLeftString = FormatTimeSpan(timeLeft);
-            cookingTimeText[(int)obj].text = timeLeftString;
+            timeLeftToCook[(int)obj] = foodIndex.RemainingCookingTime - offlineTime;
 
-            foodLoadingBarTweens[(int)obj].OnUpdate(() =>
+
+            foodIndex.IsOnCooldown = true;
+
+            CookFoodButtonCheck();
+
+            if (timeLeftToCook[(int)obj] > 0)
             {
-                timeLeft = TimeSpan.FromSeconds(foodLoadingBarTweens[(int)obj].Duration() - foodLoadingBarTweens[(int)obj].Elapsed());
-                timeLeftString = FormatTimeSpan(timeLeft);
-                cookingTimeText[(int)obj].text = timeLeftString;
-            });
+                foodIndex.RemainingCookingTime = timeLeftToCook[(int)obj];
+
+
+                var countdownTween = DOTween.To(() => timeLeftToCook[(int)obj], x => timeLeftToCook[(int)obj] = x, 0, timeLeftToCook[(int)obj]).SetEase(Ease.Linear);
+
+
+                cookingTimeText[(int)obj].text = timeLeftToCook[(int)obj].ToString("mm':'ss");
+
+                float fillValue = (cookingTime - timeLeftToCook[(int)obj]) / cookingTime;
+
+                cookingSliderBar[(int)obj].value = fillValue;
+                // Use a DOTween animation to update the value of the slider to the calculated fill value
+                cookingSliderBar[(int)obj].DOValue(maxValue, timeLeftToCook[(int)obj]).SetEase(Ease.Linear);
+
+
+                int previousTime = (int)timeLeftToCook[(int)obj];
+
+                countdownTween.OnUpdate(() =>
+                {
+
+                remainingTime = TimeSpan.FromSeconds(timeLeftToCook[(int)obj]);
+                foodIndex.RemainingCookingTime = timeLeftToCook[(int)obj];
+
+                    if (previousTime != (int)timeLeftToCook[(int)obj])
+                    {
+                        foodIndex.RemainingCookingTime = timeLeftToCook[(int)obj];
+                        HOGManager.Instance.SaveManager.Save(foodManager.foods);
+                        previousTime = (int)timeLeftToCook[(int)obj];
+                    }
+
+                cookingTimeText[(int)obj].text = string.Format("{0:D2}:{1:D2}", remainingTime.Minutes, remainingTime.Seconds);
+                
+                });
+
+            countdownTween.OnComplete(() => OnTimerComplete((int)obj));
+            }
+
+            else
+            {
+                cookingTimeText[(int)obj].text = TimeSpan.FromSeconds(cookingTime).ToString("mm':'ss");
+                foodIndex.IsOnCooldown = false;
+                cookingSliderBar[(int)obj].value = 0;
+                foodIndex.RemainingCookingTime = foodIndex.CookingTime;
+                HOGManager.Instance.SaveManager.Save(foodManager.foods);
+            }
+
+            BuyButtonsCheck();
+            CookFoodButtonCheck();
+            }
+
+        private void OnTimerComplete(int index)
+        {
+            var foodIndex = foodManager.GetFoodData(index);
+            foodIndex.RemainingCookingTime = foodIndex.CookingTime;
+            cookingSliderBar[index].DOValue(cookingSliderBar[index].minValue, 0f).SetEase(Ease.Linear);
+            HOGDebug.LogException("Spam?");
+            int profit = foodIndex.Profit;
+            moneyHolder.UpdateCurrency(profit);
+            foodIndex.IsOnCooldown = false;
+            cookingTimeText[index].text = TimeSpan.FromSeconds(foodIndex.CookingTime).ToString("mm':'ss");
+            InvokeEvent(HOGEventNames.MoneyToastOnCook, index); 
+        }
+
+        private void CookingPauseCheck(object isPaused)
+        {
+            if (!(bool)isPaused)
+            {
+                for (int i = 0; i < FoodManager.FOOD_COUNT; i++)
+                {
+                    if (foodManager.GetFoodData(i).IsOnCooldown == true)
+                    {
+                        StartTimerAfterPause(i);
+                    }
+                }
+            }
+
+            else
+            {
+                HOGManager.Instance.SaveManager.Save(foodManager.foods);
+
+                DOTween.KillAll();
+
+                for (int i = 0; i < FoodManager.FOOD_COUNT; i++)
+                {
+                    timeLeftToCook[i] = foodManager.GetFoodData(i).RemainingCookingTime;
+                    
+                }
+            }
         }
 
         private void BakerCookingLoadingBarAnimation(object obj) // activates loading bar with DOTween (PASSIVE cooking)

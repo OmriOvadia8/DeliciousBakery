@@ -3,7 +3,7 @@ using Core;
 using UnityEngine;
 
 namespace Game
-{
+{ // Offline manual cooking still not working
     public static class HOGExtension
     {
         public static void WaitForAnimationComplete(this Animator animator, HOGMonoBehaviour monoBehaviour, Action onComplete)
