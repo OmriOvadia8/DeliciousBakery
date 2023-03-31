@@ -50,8 +50,6 @@ namespace Game
                 InvokeEvent(HOGEventNames.OnHired, i);
                 InvokeEvent(HOGEventNames.OnLearnRecipe, i);
 
-                
-
                 if (foodData.IsFoodLocked == false) // setting the locked/unlocked saved food on launch
                 {
                     LockedFoodBars[i].SetActive(false);
@@ -61,7 +59,6 @@ namespace Game
                 if (foodData.IsIdleFood == true)
                 {
                     foodData.IsAutoOnCooldown = true;
-                   // cookingManager.AutoCookFoodAfterOffline(i);
                 }
             }
         }
@@ -80,7 +77,6 @@ namespace Game
                 foodID = foodID
             });
         }
-
 
         public FoodData GetFoodData(int foodID)
         {

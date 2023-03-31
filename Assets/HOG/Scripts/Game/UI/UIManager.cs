@@ -203,35 +203,33 @@ namespace Game
 
             timeLeftToCook[(int)obj] = cookingTime;
 
-            var countdownTween = DOTween.To(() => timeLeftToCook[(int)obj], x => timeLeftToCook[(int)obj] = x, 0, timeLeftToCook[(int)obj]).SetEase(Ease.Linear).SetId("cookingTween_" + (int)obj);
+            var countdownTween = DOTween.To(() => timeLeftToCook[(int)obj], x => timeLeftToCook[(int)obj] = x, 0, timeLeftToCook[(int)obj]).SetEase(Ease.Linear).SetId("activeCookingTimer" + (int)obj);
 
             cookingTimeText[(int)obj].text = timeLeftToCook[(int)obj].ToString("mm':'ss");
-            // Use a DOTween animation to update the value of the slider to the calculated fill value
-            // Set the initial value of the slider to minValue
+
             cookingSliderBar[(int)obj].value = cookingSliderBar[(int)obj].minValue;
-            // Animate the slider's value to maxValue over timeLeftToCook duration
-            cookingSliderBar[(int)obj].DOValue(maxValue, timeLeftToCook[(int)obj]).SetEase(Ease.Linear).SetId("cookingTween_" + (int)obj);
+
+            cookingSliderBar[(int)obj].DOValue(maxValue, timeLeftToCook[(int)obj]).SetEase(Ease.Linear).SetId("activeCookingAnim" + (int)obj);
 
 
-            float previousTime = timeLeftToCook[(int)obj];
-            // Update the timer text on each frame
+            int previousTime = (int)timeLeftToCook[(int)obj];
+
             countdownTween.OnUpdate(() =>
             {
                 remainingTime = TimeSpan.FromSeconds(timeLeftToCook[(int)obj]);
 
-                if (previousTime != timeLeftToCook[(int)obj])
+                if (previousTime != (int)timeLeftToCook[(int)obj])
                 {
                     foodIndex.RemainingCookingTime = timeLeftToCook[(int)obj];
                     HOGManager.Instance.SaveManager.Save(foodManager.foods);
-                    previousTime = timeLeftToCook[(int)obj];
+                    previousTime = (int)timeLeftToCook[(int)obj];
                 }
 
-                cookingTimeText[(int)obj].text = string.Format("{0:D2}:{1:D2}", remainingTime.Minutes, remainingTime.Seconds);
+                cookingTimeText[(int)obj].text = $"{remainingTime.Minutes:D2}:{remainingTime.Seconds:D2}";
             });
 
             countdownTween.OnComplete(() => OnTimerComplete((int)obj));
         }
-
 
         private void StartTimerAfterPause(object obj)
         {
@@ -241,7 +239,6 @@ namespace Game
 
             timeLeftToCook[(int)obj] = foodIndex.RemainingCookingTime - offlineTime;
 
-
             foodIndex.IsOnCooldown = true;
 
             CookFoodButtonCheck();
@@ -249,27 +246,18 @@ namespace Game
             if (timeLeftToCook[(int)obj] > 0)
             {
                 foodIndex.RemainingCookingTime = timeLeftToCook[(int)obj];
-
-
-                var countdownTween = DOTween.To(() => timeLeftToCook[(int)obj], x => timeLeftToCook[(int)obj] = x, 0, timeLeftToCook[(int)obj]).SetEase(Ease.Linear).SetId("cookingTween_" + (int)obj);
-
-
+                var countdownTween = DOTween.To(() => timeLeftToCook[(int)obj], x => timeLeftToCook[(int)obj] = x, 0, timeLeftToCook[(int)obj]).SetEase(Ease.Linear).SetId("activeCookingTimer" + (int)obj);
                 cookingTimeText[(int)obj].text = timeLeftToCook[(int)obj].ToString("mm':'ss");
-
                 float fillValue = (cookingTime - timeLeftToCook[(int)obj]) / cookingTime;
-
                 cookingSliderBar[(int)obj].value = fillValue;
-                // Use a DOTween animation to update the value of the slider to the calculated fill value
-                cookingSliderBar[(int)obj].DOValue(maxValue, timeLeftToCook[(int)obj]).SetEase(Ease.Linear).SetId("cookingTween_" + (int)obj);
-
+                cookingSliderBar[(int)obj].DOValue(maxValue, timeLeftToCook[(int)obj]).SetEase(Ease.Linear).SetId("activeCookingAnim" + (int)obj);
 
                 int previousTime = (int)timeLeftToCook[(int)obj];
 
                 countdownTween.OnUpdate(() =>
                 {
-
                 remainingTime = TimeSpan.FromSeconds(timeLeftToCook[(int)obj]);
-                foodIndex.RemainingCookingTime = timeLeftToCook[(int)obj];
+               // foodIndex.RemainingCookingTime = timeLeftToCook[(int)obj];
 
                     if (previousTime != (int)timeLeftToCook[(int)obj])
                     {
@@ -278,7 +266,7 @@ namespace Game
                         previousTime = (int)timeLeftToCook[(int)obj];
                     }
 
-                cookingTimeText[(int)obj].text = string.Format("{0:D2}:{1:D2}", remainingTime.Minutes, remainingTime.Seconds);
+                cookingTimeText[(int)obj].text = $"{remainingTime.Minutes:D2}:{remainingTime.Seconds:D2}";
                 
                 });
 
@@ -289,7 +277,7 @@ namespace Game
             {
                 cookingTimeText[(int)obj].text = TimeSpan.FromSeconds(cookingTime).ToString("mm':'ss");
                 foodIndex.IsOnCooldown = false;
-                cookingSliderBar[(int)obj].value = 0;
+                cookingSliderBar[(int)obj].DOValue(cookingSliderBar[(int)obj].minValue, 0f).SetEase(Ease.Linear);
                 foodIndex.RemainingCookingTime = foodIndex.CookingTime;
                 HOGManager.Instance.SaveManager.Save(foodManager.foods);
             }
@@ -303,7 +291,6 @@ namespace Game
             var foodIndex = foodManager.GetFoodData(index);
             foodIndex.RemainingCookingTime = foodIndex.CookingTime;
             cookingSliderBar[index].DOValue(cookingSliderBar[index].minValue, 0f).SetEase(Ease.Linear);
-            HOGDebug.LogException("Spam?");
             int profit = foodIndex.Profit;
             moneyHolder.UpdateCurrency(profit);
             foodIndex.IsOnCooldown = false;
@@ -331,7 +318,8 @@ namespace Game
                 for (int i = 0; i < FoodManager.FOOD_COUNT; i++)
                 {
                     timeLeftToCook[i] = foodManager.GetFoodData(i).RemainingCookingTime;
-                    DOTween.Kill("cookingTween_" + i);
+                    DOTween.Kill("activeCookingAnim" + i);
+                    DOTween.Kill("activeCookingTimer" + i);
                 }
             }
         }
