@@ -10,7 +10,6 @@ namespace Game
 {
     public class UIManager : HOGLogicMonoBehaviour
     {
-        private readonly Dictionary<int, Tweener> foodLoadingBarTweens = new(); // DOTween dictionary - Tween for each cooking food loading bar
         private readonly Dictionary<int, Tweener> bakerLoadingBarTweens = new(); // DOTween dictionary - Tween for each cooking baker loading bar
 
         private readonly float minValue = 0f;
@@ -204,14 +203,14 @@ namespace Game
 
             timeLeftToCook[(int)obj] = cookingTime;
 
-            var countdownTween = DOTween.To(() => timeLeftToCook[(int)obj], x => timeLeftToCook[(int)obj] = x, 0, timeLeftToCook[(int)obj]).SetEase(Ease.Linear);
+            var countdownTween = DOTween.To(() => timeLeftToCook[(int)obj], x => timeLeftToCook[(int)obj] = x, 0, timeLeftToCook[(int)obj]).SetEase(Ease.Linear).SetId("cookingTween_" + (int)obj);
 
             cookingTimeText[(int)obj].text = timeLeftToCook[(int)obj].ToString("mm':'ss");
             // Use a DOTween animation to update the value of the slider to the calculated fill value
             // Set the initial value of the slider to minValue
             cookingSliderBar[(int)obj].value = cookingSliderBar[(int)obj].minValue;
             // Animate the slider's value to maxValue over timeLeftToCook duration
-            cookingSliderBar[(int)obj].DOValue(maxValue, timeLeftToCook[(int)obj]).SetEase(Ease.Linear);
+            cookingSliderBar[(int)obj].DOValue(maxValue, timeLeftToCook[(int)obj]).SetEase(Ease.Linear).SetId("cookingTween_" + (int)obj);
 
 
             float previousTime = timeLeftToCook[(int)obj];
@@ -252,7 +251,7 @@ namespace Game
                 foodIndex.RemainingCookingTime = timeLeftToCook[(int)obj];
 
 
-                var countdownTween = DOTween.To(() => timeLeftToCook[(int)obj], x => timeLeftToCook[(int)obj] = x, 0, timeLeftToCook[(int)obj]).SetEase(Ease.Linear);
+                var countdownTween = DOTween.To(() => timeLeftToCook[(int)obj], x => timeLeftToCook[(int)obj] = x, 0, timeLeftToCook[(int)obj]).SetEase(Ease.Linear).SetId("cookingTween_" + (int)obj);
 
 
                 cookingTimeText[(int)obj].text = timeLeftToCook[(int)obj].ToString("mm':'ss");
@@ -261,7 +260,7 @@ namespace Game
 
                 cookingSliderBar[(int)obj].value = fillValue;
                 // Use a DOTween animation to update the value of the slider to the calculated fill value
-                cookingSliderBar[(int)obj].DOValue(maxValue, timeLeftToCook[(int)obj]).SetEase(Ease.Linear);
+                cookingSliderBar[(int)obj].DOValue(maxValue, timeLeftToCook[(int)obj]).SetEase(Ease.Linear).SetId("cookingTween_" + (int)obj);
 
 
                 int previousTime = (int)timeLeftToCook[(int)obj];
@@ -329,12 +328,10 @@ namespace Game
             {
                 HOGManager.Instance.SaveManager.Save(foodManager.foods);
 
-                DOTween.KillAll();
-
                 for (int i = 0; i < FoodManager.FOOD_COUNT; i++)
                 {
                     timeLeftToCook[i] = foodManager.GetFoodData(i).RemainingCookingTime;
-                    
+                    DOTween.Kill("cookingTween_" + i);
                 }
             }
         }

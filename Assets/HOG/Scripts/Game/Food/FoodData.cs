@@ -4,7 +4,6 @@ namespace Game
 {
     public class FoodData
     {
-        private bool _isOnCooldown;
         private bool _isAutoOnCooldown;
 
         public int Index { get; set; }
