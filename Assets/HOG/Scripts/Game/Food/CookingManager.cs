@@ -10,15 +10,13 @@ namespace Game
         [SerializeField] FoodManager foodManager;
         [SerializeField] HOGMoneyHolder playerMoney;
 
-        public const int BAKER_TIME_MULTIPLIER = 2;
-
         private FoodData foodData;
 
         public void CookFood(int foodIndex) // Active cooking by clicking
         {
             foodData = foodManager.GetFoodData(foodIndex);
 
-            if (foodManager.IsFoodOnCooldown(foodIndex))
+            if (foodData.IsOnCooldown)
             {
                 return;
             }
@@ -34,72 +32,13 @@ namespace Game
         {
             foodData = foodManager.GetFoodData(foodIndex);
 
-            if (foodManager.IsAutoFoodOnCooldown(foodIndex))
+            if (foodData.IsAutoOnCooldown)
             {
                 return;
             }
+            foodData.IsAutoOnCooldown = true;
 
-            float cookingTime = foodData.CookingTime * BAKER_TIME_MULTIPLIER;
-
-            if (foodData.CookFoodTimes == 0)
-            {
-                int profit = foodData.Profit * (foodData.CookFoodTimes + 1);
-
-                foodManager.SetAutoFoodOnCooldown(foodIndex, true);
-
-                InvokeEvent(HOGEventNames.OnAutoCookFood, foodIndex); // starts the loading bar and timer of cooking
-
-                StartCoroutine(StartAutoCooking(cookingTime, profit, foodIndex));
-            }
-
-            else
-            {
-                int profit = foodData.Profit * foodData.CookFoodTimes;
-
-                foodManager.SetAutoFoodOnCooldown(foodIndex, true);
-
-                InvokeEvent(HOGEventNames.OnAutoCookFood, foodIndex); // starts the loading bar and timer of cooking
-
-                StartCoroutine(StartAutoCooking(cookingTime, profit, foodIndex));
-            }
+            InvokeEvent(HOGEventNames.OnAutoCookFood, foodIndex); // starts the loading bar and timer of cooking
         }
-
-        public void AutoCookFoodAfterOffline(int foodIndex)
-        {
-            foodData = foodManager.GetFoodData(foodIndex);
-
-            if (!foodManager.IsAutoFoodOnCooldown(foodIndex))
-            {
-                return;
-            }
-
-            int offlineTime = Manager.TimerManager.GetLastOfflineTimeSeconds();
-            float cookingTime = foodData.CookingTime * BAKER_TIME_MULTIPLIER;
-
-            float timeLeftToCook = cookingTime - (offlineTime % cookingTime + cookingTime) % cookingTime;
-
-            int profit = foodData.Profit * foodData.CookFoodTimes;
-
-            foodManager.SetAutoFoodOnCooldown(foodIndex, true);
-
-            InvokeEvent(HOGEventNames.OnAutoCookOnResume, foodIndex); // starts the loading bar and timer of cooking with the time left
-
-            StartCoroutine(StartAutoCooking(timeLeftToCook, profit, foodIndex));
-        }
-
-        private IEnumerator StartAutoCooking(float cookingTime, int profit, int foodIndex)
-        {
-            int index = foodIndex; // created a local copy of the foodIndex variable so courotines won't get mixed up
-            foodData = foodManager.GetFoodData(index);
-            yield return new WaitForSeconds(cookingTime);
-
-            playerMoney.UpdateCurrency(profit);
-            foodManager.SetAutoFoodOnCooldown(index, false);
-
-            InvokeEvent(HOGEventNames.MoneyToastOnAutoCook, index);
-
-            AutoCookFood(index); // Go on the loop
-        }
-
     }
 }

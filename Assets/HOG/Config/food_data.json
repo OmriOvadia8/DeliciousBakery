@@ -12,7 +12,9 @@
       "IsFoodLocked": true,
       "UnlockCost": 0,
       "IsOnCooldown": false,
-      "RemainingCookingTime": 1
+      "RemainingCookingTime": 1,
+      "BakerCookingTime": 1,
+      "RemainingBakerCookingTime": 1
     },
     {
       "Index": 1,
@@ -26,7 +28,9 @@
       "IsFoodLocked": true,
       "UnlockCost": 150,
       "IsOnCooldown": false,
-      "RemainingCookingTime": 15
+      "RemainingCookingTime": 15,
+      "BakerCookingTime": 60,
+      "RemainingBakerCookingTime": 60
     },
     {
       "Index": 2,
@@ -40,7 +44,9 @@
       "IsFoodLocked": true,
       "UnlockCost": 400,
       "IsOnCooldown": false,
-      "RemainingCookingTime": 333
+      "RemainingCookingTime": 333,
+      "BakerCookingTime": 500,
+      "RemainingBakerCookingTime": 500
     },
     {
       "Index": 3,
@@ -54,7 +60,9 @@
       "IsFoodLocked": true,
       "UnlockCost": 750,
       "IsOnCooldown": false,
-      "RemainingCookingTime": 4
+      "RemainingCookingTime": 4,
+      "BakerCookingTime": 10,
+      "RemainingBakerCookingTime": 10
     },
     {
       "Index": 4,
@@ -68,7 +76,9 @@
       "IsFoodLocked": true,
       "UnlockCost": 1100,
       "IsOnCooldown": false,
-      "RemainingCookingTime": 4
+      "RemainingCookingTime": 4,
+      "BakerCookingTime": 16,
+      "RemainingBakerCookingTime": 16
     },
     {
       "Index": 5,
@@ -82,7 +92,9 @@
       "IsFoodLocked": true,
       "UnlockCost": 1500,
       "IsOnCooldown": false,
-      "RemainingCookingTime": 5
+      "RemainingCookingTime": 5,
+      "BakerCookingTime": 174,
+      "RemainingBakerCookingTime": 174
     },
     {
       "Index": 6,
@@ -96,7 +108,9 @@
       "IsFoodLocked": true,
       "UnlockCost": 3000,
       "IsOnCooldown": false,
-      "RemainingCookingTime": 7
+      "RemainingCookingTime": 7,
+      "BakerCookingTime": 12,
+      "RemainingBakerCookingTime": 12
     },
     {
       "Index": 7,
@@ -110,7 +124,9 @@
       "IsFoodLocked": true,
       "UnlockCost": 4500,
       "IsOnCooldown": false,
-      "RemainingCookingTime": 10
+      "RemainingCookingTime": 10,
+      "BakerCookingTime": 12,
+      "RemainingBakerCookingTime": 12
     },
     {
       "Index": 8,
@@ -124,7 +140,9 @@
       "IsFoodLocked": true,
       "UnlockCost": 7000,
       "IsOnCooldown": false,
-      "RemainingCookingTime": 10
+      "RemainingCookingTime": 10,
+      "BakerCookingTime": 12,
+      "RemainingBakerCookingTime": 12
     },
     {
       "Index": 9,
@@ -138,7 +156,9 @@
       "IsFoodLocked": true,
       "UnlockCost": 10000,
       "IsOnCooldown": false,
-      "RemainingCookingTime": 15
+      "RemainingCookingTime": 15,
+      "BakerCookingTime": 12,
+      "RemainingBakerCookingTime": 12
     }
   ]
 }

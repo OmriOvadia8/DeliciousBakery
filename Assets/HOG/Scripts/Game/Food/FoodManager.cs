@@ -1,5 +1,4 @@
 using Core;
-using System;
 using System.Linq;
 using UnityEngine;
 
@@ -54,11 +53,6 @@ namespace Game
                 {
                     LockedFoodBars[i].SetActive(false);
                     LockedBakersBars[i].SetActive(false);
-                }
-
-                if (foodData.IsIdleFood == true)
-                {
-                    foodData.IsAutoOnCooldown = true;
                 }
             }
         }
@@ -177,70 +171,5 @@ namespace Game
             HOGManager.Instance.SaveManager.Save(foods);
         }
 
-        public bool IsFoodOnCooldown(int foodID)
-        {
-            var foodData = GetFoodData(foodID);
-
-            if (foodData == null)
-            {
-                return false;
-            }
-
-            return foodData.IsOnCooldown;
-        }
-
-        public void SetFoodOnCooldown(int foodID, bool value)
-        {
-            if (foods != null)
-            {
-                FoodData foodData = GetFoodData(foodID);
-
-                if (foodData != null)
-                {
-                    foodData.IsOnCooldown = value;
-                }
-                else
-                {
-                    Debug.LogError("Invalid food ID: " + foodID);
-                }
-            }
-            else
-            {
-                Debug.LogError("Food data not loaded");
-            }
-        }
-
-        public bool IsAutoFoodOnCooldown(int foodID)
-        {
-            var foodData = GetFoodData(foodID);
-
-            if (foodData == null)
-            {
-                return false;
-            }
-
-            return foodData.IsAutoOnCooldown;
-        }
-
-        public void SetAutoFoodOnCooldown(int foodID, bool value)
-        {
-            if (foods != null)
-            {
-                FoodData foodData = GetFoodData(foodID);
-
-                if (foodData != null)
-                {
-                    foodData.IsAutoOnCooldown = value;
-                }
-                else
-                {
-                    Debug.LogError("Invalid food ID: " + foodID);
-                }
-            }
-            else
-            {
-                Debug.LogError("Food data not loaded");
-            }
-        }
     }
 }
