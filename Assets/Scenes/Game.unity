@@ -986,7 +986,7 @@ GameObject:
   - component: {fileID: 68174595}
   - component: {fileID: 68174596}
   m_Layer: 0
-  m_Name: MoneyManager
+  m_Name: CurrencyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6405,37 +6405,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1588827603130948454, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
   m_PrefabInstance: {fileID: 682689297}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &433130114
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 433130115}
-  m_Layer: 0
-  m_Name: ScoreManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &433130115
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433130114}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -308.06708, y: -831.83435, z: 18.016953}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 938380542}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &437320452
 GameObject:
   m_ObjectHideFlags: 0
@@ -11253,7 +11222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &827254815
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13457,7 +13426,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 68174595}
-  - {fileID: 433130115}
   m_Father: {fileID: 1120818653}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18819,8 +18787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6b7becdac7fec4e95908425af20a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodManager: {fileID: 1432630589}
-  playerMoney: {fileID: 68174596}
+  currencyManager: {fileID: 68174596}
 --- !u!114 &1332144756 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 45031781346865465, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
@@ -20299,7 +20266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79764c0389ac907449c847cedb92898f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyHolder: {fileID: 68174596}
+  currencyManager: {fileID: 68174596}
   cookingManager: {fileID: 1330954666}
   uiManager: {fileID: 1686217519}
   LockedFoodBars:
@@ -23813,7 +23780,7 @@ MonoBehaviour:
   SpendMoneyComponent: {fileID: 6681014376655726399, guid: be990fa58eb59d44cb37034f3973ad9e, type: 3}
   moneyToastPosition: {fileID: 350408837}
   foodManager: {fileID: 1432630589}
-  moneyHolder: {fileID: 68174596}
+  currencyManager: {fileID: 68174596}
   cookingManager: {fileID: 1330954666}
   cookFoodButtons:
   - {fileID: 1588827602272172233}
