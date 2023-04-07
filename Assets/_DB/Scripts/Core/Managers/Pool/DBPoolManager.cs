@@ -76,7 +76,6 @@ namespace DB_Core
             return null;
         }
 
-
         public void ReturnPoolable(DBPoolable poolable)
         {
             if (Pools.TryGetValue(poolable.poolName, out DBPool pool))

@@ -108,7 +108,7 @@ namespace DB_Game
         {
             if (foods == null)
             {
-                Debug.LogError("Food data not loaded");
+                DBDebug.LogException("Food data not loaded");
                 return;
             }
 
@@ -116,7 +116,7 @@ namespace DB_Game
 
             if (foodData == null)
             {
-                Debug.LogError("Invalid food ID: " + foodID);
+                DBDebug.LogException("Invalid food ID: " + foodID);
                 return;
             }
 
@@ -137,7 +137,7 @@ namespace DB_Game
                 DBManager.Instance.SaveManager.Save(foods); // Saving the current food data list stats
             }
 
-            Debug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel);
+            DBDebug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel);
         }
 
         public void UnlockOrUpgradeIdleFood(int foodIndex)
@@ -147,22 +147,17 @@ namespace DB_Game
             if (DBGameLogic.Instance.ScoreManager.TryUseScore(ScoreTags.GameCurrency, foodData.HireCost))
             {
                 InvokeEvent(DBEventNames.OnHireMoneySpentToast, foodIndex);
-
                 foodData.IsIdleFood = true;
-
                 cookingManager.AutoCookFood(foodIndex);
-
                 foodData.HireCost = (int)(foodData.HireCost * BAKER_COST_INCREASE);
-
                 if (foodData.BakersCount % 3 == 0) // check if baker count is a multiple of 3
                 {
                     foodData.CookFoodTimes++;
                 }
-
                 foodData.BakersCount++;
-
                 InvokeEvent(DBEventNames.OnHired, foodIndex);
             }
+
             else
             {
                 DBDebug.LogException("Failed to unlock/update idle");
@@ -170,6 +165,5 @@ namespace DB_Game
 
             DBManager.Instance.SaveManager.Save(foods);
         }
-
     }
 }

@@ -14,6 +14,16 @@ namespace DB_Game
             LoadCurrency();
         }
 
+        private void OnEnable()
+        {
+            AddListener(DBEventNames.CurrencyUpdateUI, UpdateCurrencyAfterScoreChange);
+        }
+
+        private void OnDisable()
+        {
+            AddListener(DBEventNames.CurrencyUpdateUI, UpdateCurrencyAfterScoreChange);
+        }
+
         public void UpdateCurrency(int foodProfit)
         {
             GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, foodProfit);
@@ -35,6 +45,11 @@ namespace DB_Game
             {
                 currencySaveData = data ?? new CurrencySaveData(0);
             });
+        }
+
+        private void UpdateCurrencyAfterScoreChange(object obj)
+        {
+            UpdateCurrency(startingCurrency);
         }
 
         [Serializable]

@@ -12,7 +12,6 @@ namespace DB_Core
         protected void RemoveListener(DBEventNames eventName, Action<object> onGameStart) => Manager.EventsManager.RemoveListener(eventName, onGameStart);
         protected void InvokeEvent(DBEventNames eventName, object obj) => Manager.EventsManager.InvokeEvent(eventName, obj);
 
-
         public Coroutine WaitForSeconds(float time, Action onComplete)
         {
             return StartCoroutine(WaitForSecondsCoroutine(time, onComplete));

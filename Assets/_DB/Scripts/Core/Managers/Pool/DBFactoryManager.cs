@@ -7,6 +7,12 @@ namespace DB_Core
 {
     public class DBFactoryManager
     {
+        public void CreateAsync<T>(string name, Vector3 pos, Action<T> onCreated) where T : Object
+        {
+            var original = Resources.Load<T>(name);
+            CreateAsync(original, pos, onCreated);
+        }
+
         public void CreateAsync<T>(T origin, Vector3 pos, Action<T> onCreated) where T : Object
         {
             var clone = Object.Instantiate(origin, pos, Quaternion.identity);
@@ -15,7 +21,7 @@ namespace DB_Core
 
         public void MultiCreateAsync<T>(T origin, Vector3 pos, int amount, Action<List<T>> onCreated) where T : Object
         {
-            var createdObjects = new List<T>();
+            List<T> createdObjects = new List<T>();
 
             for (var i = 0; i < amount; i++)
             {

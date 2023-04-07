@@ -99,15 +99,11 @@ namespace DB_Game
 
             for (int i = 0; i < DBFoodManager.FOOD_COUNT; i++)
             {
-                cookingSliderBar[i].value = minValue;
-                float cookingTime = DBFoodManager.GetFoodData(i).CookingTime;
-                cookingTimeText[i].text = TimeSpan.FromSeconds(cookingTime).ToString("mm':'ss"); // set the cooking time in the timer text
+                InitialCookingUI(i, CookingType.ActiveCooking);
 
                 if (DBFoodManager.GetFoodData(i).IsIdleFood == false)
                 {
-                    bakerSliderBar[i].value = minValue;
-                    float bakerCookingTime = DBFoodManager.GetFoodData(i).BakerCookingTime;
-                    bakerTimeText[i].text = TimeSpan.FromSeconds(bakerCookingTime).ToString("mm':'ss"); // set the baking time in the timer text
+                    InitialCookingUI(i, CookingType.BakerCooking);
                 }
 
                 if (DBFoodManager.GetFoodData(i).IsFoodLocked == true)
@@ -172,8 +168,8 @@ namespace DB_Game
             float cookingTime = foodData.CookingTime;
             foodData.IsOnCooldown = true;
             CookFoodButtonCheck();
-            CookingUISetUp(timeLeftToCook, index, cookingTime, cookingSliderBar, cookingTimeText, TimerTweenTypes.ActiveCookingAnim);
-            var countdownTween = CookingTweenTimer(index, timeLeftToCook, TimerTweenTypes.ActiveCookingTimer);
+            CookingUISetUp(timeLeftToCook, index, cookingTime, cookingSliderBar, cookingTimeText, CookingTweenTypes.ActiveCookingAnim);
+            var countdownTween = CookingTweenTimer(index, timeLeftToCook, CookingTweenTypes.ActiveCookingTimer);
             CookingUITweenOnUpdate(index, timeLeftToCook, countdownTween, foodData, remainingCookingTime, cookingTimeText, CookingType.ActiveCooking);
             countdownTween.OnComplete(() => OnTimerComplete(index));
         }
@@ -189,8 +185,8 @@ namespace DB_Game
             {
                 foodData.IsOnCooldown = true;
                 CookFoodButtonCheck();
-                CookingUISetUpAfterPause(foodData, index, cookingTime, timeLeftToCook, TimerTweenTypes.ActiveCookingAnim, cookingSliderBar, cookingTimeText, CookingType.ActiveCooking);
-                var countdownTween = CookingTweenTimer(index, timeLeftToCook, TimerTweenTypes.ActiveCookingTimer);
+                CookingUISetUpAfterPause(foodData, index, cookingTime, timeLeftToCook, CookingTweenTypes.ActiveCookingAnim, cookingSliderBar, cookingTimeText, CookingType.ActiveCooking);
+                var countdownTween = CookingTweenTimer(index, timeLeftToCook, CookingTweenTypes.ActiveCookingTimer);
                 CookingUITweenOnUpdate(index, timeLeftToCook, countdownTween, foodData, remainingCookingTime, cookingTimeText, CookingType.ActiveCooking);
                 countdownTween.OnComplete(() => OnTimerComplete(index));
             }
@@ -218,8 +214,8 @@ namespace DB_Game
             var foodData = DBFoodManager.GetFoodData(index);
             float bakerCookingTime = foodData.BakerCookingTime;
             foodData.IsAutoOnCooldown = true;
-            CookingUISetUp(bakerTimeLeftCooking, index, bakerCookingTime, bakerSliderBar, bakerTimeText, TimerTweenTypes.BakerCookingAnim);
-            var countdownTween = CookingTweenTimer(index, bakerTimeLeftCooking, TimerTweenTypes.BakerCookingTimer);
+            CookingUISetUp(bakerTimeLeftCooking, index, bakerCookingTime, bakerSliderBar, bakerTimeText, CookingTweenTypes.BakerCookingAnim);
+            var countdownTween = CookingTweenTimer(index, bakerTimeLeftCooking, CookingTweenTypes.BakerCookingTimer);
             CookingUITweenOnUpdate(index, bakerTimeLeftCooking, countdownTween, foodData, remainingBakerTime, bakerTimeText, CookingType.BakerCooking);
             countdownTween.OnComplete(() => OnBakerTimerComplete(index));
         }
@@ -250,7 +246,7 @@ namespace DB_Game
                 index,
                 bakerCookingTime,
                 bakerTimeLeftCooking,
-                TimerTweenTypes.BakerCookingAnim,
+                CookingTweenTypes.BakerCookingAnim,
                 bakerSliderBar,
                 bakerTimeText,
                 CookingType.BakerCooking
@@ -258,7 +254,7 @@ namespace DB_Game
             var countdownTween = CookingTweenTimer(
                 index,
                 bakerTimeLeftCooking,
-                TimerTweenTypes.BakerCookingTimer
+                CookingTweenTypes.BakerCookingTimer
             );
             int previousTime = (int)bakerTimeLeftCooking[index];
             CookingUITweenOnUpdate(
@@ -289,10 +285,7 @@ namespace DB_Game
 
             else
             {
-                for (int i = 0; i < DBFoodManager.FOOD_COUNT; i++)
-                {
-                    KillAllCookingTweens(i);
-                }
+                KillAllCookingTweens();
             }
         }
         #endregion
@@ -416,15 +409,35 @@ namespace DB_Game
             }
         }
 
-        private void KillAllCookingTweens(int i)
+        private void InitialCookingUI(int i, CookingType cookingType)
         {
-            DOTween.Kill(TimerTweenTypes.ActiveCookingAnim + i);
-            DOTween.Kill(TimerTweenTypes.ActiveCookingTimer + i);
-            DOTween.Kill(TimerTweenTypes.BakerCookingTimer + i);
-            DOTween.Kill(TimerTweenTypes.BakerCookingAnim + i);
+            switch (cookingType)
+            {
+                case CookingType.ActiveCooking:
+                    cookingSliderBar[i].value = minValue;
+                    cookingTimeText[i].text = TimeSpan.FromSeconds(DBFoodManager.GetFoodData(i).CookingTime).ToString("mm':'ss");
+                    break;
+                case CookingType.BakerCooking:
+                    bakerSliderBar[i].value = minValue;
+                    bakerTimeText[i].text = TimeSpan.FromSeconds(DBFoodManager.GetFoodData(i).BakerCookingTime).ToString("mm':'ss");
+                    break;
+                default:
+                    throw new ArgumentException("Invalid CookingType value");
+            }
         }
 
-        private Tween CookingTweenTimer(int index, float[] timeLeft, TimerTweenTypes tweenType)
+        private void KillAllCookingTweens()
+        {
+            for (int i = 0; i < DBFoodManager.FOOD_COUNT; i++)
+            {
+                DOTween.Kill(CookingTweenTypes.ActiveCookingAnim + i);
+                DOTween.Kill(CookingTweenTypes.ActiveCookingTimer + i);
+                DOTween.Kill(CookingTweenTypes.BakerCookingTimer + i);
+                DOTween.Kill(CookingTweenTypes.BakerCookingAnim + i);
+            }
+        }
+
+        private Tween CookingTweenTimer(int index, float[] timeLeft, CookingTweenTypes tweenType)
         {
             return
             DOTween.To(() => timeLeft[index], x => timeLeft[index] = x, minValue, timeLeft[index]).SetEase(Ease.Linear).SetId(tweenType + index);
@@ -461,7 +474,7 @@ namespace DB_Game
             DBManager.Instance.SaveManager.Save(DBFoodManager.foods);
         }
 
-        private void CookingUISetUp(float[] timeLeft, int index, float cookingTime, Slider[] cookingSlider, TMP_Text[] timeText, TimerTweenTypes tweenType)
+        private void CookingUISetUp(float[] timeLeft, int index, float cookingTime, Slider[] cookingSlider, TMP_Text[] timeText, CookingTweenTypes tweenType)
         {
             timeLeft[index] = cookingTime;
             timeText[index].text = timeLeft[index].ToString("mm':'ss");
@@ -474,7 +487,7 @@ namespace DB_Game
         int index,
         float cookingTime,
         float[] timeLeft,
-        TimerTweenTypes tweenType,
+        CookingTweenTypes tweenType,
         Slider[] cookingSlider,
         TMP_Text[] timeText,
         CookingType cookingType)
@@ -584,7 +597,7 @@ namespace DB_Game
         }
     }
 
-    public enum TimerTweenTypes
+    public enum CookingTweenTypes
     {
         ActiveCookingAnim,
         ActiveCookingTimer,

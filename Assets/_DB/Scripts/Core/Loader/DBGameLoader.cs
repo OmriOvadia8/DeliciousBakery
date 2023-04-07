@@ -23,8 +23,18 @@ namespace DB_Core
                 {
                     SceneManager.LoadScene(1);
                     Manager.AnalyticsManager.ReportEvent(DBEventType.app_loaded);
-                    Destroy(gameObject);
+                    ShowMessage();
                 });
+            });
+        }
+
+        private void ShowMessage()
+        {
+            WaitForFrame(() =>
+            {
+                Manager.PopupManager.AddPopupToQueue(DBPopupData.WelcomeBackMessage);
+
+                Destroy(gameObject);
             });
         }
     }

@@ -18,6 +18,7 @@ namespace DB_Core
         public DBMonoManager MonoManager;
         public DBInAppPurchase PurchaseManager;
         public DBAdsManager AdsManager;
+        public DBPopupManager PopupManager;
 
         public Action onInitAction;
 
@@ -86,6 +87,8 @@ namespace DB_Core
             PurchaseManager = new DBInAppPurchase();
 
             AdsManager = new DBAdsManager();
+
+            PopupManager = new DBPopupManager();
 
             ConfigManager = new DBConfigManager(delegate
             {

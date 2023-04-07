@@ -10,15 +10,30 @@ namespace DB_Core
         {
             monoBehaviour.WaitForFrame(() =>
             {
-                var animationTime = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+                //var animationTime = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
 
-                monoBehaviour.WaitForSeconds(animationTime, delegate
+                //monoBehaviour.WaitForSeconds(animationTime, delegate
+                //{
+                //    onComplete?.Invoke();
+                //});
+
+                var clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+                if (clipInfo.Length > 0)
+                {
+                    var animationTime = clipInfo[0].clip.length;
+                    monoBehaviour.WaitForSeconds(animationTime, delegate
+                    {
+                        onComplete?.Invoke();
+                    });
+                }
+                else
                 {
                     onComplete?.Invoke();
-                });
+                }
+
             });
         }
-
+         
         public static int HoursToSeconds(this int hours)
         {
             return hours * 60 * 60;
@@ -43,5 +58,6 @@ namespace DB_Core
         {
             return string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
         }
+
     }
 }

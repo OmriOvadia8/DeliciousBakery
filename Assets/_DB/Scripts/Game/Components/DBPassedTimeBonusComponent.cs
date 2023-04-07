@@ -6,8 +6,6 @@ namespace DB_Game
 {
     public class DBPassedTimeBonusComponent : DBLogicMonoBehaviour
     {
-        [SerializeField] DBCurrencyManager playerCurrency;
-        [SerializeField] DBFoodManager foodManager;
         [SerializeField] private int rewardPerSecond = 300;
         [SerializeField] int baseMaxReward = 1500;
         [SerializeField] private TMP_Text rewardText;
@@ -18,7 +16,7 @@ namespace DB_Game
         private int[] returnFoodBonus;
 
         private int totalFoodBonus = 0;
-        private int totalReturnBonus = 0;
+        public int totalReturnBonus = 0;
 
         private float initialXPos;
 
@@ -47,16 +45,17 @@ namespace DB_Game
             OpenOfflineRewardWindow((int)timePassed);
         }
 
-        private void GivePassiveBonusAccordingToTimePassed()
+        public void GivePassiveBonusAccordingToTimePassed()
         {
             GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, totalReturnBonus);
-            playerCurrency.UpdateCurrency(playerCurrency.startingCurrency);
+            InvokeEvent(DBEventNames.CurrencyUpdateUI, null);
         }
 
         public void GiveDoubleBonusAccordingToTimePassed()
         {
             GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, totalReturnBonus);
-            playerCurrency.UpdateCurrency(playerCurrency.startingCurrency);
+            WatchAd();
+            InvokeEvent(DBEventNames.CurrencyUpdateUI, null);
         }
 
         private void OpenOfflineRewardWindow(int timePassed)
@@ -69,18 +68,16 @@ namespace DB_Game
 
             if (totalReturnBonus > 1000)
             {
-                this.gameObject.SetActive(true);
-
                 GivePassiveBonusAccordingToTimePassed();
             }
 
             else
             {
-                HideWindow();
+                return;
             }
-        }
+}
 
-        private int PassedTimeFoodRewardCalc(int timePassed)
+        public int PassedTimeFoodRewardCalc(int timePassed)
         {
             totalFoodBonus = 0;
             totalReturnBonus = 0;
@@ -104,9 +101,9 @@ namespace DB_Game
             return totalFoodBonus + (timePassed / rewardPerSecond); // extra reward mainly for beginners to get easier start (barely noticeable later on)
         }
 
-        public void HideWindow()
+        public void WatchAd()
         {
-            this.gameObject.SetActive(false);
+            DBManager.Instance.AdsManager.ShowAd(null);
         }
     }
 }
