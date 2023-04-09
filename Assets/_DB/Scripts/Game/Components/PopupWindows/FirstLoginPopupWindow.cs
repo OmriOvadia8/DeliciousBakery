@@ -16,6 +16,12 @@ namespace DB_Game
             anim.WaitForAnimationComplete(this, () => base.Init(popupData));
         }
 
+        protected override void OnClosePopup()
+        {
+            Manager.PopupManager.AddPopupToQueue(DBPopupData.StorePopupData);
+            base.OnClosePopup();
+        }
+
         protected override void OnOpenPopup()
         {
             base.OnOpenPopup();

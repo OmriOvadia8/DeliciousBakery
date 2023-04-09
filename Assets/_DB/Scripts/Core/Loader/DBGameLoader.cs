@@ -36,7 +36,7 @@ namespace DB_Core
             {
                 if(offlineTime == 0)
                 {
-                    Manager.PopupManager.AddPopupToQueue(DBPopupData.NoProfitWelcome);
+                    Manager.PopupManager.AddPopupToQueue(DBPopupData.FirstLoginMessage);
                 }
 
                 else

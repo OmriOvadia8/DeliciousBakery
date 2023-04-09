@@ -12,8 +12,8 @@ namespace DB_Game
         [SerializeField]
         private TMP_Text messageText;
 
-        [SerializeField]
-        private TMP_Text buttonText;
+        //[SerializeField]
+        //private TMP_Text buttonText;
 
         private static readonly int Open = Animator.StringToHash("Open");
 
@@ -22,19 +22,25 @@ namespace DB_Game
             anim.SetTrigger(Open);
             anim.WaitForAnimationComplete(this, () => base.Init(popupData));
         }
+        
+        protected override void OnClosePopup()
+        {
+            Manager.PopupManager.AddPopupToQueue(DBPopupData.StorePopupData);
+            base.OnClosePopup();
+        }
 
         protected override void OnOpenPopup()
         {
             if(PauseCurrencyManager.PassedTimeFoodRewardCalc(Manager.TimerManager.GetLastOfflineTimeSeconds()) > 0)
             {
                 messageText.SetText(popupData.MessageContent);
-                buttonText.SetText(popupData.ButtonContent);
+               // buttonText.SetText(popupData.ButtonContent);
             }
 
             else
             {
                 messageText.SetText(popupData.MessageNoProfitContent);
-                buttonText.SetText(popupData.ButtonNoProfitContent);
+              //  buttonText.SetText(popupData.ButtonNoProfitContent);
             }
             
             base.OnOpenPopup();

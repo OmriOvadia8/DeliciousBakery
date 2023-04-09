@@ -107,15 +107,14 @@ namespace DB_Core
 
         public static DBPopupData WelcomeBackMessage = new()
         {
-            Priority = 3,
+            Priority = 0,
             PopupType = PopupTypes.WelcomeBackMessage,
 
             MessageContent = "Welcome Back!\r\nYour bakers worked tirelessly while \r\nyou were away. \r\nHere's a reward for their hard work!",
-            ButtonContent = "Claim 2X",
+           // ButtonContent = "Claim 2X",
 
-            MessageNoProfitContent = " No profit today!",
-            ButtonNoProfitContent = "Got it!"
-
+            MessageNoProfitContent = "Welcome Back! \r\nNo profits earned while away.\r\nHire bakers to make money \r\nwhile offline!",
+          //  ButtonNoProfitContent = "Got it!"
         };
 
         public static DBPopupData UpgradePopupData = new()
@@ -126,13 +125,13 @@ namespace DB_Core
 
         public static DBPopupData StorePopupData = new()
         {
-            Priority = 2,
+            Priority = 10,
             PopupType = PopupTypes.Store
         };
 
-        public static DBPopupData NoProfitWelcome = new()
+        public static DBPopupData FirstLoginMessage = new()
         {
-            Priority = 10,
+            Priority = 0,
             PopupType = PopupTypes.NoProfitWelcome
         };
 

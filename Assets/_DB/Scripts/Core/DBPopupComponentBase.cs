@@ -27,13 +27,18 @@ namespace DB_Core
             {
                 OnClosePopup();
             }
-        }
 
+            else
+            {
+                DBDebug.LogException("closepopup execption");
+            }
+        }
 
         protected virtual void OnClosePopup()
         {
             if (popupData == null)
             {
+                DBDebug.LogException("Onclosepopup execption");
                 return;
             }
 

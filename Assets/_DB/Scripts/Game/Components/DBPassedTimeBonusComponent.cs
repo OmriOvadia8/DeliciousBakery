@@ -1,6 +1,7 @@
 using DB_Core;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace DB_Game
 {
@@ -9,6 +10,8 @@ namespace DB_Game
         [SerializeField] private TMP_Text rewardText;
         [SerializeField] private float xOffsetPerDigit = 10f;
         [SerializeField] private RectTransform coinRectTransform;
+        [SerializeField] Button gotItButton;
+        [SerializeField] Button claimButton;
 
         private int totalReturnBonus = 0;
 
@@ -24,6 +27,17 @@ namespace DB_Game
             OpenOfflineRewardWindow(Manager.TimerManager.GetLastOfflineTimeSeconds());
 
             Manager.EventsManager.AddListener(DBEventNames.OfflineTimeRefreshed, OnRefreshedTime);
+
+            if(totalReturnBonus == 0)
+            {
+                gotItButton.gameObject.SetActive(true);
+                claimButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                gotItButton.gameObject.SetActive(false);
+                claimButton.gameObject.SetActive(true);
+            }
         }
 
         private void OnDestroy()
