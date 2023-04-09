@@ -30,9 +30,19 @@ namespace DB_Core
 
         private void ShowMessage()
         {
+            int offlineTime = Manager.TimerManager.GetLastOfflineTimeSeconds();
+
             WaitForFrame(() =>
             {
-                Manager.PopupManager.AddPopupToQueue(DBPopupData.WelcomeBackMessage);
+                if(offlineTime == 0)
+                {
+                    Manager.PopupManager.AddPopupToQueue(DBPopupData.NoProfitWelcome);
+                }
+
+                else
+                {
+                    Manager.PopupManager.AddPopupToQueue(DBPopupData.WelcomeBackMessage);
+                }
 
                 Destroy(gameObject);
             });

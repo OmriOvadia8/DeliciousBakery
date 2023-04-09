@@ -23,11 +23,20 @@ namespace DB_Core
 
         public virtual void ClosePopup()
         {
-            OnClosePopup();
+            if (popupData != null)
+            {
+                OnClosePopup();
+            }
         }
+
 
         protected virtual void OnClosePopup()
         {
+            if (popupData == null)
+            {
+                return;
+            }
+
             var data = new Dictionary<DBDataKeys, object>();
             data.Add(DBDataKeys.popup_type, popupData.PopupType.ToString());
             Manager.AnalyticsManager.ReportEvent(DBEventType.popup_close, data);

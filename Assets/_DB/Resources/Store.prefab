@@ -197,7 +197,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2630793040706453838}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DB_Core.DBPopupComponentBase, Core
         m_MethodName: ClosePopup
         m_Mode: 1
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Claim x2
+  m_text: Buy Now!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 341e685ec206ad0498552d2a4d6a245f, type: 2}
   m_sharedMaterial: {fileID: 8309912418977583134, guid: 341e685ec206ad0498552d2a4d6a245f, type: 2}
@@ -947,7 +947,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2672678040539564395}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DB_Game.DBPassedTimeBonusComponent, Game
         m_MethodName: GiveDoubleBonusAccordingToTimePassed
         m_Mode: 1
@@ -959,7 +959,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2630793040706453838}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DB_Core.DBPopupComponentBase, Core
         m_MethodName: ClosePopup
         m_Mode: 1
@@ -980,11 +980,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2672678040539564372}
-  - component: {fileID: 2672678040539564395}
   - component: {fileID: -8043766205650962037}
-  - component: {fileID: 2630793040706453838}
+  - component: {fileID: 206788096802522138}
   m_Layer: 5
-  m_Name: WelcomeBackMessage
+  m_Name: Store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1011,21 +1010,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2672678040539564395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2672678040539564373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0305bac6d9cc2ae4e8aaecbf16c2000e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rewardText: {fileID: 2672678039601147834}
-  xOffsetPerDigit: 10
-  coinRectTransform: {fileID: 2672678039629611128}
 --- !u!95 &-8043766205650962037
 Animator:
   serializedVersion: 5
@@ -1046,7 +1030,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &2630793040706453838
+--- !u!114 &206788096802522138
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1055,12 +1039,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2672678040539564373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d229c637c4fba94cb1a49b7a764e371, type: 3}
+  m_Script: {fileID: 11500000, guid: 0620a83c1374e5547a8e46a92bb30c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: -8043766205650962037}
-  messageText: {fileID: 2672678040591450049}
-  buttonText: {fileID: 2672678039435834398}
 --- !u!1 &2672678040568900718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,8 +1186,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Welcome Back!\nYour bakers worked tirelessly while \nyou were away. \nHere's
-    a reward for their hard work!"
+  m_text: Whateverrrr
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5d9befe22dfa970418b9aa15dbc9f4ba, type: 2}
   m_sharedMaterial: {fileID: -7769912929738174819, guid: 5d9befe22dfa970418b9aa15dbc9f4ba, type: 2}

@@ -1,15 +1,12 @@
-using TMPro;
 using UnityEngine;
+using DB_Core;
 
-namespace DB_Core
+namespace DB_Game
 {
-    public class PopupWindowTest : DBPopupComponentBase
+    public class StorePopupWindow : DBPopupComponentBase
     {
         [SerializeField]
         private Animator anim;
-
-        [SerializeField]
-        private TMP_Text message;
 
         private static readonly int Open = Animator.StringToHash("Open");
 
@@ -21,7 +18,6 @@ namespace DB_Core
 
         protected override void OnOpenPopup()
         {
-            message.SetText((string)popupData.GenericData);
             base.OnOpenPopup();
         }
     }

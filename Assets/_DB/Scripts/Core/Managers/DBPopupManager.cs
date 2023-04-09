@@ -3,7 +3,6 @@ using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using System.Linq;
-using System.Security.Claims;
 
 namespace DB_Core
 {
@@ -78,6 +77,18 @@ namespace DB_Core
             dbPopupComponentBase.gameObject.SetActive(false);
             TryShowNextPopup();
         }
+
+        public void ClosePopup()
+        {
+            if (cachedPopups.Count > 0)
+            {
+                var lastPopup = cachedPopups.Values.LastOrDefault(popup => popup.gameObject.activeSelf);
+                if (lastPopup != null)
+                {
+                    lastPopup.ClosePopup();
+                }
+            }
+        }
     }
 
     public class DBPopupData
@@ -88,13 +99,23 @@ namespace DB_Core
         public Action OnPopupOpen;
         public Action<DBPopupComponentBase> OnPopupClose;
 
-        public object GenericData;
+        public string MessageContent;
+        public string ButtonContent;
+
+        public string MessageNoProfitContent;
+        public string ButtonNoProfitContent;
 
         public static DBPopupData WelcomeBackMessage = new()
         {
-            Priority = 0,
+            Priority = 3,
             PopupType = PopupTypes.WelcomeBackMessage,
-            GenericData = "Claim 2X"
+
+            MessageContent = "Welcome Back!\r\nYour bakers worked tirelessly while \r\nyou were away. \r\nHere's a reward for their hard work!",
+            ButtonContent = "Claim 2X",
+
+            MessageNoProfitContent = " No profit today!",
+            ButtonNoProfitContent = "Got it!"
+
         };
 
         public static DBPopupData UpgradePopupData = new()
@@ -105,9 +126,16 @@ namespace DB_Core
 
         public static DBPopupData StorePopupData = new()
         {
-            Priority = 0,
+            Priority = 2,
             PopupType = PopupTypes.Store
         };
+
+        public static DBPopupData NoProfitWelcome = new()
+        {
+            Priority = 10,
+            PopupType = PopupTypes.NoProfitWelcome
+        };
+
     }
 
     public enum PopupTypes
@@ -115,6 +143,6 @@ namespace DB_Core
         WelcomeBackMessage,
         Store,
         UpgradePopupMenu,
-        DoubleProfit
+        NoProfitWelcome
     }
 }
