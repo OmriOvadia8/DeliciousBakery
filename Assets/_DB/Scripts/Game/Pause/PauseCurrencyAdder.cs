@@ -19,7 +19,7 @@ namespace DB_Game
         private void OnPausedEarning(object timePassed)
         {
             pausedReward = 0;
-            pausedReward = PauseCurrencyManager.PassedTimeFoodRewardCalc((int)timePassed);
+            pausedReward = DBPauseCurrencyManager.PassedTimeFoodRewardCalc((int)timePassed);
 
             GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, pausedReward);
             Manager.EventsManager.InvokeEvent(DBEventNames.CurrencyUpdateUI, null);

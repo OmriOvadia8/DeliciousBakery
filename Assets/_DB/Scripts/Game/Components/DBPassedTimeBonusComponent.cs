@@ -68,7 +68,7 @@ namespace DB_Game
 
         private void OpenOfflineRewardWindow(int timePassed)
         {
-            totalReturnBonus = PauseCurrencyManager.PassedTimeFoodRewardCalc(timePassed);
+            totalReturnBonus = DBPauseCurrencyManager.PassedTimeFoodRewardCalc(timePassed);
 
             rewardText.text = totalReturnBonus.ToString();
             float xPos = initialXPos - (totalReturnBonus.ToString().Length - 1) * xOffsetPerDigit;

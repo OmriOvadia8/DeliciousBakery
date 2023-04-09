@@ -1,6 +1,7 @@
 using UnityEngine;
 using DB_Core;
 using TMPro;
+using UnityEngine.UI;
 
 namespace DB_Game
 {
@@ -31,7 +32,7 @@ namespace DB_Game
 
         protected override void OnOpenPopup()
         {
-            if(PauseCurrencyManager.PassedTimeFoodRewardCalc(Manager.TimerManager.GetLastOfflineTimeSeconds()) > 0)
+            if(DBPauseCurrencyManager.PassedTimeFoodRewardCalc(Manager.TimerManager.GetLastOfflineTimeSeconds()) > 0)
             {
                 messageText.SetText(popupData.MessageContent);
                // buttonText.SetText(popupData.ButtonContent);

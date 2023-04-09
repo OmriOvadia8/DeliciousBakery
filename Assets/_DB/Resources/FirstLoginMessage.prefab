@@ -644,7 +644,7 @@ GameObject:
   - component: {fileID: -8043766205650962037}
   - component: {fileID: 8332336265207577233}
   m_Layer: 5
-  m_Name: NoProfitWelcome
+  m_Name: FirstLoginMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

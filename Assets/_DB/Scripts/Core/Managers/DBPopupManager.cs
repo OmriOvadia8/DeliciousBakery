@@ -100,14 +100,14 @@ namespace DB_Core
         public Action<DBPopupComponentBase> OnPopupClose;
 
         public string MessageContent;
-        public string ButtonContent;
+       // public string ButtonContent;
 
         public string MessageNoProfitContent;
-        public string ButtonNoProfitContent;
+        //public string ButtonNoProfitContent;
 
         public static DBPopupData WelcomeBackMessage = new()
         {
-            Priority = 0,
+            Priority = 10,
             PopupType = PopupTypes.WelcomeBackMessage,
 
             MessageContent = "Welcome Back!\r\nYour bakers worked tirelessly while \r\nyou were away. \r\nHere's a reward for their hard work!",
@@ -125,16 +125,15 @@ namespace DB_Core
 
         public static DBPopupData StorePopupData = new()
         {
-            Priority = 10,
+            Priority = 1,
             PopupType = PopupTypes.Store
         };
 
         public static DBPopupData FirstLoginMessage = new()
         {
-            Priority = 0,
-            PopupType = PopupTypes.NoProfitWelcome
+            Priority = 10,
+            PopupType = PopupTypes.FirstLoginMessage
         };
-
     }
 
     public enum PopupTypes
@@ -142,6 +141,6 @@ namespace DB_Core
         WelcomeBackMessage,
         Store,
         UpgradePopupMenu,
-        NoProfitWelcome
+        FirstLoginMessage
     }
 }
