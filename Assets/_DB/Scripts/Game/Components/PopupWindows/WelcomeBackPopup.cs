@@ -26,7 +26,7 @@ namespace DB_Game
         
         protected override void OnClosePopup()
         {
-            Manager.PopupManager.AddPopupToQueue(DBPopupData.StorePopupData);
+            //Manager.PopupManager.AddPopupToQueue(DBPopupData.StorePopupData);
             base.OnClosePopup();
         }
 

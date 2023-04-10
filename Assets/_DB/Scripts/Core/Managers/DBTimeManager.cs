@@ -187,5 +187,4 @@ namespace DB_Core
         DailyBonus,
         ExtraBonus
     }
-
 }
