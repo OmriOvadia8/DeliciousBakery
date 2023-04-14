@@ -9,8 +9,8 @@ namespace DB_Game
 {
     public class UIManager : DBLogicMonoBehaviour
     {
-        private readonly float minValue = 0f;
-        private readonly float maxValue = 1f;
+        private readonly int minValue = 0;
+        private readonly int maxValue = 1;
         private readonly int moneyTextToastAmount = 25;
 
         private int offlineTime;
@@ -418,11 +418,13 @@ namespace DB_Game
             {
                 case CookingType.ActiveCooking:
                     cookingSliderBar[i].value = minValue;
-                    cookingTimeText[i].text = TimeSpan.FromSeconds(DBFoodManager.GetFoodData(i).CookingTime).ToString("mm':'ss");
+                    //cookingTimeText[i].text = TimeSpan.FromSeconds(DBFoodManager.GetFoodData(i).CookingTime).ToString("mm':'ss");
+                    cookingTimeText[i].text = DBExtension.GetFormattedTimeSpan((int)(DBFoodManager.GetFoodData(i).CookingTime));
                     break;
                 case CookingType.BakerCooking:
                     bakerSliderBar[i].value = minValue;
-                    bakerTimeText[i].text = TimeSpan.FromSeconds(DBFoodManager.GetFoodData(i).BakerCookingTime).ToString("mm':'ss");
+                    //bakerTimeText[i].text = TimeSpan.FromSeconds(DBFoodManager.GetFoodData(i).BakerCookingTime).ToString("mm':'ss");
+                    bakerTimeText[i].text = DBExtension.GetFormattedTimeSpan((int)(DBFoodManager.GetFoodData(i).BakerCookingTime));
                     break;
                 default:
                     throw new ArgumentException("Invalid CookingType value");
@@ -455,7 +457,8 @@ namespace DB_Game
 
         private void ResetActiveCookingUI(FoodData foodData, int index, Slider[] cookingSlider, TMP_Text[] timeText)
         {
-            timeText[index].text = TimeSpan.FromSeconds(foodData.CookingTime).ToString("mm':'ss");
+            //timeText[index].text = TimeSpan.FromSeconds(foodData.CookingTime).ToString("mm':'ss");
+            timeText[index].text = DBExtension.GetFormattedTimeSpan((int)foodData.CookingTime);
             foodData.IsOnCooldown = false;
             cookingSlider[index].DOValue(cookingSlider[index].minValue, minValue).SetEase(Ease.Linear);
             foodData.RemainingCookingTime = foodData.CookingTime;
@@ -470,7 +473,8 @@ namespace DB_Game
             int profit = foodData.Profit * DoubleProfitComponent.doubleProfitMultiplier * foodData.CookFoodTimes + (foodData.CookFoodTimes == 0 ? foodData.Profit : 0);
             currencyManager.UpdateCurrency(profit);
             foodData.IsAutoOnCooldown = false;
-            bakerTimeText[index].text = TimeSpan.FromSeconds(foodData.BakerCookingTime).ToString("mm':'ss");
+            //bakerTimeText[index].text = TimeSpan.FromSeconds(foodData.BakerCookingTime).ToString("mm':'ss");
+            bakerTimeText[index].text = DBExtension.GetFormattedTimeSpan((int)foodData.BakerCookingTime);
             InvokeEvent(DBEventNames.MoneyToastOnAutoCook, index);
             cookingManager.AutoCookFood(index);
             BuyButtonsCheck();
@@ -480,7 +484,8 @@ namespace DB_Game
         private void CookingUISetUp(float[] timeLeft, int index, float cookingTime, Slider[] cookingSlider, TMP_Text[] timeText, DBTweenTypes tweenType)
         {
             timeLeft[index] = cookingTime;
-            timeText[index].text = timeLeft[index].ToString("mm':'ss");
+            //timeText[index].text = timeLeft[index].ToString("mm':'ss");
+            timeText[index].text = DBExtension.GetFormattedTimeSpan((int)timeLeft[index]);
             cookingSlider[index].value = cookingSlider[index].minValue;
             cookingSlider[index].DOValue(maxValue, timeLeft[index]).SetEase(Ease.Linear).SetId(tweenType + index);
         }
@@ -507,7 +512,8 @@ namespace DB_Game
                     throw new ArgumentException("Invalid CookingType value");
             }
 
-            timeText[index].text = timeLeft[index].ToString("mm':'ss");
+            //timeText[index].text = timeLeft[index].ToString("mm':'ss");
+            timeText[index].text = DBExtension.GetFormattedTimeSpan((int)timeLeft[index]);
             float fillValue = (cookingTime - timeLeft[index]) / cookingTime;
             cookingSlider[index].value = fillValue;
             cookingSlider[index].DOValue(maxValue, timeLeft[index]).SetEase(Ease.Linear).SetId(tweenType + index);

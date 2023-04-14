@@ -65,7 +65,7 @@ namespace DB_Game
             if (!isDoubleProfitOn)
             {
                 DoubleProfitOn();
-                doubleProfitTimerText.text = TimeSpan.FromSeconds(currentDuration).ToString("mm':'ss");
+                doubleProfitTimerText.text = DBExtension.GetFormattedTimeSpan(currentDuration);
             }
 
             else
@@ -87,7 +87,7 @@ namespace DB_Game
                         doubleProfitSaveData.CurrentDoubleProfitDuration = remainingDuration;
                         SaveDoubleProfit();
                     }
-                    doubleProfitTimerText.text = TimeSpan.FromSeconds(remainingDuration).ToString("mm':'ss");
+                    doubleProfitTimerText.text = DBExtension.GetFormattedTimeSpan(remainingDuration);
                 })
                 .OnComplete(() =>
                 {
@@ -112,7 +112,7 @@ namespace DB_Game
                         doubleProfitSaveData.CurrentDoubleProfitDuration = remainingDuration;
                         SaveDoubleProfit();
                     }
-                    doubleProfitTimerText.text = TimeSpan.FromSeconds(remainingDuration).ToString("mm':'ss");
+                    doubleProfitTimerText.text = DBExtension.GetFormattedTimeSpan(remainingDuration);
                 })
                 .OnComplete(() =>
                 {
@@ -130,7 +130,7 @@ namespace DB_Game
         {
             DBManager.Instance.SaveManager.Load<DoubleProfitData>(delegate (DoubleProfitData data)
             {
-                doubleProfitSaveData = data ?? new DoubleProfitData(false, 1, 5, 0);
+                doubleProfitSaveData = data ?? new DoubleProfitData(false, 1, 300, 0);
             });
         }
 
@@ -143,7 +143,7 @@ namespace DB_Game
 
         private void SetUpDoubleProfitUI()
         {
-            doubleProfitTimerText.text = TimeSpan.FromSeconds(doubleProfitSaveData.DoubleProfitDuration).ToString("mm':'ss");
+            doubleProfitTimerText.text = DBExtension.GetFormattedTimeSpan(doubleProfitSaveData.DoubleProfitDuration);
         }
 
         private int DoubleProfitTimeLeftAfterPause(int currentDuration)
@@ -178,7 +178,7 @@ namespace DB_Game
         private void ContinueDoubleProfitAfterPause()
         {
             int currentTime = DoubleProfitTimeLeftAfterPause(doubleProfitSaveData.CurrentDoubleProfitDuration);
-            doubleProfitTimerText.text = TimeSpan.FromSeconds(currentTime).ToString("mm':'ss");
+            doubleProfitTimerText.text = DBExtension.GetFormattedTimeSpan(currentTime);
             doubleProfitSaveData.CurrentDoubleProfitDuration = currentTime;
             SaveDoubleProfit();
 
@@ -218,7 +218,7 @@ namespace DB_Game
         {
             IsDoubleProfitOn = false;
             DoubleProfitMultiplier = 1;
-            DoubleProfitDuration = 5;
+            DoubleProfitDuration = 300;
         }
     }
 }

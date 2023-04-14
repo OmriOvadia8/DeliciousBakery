@@ -56,12 +56,35 @@ namespace DB_Core
 
         public static string FormatTimeSpan(TimeSpan timeSpan)
         {
-            return string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
+            //return string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
+            string formatString = "";
+            if (timeSpan.TotalHours >= 1)
+            {
+                formatString = @"hh\:mm\:ss";
+            }
+            else
+            {
+                formatString = @"mm\:ss";
+            }
+            return timeSpan.ToString(formatString);
         }
 
         public static void WatchAd()
         {
             DBManager.Instance.AdsManager.ShowAd(null);
+        }
+
+        public static string GetFormattedTimeSpan(int seconds)
+        {
+            TimeSpan timeSpan = TimeSpan.FromSeconds(seconds);
+            if (timeSpan.TotalHours >= 1)
+            {
+                return string.Format("{0}:{1:mm}:{1:ss}", (int)timeSpan.TotalHours, timeSpan);
+            }
+            else
+            {
+                return timeSpan.ToString("mm':'ss");
+            }
         }
 
     }
