@@ -1,8 +1,6 @@
 using DB_Core;
 using System.Collections.Generic;
 using System;
-using UnityEditor;
-using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
 
@@ -27,6 +25,7 @@ namespace DB_Game
                 }
             });
         }
+
         public void SaveFoods()
         {
             DBManager.Instance.SaveManager.Save(this);

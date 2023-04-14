@@ -19,26 +19,28 @@ namespace DB_Game
         public float BakerCookingTime { get; set; }
         public float RemainingBakerCookingTime { get; set; }
         public bool IsAutoOnCooldown { get; set; }
+        public int FoodCookedCount { get; set; }
 
         public FoodData()
         {
         }
 
         public FoodData(int index,
-                 float cookingTime,
-                 int profit,
-                 int upgradeCost,
-                 bool isIdleFood,
-                 int hireCost,
-                 int bakersCount,
-                 int cookFoodTimes,
-                 bool isFoodUnlocked,
-                 int unlockCost,
-                 bool isOnCooldown,
-                 float remainingCookingTime,
-                 float bakerCookingTime,
-                 float remainingBakerCookingTime,
-                 bool isAutoOnCooldown)
+                        float cookingTime,
+                        int profit,
+                        int upgradeCost,
+                        bool isIdleFood,
+                        int hireCost,
+                        int bakersCount,
+                        int cookFoodTimes,
+                        bool isFoodUnlocked,
+                        int unlockCost,
+                        bool isOnCooldown,
+                        float remainingCookingTime,
+                        float bakerCookingTime,
+                        float remainingBakerCookingTime,
+                        bool isAutoOnCooldown,
+                        int foodCookedCount)
 
         {
             Index = index;
@@ -56,6 +58,7 @@ namespace DB_Game
             BakerCookingTime = bakerCookingTime;
             RemainingBakerCookingTime = remainingBakerCookingTime;
             IsAutoOnCooldown = isAutoOnCooldown;
+            FoodCookedCount = foodCookedCount;
         }
     }
 

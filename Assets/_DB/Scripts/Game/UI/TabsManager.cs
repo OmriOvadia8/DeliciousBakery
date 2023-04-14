@@ -4,7 +4,7 @@ using DB_Core;
 
 namespace DB_Game
 {
-    public class TabsManager : MonoBehaviour
+    public class TabsManager : DBLogicMonoBehaviour
     {
         [SerializeField] GameObject[] scrollers;
         [SerializeField] Button[] tabButtons;

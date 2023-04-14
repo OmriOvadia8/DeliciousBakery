@@ -62,7 +62,11 @@ namespace DB_Game
                 ChangeScoreByTagByAmount(scoreTag, -amountToReduce);
             }
 
-            DBManager.Instance.CrashManager.LogBreadcrumb($"User Doesn't have enough coins of type {scoreTag.ToString()}");
+            else
+            {
+                DBManager.Instance.CrashManager.LogBreadcrumb($"User Doesn't have enough coins of type {scoreTag.ToString()}");
+            }
+
             return hasEnough;
         }
     }

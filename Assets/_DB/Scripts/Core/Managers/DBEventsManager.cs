@@ -67,6 +67,9 @@ namespace DB_Core
         OnAutoCookAfterPause,
         CookFoodAfterOffline,
         Letstrythisout,
-        CurrencyUpdateUI
+        CurrencyUpdateUI,
+        OnCompleteCookFood,
+        OnPremCurrencySet,
+        PremCurrencyUpdateUI
     }
 }

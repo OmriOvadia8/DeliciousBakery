@@ -1,4 +1,5 @@
 using DB_Core;
+using UnityEngine;
 
 namespace DB_Game
 {
@@ -24,7 +25,6 @@ namespace DB_Game
             GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, pausedReward);
             Manager.EventsManager.InvokeEvent(DBEventNames.CurrencyUpdateUI, null);
 
-            DBDebug.LogException("Offline pause reward : " + pausedReward);
         }
     }
 }

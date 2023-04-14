@@ -59,5 +59,10 @@ namespace DB_Core
             return string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
         }
 
+        public static void WatchAd()
+        {
+            DBManager.Instance.AdsManager.ShowAd(null);
+        }
+
     }
 }

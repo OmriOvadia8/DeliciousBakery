@@ -7,6 +7,7 @@ namespace DB_Game
     public class DBCurrencyManager : DBLogicMonoBehaviour
     {
         public int startingCurrency = 0;
+        public int startingPremCurrency = 0;
         public CurrencySaveData currencySaveData;
 
         private void Awake()
@@ -17,11 +18,13 @@ namespace DB_Game
         private void OnEnable()
         {
             AddListener(DBEventNames.CurrencyUpdateUI, UpdateCurrencyAfterScoreChange);
+            AddListener(DBEventNames.PremCurrencyUpdateUI, UpdatePremCurrencyAfterScoreChange);
         }
 
         private void OnDisable()
         {
             AddListener(DBEventNames.CurrencyUpdateUI, UpdateCurrencyAfterScoreChange);
+            RemoveListener(DBEventNames.PremCurrencyUpdateUI, UpdatePremCurrencyAfterScoreChange);
         }
 
         public void UpdateCurrency(int foodProfit)
@@ -34,6 +37,27 @@ namespace DB_Game
             }
         }
 
+        private void UpdatePremCurrency(int starIncrease)
+        {
+            GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.PremiumCurrency, starIncrease);
+            if (DBGameLogic.Instance.ScoreManager.TryGetScoreByTag(ScoreTags.PremiumCurrency, ref currencySaveData.PremCurrencyAmount))
+            {
+                InvokeEvent(DBEventNames.OnPremCurrencySet, currencySaveData.PremCurrencyAmount);
+                SaveCurrency();
+            }
+        }
+ 
+        public void TestPrem()
+        {
+            UpdatePremCurrency(1000);
+        }
+
+        public void UsePrem()
+        {
+            DBGameLogic.Instance.ScoreManager.TryUseScore(ScoreTags.PremiumCurrency, 1000);
+            UpdatePremCurrency(0);
+        }
+
         public void SaveCurrency() // saving the current player's currency
         {
             DBManager.Instance.SaveManager.Save(currencySaveData);
@@ -43,7 +67,7 @@ namespace DB_Game
         {
             DBManager.Instance.SaveManager.Load<CurrencySaveData>(delegate (CurrencySaveData data)
             {
-                currencySaveData = data ?? new CurrencySaveData(0);
+                currencySaveData = data ?? new CurrencySaveData(0, 0);
             });
         }
 
@@ -52,14 +76,21 @@ namespace DB_Game
             UpdateCurrency(startingCurrency);
         }
 
+        private void UpdatePremCurrencyAfterScoreChange(object obj)
+        {
+            UpdatePremCurrency(startingPremCurrency);
+        }
+
         [Serializable]
         public class CurrencySaveData : IDBSaveData
         {
             public int CurrencyAmount;
+            public int PremCurrencyAmount;
 
-            public CurrencySaveData(int currencyAmount)
+            public CurrencySaveData(int currencyAmount, int premCurrencyAmount)
             {
                 CurrencyAmount = currencyAmount;
+                PremCurrencyAmount = premCurrencyAmount;
             }
         }
     }

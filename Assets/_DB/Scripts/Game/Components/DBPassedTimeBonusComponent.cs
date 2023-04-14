@@ -62,7 +62,7 @@ namespace DB_Game
 
             if (totalReturnBonus > 0)
             {
-                WatchAd();
+                DBExtension.WatchAd();
             }
         }
 
@@ -76,12 +76,6 @@ namespace DB_Game
 
             GivePassiveBonusAccordingToTimePassed();
 
-            DBDebug.LogException("Offline WINDOW reward : " + totalReturnBonus);
-        }
-
-        public void WatchAd()
-        {
-            DBManager.Instance.AdsManager.ShowAd(null);
         }
     }
 }

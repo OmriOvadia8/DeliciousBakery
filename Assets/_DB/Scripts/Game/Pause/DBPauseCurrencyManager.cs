@@ -1,4 +1,3 @@
-using DB_Core;
 using UnityEngine;
 
 namespace DB_Game
@@ -34,7 +33,7 @@ namespace DB_Game
                 }
             }
 
-            return totalReward;
+            return totalReward * DoubleProfitComponent.doubleProfitMultiplier;
         }
 
     }
