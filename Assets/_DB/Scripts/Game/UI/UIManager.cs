@@ -36,6 +36,11 @@ namespace DB_Game
         [SerializeField] Button[] learnRecipeButtons;
         [SerializeField] CanvasGroup[] cookButtonAnimation;
 
+        [Header("Particles")]
+        [SerializeField] ParticleSystem[] cookFoodParticles;
+        //[SerializeField] ParticleSystem[] upgradeParticles; moved to foodmanager
+        //[SerializeField] ParticleSystem[] hireParticles;moved to foodmanager
+
         [Header("Texts")]
         [SerializeField] TMP_Text moneyText;
         [SerializeField] TMP_Text starText;
@@ -138,6 +143,7 @@ namespace DB_Game
         private void OnUpgradeUpdate(object obj) // update the foods stats text after each upgrade
         {
             int index = (int)obj;
+            //upgradeParticles[index].Play();
             int foodLevel = GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, index).CurrentLevel;
             int foodProfit = DBFoodManager.GetFoodData(index).Profit;
             int upgradeCost =   DBFoodManager.GetFoodData(index).UpgradeCost;
@@ -177,6 +183,7 @@ namespace DB_Game
         private void ActiveCookingUIStart(object obj)
         {
             int index = (int)obj;
+            cookFoodParticles[index].Play();
             var foodData = DBFoodManager.GetFoodData(index);
             float cookingTime = foodData.CookingTime;
             foodData.IsOnCooldown = true;
@@ -589,7 +596,7 @@ namespace DB_Game
         private void MoneyToasting(int moneyAmount, PoolNames poolName)
         {
             var moneyToast = (DBTweenMoneyComponent)Manager.PoolManager.GetPoolable(poolName);
-            Vector3 toastPosition = moneyToastPosition.position + Vector3.up * 3;
+            Vector3 toastPosition = moneyToastPosition.position;
             moneyToast.transform.position = toastPosition;
 
             switch (poolName)

@@ -70,6 +70,8 @@ namespace DB_Core
         CurrencyUpdateUI,
         OnCompleteCookFood,
         OnPremCurrencySet,
-        PremCurrencyUpdateUI
+        PremCurrencyUpdateUI,
+        DeviceAppearAnimation,
+        CheckDeviceAppearance
     }
 }

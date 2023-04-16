@@ -12,6 +12,7 @@ namespace DB_Game
         public static int doubleProfitMultiplier = 1;
         public DoubleProfitData doubleProfitSaveData;
         [SerializeField] TMP_Text doubleProfitTimerText;
+        [SerializeField] GameObject timerBackground;
 
         private void Awake()
         {
@@ -25,6 +26,8 @@ namespace DB_Game
 
         private void Start()
         {
+            timerBackground.SetActive(false);
+
             if (doubleProfitSaveData.IsDoubleProfitOn && Manager.TimerManager.GetLastOfflineTimeSeconds() > 0)
             {
                 ContinueDoubleProfitAfterPause();
@@ -43,6 +46,7 @@ namespace DB_Game
 
         public void DoubleProfitOn()
         {
+            timerBackground.SetActive(true);
             doubleProfitSaveData.TurnOnDoubleProfit();
             SaveDoubleProfit();
             isDoubleProfitOn = true;
@@ -51,6 +55,7 @@ namespace DB_Game
 
         public void DoubleProfitOff()
         {
+            timerBackground.SetActive(false);
             doubleProfitSaveData.TurnOffDoubleProfit();
             SetUpDoubleProfitUI();
             SaveDoubleProfit();
@@ -73,7 +78,7 @@ namespace DB_Game
                 doubleProfitSaveData.CurrentDoubleProfitDuration += currentDuration;
                 currentDuration = doubleProfitSaveData.CurrentDoubleProfitDuration;
                 SaveDoubleProfit();
-            }
+            }    
 
             int remainingDuration = currentDuration;
 

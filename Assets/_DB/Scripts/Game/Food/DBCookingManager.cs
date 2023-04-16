@@ -6,6 +6,7 @@ namespace DB_Game
     public class DBCookingManager : DBLogicMonoBehaviour
     {
         [SerializeField] DBCurrencyManager currencyManager;
+
         private FoodData foodData;
 
         public void CookFood(int foodIndex) // Active cooking by clicking

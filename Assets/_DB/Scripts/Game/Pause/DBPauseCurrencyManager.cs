@@ -4,7 +4,7 @@ namespace DB_Game
 {
     public static class DBPauseCurrencyManager
     {
-        static int baseMaxReward = 10000;
+        static int baseMaxReward = 5000;
 
         static int totalReward = 0;
         static int maxReward = 0;

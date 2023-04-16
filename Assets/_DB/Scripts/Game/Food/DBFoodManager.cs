@@ -1,4 +1,5 @@
 using DB_Core;
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -11,6 +12,9 @@ namespace DB_Game
         [SerializeField] UIManager uiManager;
         [SerializeField] GameObject[] LockedFoodBars;
         [SerializeField] GameObject[] LockedBakersBars;
+        [SerializeField] ParticleSystem[] upgradeParticles;
+        [SerializeField] ParticleSystem[] hireParticles;
+        [SerializeField] ParticleSystem[] learnParticles;
 
         public static FoodDataCollection foods; // fooddatacollection sub class in FoodData.cs (array of foods)
 
@@ -90,10 +94,12 @@ namespace DB_Game
 
             if (DBGameLogic.Instance.ScoreManager.TryUseScore(ScoreTags.GameCurrency, foodData.UnlockCost))
             {
+                learnParticles[foodID].Play();
                 foodData.IsFoodLocked = false;
                 LockedFoodBars[foodID].SetActive(false);
                 LockedBakersBars[foodID].SetActive(false);
 
+                InvokeEvent(DBEventNames.DeviceAppearAnimation, foodID);
                 InvokeEvent(DBEventNames.OnLearnRecipeSpentToast, foodID);
 
                 DBManager.Instance.SaveManager.Save(foods);
@@ -128,7 +134,7 @@ namespace DB_Game
             if (initialLevel < GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel) // checks if the item leveled up and if so increases stats
             {
                 InvokeEvent(DBEventNames.OnUpgradeMoneySpentToast, foodID);
-
+                upgradeParticles[foodID].Play();
                 foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE);
                 foodData.UpgradeCost = (int)(foodData.UpgradeCost * COST_INCREASE);
 
@@ -146,6 +152,7 @@ namespace DB_Game
 
             if (DBGameLogic.Instance.ScoreManager.TryUseScore(ScoreTags.GameCurrency, foodData.HireCost))
             {
+                hireParticles[foodIndex].Play();
                 InvokeEvent(DBEventNames.OnHireMoneySpentToast, foodIndex);
                 foodData.IsIdleFood = true;
                 cookingManager.AutoCookFood(foodIndex);

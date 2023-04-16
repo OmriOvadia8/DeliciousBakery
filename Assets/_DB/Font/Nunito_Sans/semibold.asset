@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: NunitoSans-SemiBold SDF
+  m_Name: semibold
   m_EditorClassIdentifier: 
   hashCode: 1669627939
   material: {fileID: 8180637297357037130}

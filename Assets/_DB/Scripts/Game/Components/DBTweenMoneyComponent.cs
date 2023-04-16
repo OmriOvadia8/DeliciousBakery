@@ -16,7 +16,7 @@ namespace DB_Game
         [SerializeField] private float scaleStart = 0f;
         [SerializeField] private float scaleEnd = 1f;
 
-        [SerializeField] private Ease easeTypeMove = Ease.OutCubic;
+        [SerializeField] private Ease easeTypeMove = Ease.Linear;
         [SerializeField] private AnimationCurve fadeEase;
 
 
