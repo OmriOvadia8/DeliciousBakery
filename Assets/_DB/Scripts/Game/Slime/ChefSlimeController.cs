@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using DB_Core;
 
-public class ChefSlimeController : MonoBehaviour
+namespace DB_Game
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public class ChefSlimeController : DBLogicMonoBehaviour
     {
-        
+
     }
 }

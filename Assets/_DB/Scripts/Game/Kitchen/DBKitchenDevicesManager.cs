@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DB_Core;
 
@@ -7,7 +5,6 @@ namespace DB_Game
 {
     public class DBKitchenDevicesManager : DBLogicMonoBehaviour
     {
-
         [SerializeField] GameObject[] deviceObject;
         [SerializeField] GameObject[] poofObjects;
         [SerializeField] Animator[] poofAnims;
@@ -40,7 +37,7 @@ namespace DB_Game
         private void DeviceAppear(object obj)
         {
             int index = (int)obj;
-            if(index == 8 || index == 9)
+            if(index == 8 || index == 9) // only have 8 devices therefore ignoring index 8 and 9
             {
                 return;
             }

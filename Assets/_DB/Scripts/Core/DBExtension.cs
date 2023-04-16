@@ -56,17 +56,6 @@ namespace DB_Core
 
         public static string FormatTimeSpan(TimeSpan timeSpan)
         {
-            //string formatString = "";
-            //if (timeSpan.TotalHours >= 1)
-            //{
-            //    formatString = @"hh\:mm\:ss";
-            //}
-            //else
-            //{
-            //    formatString = @"mm\:ss";
-            //}
-            //return timeSpan.ToString(formatString);\
-
             string formatString = (timeSpan.TotalHours >= 1) ? @"hh\:mm\:ss" : @"mm\:ss";
             return timeSpan.ToString(formatString);
         }

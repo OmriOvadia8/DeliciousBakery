@@ -41548,80 +41548,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049270256}
   m_CullTransparentMesh: 1
---- !u!1 &1051731257
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1051731258}
-  - component: {fileID: 1051731259}
-  m_Layer: 0
-  m_Name: KitchenManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1051731258
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1051731257}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1718790066}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1051731259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1051731257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e742f87d9e7dd51429202d78d96cc764, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floor1: {fileID: 1455250885}
-  floor2: {fileID: 1637980231}
-  floor3: {fileID: 743451298}
-  stove1: {fileID: 0}
-  stove2: {fileID: 0}
-  stove3: {fileID: 0}
-  blender1: {fileID: 0}
-  blender2: {fileID: 0}
-  blender3: {fileID: 0}
-  mixer1: {fileID: 0}
-  mixer2: {fileID: 0}
-  mixer3: {fileID: 0}
-  coffeeMachine1: {fileID: 0}
-  coffeeMachine2: {fileID: 0}
-  coffeeMachine3: {fileID: 0}
-  cocoaMachine1: {fileID: 0}
-  cocoaMachine2: {fileID: 0}
-  cocoaMachine3: {fileID: 0}
-  iceCreamStand1: {fileID: 0}
-  iceCreamStand2: {fileID: 0}
-  iceCreamStand3: {fileID: 0}
-  firstIceCreamTaste1: {fileID: 0}
-  firstIceCreamTaste2: {fileID: 0}
-  firstIceCreamTaste3: {fileID: 0}
-  secondIceCreamTaste1: {fileID: 0}
-  secondIceCreamTaste2: {fileID: 0}
-  secondIceCreamTaste3: {fileID: 0}
-  thirdIceCreamTaste1: {fileID: 0}
-  thirdIceCreamTaste2: {fileID: 0}
-  thirdIceCreamTaste3: {fileID: 0}
 --- !u!198 &1055336284 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3729184850689572409, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
@@ -43268,7 +43194,6 @@ Transform:
   - {fileID: 208446610}
   - {fileID: 1454606405}
   - {fileID: 1485616545}
-  - {fileID: 1558280061}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -56781,8 +56706,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1120818653}
-  m_RootOrder: 7
+  m_Father: {fileID: 1718790066}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1558726932
 GameObject:
@@ -61836,7 +61761,7 @@ Transform:
   m_Children:
   - {fileID: 1686217518}
   - {fileID: 625420486}
-  - {fileID: 1051731258}
+  - {fileID: 1558280061}
   m_Father: {fileID: 1120818653}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

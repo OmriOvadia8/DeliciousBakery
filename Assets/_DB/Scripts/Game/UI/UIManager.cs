@@ -38,8 +38,6 @@ namespace DB_Game
 
         [Header("Particles")]
         [SerializeField] ParticleSystem[] cookFoodParticles;
-        //[SerializeField] ParticleSystem[] upgradeParticles; moved to foodmanager
-        //[SerializeField] ParticleSystem[] hireParticles;moved to foodmanager
 
         [Header("Texts")]
         [SerializeField] TMP_Text moneyText;
@@ -143,7 +141,6 @@ namespace DB_Game
         private void OnUpgradeUpdate(object obj) // update the foods stats text after each upgrade
         {
             int index = (int)obj;
-            //upgradeParticles[index].Play();
             int foodLevel = GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, index).CurrentLevel;
             int foodProfit = DBFoodManager.GetFoodData(index).Profit;
             int upgradeCost =   DBFoodManager.GetFoodData(index).UpgradeCost;
@@ -180,7 +177,7 @@ namespace DB_Game
         #region Cooking
 
         #region Active Cooking
-        private void ActiveCookingUIStart(object obj)
+        private void ActiveCookingUIStart(object obj) // Starts the tweens of active cooking process
         {
             int index = (int)obj;
             cookFoodParticles[index].Play();
@@ -194,7 +191,7 @@ namespace DB_Game
             countdownTween.OnComplete(() => OnTimerComplete(index));
         }
 
-        private void ActiveCookingUIAfterPause(int index)
+        private void ActiveCookingUIAfterPause(int index) // Starts the tweens of active cooking after the player comes back from pause/offline
         {
             var foodData = DBFoodManager.GetFoodData(index);
             float cookingTime = foodData.CookingTime;
@@ -219,7 +216,7 @@ namespace DB_Game
             BuyButtonsCheck();
         }
 
-        private void OnTimerComplete(int index)
+        private void OnTimerComplete(int index) 
         {
             var foodData = DBFoodManager.GetFoodData(index);
             ResetActiveCookingUI(foodData, index, cookingSliderBar, cookingTimeText);
@@ -228,7 +225,7 @@ namespace DB_Game
         #endregion
 
         #region Idle Baker Cooking
-        private void BakerStartTimer(object obj)
+        private void BakerStartTimer(object obj) // starts tweens of baker cooking process (idle)
         {
             int index = (int)obj;
             var foodData = DBFoodManager.GetFoodData(index);
@@ -240,7 +237,7 @@ namespace DB_Game
             countdownTween.OnComplete(() => OnBakerTimerComplete(index));
         }
 
-        private void BakerCookingTimerAfterPause(int index)
+        private void BakerCookingTimerAfterPause(int index) // starts tweens of baker cooking process after pause/offline (idle)
         {
             var foodData = DBFoodManager.GetFoodData(index);
             float bakerCookingTime = foodData.BakerCookingTime;
@@ -279,14 +276,14 @@ namespace DB_Game
             countdownTween.OnComplete(() => OnBakerTimerComplete(index));
         }
 
-        private void OnBakerTimerComplete(int index)
+        private void OnBakerTimerComplete(int index) 
         {
             var foodData = DBFoodManager.GetFoodData(index);
             BakerCookingCompleteReward(foodData, index);
         }
         #endregion
 
-        private void CookingPauseCheck(object isPaused)
+        private void CookingPauseCheck(object isPaused) 
         {
             if (!(bool)isPaused)
             {
@@ -317,14 +314,14 @@ namespace DB_Game
             BuyButtonsCheck();
         }
 
-        private void SpendUpgradeMoneyTextToast(object obj)
+        private void SpendUpgradeMoneyTextToast(object obj) // toasting cost text after upgrading
         {
             int index = (int)obj;
             int upgradeCost = DBFoodManager.GetFoodData(index).UpgradeCost;
             MoneyToasting(upgradeCost, PoolNames.SpendMoneyToast);
         }
 
-        private void SpendLearnRecipeMoneyTextToast(object obj)
+        private void SpendLearnRecipeMoneyTextToast(object obj) // toasting cost text after learning
         {
             int index = (int)obj;
             int learnCost = DBFoodManager.GetFoodData(index).UnlockCost;
@@ -333,14 +330,14 @@ namespace DB_Game
             UpdateCurrencyAndButtonCheck();
         }
 
-        private void SpendHireMoneyTextToast(object obj)
+        private void SpendHireMoneyTextToast(object obj) // // toasting cost text after hiring
         {
             int index = (int)obj;
             int hireCost = DBFoodManager.GetFoodData(index).HireCost;
             MoneyToasting(hireCost, PoolNames.SpendMoneyToast);
         }
 
-        private void BuyButtonsCheck()
+        private void BuyButtonsCheck() // checks if all buying buttons are interactable if player has enough money
         {
             UpgradeButtonsCheck();
             HireButtonCheck();
@@ -401,7 +398,7 @@ namespace DB_Game
             }
         }
 
-        private void CookFoodButtonCheck()
+        private void CookFoodButtonCheck() // checks if food is already being cooked so player must wait to cook again that food
         {
             for (int i = 0; i < cookFoodButtons.Length; i++)
             {
@@ -419,18 +416,16 @@ namespace DB_Game
             }
         }
 
-        private void InitialCookingUI(int i, CookingType cookingType)
+        private void InitialCookingUI(int i, CookingType cookingType) // Reset food UI
         {
             switch (cookingType)
             {
                 case CookingType.ActiveCooking:
                     cookingSliderBar[i].value = minValue;
-                    //cookingTimeText[i].text = TimeSpan.FromSeconds(DBFoodManager.GetFoodData(i).CookingTime).ToString("mm':'ss");
                     cookingTimeText[i].text = DBExtension.GetFormattedTimeSpan((int)(DBFoodManager.GetFoodData(i).CookingTime));
                     break;
                 case CookingType.BakerCooking:
                     bakerSliderBar[i].value = minValue;
-                    //bakerTimeText[i].text = TimeSpan.FromSeconds(DBFoodManager.GetFoodData(i).BakerCookingTime).ToString("mm':'ss");
                     bakerTimeText[i].text = DBExtension.GetFormattedTimeSpan((int)(DBFoodManager.GetFoodData(i).BakerCookingTime));
                     break;
                 default:
@@ -464,7 +459,6 @@ namespace DB_Game
 
         private void ResetActiveCookingUI(FoodData foodData, int index, Slider[] cookingSlider, TMP_Text[] timeText)
         {
-            //timeText[index].text = TimeSpan.FromSeconds(foodData.CookingTime).ToString("mm':'ss");
             timeText[index].text = DBExtension.GetFormattedTimeSpan((int)foodData.CookingTime);
             foodData.IsOnCooldown = false;
             cookingSlider[index].DOValue(cookingSlider[index].minValue, minValue).SetEase(Ease.Linear);
@@ -480,7 +474,6 @@ namespace DB_Game
             int profit = foodData.Profit * DoubleProfitComponent.doubleProfitMultiplier * foodData.CookFoodTimes + (foodData.CookFoodTimes == 0 ? foodData.Profit : 0);
             currencyManager.UpdateCurrency(profit);
             foodData.IsAutoOnCooldown = false;
-            //bakerTimeText[index].text = TimeSpan.FromSeconds(foodData.BakerCookingTime).ToString("mm':'ss");
             bakerTimeText[index].text = DBExtension.GetFormattedTimeSpan((int)foodData.BakerCookingTime);
             InvokeEvent(DBEventNames.MoneyToastOnAutoCook, index);
             cookingManager.AutoCookFood(index);
@@ -491,7 +484,6 @@ namespace DB_Game
         private void CookingUISetUp(float[] timeLeft, int index, float cookingTime, Slider[] cookingSlider, TMP_Text[] timeText, DBTweenTypes tweenType)
         {
             timeLeft[index] = cookingTime;
-            //timeText[index].text = timeLeft[index].ToString("mm':'ss");
             timeText[index].text = DBExtension.GetFormattedTimeSpan((int)timeLeft[index]);
             cookingSlider[index].value = cookingSlider[index].minValue;
             cookingSlider[index].DOValue(maxValue, timeLeft[index]).SetEase(Ease.Linear).SetId(tweenType + index);
@@ -519,7 +511,6 @@ namespace DB_Game
                     throw new ArgumentException("Invalid CookingType value");
             }
 
-            //timeText[index].text = timeLeft[index].ToString("mm':'ss");
             timeText[index].text = DBExtension.GetFormattedTimeSpan((int)timeLeft[index]);
             float fillValue = (cookingTime - timeLeft[index]) / cookingTime;
             cookingSlider[index].value = fillValue;
