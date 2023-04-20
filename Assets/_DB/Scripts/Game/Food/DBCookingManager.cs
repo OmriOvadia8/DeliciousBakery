@@ -1,41 +1,51 @@
 using DB_Core;
-using UnityEngine;
 
 namespace DB_Game
 {
     public class DBCookingManager : DBLogicMonoBehaviour
     {
-        [SerializeField] DBCurrencyManager currencyManager;
-
-        private FoodData foodData;
-
-        public void CookFood(int foodIndex) // Active cooking by clicking
+        private void OnEnable()
         {
-            foodData = DBFoodManager.GetFoodData(foodIndex);
-
-            if (foodData.IsOnCooldown)
-            {
-                return;
-            }
-
-            foodData.IsOnCooldown = true;
-
-            DBManager.Instance.SaveManager.Save(DBFoodManager.foods);
-
-            InvokeEvent(DBEventNames.OnCookFood, foodIndex); // starts the loading bar and timer of cooking
+           // AddListener(DBEventNames.StartActiveCooking, CookFood);
+           // AddListener(DBEventNames.StartBakerCooking, AutoCookFood);
         }
 
-        public void AutoCookFood(int foodIndex) // Cooking automatically courotine loop after baker unlocked
+        private void OnDisable()
         {
-            foodData = DBFoodManager.GetFoodData(foodIndex);
-
-            if (foodData.IsAutoOnCooldown)
-            {
-                return;
-            }
-            foodData.IsAutoOnCooldown = true;
-
-            InvokeEvent(DBEventNames.OnAutoCookFood, foodIndex); // starts the loading bar and timer of cooking
+            //RemoveListener(DBEventNames.StartActiveCooking, CookFood);
+          //  RemoveListener(DBEventNames.StartBakerCooking, AutoCookFood);
         }
+
+        //public void CookFood(int index) // Active cooking by clicking
+        //{
+        //    //int index = (int)foodIndex;
+            
+        //    var foodData = DBFoodManager.GetFoodData(index);
+
+        //    if (foodData.IsOnCooldown)
+        //    {
+        //        return;
+        //    }
+
+        //    foodData.IsOnCooldown = true;
+
+        //    DBManager.Instance.SaveManager.Save(DBFoodManager.Foods);
+        //    InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
+        //    InvokeEvent(DBEventNames.OnCookFood, index); // starts the loading bar and timer of cooking
+        //}
+
+        //public void AutoCookFood(int index) // Cooking automatically courotine loop after baker unlocked
+        //{
+
+        //    var foodData = DBFoodManager.GetFoodData(index);
+
+        //    if (foodData.IsAutoOnCooldown)
+        //    {
+        //        return;
+        //    }
+        //    foodData.IsAutoOnCooldown = true;
+
+        //    InvokeEvent(DBEventNames.OnAutoCookFood, index); // starts the loading bar and timer of cooking
+        //}
     }
 }

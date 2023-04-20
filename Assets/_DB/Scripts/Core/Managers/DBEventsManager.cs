@@ -72,6 +72,12 @@ namespace DB_Core
         OnPremCurrencySet,
         PremCurrencyUpdateUI,
         DeviceAppearAnimation,
-        CheckDeviceAppearance
+        CheckDeviceAppearance,
+        AddCurrencyUpdate,
+        StartActiveCooking,
+        StartBakerCooking,
+        BuyButtonsCheck,
+        CookButtonAlphaOn,
+        CookButtonAlphaOff
     }
 }

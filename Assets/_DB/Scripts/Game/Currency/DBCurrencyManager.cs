@@ -19,17 +19,20 @@ namespace DB_Game
         {
             AddListener(DBEventNames.CurrencyUpdateUI, UpdateCurrencyAfterScoreChange);
             AddListener(DBEventNames.PremCurrencyUpdateUI, UpdatePremCurrencyAfterScoreChange);
+            AddListener(DBEventNames.AddCurrencyUpdate, UpdateCurrency);
         }
 
         private void OnDisable()
         {
-            AddListener(DBEventNames.CurrencyUpdateUI, UpdateCurrencyAfterScoreChange);
+            RemoveListener(DBEventNames.CurrencyUpdateUI, UpdateCurrencyAfterScoreChange);
             RemoveListener(DBEventNames.PremCurrencyUpdateUI, UpdatePremCurrencyAfterScoreChange);
+            RemoveListener(DBEventNames.AddCurrencyUpdate, UpdateCurrency);
         }
 
-        public void UpdateCurrency(int foodProfit)
+        public void UpdateCurrency(object foodProfit)
         {
-            GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, foodProfit);
+            int profit = (int)foodProfit;
+            GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, profit);
             if (DBGameLogic.Instance.ScoreManager.TryGetScoreByTag(ScoreTags.GameCurrency, ref currencySaveData.CurrencyAmount))
             {
                 InvokeEvent(DBEventNames.OnCurrencySet, currencySaveData.CurrencyAmount);

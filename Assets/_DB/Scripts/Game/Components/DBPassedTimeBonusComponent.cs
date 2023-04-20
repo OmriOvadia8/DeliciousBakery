@@ -45,9 +45,10 @@ namespace DB_Game
             Manager.EventsManager.RemoveListener(DBEventNames.OfflineTimeRefreshed, OnRefreshedTime);
         }
 
-        private void OnRefreshedTime(object timePassed)
+        private void OnRefreshedTime(object timeValue)
         {
-            OpenOfflineRewardWindow((int)timePassed);
+            int timePassed = (int)timeValue;
+            OpenOfflineRewardWindow(timePassed);
         }
 
         public void GivePassiveBonusAccordingToTimePassed()
@@ -75,7 +76,6 @@ namespace DB_Game
             coinRectTransform.anchoredPosition = new Vector2(xPos, coinRectTransform.anchoredPosition.y);
 
             GivePassiveBonusAccordingToTimePassed();
-
         }
     }
 }

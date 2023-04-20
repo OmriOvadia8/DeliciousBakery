@@ -2823,10 +2823,14 @@ PrefabInstance:
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1330954666}
+      objectReference: {fileID: 166926203}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CookFood
+      value: ActiveCookFood
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DB_Game.DBActiveCookingUIController, Game
       objectReference: {fileID: 0}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -4573,6 +4577,129 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121161327}
   m_CullTransparentMesh: 1
+--- !u!1 &122308648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 122308649}
+  - component: {fileID: 122308650}
+  m_Layer: 0
+  m_Name: ButtonsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &122308649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122308648}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1120818653}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &122308650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122308648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b09f2517145e34a93cb05e3558e076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+    CookFoodButtons:
+    - {fileID: 1588827602272172233}
+    - {fileID: 912520940}
+    - {fileID: 1951558342}
+    - {fileID: 1885365662}
+    - {fileID: 1205488904}
+    - {fileID: 221899073}
+    - {fileID: 1833774947}
+    - {fileID: 719564224}
+    - {fileID: 441060466}
+    - {fileID: 929759188}
+    UpgradeButtons:
+    - {fileID: 6902252160960550552}
+    - {fileID: 2105014747}
+    - {fileID: 899852044}
+    - {fileID: 1836065872}
+    - {fileID: 1478794507}
+    - {fileID: 1328608678}
+    - {fileID: 355050598}
+    - {fileID: 2088317708}
+    - {fileID: 643185337}
+    - {fileID: 1526736997}
+    HireButtons:
+    - {fileID: 8626929458048587136}
+    - {fileID: 896016888}
+    - {fileID: 2050835568}
+    - {fileID: 206298032}
+    - {fileID: 17485396}
+    - {fileID: 870291651}
+    - {fileID: 1136047819}
+    - {fileID: 167831960}
+    - {fileID: 1126055735}
+    - {fileID: 1897932581}
+    LearnRecipeButtons:
+    - {fileID: 45031781501221833}
+    - {fileID: 99024607}
+    - {fileID: 1141054164}
+    - {fileID: 371069222}
+    - {fileID: 1332144756}
+    - {fileID: 1613890258}
+    - {fileID: 288915191}
+    - {fileID: 217758573}
+    - {fileID: 1010984767}
+    - {fileID: 1285213616}
+    CookButtonAnimation:
+    - {fileID: 8724860206833805897}
+    - {fileID: 1652431743}
+    - {fileID: 1390451670}
+    - {fileID: 1325763978}
+    - {fileID: 1909824941}
+    - {fileID: 1496241703}
+    - {fileID: 142782283}
+    - {fileID: 1454184557}
+    - {fileID: 2068476732}
+    - {fileID: 1133661689}
+  currencyManager: {fileID: 68174596}
+  coinIcons:
+  - {fileID: 965963984}
+  - {fileID: 1509721365}
+  - {fileID: 2076265213}
+  - {fileID: 968467036}
+  - {fileID: 1271331827}
+  - {fileID: 195376991}
+  - {fileID: 1087397203}
+  - {fileID: 1592102154}
+  - {fileID: 1389518390}
+  - {fileID: 630842554}
+  learnRecipeText:
+  - {fileID: 699470079071981344}
+  - {fileID: 1623352133}
+  - {fileID: 1868154581}
+  - {fileID: 1783214248}
+  - {fileID: 1009209327}
+  - {fileID: 1068893255}
+  - {fileID: 954711642}
+  - {fileID: 821872787}
+  - {fileID: 837176976}
+  - {fileID: 1713111173}
 --- !u!1 &125590977
 GameObject:
   m_ObjectHideFlags: 0
@@ -6085,6 +6212,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 165848640}
   m_CullTransparentMesh: 1
+--- !u!1 &166926201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 166926202}
+  - component: {fileID: 166926203}
+  m_Layer: 0
+  m_Name: CookingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &166926202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166926201}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1120818653}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &166926203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166926201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9587b6f333ad84485895d25baedc55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cookingUIManager: {fileID: 598245716}
+  buttonsManager: {fileID: 122308650}
 --- !u!1001 &167831956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6445,10 +6618,14 @@ PrefabInstance:
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1330954666}
+      objectReference: {fileID: 166926203}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CookFood
+      value: ActiveCookFood
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DB_Game.DBActiveCookingUIController, Game
       objectReference: {fileID: 0}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -7223,10 +7400,14 @@ PrefabInstance:
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1330954666}
+      objectReference: {fileID: 166926203}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CookFood
+      value: ActiveCookFood
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DB_Game.DBActiveCookingUIController, Game
       objectReference: {fileID: 0}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -23895,10 +24076,14 @@ PrefabInstance:
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1330954666}
+      objectReference: {fileID: 166926203}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CookFood
+      value: ActiveCookFood
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DB_Game.DBActiveCookingUIController, Game
       objectReference: {fileID: 0}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -24458,10 +24643,14 @@ PrefabInstance:
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1330954666}
+      objectReference: {fileID: 166926203}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CookFood
+      value: ActiveCookFood
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DB_Game.DBActiveCookingUIController, Game
       objectReference: {fileID: 0}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -24622,14 +24811,14 @@ PrefabInstance:
     - target: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1432630589}
+      objectReference: {fileID: 166926203}
     - target: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpgradeFood
+      value: ActiveCookFood
       objectReference: {fileID: 0}
     - target: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Game.FoodManager, Game
+      value: DB_Game.DBActiveCookingUIController, Game
       objectReference: {fileID: 0}
     - target: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -26097,10 +26286,14 @@ PrefabInstance:
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1330954666}
+      objectReference: {fileID: 166926203}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CookFood
+      value: ActiveCookFood
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DB_Game.DBActiveCookingUIController, Game
       objectReference: {fileID: 0}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -28666,6 +28859,162 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597409641}
   m_CullTransparentMesh: 1
+--- !u!1 &598245714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 598245715}
+  - component: {fileID: 598245716}
+  m_Layer: 0
+  m_Name: CookingUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &598245715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598245714}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1120818653}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &598245716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598245714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a331b69f3dcb7943a7427f63e6c4fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiActiveCookingComponents:
+    TimeLeftToActiveCook:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    CookingTimerText:
+    - {fileID: 1588827601471636343}
+    - {fileID: 338219180}
+    - {fileID: 660492060}
+    - {fileID: 1764614947}
+    - {fileID: 1391866686}
+    - {fileID: 682689302}
+    - {fileID: 509836348}
+    - {fileID: 183907032}
+    - {fileID: 461121579}
+    - {fileID: 170367079}
+    CookingSliderBar:
+    - {fileID: 1087547316069998290}
+    - {fileID: 446521288}
+    - {fileID: 94691878}
+    - {fileID: 1764614946}
+    - {fileID: 1391866685}
+    - {fileID: 682689301}
+    - {fileID: 509836347}
+    - {fileID: 183907031}
+    - {fileID: 461121578}
+    - {fileID: 170367078}
+    CookButtonAnimation:
+    - {fileID: 8724860206833805897}
+    - {fileID: 1652431743}
+    - {fileID: 1390451670}
+    - {fileID: 1325763978}
+    - {fileID: 1909824941}
+    - {fileID: 1496241703}
+    - {fileID: 142782283}
+    - {fileID: 1454184557}
+    - {fileID: 2068476732}
+    - {fileID: 1133661689}
+    ActiveCookingParticles:
+    - {fileID: 313218363}
+    - {fileID: 2145089528}
+    - {fileID: 1794966203}
+    - {fileID: 1955612518}
+    - {fileID: 597016903}
+    - {fileID: 1525283671}
+    - {fileID: 989102310}
+    - {fileID: 1158830082}
+    - {fileID: 1323760762}
+    - {fileID: 1925781173}
+  uiBakerComponents:
+    BakerTimeLeftCooking:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    BakerTimerText:
+    - {fileID: 8626929458048587138}
+    - {fileID: 813339974}
+    - {fileID: 1653355729}
+    - {fileID: 349493426}
+    - {fileID: 995746473}
+    - {fileID: 556687711}
+    - {fileID: 183474217}
+    - {fileID: 1679386479}
+    - {fileID: 1534603945}
+    - {fileID: 1371495097}
+    BakersCountText:
+    - {fileID: 8626929458048587134}
+    - {fileID: 896016886}
+    - {fileID: 2050835566}
+    - {fileID: 206298030}
+    - {fileID: 17485394}
+    - {fileID: 870291649}
+    - {fileID: 1136047817}
+    - {fileID: 167831958}
+    - {fileID: 1126055733}
+    - {fileID: 1897932579}
+    CookFoodTimesText:
+    - {fileID: 8626929458048587137}
+    - {fileID: 896016889}
+    - {fileID: 2050835569}
+    - {fileID: 206298033}
+    - {fileID: 17485397}
+    - {fileID: 870291652}
+    - {fileID: 1136047820}
+    - {fileID: 167831961}
+    - {fileID: 1126055736}
+    - {fileID: 1897932582}
+    BakerSliderBar:
+    - {fileID: 8626929458048587139}
+    - {fileID: 813339975}
+    - {fileID: 1653355730}
+    - {fileID: 349493427}
+    - {fileID: 995746474}
+    - {fileID: 556687712}
+    - {fileID: 183474218}
+    - {fileID: 1679386480}
+    - {fileID: 1534603946}
+    - {fileID: 1371495098}
 --- !u!1 &607804966
 GameObject:
   m_ObjectHideFlags: 0
@@ -31279,10 +31628,14 @@ PrefabInstance:
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1330954666}
+      objectReference: {fileID: 166926203}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CookFood
+      value: ActiveCookFood
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DB_Game.DBActiveCookingUIController, Game
       objectReference: {fileID: 0}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -31443,14 +31796,14 @@ PrefabInstance:
     - target: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1432630589}
+      objectReference: {fileID: 166926203}
     - target: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpgradeFood
+      value: ActiveCookFood
       objectReference: {fileID: 0}
     - target: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Game.FoodManager, Game
+      value: DB_Game.DBActiveCookingUIController, Game
       objectReference: {fileID: 0}
     - target: {fileID: 6902252160839982184, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -43194,6 +43547,10 @@ Transform:
   - {fileID: 208446610}
   - {fileID: 1454606405}
   - {fileID: 1485616545}
+  - {fileID: 1953081220}
+  - {fileID: 166926202}
+  - {fileID: 598245715}
+  - {fileID: 122308649}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49663,7 +50020,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6b7becdac7fec4e95908425af20a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currencyManager: {fileID: 68174596}
 --- !u!1 &1331512119
 GameObject:
   m_ObjectHideFlags: 0
@@ -51520,10 +51876,14 @@ PrefabInstance:
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1330954666}
+      objectReference: {fileID: 166926203}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CookFood
+      value: ActiveCookFood
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DB_Game.DBActiveCookingUIController, Game
       objectReference: {fileID: 0}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -52575,9 +52935,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79764c0389ac907449c847cedb92898f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currencyManager: {fileID: 68174596}
   cookingManager: {fileID: 1330954666}
-  uiManager: {fileID: 1686217519}
+  bakerUIController: {fileID: 1953081221}
   LockedFoodBars:
   - {fileID: 7045266716326481663}
   - {fileID: 813862588}
@@ -52633,7 +52992,6 @@ MonoBehaviour:
   - {fileID: 1174031061}
   - {fileID: 1055336284}
   - {fileID: 966263118}
-  isIdleUnlocked: 00000000000000000000
 --- !u!4 &1432630590
 Transform:
   m_ObjectHideFlags: 0
@@ -60845,220 +61203,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyToastPosition: {fileID: 350408837}
-  foodManager: {fileID: 1432630589}
+  cookingUIManager: {fileID: 598245716}
   currencyManager: {fileID: 68174596}
-  cookingManager: {fileID: 1330954666}
-  cookFoodButtons:
-  - {fileID: 1588827602272172233}
-  - {fileID: 912520940}
-  - {fileID: 1951558342}
-  - {fileID: 1885365662}
-  - {fileID: 1205488904}
-  - {fileID: 221899073}
-  - {fileID: 1833774947}
-  - {fileID: 719564224}
-  - {fileID: 441060466}
-  - {fileID: 929759188}
-  upgradeButtons:
-  - {fileID: 6902252160960550552}
-  - {fileID: 2105014747}
-  - {fileID: 899852044}
-  - {fileID: 1836065872}
-  - {fileID: 1478794507}
-  - {fileID: 1328608678}
-  - {fileID: 355050598}
-  - {fileID: 2088317708}
-  - {fileID: 643185337}
-  - {fileID: 1526736997}
-  hireButtons:
-  - {fileID: 8626929458048587136}
-  - {fileID: 896016888}
-  - {fileID: 2050835568}
-  - {fileID: 206298032}
-  - {fileID: 17485396}
-  - {fileID: 870291651}
-  - {fileID: 1136047819}
-  - {fileID: 167831960}
-  - {fileID: 1126055735}
-  - {fileID: 1897932581}
-  learnRecipeButtons:
-  - {fileID: 45031781501221833}
-  - {fileID: 99024607}
-  - {fileID: 1141054164}
-  - {fileID: 371069222}
-  - {fileID: 1332144756}
-  - {fileID: 1613890258}
-  - {fileID: 288915191}
-  - {fileID: 217758573}
-  - {fileID: 1010984767}
-  - {fileID: 1285213616}
-  cookButtonAnimation:
-  - {fileID: 8724860206833805897}
-  - {fileID: 1652431743}
-  - {fileID: 1390451670}
-  - {fileID: 1325763978}
-  - {fileID: 1909824941}
-  - {fileID: 1496241703}
-  - {fileID: 142782283}
-  - {fileID: 1454184557}
-  - {fileID: 2068476732}
-  - {fileID: 1133661689}
-  cookFoodParticles:
-  - {fileID: 313218363}
-  - {fileID: 2145089528}
-  - {fileID: 1794966203}
-  - {fileID: 1955612518}
-  - {fileID: 597016903}
-  - {fileID: 1525283671}
-  - {fileID: 989102310}
-  - {fileID: 1158830082}
-  - {fileID: 1323760762}
-  - {fileID: 1925781173}
-  moneyText: {fileID: 350408838}
-  starText: {fileID: 111549064}
-  foodProfitText:
-  - {fileID: 2180726918987541333}
-  - {fileID: 446521286}
-  - {fileID: 94691876}
-  - {fileID: 1764614945}
-  - {fileID: 1391866684}
-  - {fileID: 682689300}
-  - {fileID: 509836346}
-  - {fileID: 183907030}
-  - {fileID: 461121577}
-  - {fileID: 170367077}
-  foodLevelText:
-  - {fileID: 3840852604772862532}
-  - {fileID: 446521285}
-  - {fileID: 94691875}
-  - {fileID: 1764614944}
-  - {fileID: 1391866683}
-  - {fileID: 682689299}
-  - {fileID: 509836345}
-  - {fileID: 183907029}
-  - {fileID: 461121576}
-  - {fileID: 170367076}
-  upgradeCostText:
-  - {fileID: 1309061383329210782}
-  - {fileID: 446521287}
-  - {fileID: 94691877}
-  - {fileID: 1764614943}
-  - {fileID: 1391866682}
-  - {fileID: 682689298}
-  - {fileID: 509836344}
-  - {fileID: 183907028}
-  - {fileID: 461121575}
-  - {fileID: 170367075}
-  cookFoodTimesText:
-  - {fileID: 8626929458048587137}
-  - {fileID: 896016889}
-  - {fileID: 2050835569}
-  - {fileID: 206298033}
-  - {fileID: 17485397}
-  - {fileID: 870291652}
-  - {fileID: 1136047820}
-  - {fileID: 167831961}
-  - {fileID: 1126055736}
-  - {fileID: 1897932582}
-  hireCostText:
-  - {fileID: 8626929458048587135}
-  - {fileID: 896016887}
-  - {fileID: 2050835567}
-  - {fileID: 206298031}
-  - {fileID: 17485395}
-  - {fileID: 870291650}
-  - {fileID: 1136047818}
-  - {fileID: 167831959}
-  - {fileID: 1126055734}
-  - {fileID: 1897932580}
-  bakersCountText:
-  - {fileID: 8626929458048587134}
-  - {fileID: 896016886}
-  - {fileID: 2050835566}
-  - {fileID: 206298030}
-  - {fileID: 17485394}
-  - {fileID: 870291649}
-  - {fileID: 1136047817}
-  - {fileID: 167831958}
-  - {fileID: 1126055733}
-  - {fileID: 1897932579}
-  learnRecipeCostText:
-  - {fileID: 1457020187}
-  - {fileID: 749021268}
-  - {fileID: 2051633873}
-  - {fileID: 1526784186}
-  - {fileID: 1723851364}
-  - {fileID: 1690802012}
-  - {fileID: 484946410}
-  - {fileID: 740434949}
-  - {fileID: 984030115}
-  - {fileID: 995695960}
-  learnRecipeText:
-  - {fileID: 699470079071981344}
-  - {fileID: 1623352133}
-  - {fileID: 1868154581}
-  - {fileID: 1783214248}
-  - {fileID: 1009209327}
-  - {fileID: 1068893255}
-  - {fileID: 954711642}
-  - {fileID: 821872787}
-  - {fileID: 837176976}
-  - {fileID: 1713111173}
-  coinIcons:
-  - {fileID: 965963984}
-  - {fileID: 1509721365}
-  - {fileID: 2076265213}
-  - {fileID: 968467036}
-  - {fileID: 1271331827}
-  - {fileID: 195376991}
-  - {fileID: 1087397203}
-  - {fileID: 1592102154}
-  - {fileID: 1389518390}
-  - {fileID: 630842554}
-  cookingSliderBar:
-  - {fileID: 1087547316069998290}
-  - {fileID: 446521288}
-  - {fileID: 94691878}
-  - {fileID: 1764614946}
-  - {fileID: 1391866685}
-  - {fileID: 682689301}
-  - {fileID: 509836347}
-  - {fileID: 183907031}
-  - {fileID: 461121578}
-  - {fileID: 170367078}
-  cookingTimeText:
-  - {fileID: 1588827601471636343}
-  - {fileID: 338219180}
-  - {fileID: 660492060}
-  - {fileID: 1764614947}
-  - {fileID: 1391866686}
-  - {fileID: 682689302}
-  - {fileID: 509836348}
-  - {fileID: 183907032}
-  - {fileID: 461121579}
-  - {fileID: 170367079}
-  bakerSliderBar:
-  - {fileID: 8626929458048587139}
-  - {fileID: 813339975}
-  - {fileID: 1653355730}
-  - {fileID: 349493427}
-  - {fileID: 995746474}
-  - {fileID: 556687712}
-  - {fileID: 183474218}
-  - {fileID: 1679386480}
-  - {fileID: 1534603946}
-  - {fileID: 1371495098}
-  bakerTimeText:
-  - {fileID: 8626929458048587138}
-  - {fileID: 813339974}
-  - {fileID: 1653355729}
-  - {fileID: 349493426}
-  - {fileID: 995746473}
-  - {fileID: 556687711}
-  - {fileID: 183474217}
-  - {fileID: 1679386479}
-  - {fileID: 1534603945}
-  - {fileID: 1371495097}
+  buttonsManager: {fileID: 122308650}
+  texts:
+    MoneyText: {fileID: 350408838}
+    StarText: {fileID: 111549064}
+    FoodProfitText:
+    - {fileID: 2180726918987541333}
+    - {fileID: 446521286}
+    - {fileID: 94691876}
+    - {fileID: 1764614945}
+    - {fileID: 1391866684}
+    - {fileID: 682689300}
+    - {fileID: 509836346}
+    - {fileID: 183907030}
+    - {fileID: 461121577}
+    - {fileID: 170367077}
+    FoodLevelText:
+    - {fileID: 3840852604772862532}
+    - {fileID: 446521285}
+    - {fileID: 94691875}
+    - {fileID: 1764614944}
+    - {fileID: 1391866683}
+    - {fileID: 682689299}
+    - {fileID: 509836345}
+    - {fileID: 183907029}
+    - {fileID: 461121576}
+    - {fileID: 170367076}
+    UpgradeCostText:
+    - {fileID: 1309061383329210782}
+    - {fileID: 446521287}
+    - {fileID: 94691877}
+    - {fileID: 1764614943}
+    - {fileID: 1391866682}
+    - {fileID: 682689298}
+    - {fileID: 509836344}
+    - {fileID: 183907028}
+    - {fileID: 461121575}
+    - {fileID: 170367075}
+    HireCostText:
+    - {fileID: 8626929458048587135}
+    - {fileID: 896016887}
+    - {fileID: 2050835567}
+    - {fileID: 206298031}
+    - {fileID: 17485395}
+    - {fileID: 870291650}
+    - {fileID: 1136047818}
+    - {fileID: 167831959}
+    - {fileID: 1126055734}
+    - {fileID: 1897932580}
+    LearnRecipeCostText:
+    - {fileID: 1457020187}
+    - {fileID: 749021268}
+    - {fileID: 2051633873}
+    - {fileID: 1526784186}
+    - {fileID: 1723851364}
+    - {fileID: 1690802012}
+    - {fileID: 484946410}
+    - {fileID: 740434949}
+    - {fileID: 984030115}
+    - {fileID: 995695960}
 --- !u!1 &1688980380
 GameObject:
   m_ObjectHideFlags: 0
@@ -63055,10 +63260,14 @@ PrefabInstance:
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1330954666}
+      objectReference: {fileID: 166926203}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CookFood
+      value: ActiveCookFood
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DB_Game.DBActiveCookingUIController, Game
       objectReference: {fileID: 0}
     - target: {fileID: 1588827602158055993, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -68245,6 +68454,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951877008}
   m_CullTransparentMesh: 1
+--- !u!1 &1953081219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1953081220}
+  - component: {fileID: 1953081221}
+  m_Layer: 0
+  m_Name: BakerManagers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1953081220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953081219}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1120818653}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1953081221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953081219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 793106faac33d1945b35816aafc3faec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cookingUIManager: {fileID: 598245716}
 --- !u!198 &1955612517 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 1348458920676073926, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
@@ -79146,9 +79400,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1330954666}
-        m_TargetAssemblyTypeName: Game.CookingManager, Game
-        m_MethodName: CookFood
+      - m_Target: {fileID: 166926203}
+        m_TargetAssemblyTypeName: DB_Game.DBActiveCookingUIController, Game
+        m_MethodName: ActiveCookFood
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

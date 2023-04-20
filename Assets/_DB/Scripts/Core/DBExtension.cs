@@ -10,13 +10,6 @@ namespace DB_Core
         {
             monoBehaviour.WaitForFrame(() =>
             {
-                //var animationTime = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-
-                //monoBehaviour.WaitForSeconds(animationTime, delegate
-                //{
-                //    onComplete?.Invoke();
-                //});
-
                 var clipInfo = animator.GetCurrentAnimatorClipInfo(0);
                 if (clipInfo.Length > 0)
                 {
@@ -76,6 +69,16 @@ namespace DB_Core
             {
                 return timeSpan.ToString("mm':'ss");
             }
+        }
+
+        public static string ToCurrencyFormat(this int value)
+        {
+            return $"{value:N0}";
+        }
+
+        public static string ToPlainString(this int value)
+        {
+            return value.ToString();
         }
 
     }

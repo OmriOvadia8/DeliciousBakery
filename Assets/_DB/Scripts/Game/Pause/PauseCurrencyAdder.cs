@@ -1,11 +1,10 @@
 using DB_Core;
-using UnityEngine;
 
 namespace DB_Game
 {
     public class PauseCurrencyAdder : DBLogicMonoBehaviour
     {
-        int pausedReward = 0;
+        private int pausedReward;
 
         private void Start()
         {

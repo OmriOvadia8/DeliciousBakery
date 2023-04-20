@@ -7,18 +7,15 @@ namespace DB_Game
 {
     public class DBFoodManager : DBLogicMonoBehaviour
     {
-        [SerializeField] DBCurrencyManager currencyManager;
         [SerializeField] DBCookingManager cookingManager;
-        [SerializeField] UIManager uiManager;
+        [SerializeField] DBBakerUIController bakerUIController;
         [SerializeField] GameObject[] LockedFoodBars;
         [SerializeField] GameObject[] LockedBakersBars;
         [SerializeField] ParticleSystem[] upgradeParticles;
         [SerializeField] ParticleSystem[] hireParticles;
         [SerializeField] ParticleSystem[] learnParticles;
 
-        public static FoodDataCollection foods; // fooddatacollection sub class in FoodData.cs (array of foods)
-
-        public bool[] isIdleUnlocked = new bool[FOOD_COUNT];
+        public static FoodDataCollection Foods; // fooddatacollection sub class in FoodData.cs (array of foods)
 
         public const int FOOD_COUNT = 10; // total food types count in game
         private const float PROFIT_INCREASE = 1.1f; // increasing the food's profit by 10% each upgrade
@@ -33,10 +30,12 @@ namespace DB_Game
             {
                 if (data != null)
                 {
-                    foods = data;
+                    Foods = data;
                 }
                 else // or default if there isnt one
+                {
                     DBManager.Instance.ConfigManager.GetConfigAsync<FoodDataCollection>(FOOD_CONFIG_PATH, OnConfigLoaded);
+                }
             });
         }
 
@@ -53,7 +52,7 @@ namespace DB_Game
                 InvokeEvent(DBEventNames.OnHired, i);
                 InvokeEvent(DBEventNames.OnLearnRecipe, i);
 
-                if (foodData.IsFoodLocked == false) // setting the locked/unlocked saved food on launch
+                if (!foodData.IsFoodLocked) // setting the locked/unlocked saved food on launch
                 {
                     LockedFoodBars[i].SetActive(false);
                     LockedBakersBars[i].SetActive(false);
@@ -63,7 +62,7 @@ namespace DB_Game
 
         private void OnConfigLoaded(FoodDataCollection configData)
         {
-            foods = configData;
+            Foods = configData;
         }
 
         private void AddNewFoodItem(int foodID)
@@ -78,7 +77,7 @@ namespace DB_Game
 
         public static FoodData GetFoodData(int foodID)
         {
-            var foodData = foods?.Foods.FirstOrDefault(fd => fd.Index == foodID);
+            var foodData = Foods?.Foods.FirstOrDefault(fd => fd.Index == foodID);
 
             if (foodData == null)
             {
@@ -102,7 +101,7 @@ namespace DB_Game
                 InvokeEvent(DBEventNames.DeviceAppearAnimation, foodID);
                 InvokeEvent(DBEventNames.OnLearnRecipeSpentToast, foodID);
 
-                DBManager.Instance.SaveManager.Save(foods);
+                DBManager.Instance.SaveManager.Save(Foods);
             }
             else
             {
@@ -112,7 +111,7 @@ namespace DB_Game
 
         public void UpgradeFood(int foodID)
         {
-            if (foods == null)
+            if (Foods == null)
             {
                 DBDebug.LogException("Food data not loaded");
                 return;
@@ -140,7 +139,7 @@ namespace DB_Game
 
                 InvokeEvent(DBEventNames.OnUpgraded, foodID);
 
-                DBManager.Instance.SaveManager.Save(foods); // Saving the current food data list stats
+                DBManager.Instance.SaveManager.Save(Foods); // Saving the current food data list stats
             }
 
             DBDebug.Log(GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel);
@@ -155,7 +154,7 @@ namespace DB_Game
                 hireParticles[foodIndex].Play();
                 InvokeEvent(DBEventNames.OnHireMoneySpentToast, foodIndex);
                 foodData.IsIdleFood = true;
-                cookingManager.AutoCookFood(foodIndex);
+                bakerUIController.AutoCookFood(foodIndex);
                 foodData.HireCost = (int)(foodData.HireCost * BAKER_COST_INCREASE);
                 if (foodData.BakersCount % 3 == 0) // check if baker count is a multiple of 3
                 {
@@ -164,13 +163,12 @@ namespace DB_Game
                 foodData.BakersCount++;
                 InvokeEvent(DBEventNames.OnHired, foodIndex);
             }
-
             else
             {
                 DBDebug.LogException("Failed to unlock/update idle");
             }
 
-            DBManager.Instance.SaveManager.Save(foods);
+            DBManager.Instance.SaveManager.Save(Foods);
         }
     }
 }
