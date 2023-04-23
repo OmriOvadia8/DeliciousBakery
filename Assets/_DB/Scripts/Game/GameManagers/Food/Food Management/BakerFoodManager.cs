@@ -28,16 +28,18 @@ namespace DB_Game
                 foodData.IsIdleFood = true;
                 dbManager.EventsManager.InvokeEvent(DBEventNames.StartBakerCooking, foodIndex);
                 foodData.HireCost = (int)(foodData.HireCost * BAKER_COST_INCREASE);
+
                 if (foodData.BakersCount % 3 == 0)
                 {
                     foodData.CookFoodTimes++;
                 }
+
                 foodData.BakersCount++;
-                DBManager.Instance.EventsManager.InvokeEvent(DBEventNames.OnHired, foodIndex);
+                dbManager.EventsManager.InvokeEvent(DBEventNames.OnHired, foodIndex);
             }
             else
             {
-                DBDebug.LogException("Failed to unlock/update idle");
+                DBDebug.LogException("Failed to unlock/upgrade idle");
             }
 
             foodDataRepository.SaveFoodData();

@@ -40,7 +40,7 @@ namespace DB_Game
         {
             var foodData = foodDataRepository.GetFoodData(index);
             var bakerCookingTime = foodData.BakerCookingTime;
-            var bakerOfflineTime = DBManager.Instance.TimerManager.GetLastOfflineTimeSeconds();
+            var bakerOfflineTime = Manager.TimerManager.GetLastOfflineTimeSeconds();
             foodData.IsAutoOnCooldown = true;
 
             CookingUIManager.uiBakerComponents.BakerTimeLeftCooking[index] = GetBakerTimeLeftCooking(foodData, bakerCookingTime, bakerOfflineTime);

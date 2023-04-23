@@ -10,7 +10,6 @@ namespace DB_Game
         public DBScoreManager ScoreManager;
         public DBUpgradeManager UpgradeManager;
         public DBStoreManager StoreManager;
-        public FoodDataRepository FoodDataRepository;
 
         public DBGameLogic()
         {
@@ -27,9 +26,6 @@ namespace DB_Game
             ScoreManager = new DBScoreManager();
             UpgradeManager = new DBUpgradeManager();
             StoreManager = new DBStoreManager();
-
-            FoodDataCollection foodDataCollection = DBFoodManager.Foods;
-            FoodDataRepository = new FoodDataRepository(foodDataCollection);
 
             onComplete.Invoke();
         }

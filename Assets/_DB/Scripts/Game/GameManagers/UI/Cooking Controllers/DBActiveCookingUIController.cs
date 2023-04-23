@@ -24,7 +24,7 @@ namespace DB_Game
 
             foodData.IsOnCooldown = true;
 
-            DBManager.Instance.SaveManager.Save(DBFoodManager.Foods);
+            foodDataRepository.GetFoodData(index);
             ActiveCookingUIStart(index);
         }
 
@@ -54,7 +54,7 @@ namespace DB_Game
         {
             var foodData = foodDataRepository.GetFoodData(index);
             float cookingTime = foodData.CookingTime;
-            var offlineTime = DBManager.Instance.TimerManager.GetLastOfflineTimeSeconds();
+            var offlineTime = Manager.TimerManager.GetLastOfflineTimeSeconds();
             CookingUIManager.uiActiveCookingComponents.TimeLeftToActiveCook[index] = foodData.RemainingCookingTime - offlineTime;
 
             var cookingSliderBar = CookingUIManager.uiActiveCookingComponents.CookingSliderBar[index];
@@ -126,7 +126,7 @@ namespace DB_Game
             ResetSliderAnimation(cookingSlider);
             foodData.RemainingCookingTime = foodData.CookingTime;
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
-            DBManager.Instance.SaveManager.Save(DBFoodManager.Foods);
+            foodDataRepository.SaveFoodData();
         }
 
         private void ToggleActiveCookingTweensOnPause(object pauseEvent)

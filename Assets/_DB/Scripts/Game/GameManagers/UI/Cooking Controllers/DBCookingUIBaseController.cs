@@ -14,7 +14,6 @@ namespace DB_Game
     public class DBCookingUIBaseController : FoodDataAccess
     {
         public DBCookingUIManager CookingUIManager;
-        protected IFoodDataRepository foodDataRepository;
 
         protected void SetCookingUI(ref float timeLeft, int index, float cookingTime, Slider cookingSlider, TMP_Text timeText, DBTweenTypes tweenType)
         {
@@ -88,7 +87,8 @@ namespace DB_Game
                 default:
                     throw new ArgumentException("Invalid CookingType value");
             }
-            DBManager.Instance.SaveManager.Save(DBFoodManager.Foods);
+
+            foodDataRepository.SaveFoodData();
         }
 
         protected void ResetSliderAnimation(Slider slider) =>

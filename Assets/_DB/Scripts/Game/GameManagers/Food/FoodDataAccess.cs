@@ -1,12 +1,15 @@
-using DB_Game;
-using UnityEngine;
+using DB_Core;
 
-public class FoodDataAccess : DBLogicMonoBehaviour
+namespace DB_Game
 {
-    protected FoodDataRepository foodDataRepository;
-
-    protected virtual void Awake()
+    public class FoodDataAccess : DBLogicMonoBehaviour
     {
-        foodDataRepository = new FoodDataRepository(DBFoodManager.Foods);
+        protected FoodDataRepository foodDataRepository;
+
+        protected virtual void Awake()
+        {
+            foodDataRepository = new FoodDataRepository(DBFoodManager.Foods);
+            DBDebug.Log($"FoodDataAccess: foodDataRepository initialized: {foodDataRepository != null}");
+        }
     }
 }
