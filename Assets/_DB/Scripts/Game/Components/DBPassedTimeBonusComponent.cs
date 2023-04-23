@@ -12,6 +12,7 @@ namespace DB_Game
         [SerializeField] private RectTransform coinRectTransform;
         [SerializeField] Button gotItButton;
         [SerializeField] Button claimButton;
+        private DBPauseCurrencyManager pauseCurrencyManager;
 
         private int totalReturnBonus = 0;
 
@@ -19,6 +20,7 @@ namespace DB_Game
 
         private void Awake()
         {
+            pauseCurrencyManager = FindObjectOfType<DBPauseCurrencyManager>();
             initialXPos = coinRectTransform.anchoredPosition.x;
         }
 
@@ -69,7 +71,7 @@ namespace DB_Game
 
         private void OpenOfflineRewardWindow(int timePassed)
         {
-            totalReturnBonus = DBPauseCurrencyManager.PassedTimeFoodRewardCalc(timePassed);
+            totalReturnBonus = pauseCurrencyManager.PassedTimeFoodRewardCalc(timePassed);
 
             rewardText.text = totalReturnBonus.ToString();
             float xPos = initialXPos - (totalReturnBonus.ToString().Length - 1) * xOffsetPerDigit;

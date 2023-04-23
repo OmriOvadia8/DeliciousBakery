@@ -78,6 +78,14 @@ namespace DB_Core
         StartBakerCooking,
         BuyButtonsCheck,
         CookButtonAlphaOn,
-        CookButtonAlphaOff
+        CookButtonAlphaOff,
+        OnUnFocused,
+        BakerParticles,
+        LearnParticles,
+        FoodBarReveal,
+        FoodBarLocked,
+        UpgradeParticles,
+        CookParticles,
+        CookFoodButtonCheck
     }
 }
