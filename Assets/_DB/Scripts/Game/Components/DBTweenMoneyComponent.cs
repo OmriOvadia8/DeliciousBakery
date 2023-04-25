@@ -19,7 +19,6 @@ namespace DB_Game
         [SerializeField] private Ease easeTypeMove = Ease.Linear;
         [SerializeField] private AnimationCurve fadeEase;
 
-
         public void Init(int amount)
         {
             moneyToastText.text = $"+{amount:N0}";

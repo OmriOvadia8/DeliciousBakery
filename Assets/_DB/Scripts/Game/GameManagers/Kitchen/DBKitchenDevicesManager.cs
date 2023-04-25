@@ -5,46 +5,50 @@ namespace DB_Game
 {
     public class DBKitchenDevicesManager : FoodDataAccess
     {
-        [SerializeField] GameObject[] deviceObject;
-        [SerializeField] GameObject[] poofObjects;
-        [SerializeField] Animator[] poofAnims;
+        [SerializeField] private GameObject[] deviceObject;
+        [SerializeField] private GameObject[] poofObjects;
+        [SerializeField] private Animator[] poofAnims;
 
-        private void OnEnable()
-        {
-            AddListener(DBEventNames.DeviceAppearAnimation, DeviceAppear);
-        }
+        private const int MAX_DEVICES = 8;
 
-        private void OnDisable()
-        {
-            RemoveListener(DBEventNames.DeviceAppearAnimation, DeviceAppear);
-        }
+        private void OnEnable() => AddListener(DBEventNames.DeviceAppearAnimation, KitchenDeviceAppear);
 
-        private void Start()
+        private void OnDisable() => RemoveListener(DBEventNames.DeviceAppearAnimation, KitchenDeviceAppear);
+
+        private void Start() => InitializeDevicesAndPoofs();
+
+        private void InitializeDevicesAndPoofs()
         {
             for (int i = 0; i < poofObjects.Length; i++)
             {
-                bool isFoodLocked = foodDataRepository.GetFoodData(i).IsFoodLocked;
-                deviceObject[i].SetActive(!isFoodLocked);
-                poofObjects[i].SetActive(!isFoodLocked);
-
-                if (deviceObject[i].activeSelf)
-                {
-                    poofObjects[i].SetActive(false);
-                }
+                bool isFoodLocked = GetFoodData(i).IsFoodLocked;
+                SetDeviceAndPoofActiveState(i, !isFoodLocked);
             }
         }
 
-        private void DeviceAppear(object obj)
+        private void KitchenDeviceAppear(object obj)
         {
             int index = (int)obj;
-            if(index == 8 || index == 9) // only have 8 devices therefore ignoring index 8 and 9
+
+            if (index >= MAX_DEVICES) 
             {
                 return;
             }
+
+            ActivateDeviceWithAnimation(index);
+        }
+
+        private void SetDeviceAndPoofActiveState(int index, bool isDeviceActive)
+        {
+            deviceObject[index].SetActive(isDeviceActive);
+            poofObjects[index].SetActive(!isDeviceActive);
+        }
+
+        private void ActivateDeviceWithAnimation(int index)
+        {
             deviceObject[index].SetActive(true);
             poofObjects[index].SetActive(true);
             poofAnims[index].SetBool("deviceAppear", true);
         }
-
     }
 }

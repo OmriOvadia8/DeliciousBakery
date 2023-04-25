@@ -15,52 +15,70 @@ namespace DB_Game
 
         private void OnDisable() => UnregisterEvents();
 
-        public void CoinsEarn(object foodProfit)
+        #region Coins
+
+        public void EarnCoins(object foodProfit)
         {
             int profit = (int)foodProfit;
             GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, profit);
 
-            if (DBGameLogic.Instance.ScoreManager.TryGetScoreByTag(ScoreTags.GameCurrency, ref currencySaveData.CoinsAmount))
+            if (GameLogic.ScoreManager.TryGetScoreByTag(ScoreTags.GameCurrency, ref currencySaveData.CoinsAmount))
             {
                 InvokeEvent(DBEventNames.OnCurrencySet, currencySaveData.CoinsAmount);
                 SaveCurrency();
             }
         }
 
-        private void UpdateStarsCurrency(int starIncrease)
+        private void UpdateCoinsOnAction(object obj) => EarnCoins(initialCoinsAmount);
+
+        #endregion
+
+        #region Stars
+
+        private void UpdateStars(int starIncrease)
         {
             GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.PremiumCurrency, starIncrease);
 
-            if (DBGameLogic.Instance.ScoreManager.TryGetScoreByTag(ScoreTags.PremiumCurrency, ref currencySaveData.StarsAmount))
+            if (GameLogic.ScoreManager.TryGetScoreByTag(ScoreTags.PremiumCurrency, ref currencySaveData.StarsAmount))
             {
                 InvokeEvent(DBEventNames.OnPremCurrencySet, currencySaveData.StarsAmount);
                 SaveCurrency();
             }
         }
 
-        public void SaveCurrency() => DBManager.Instance.SaveManager.Save(currencySaveData);
+        private void UpdateStarsOnAction(object obj) => UpdateStars(initialStarsAmount);
 
-        public void LoadCurrency() =>
+        #endregion
+
+        #region Currency Data
+
+        public void SaveCurrency() => Manager.SaveManager.Save(currencySaveData);
+
+        public void LoadCurrency()
+        {
             DBManager.Instance.SaveManager.Load((CurrencySaveData data) =>
             currencySaveData = data ?? new CurrencySaveData(initialCoinsAmount, initialStarsAmount));
-       
-        private void UpdateCoinsAmountOnAction(object obj) => CoinsEarn(initialCoinsAmount);
+        }
 
-        private void UpdateStarsAmountOnAction(object obj) => UpdateStarsCurrency(initialStarsAmount);
+        #endregion
+
+        #region Events
 
         private void RegisterEvents()
         {
-            AddListener(DBEventNames.CurrencyUpdateUI, UpdateCoinsAmountOnAction);
-            AddListener(DBEventNames.PremCurrencyUpdateUI, UpdateStarsAmountOnAction);
-            AddListener(DBEventNames.AddCurrencyUpdate, CoinsEarn);
+            AddListener(DBEventNames.CurrencyUpdateUI, UpdateCoinsOnAction);
+            AddListener(DBEventNames.PremCurrencyUpdateUI, UpdateStarsOnAction);
+            AddListener(DBEventNames.AddCurrencyUpdate, EarnCoins);
         }
 
         private void UnregisterEvents()
         {
-            RemoveListener(DBEventNames.CurrencyUpdateUI, UpdateCoinsAmountOnAction);
-            RemoveListener(DBEventNames.PremCurrencyUpdateUI, UpdateStarsAmountOnAction);
-            RemoveListener(DBEventNames.AddCurrencyUpdate, CoinsEarn);
+            RemoveListener(DBEventNames.CurrencyUpdateUI, UpdateCoinsOnAction);
+            RemoveListener(DBEventNames.PremCurrencyUpdateUI, UpdateStarsOnAction);
+            RemoveListener(DBEventNames.AddCurrencyUpdate, EarnCoins);
         }
+
+        #endregion
 
         [Serializable]
         public class CurrencySaveData : IDBSaveData

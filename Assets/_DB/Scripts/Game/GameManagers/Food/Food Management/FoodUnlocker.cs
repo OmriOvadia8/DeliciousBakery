@@ -13,19 +13,14 @@ namespace DB_Game
             this.dbManager = dbManager;
         }
 
-        public void LearnRecipe(int foodID)
+        public void LearnRecipe(int foodIndex)
         {
-            var foodData = foodDataRepository.GetFoodData(foodID);
+            var foodData = foodDataRepository.GetFoodData(foodIndex);
 
             if (DBGameLogic.Instance.ScoreManager.TryUseScore(ScoreTags.GameCurrency, foodData.UnlockCost))
             {
-                dbManager.EventsManager.InvokeEvent(DBEventNames.LearnParticles, foodID);
                 foodData.IsFoodLocked = false;
-                dbManager.EventsManager.InvokeEvent(DBEventNames.FoodBarReveal, foodID);
-
-                dbManager.EventsManager.InvokeEvent(DBEventNames.DeviceAppearAnimation, foodID);
-                dbManager.EventsManager.InvokeEvent(DBEventNames.OnLearnRecipeSpentToast, foodID);
-
+                InvokeUnlockEvents(foodIndex);
                 foodDataRepository.SaveFoodData();
             }
             else
@@ -33,6 +28,13 @@ namespace DB_Game
                 DBDebug.LogException("Not enough money to unlock recipe!");
             }
         }
-    }
 
+        private void InvokeUnlockEvents(int foodIndex)
+        {
+            dbManager.EventsManager.InvokeEvent(DBEventNames.LearnParticles, foodIndex);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.FoodBarReveal, foodIndex);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.DeviceAppearAnimation, foodIndex);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.OnLearnRecipeSpentToast, foodIndex);
+        }
+    }
 }

@@ -1,6 +1,4 @@
 using DB_Core;
-using UnityEditor;
-using UnityEngine;
 
 namespace DB_Game
 {
@@ -17,32 +15,38 @@ namespace DB_Game
             this.dbManager = dbManager;
         }
 
-        public void UnlockOrUpgradeIdleFood(int foodIndex)
+        public void UnlockOrUpgradeBakerCooking(int foodIndex)
         {
             var foodData = foodDataRepository.GetFoodData(foodIndex);
+            int hireCost = foodData.HireCost;
 
-            if (DBGameLogic.Instance.ScoreManager.TryUseScore(ScoreTags.GameCurrency, foodData.HireCost))
+            if (DBGameLogic.Instance.ScoreManager.TryUseScore(ScoreTags.GameCurrency, hireCost))
             {
-                dbManager.EventsManager.InvokeEvent(DBEventNames.BakerParticles, foodIndex);
-                dbManager.EventsManager.InvokeEvent(DBEventNames.OnHireMoneySpentToast, foodIndex);
-                foodData.IsIdleFood = true;
-                dbManager.EventsManager.InvokeEvent(DBEventNames.StartBakerCooking, foodIndex);
-                foodData.HireCost = (int)(foodData.HireCost * BAKER_COST_INCREASE);
-
-                if (foodData.BakersCount % 3 == 0)
-                {
-                    foodData.CookFoodTimes++;
-                }
-
-                foodData.BakersCount++;
-                dbManager.EventsManager.InvokeEvent(DBEventNames.OnHired, foodIndex);
+                PerformBakerUnlockOrUpgrade(foodData, foodIndex);
             }
             else
             {
-                DBDebug.LogException("Failed to unlock/upgrade idle");
+                DBDebug.LogException("Failed to unlock/upgrade baker");
             }
 
             foodDataRepository.SaveFoodData();
+        }
+
+        private void PerformBakerUnlockOrUpgrade(FoodData foodData, int foodIndex)
+        {
+            dbManager.EventsManager.InvokeEvent(DBEventNames.BakerParticles, foodIndex);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.OnHireMoneySpentToast, foodIndex);
+            foodData.IsBakerUnlocked = true;
+            dbManager.EventsManager.InvokeEvent(DBEventNames.StartBakerCooking, foodIndex);
+            foodData.HireCost = (int)(foodData.HireCost * BAKER_COST_INCREASE);
+
+            if (foodData.BakersCount % 3 == 0)
+            {
+                foodData.CookFoodMultiplier++;
+            }
+
+            foodData.BakersCount++;
+            dbManager.EventsManager.InvokeEvent(DBEventNames.OnHiredTextUpdate, foodIndex);
         }
     }
 }

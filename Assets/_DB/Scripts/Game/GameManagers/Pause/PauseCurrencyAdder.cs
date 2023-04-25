@@ -6,17 +6,12 @@ namespace DB_Game
     public class PauseCurrencyAdder : DBLogicMonoBehaviour
     {
         private int pausedReward;
+
         [SerializeField] DBPauseCurrencyManager pausedCurrencyManager;
 
-        private void Start()
-        {
-            Manager.EventsManager.AddListener(DBEventNames.OfflineTimeRefreshed, OnPausedEarning);
-        }
+        private void OnEnable() => AddListener(DBEventNames.OfflineTimeRefreshed, OnPausedEarning);
 
-        private void OnDestroy()
-        {
-            Manager.EventsManager.RemoveListener(DBEventNames.OfflineTimeRefreshed, OnPausedEarning);
-        }
+        private void OnDisable() => RemoveListener(DBEventNames.OfflineTimeRefreshed, OnPausedEarning);
 
         private void OnPausedEarning(object timePassed)
         {
@@ -24,8 +19,7 @@ namespace DB_Game
             pausedReward = pausedCurrencyManager.PassedTimeFoodRewardCalc((int)timePassed);
 
             GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, pausedReward);
-            Manager.EventsManager.InvokeEvent(DBEventNames.CurrencyUpdateUI, null);
-
+            InvokeEvent(DBEventNames.CurrencyUpdateUI, null);
         }
     }
 }

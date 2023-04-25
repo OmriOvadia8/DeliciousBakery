@@ -9,12 +9,9 @@ namespace DB_Game
         [SerializeField] private RectTransform moneyToastPosition;
         [SerializeField] private int moneyTextToastAmount = 20;
 
-        private void Start()
-        {
-            MoneyToastPoolInitialization();
-        }
+        private void Start() => MoneyToastPoolInitialization();
 
-        public void MoneyToasting(int moneyAmount, PoolNames poolName)
+        public void DisplayMoneyToast(int moneyAmount, PoolNames poolName)
         {
             var moneyToast = (DBTweenMoneyComponent)Manager.PoolManager.GetPoolable(poolName);
             Vector3 toastPosition = moneyToastPosition.position;

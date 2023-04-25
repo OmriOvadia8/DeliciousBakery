@@ -17,53 +17,58 @@ namespace DB_Game
         [Header("Baker Cooking UI Components")]
         public BakerUIComponents uiBakerComponents;
 
-        private void Start()
-        {
-            LoadCookingUIInitialization();
-        }
+        private void Start() => LoadCookingUIInitialization();
 
         private void LoadCookingUIInitialization()
         {
             for (int i = 0; i < DBFoodManager.FOOD_COUNT; i++)
             {
-                var foodData = foodDataRepository.GetFoodData(i);
+                var foodData = GetFoodData(i);
 
                 if(!foodData.IsOnCooldown)
                 {
-                    InitialCookingUI(i, CookingType.ActiveCooking);
-                }
-
-                if(!foodData.IsIdleFood)
-                {
-                    InitialCookingUI(i, CookingType.BakerCooking);
+                    ResetCookingUI(i, CookingType.ActiveCooking);
                 }
 
                 if (foodData.IsFoodLocked)
                 {
+                    ResetCookingUI(i, CookingType.BakerCooking);
                     uiActiveCookingComponents.CookButtonAnimation[i].alpha = 0;
                 }
             }
         }
 
-        private void InitialCookingUI(int i, CookingType cookingType) // Reset food UI
+        private void ResetCookingUI(int i, CookingType cookingType) 
         {
-            var foodData = foodDataRepository.GetFoodData(i);
-
             switch (cookingType)
             {
                 case CookingType.ActiveCooking:
-                    uiActiveCookingComponents.CookingSliderBar[i].value = MIN_VALUE;
-                    uiActiveCookingComponents.CookingTimerText[i].text = DBExtension.GetFormattedTimeSpan((int)foodData.CookingTime);
+                    ResetActiveCookingUI(i);
                     break;
 
                 case CookingType.BakerCooking:
-                    uiBakerComponents.BakerSliderBar[i].value = MIN_VALUE;
-                    uiBakerComponents.BakerTimerText[i].text = DBExtension.GetFormattedTimeSpan((int)foodData.BakerCookingTime);
+                    ResetBakerCookingUI(i);
                     break;
 
                 default:
                     throw new ArgumentException("Invalid CookingType value");
             }
+        }
+
+        private void ResetActiveCookingUI(int i)
+        {
+            var foodData = GetFoodData(i);
+            int cookingTime = (int)foodData.CookingTime;
+            uiActiveCookingComponents.CookingSliderBar[i].value = MIN_VALUE;
+            uiActiveCookingComponents.CookingTimerText[i].text = DBExtension.GetFormattedTimeSpan(cookingTime);
+        }
+
+        private void ResetBakerCookingUI(int i)
+        {
+            var foodData = GetFoodData(i);
+            int bakerCookingTime = (int)foodData.BakerCookingTime;
+            uiBakerComponents.BakerSliderBar[i].value = MIN_VALUE;
+            uiBakerComponents.BakerTimerText[i].text = DBExtension.GetFormattedTimeSpan(bakerCookingTime);
         }
     }
 
@@ -83,9 +88,8 @@ namespace DB_Game
         public float[] BakerTimeLeftCooking = new float[DBFoodManager.FOOD_COUNT];
         public TMP_Text[] BakerTimerText;
         public TMP_Text[] BakersCountText;
-        public TMP_Text[] CookFoodTimesText;
+        public TMP_Text[] CookFoodMultiplierText;
         public TimeSpan RemainingBakerTime;
         public Slider[] BakerSliderBar;
     }
-
 }

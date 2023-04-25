@@ -15,7 +15,7 @@ namespace DB_Game
 
         public void ActiveCookFood(int index)
         {
-            var foodData = foodDataRepository.GetFoodData(index);
+            var foodData = GetFoodData(index);
 
             if (foodData.IsOnCooldown)
             {
@@ -24,7 +24,7 @@ namespace DB_Game
 
             foodData.IsOnCooldown = true;
 
-            foodDataRepository.GetFoodData(index);
+            GetFoodData(index);
             ActiveCookingUIStart(index);
         }
 
@@ -32,7 +32,7 @@ namespace DB_Game
         {
             InvokeEvent(DBEventNames.CookParticles, index);
 
-            var foodData = foodDataRepository.GetFoodData(index);
+            var foodData = GetFoodData(index);
             float cookingTime = foodData.CookingTime;
             foodData.IsOnCooldown = true;
 
@@ -52,14 +52,14 @@ namespace DB_Game
 
         private void ActiveCookingUIAfterPause(int index)
         {
-            var foodData = foodDataRepository.GetFoodData(index);
-            float cookingTime = foodData.CookingTime;
+            var foodData = GetFoodData(index);
+            var cookingTime = foodData.CookingTime;
             var offlineTime = Manager.TimerManager.GetLastOfflineTimeSeconds();
             CookingUIManager.uiActiveCookingComponents.TimeLeftToActiveCook[index] = foodData.RemainingCookingTime - offlineTime;
 
             var cookingSliderBar = CookingUIManager.uiActiveCookingComponents.CookingSliderBar[index];
             var cookingTimerText = CookingUIManager.uiActiveCookingComponents.CookingTimerText[index];
-            float timeLeftToCook = CookingUIManager.uiActiveCookingComponents.TimeLeftToActiveCook[index];
+            var timeLeftToCook = CookingUIManager.uiActiveCookingComponents.TimeLeftToActiveCook[index];
             var remainingCookingTime = CookingUIManager.uiActiveCookingComponents.RemainingActiveCookingTime;
 
             if (timeLeftToCook > 0)
@@ -84,7 +84,7 @@ namespace DB_Game
 
         private void OnTimerComplete(int index)
         {
-            var foodData = foodDataRepository.GetFoodData(index);
+            var foodData = GetFoodData(index);
             var cookingSliderBar = CookingUIManager.uiActiveCookingComponents.CookingSliderBar[index];
             var cookingTimerText = CookingUIManager.uiActiveCookingComponents.CookingTimerText[index];
 
@@ -105,7 +105,7 @@ namespace DB_Game
         {
             for (int i = 0; i < DBFoodManager.FOOD_COUNT; i++)
             {
-                if (foodDataRepository.GetFoodData(i).IsOnCooldown)
+                if (GetFoodData(i).IsOnCooldown)
                 {
                     ActiveCookingUIAfterPause(i);
                 }
@@ -114,8 +114,11 @@ namespace DB_Game
 
         private void ActiveCookingCompleteReward(FoodData foodData, int index)
         {
-            int profit = foodData.Profit * DoubleProfitComponent.doubleProfitMultiplier;
-            InvokeEvent(DBEventNames.AddCurrencyUpdate, profit);
+            int profit = foodData.Profit;
+            int profitMultiplier = DoubleProfitComponent.DoubleProfitMultiplier;
+            int totalProfit = profit * profitMultiplier;
+
+            InvokeEvent(DBEventNames.AddCurrencyUpdate, totalProfit);
             InvokeEvent(DBEventNames.MoneyToastOnCook, index);
         }
 
@@ -126,7 +129,7 @@ namespace DB_Game
             ResetSliderAnimation(cookingSlider);
             foodData.RemainingCookingTime = foodData.CookingTime;
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
-            foodDataRepository.SaveFoodData();
+            SaveFoodData();
         }
 
         private void ToggleActiveCookingTweensOnPause(object pauseEvent)

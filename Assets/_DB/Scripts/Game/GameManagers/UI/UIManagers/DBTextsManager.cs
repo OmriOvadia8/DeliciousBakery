@@ -15,9 +15,9 @@ namespace DB_Game
         [Header("Texts")]
         [SerializeField] private Texts texts;
 
-        private void OnEnable() => AddTextsEvents();
+        private void OnEnable() => RegisterEvents();
    
-        private void OnDisable() => RemoveTextsEvents();
+        private void OnDisable() => UnregisterEvents();
 
         private void Start() => UpdateCurrencyAmountText();
 
@@ -73,7 +73,7 @@ namespace DB_Game
         {
             int index = (int)obj;
             int foodLevel = GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, index).CurrentLevel;
-            var foodData = foodDataRepository.GetFoodData(index);
+            var foodData = GetFoodData(index);
             int foodProfit = foodData.Profit;
             int upgradeCost = foodData.UpgradeCost;
 
@@ -84,7 +84,7 @@ namespace DB_Game
         private void LearnRecipeTextUpdate(object obj) 
         {
             int index = (int)obj;
-            var foodData = foodDataRepository.GetFoodData(index);
+            var foodData = GetFoodData(index);
             int learnCost = foodData.UnlockCost;
             var learnRecipeCostText = texts.LearnRecipeCostText[index];
 
@@ -96,30 +96,30 @@ namespace DB_Game
         private void OnHireTextUpdate(object obj)
         {
             int index = (int)obj;
-            var foodData = foodDataRepository.GetFoodData(index);
+            var foodData = GetFoodData(index);
 
             int hireCost = foodData.HireCost;
-            int cookFoodTimes = foodData.CookFoodTimes;
+            int cookFoodMultiplier = foodData.CookFoodMultiplier;
             int bakersCount = foodData.BakersCount;
 
-            UpdateHireTexts(index, bakersCount, cookFoodTimes, hireCost);
+            UpdateHireTexts(index, bakersCount, cookFoodMultiplier, hireCost);
             UpdateCurrencyAndButtonCheck();
         }
 
         private void UpdateCurrencyAndButtonCheck()
         {
-            currencyManager.CoinsEarn(currencyManager.initialCoinsAmount);
+            currencyManager.EarnCoins(currencyManager.initialCoinsAmount);
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
         }
 
-        private void UpdateHireTexts(int index, int bakersCount, int cookFoodTimes, int hireCost)
+        private void UpdateHireTexts(int index, int bakersCount, int cookFoodMultiplier, int hireCost)
         {
             var bakersCountText = cookingUIManager.uiBakerComponents.BakersCountText[index];
-            var cookFoodTimesText = cookingUIManager.uiBakerComponents.CookFoodTimesText[index];
+            var cookFoodMultiplierText = cookingUIManager.uiBakerComponents.CookFoodMultiplierText[index];
             var hireCostText = texts.HireCostText[index];
 
             bakersCountText.text = $"{bakersCount}x";
-            cookFoodTimesText.text = $"{cookFoodTimes}x";
+            cookFoodMultiplierText.text = $"{cookFoodMultiplier}x";
             hireCostText.text = $"{hireCost}";
         }
 
@@ -142,73 +142,73 @@ namespace DB_Game
         {
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
             int index = (int)obj;
-            int foodProfit = foodDataRepository.GetFoodData(index).Profit;
-            int totalFoodProfit = foodProfit * DoubleProfitComponent.doubleProfitMultiplier;
-            toastingManager.MoneyToasting(totalFoodProfit, PoolNames.MoneyToast);
+            int foodProfit = GetFoodData(index).Profit;
+            int totalFoodProfit = foodProfit * DoubleProfitComponent.DoubleProfitMultiplier;
+            toastingManager.DisplayMoneyToast(totalFoodProfit, PoolNames.MoneyToast);
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
         }
 
         private void MoneyTextToastAfterBakerCooking(object obj) 
         {
             int index = (int)obj;
-            int foodProfit = foodDataRepository.GetFoodData(index).Profit;
-            int cookFoodQuantity = foodDataRepository.GetFoodData(index).CookFoodTimes;
+            int foodProfit = GetFoodData(index).Profit;
+            int cookFoodMultiplier = GetFoodData(index).CookFoodMultiplier;
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
-            int totalFoodProfit = foodProfit * cookFoodQuantity * DoubleProfitComponent.doubleProfitMultiplier;
-            toastingManager.MoneyToasting(totalFoodProfit, PoolNames.MoneyToast);
+            int totalFoodProfit = foodProfit * cookFoodMultiplier * DoubleProfitComponent.DoubleProfitMultiplier;
+            toastingManager.DisplayMoneyToast(totalFoodProfit, PoolNames.MoneyToast);
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
         }
 
         private void SpendUpgradeMoneyTextToast(object obj) 
         {
             int index = (int)obj;
-            int upgradeCost = foodDataRepository.GetFoodData(index).UpgradeCost;
-            toastingManager.MoneyToasting(upgradeCost, PoolNames.SpendMoneyToast);
+            int upgradeCost = GetFoodData(index).UpgradeCost;
+            toastingManager.DisplayMoneyToast(upgradeCost, PoolNames.SpendMoneyToast);
         }
 
         private void SpendLearnRecipeMoneyTextToast(object obj) 
         {
             int index = (int)obj;
-            int learnCost = foodDataRepository.GetFoodData(index).UnlockCost;
+            int learnCost = GetFoodData(index).UnlockCost;
             InvokeEvent(DBEventNames.CookButtonAlphaOn, index);
-            toastingManager.MoneyToasting(learnCost, PoolNames.SpendMoneyToast);
+            toastingManager.DisplayMoneyToast(learnCost, PoolNames.SpendMoneyToast);
             UpdateCurrencyAndButtonCheck();
         }
 
         private void SpendHireMoneyTextToast(object obj) 
         {
             int index = (int)obj;
-            int hireCost = foodDataRepository.GetFoodData(index).HireCost;
-            toastingManager.MoneyToasting(hireCost, PoolNames.SpendMoneyToast);
+            int hireCost = GetFoodData(index).HireCost;
+            toastingManager.DisplayMoneyToast(hireCost, PoolNames.SpendMoneyToast);
         }
 
         #endregion
 
         #region Events Register/Unregister
 
-        private void AddTextsEvents()
+        private void RegisterEvents()
         {
             AddListener(DBEventNames.OnCurrencySet, OnCoinsAmountUpdate);
             AddListener(DBEventNames.OnPremCurrencySet, OnStarsAmountUpdate);
-            AddListener(DBEventNames.OnUpgraded, OnUpgradeTextUpdate);
+            AddListener(DBEventNames.OnUpgradeTextUpdate, OnUpgradeTextUpdate);
             AddListener(DBEventNames.MoneyToastOnCook, MoneyTextToastAfterActiveCooking);
             AddListener(DBEventNames.MoneyToastOnAutoCook, MoneyTextToastAfterBakerCooking);
             AddListener(DBEventNames.OnUpgradeMoneySpentToast, SpendUpgradeMoneyTextToast);
             AddListener(DBEventNames.OnHireMoneySpentToast, SpendHireMoneyTextToast);
-            AddListener(DBEventNames.OnHired, OnHireTextUpdate);
+            AddListener(DBEventNames.OnHiredTextUpdate, OnHireTextUpdate);
             AddListener(DBEventNames.OnLearnRecipe, LearnRecipeTextUpdate);
             AddListener(DBEventNames.OnLearnRecipeSpentToast, SpendLearnRecipeMoneyTextToast);
         }
 
-        private void RemoveTextsEvents()
+        private void UnregisterEvents()
         {
             RemoveListener(DBEventNames.OnCurrencySet, OnCoinsAmountUpdate);
-            RemoveListener(DBEventNames.OnUpgraded, OnUpgradeTextUpdate);
+            RemoveListener(DBEventNames.OnUpgradeTextUpdate, OnUpgradeTextUpdate);
             RemoveListener(DBEventNames.MoneyToastOnCook, MoneyTextToastAfterActiveCooking);
             RemoveListener(DBEventNames.MoneyToastOnAutoCook, MoneyTextToastAfterBakerCooking);
             RemoveListener(DBEventNames.OnUpgradeMoneySpentToast, SpendUpgradeMoneyTextToast);
             RemoveListener(DBEventNames.OnHireMoneySpentToast, SpendHireMoneyTextToast);
-            RemoveListener(DBEventNames.OnHired, OnHireTextUpdate);
+            RemoveListener(DBEventNames.OnHiredTextUpdate, OnHireTextUpdate);
             RemoveListener(DBEventNames.OnLearnRecipe, LearnRecipeTextUpdate);
             RemoveListener(DBEventNames.OnLearnRecipeSpentToast, SpendLearnRecipeMoneyTextToast);
             RemoveListener(DBEventNames.OnPremCurrencySet, OnStarsAmountUpdate);
@@ -218,7 +218,6 @@ namespace DB_Game
     }
 
     [Serializable]
-
     public class Texts
     {
         public TMP_Text MoneyText;

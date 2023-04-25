@@ -12,7 +12,30 @@ namespace DB_Game
         [SerializeField] ParticleSystem[] hireParticles;
         [SerializeField] ParticleSystem[] learnParticles;
 
-        private void OnEnable()
+        private void OnEnable() => RegisterEvents();
+
+        private void OnDisable() => UnregisterEvents();
+
+        private void PlayCookParticles(object foodIndex) => cookParticles[(int)foodIndex].Play();
+
+        private void PlayHireParticle(object foodIndex) => hireParticles[(int)foodIndex].Play();
+
+        private void PlayLearnParticles(object foodIndex) => learnParticles[(int)foodIndex].Play();
+
+        private void PlayUpgradeParticles(object foodIndex) => upgradeParticles[(int)foodIndex].Play();
+
+        private void RevealFoodBars(object foodIndex) => SetLockedFoodBarsActiveState(foodIndex, false);
+
+        private void HideFoodBars(object foodIndex) => SetLockedFoodBarsActiveState(foodIndex, true);
+
+        private void SetLockedFoodBarsActiveState(object foodIndex, bool state)
+        {
+            int index = (int)foodIndex;
+            LockedFoodBars[index].SetActive(state);
+            LockedBakersBars[index].SetActive(state);
+        }
+
+        private void RegisterEvents()
         {
             AddListener(DBEventNames.CookParticles, PlayCookParticles);
             AddListener(DBEventNames.BakerParticles, PlayHireParticle);
@@ -22,7 +45,7 @@ namespace DB_Game
             AddListener(DBEventNames.FoodBarLocked, HideFoodBars);
         }
 
-        private void OnDisable()
+        private void UnregisterEvents()
         {
             RemoveListener(DBEventNames.BakerParticles, PlayHireParticle);
             RemoveListener(DBEventNames.LearnParticles, PlayLearnParticles);
@@ -30,40 +53,6 @@ namespace DB_Game
             RemoveListener(DBEventNames.FoodBarReveal, RevealFoodBars);
             RemoveListener(DBEventNames.FoodBarLocked, HideFoodBars);
             RemoveListener(DBEventNames.CookParticles, PlayCookParticles);
-        }
-
-        private void PlayCookParticles(object foodIndex)
-        {
-            cookParticles[(int)foodIndex].Play();
-        }
-
-        private void PlayHireParticle(object foodIndex)
-        {
-            hireParticles[(int)foodIndex].Play();
-        }
-
-        private void PlayLearnParticles(object foodIndex)
-        {
-            learnParticles[(int)foodIndex].Play();
-        }
-
-        private void PlayUpgradeParticles(object foodIndex)
-        {
-            upgradeParticles[(int)foodIndex].Play();
-        }
-
-        private void RevealFoodBars(object foodIndex)
-        {
-            int index = (int)foodIndex;
-            LockedFoodBars[index].SetActive(false);
-            LockedBakersBars[index].SetActive(false);
-        }
-
-        private void HideFoodBars(object foodIndex)
-        {
-            int index = (int)foodIndex;
-            LockedFoodBars[index].SetActive(true);
-            LockedBakersBars[index].SetActive(true);
         }
     }
 }

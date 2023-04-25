@@ -4,37 +4,39 @@ namespace DB_Game
 {
     public class DBPauseCurrencyManager : FoodDataAccess, IDBPauseCurrencyManager
     {
-        static int baseMaxReward = 500;
-
-        static int totalReward = 0;
-        static int maxReward = 0;
+        [SerializeField] private int baseMaxReward = 500;
 
         public int PassedTimeFoodRewardCalc(int timePassed)
         {
-            totalReward = 0;
-            maxReward = 0;
+            int totalReward = 0;
+            int doubleProfit = DoubleProfitComponent.DoubleProfitMultiplier;
 
             // Calculate rewards for each idle food
             for (int i = 0; i < DBFoodManager.FOOD_COUNT; i++)
             {
-                var foodData = foodDataRepository.GetFoodData(i);
+                var foodData = GetFoodData(i);
 
-                if (!foodData.IsFoodLocked && foodData.IsIdleFood)
+                if (!foodData.IsFoodLocked && foodData.IsBakerUnlocked)
                 {
-                    // Calculate reward for this food based on time passed
-                    int reward = (int)(timePassed / foodData.BakerCookingTime) * foodData.Profit;
-
-                    // Limit reward to avoid exploits
-                    maxReward = baseMaxReward * foodData.CookFoodTimes;
-                    reward = Mathf.Min(reward, maxReward);
-
-                    // Add reward to total
+                    int reward = CalculateReward(timePassed, foodData);
                     totalReward += reward;
                 }
             }
 
-            return totalReward * DoubleProfitComponent.doubleProfitMultiplier;
+            return totalReward * doubleProfit;
         }
 
+        private int CalculateReward(int timePassed, FoodData foodData)
+        {
+            var bakerCookingTime = foodData.BakerCookingTime;
+            int profit = foodData.Profit;
+
+            int reward = (int)(timePassed / bakerCookingTime) * profit;
+            int maxReward = CalculateMaxReward(foodData);
+
+            return Mathf.Min(reward, maxReward);
+        }
+
+        private int CalculateMaxReward(FoodData foodData) => baseMaxReward * foodData.CookFoodMultiplier;
     }
 }

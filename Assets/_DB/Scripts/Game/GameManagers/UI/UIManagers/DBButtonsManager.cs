@@ -9,7 +9,7 @@ namespace DB_Game
     public class DBButtonsManager : FoodDataAccess
     {
         [Header("Buttons")]
-        [SerializeField] public Buttons buttons;
+        [SerializeField] private Buttons buttons;
 
         [Header("Managers")]
         [SerializeField] private DBCurrencyManager currencyManager;
@@ -18,23 +18,11 @@ namespace DB_Game
         [SerializeField] private Image[] coinIcons;
         [SerializeField] private TMP_Text[] learnRecipeText;
 
-        private int CurrentCurrency => currencyManager.currencySaveData.CoinsAmount;
+        int CurrentCurrency => currencyManager.currencySaveData.CoinsAmount;
 
-        private void OnEnable()
-        {
-            AddListener(DBEventNames.BuyButtonsCheck, BuyButtonsCheck);
-            AddListener(DBEventNames.CookFoodButtonCheck, CookFoodButtonCheck);
-            AddListener(DBEventNames.CookButtonAlphaOn, CookButtonAlphaOn);
-            AddListener(DBEventNames.CookButtonAlphaOff, CookButtonAlphaOff);
-        }
+        private void OnEnable() => RegisterEvents();
 
-        private void OnDisable()
-        {
-            RemoveListener(DBEventNames.BuyButtonsCheck, BuyButtonsCheck);
-            RemoveListener(DBEventNames.CookFoodButtonCheck, CookFoodButtonCheck);
-            RemoveListener(DBEventNames.CookButtonAlphaOn, CookButtonAlphaOn);
-            RemoveListener(DBEventNames.CookButtonAlphaOff, CookButtonAlphaOff);
-        }
+        private void OnDisable() => UnregisterEvents();
 
         private void BuyButtonsCheck(object obj = null)
         {
@@ -48,9 +36,9 @@ namespace DB_Game
             for (int i = 0; i < buttons.UpgradeButtons.Length; i++)
             {
                 var upgradeButton = buttons.UpgradeButtons[i];
-                int upgradeCost = foodDataRepository.GetFoodData(i).UpgradeCost;
+                int upgradeCost = GetFoodData(i).UpgradeCost;
 
-                bool isAffordable = CanAfford(upgradeCost);
+                bool isAffordable = IsAffordable(upgradeCost);
 
                 upgradeButton.interactable = isAffordable;
             }
@@ -68,9 +56,9 @@ namespace DB_Game
         {
             for (int i = 0; i < buttons.HireButtons.Length; i++)
             {
-                int hireCost = foodDataRepository.GetFoodData(i).HireCost;
-                bool isLocked = foodDataRepository.GetFoodData(i).IsFoodLocked;
-                bool canHire = CanAfford(hireCost) && !isLocked;
+                int hireCost = GetFoodData(i).HireCost;
+                bool isLocked = GetFoodData(i).IsFoodLocked;
+                bool canHire = IsAffordable(hireCost) && !isLocked;
 
                 buttons.HireButtons[i].interactable = canHire;
             }
@@ -86,7 +74,7 @@ namespace DB_Game
 
         private void UpdateCookFoodButtonUI(int index)
         {
-            var foodData = foodDataRepository.GetFoodData(index);
+            var foodData = GetFoodData(index);
             bool isOnCooldown = foodData.IsOnCooldown;
 
             buttons.CookFoodButtons[index].interactable = !isOnCooldown;
@@ -101,29 +89,44 @@ namespace DB_Game
 
         private void UpdateLearnRecipeButtonUI(int index)
         {
-            int learnCost = foodDataRepository.GetFoodData(index).UnlockCost;
-            bool canAfford = CanAfford(learnCost);
+            int learnCost = GetFoodData(index).UnlockCost;
+            bool isAffordable = IsAffordable(learnCost);
 
-            buttons.LearnRecipeButtons[index].interactable = canAfford;
-            learnRecipeText[index].color = canAfford ? Color.white : Color.gray;
-            coinIcons[index].color = canAfford ? Color.white : Color.gray;
+            buttons.LearnRecipeButtons[index].interactable = isAffordable;
+            learnRecipeText[index].color = isAffordable ? Color.white : Color.gray;
+            coinIcons[index].color = isAffordable ? Color.white : Color.gray;
         }
 
-        private bool CanAfford(int cost)
-        {
-            return CurrentCurrency >= cost;
-        }
+        private bool IsAffordable(int cost) => CurrentCurrency >= cost;
 
         private void CookButtonAlphaOn(object index)
         {
             int foodIndex = (int)index;
-            buttons.CookButtonAnimation[foodIndex].alpha = 1;
+            var cookButton = buttons.CookButtonAnimation[foodIndex];
+            cookButton.alpha = 1;
         }
 
         private void CookButtonAlphaOff(object index)
         {
             int foodIndex = (int)index;
-            buttons.CookButtonAnimation[foodIndex].alpha = 0;
+            var cookButton = buttons.CookButtonAnimation[foodIndex];
+            cookButton.alpha = 0;
+        }
+
+        private void RegisterEvents()
+        {
+            AddListener(DBEventNames.BuyButtonsCheck, BuyButtonsCheck);
+            AddListener(DBEventNames.CookFoodButtonCheck, CookFoodButtonCheck);
+            AddListener(DBEventNames.CookButtonAlphaOn, CookButtonAlphaOn);
+            AddListener(DBEventNames.CookButtonAlphaOff, CookButtonAlphaOff);
+        }
+
+        private void UnregisterEvents()
+        {
+            RemoveListener(DBEventNames.BuyButtonsCheck, BuyButtonsCheck);
+            RemoveListener(DBEventNames.CookFoodButtonCheck, CookFoodButtonCheck);
+            RemoveListener(DBEventNames.CookButtonAlphaOn, CookButtonAlphaOn);
+            RemoveListener(DBEventNames.CookButtonAlphaOff, CookButtonAlphaOff);
         }
     }
 

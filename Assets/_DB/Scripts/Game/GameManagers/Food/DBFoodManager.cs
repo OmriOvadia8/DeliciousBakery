@@ -12,25 +12,45 @@ namespace DB_Game
         private IFoodUnlocker foodUnlocker;
         private IBakerFoodManager bakerFoodManager;
 
-        private void OnEnable()
+        private void OnEnable() => LoadData();
+
+        private void Start() => InitializeFoodData();
+
+        public void LearnRecipe(int foodIndex) => foodUnlocker.LearnRecipe(foodIndex);
+
+        public void UpgradeFood(int foodIndex) => foodUpgrader.UpgradeFood(foodIndex);
+
+        public void UnlockOrUpgradeIdleFood(int foodIndex) => bakerFoodManager.UnlockOrUpgradeBakerCooking(foodIndex);
+
+        #region Data Loading
+        private void LoadData()
         {
             DBManager.Instance.SaveManager.Load<FoodDataCollection>(data =>
             {
                 if (data != null)
                 {
-                    Foods = data;
-                    DBDebug.Log("Saved food data loaded successfully");
-                    
-                    base.Awake();
+                    LoadSavedFoodData(data);
                 }
                 else
                 {
-                    Manager.ConfigManager.GetConfigAsync<FoodDataCollection>(FOOD_CONFIG_PATH, OnConfigLoaded);
-                    DBDebug.Log("Default Data Loaded Successfully");
+                    LoadDefaultFoodData();
                 }
 
                 InitializeManagers();
             });
+        }
+
+        private void LoadSavedFoodData(FoodDataCollection data)
+        {
+            Foods = data;
+            DBDebug.Log("Saved food data loaded successfully");
+            base.Awake();
+        }
+
+        private void LoadDefaultFoodData()
+        {
+            Manager.ConfigManager.GetConfigAsync<FoodDataCollection>(FOOD_CONFIG_PATH, OnConfigLoaded);
+            DBDebug.Log("Default Data Loaded Successfully");
         }
 
         private void InitializeManagers()
@@ -48,19 +68,11 @@ namespace DB_Game
             base.Awake();
         }
 
-        private void Start() => InitializeFoodData();
-
-        public void LearnRecipe(int foodIndex) => foodUnlocker.LearnRecipe(foodIndex);
-
-        public void UpgradeFood(int foodIndex) => foodUpgrader.UpgradeFood(foodIndex);
-
-        public void UnlockOrUpgradeIdleFood(int foodIndex) => bakerFoodManager.UnlockOrUpgradeIdleFood(foodIndex);
-
         private void InitializeFoodData()
         {
             for (int i = 0; i < FOOD_COUNT; i++)
             {
-                var foodData = foodDataRepository.GetFoodData(i);
+                var foodData = GetFoodData(i);
                 AddFoodToUpgradeablesData(i);
                 LoadFoodsStats(foodData, i);
             }
@@ -78,8 +90,8 @@ namespace DB_Game
 
         private void LoadFoodsStats(FoodData foodData, int i)
         {
-            InvokeEvent(DBEventNames.OnUpgraded, i);
-            InvokeEvent(DBEventNames.OnHired, i);
+            InvokeEvent(DBEventNames.OnUpgradeTextUpdate, i);
+            InvokeEvent(DBEventNames.OnHiredTextUpdate, i);
             InvokeEvent(DBEventNames.OnLearnRecipe, i);
 
             if (foodData.IsFoodLocked)
@@ -87,5 +99,6 @@ namespace DB_Game
                 InvokeEvent(DBEventNames.FoodBarLocked, i);
             }
         }
+        #endregion
     }
 }

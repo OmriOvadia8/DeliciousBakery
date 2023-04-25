@@ -2,6 +2,6 @@ namespace DB_Game
 {
     public interface IFoodUnlocker
     {
-        void LearnRecipe(int foodID);
+        void LearnRecipe(int foodIndex);
     }
 }

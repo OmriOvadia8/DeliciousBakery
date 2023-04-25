@@ -8,21 +8,18 @@ namespace DB_Game
 {
     public class DoubleProfitComponent : DBLogicMonoBehaviour
     {
-        private static bool isDoubleProfitOn = false;
-        public static int doubleProfitMultiplier = 1;
-        public DoubleProfitData doubleProfitSaveData;
+        private bool isDoubleProfitOn;
+        public static int DoubleProfitMultiplier = 1;
+        private DoubleProfitData doubleProfitSaveData;
+
         [SerializeField] TMP_Text doubleProfitTimerText;
         [SerializeField] GameObject timerBackground;
 
-        private void Awake()
-        {
-            LoadDoubleProfit();
-        }
+        private void Awake() => LoadDoubleProfit();
 
-        private void OnEnable()
-        {
-            AddListener(DBEventNames.OnPause, DoubleProfitPauseCheck);
-        }
+        private void OnEnable() => AddListener(DBEventNames.OnPause, DoubleProfitPauseCheck);
+
+        private void OnDisable() => RemoveListener(DBEventNames.OnPause, DoubleProfitPauseCheck);
 
         private void Start()
         {
@@ -39,18 +36,13 @@ namespace DB_Game
             }
         }
 
-        private void OnDisable()
-        {
-            RemoveListener(DBEventNames.OnPause, DoubleProfitPauseCheck);
-        }
-
         public void DoubleProfitOn()
         {
             timerBackground.SetActive(true);
             doubleProfitSaveData.TurnOnDoubleProfit();
             SaveDoubleProfit();
             isDoubleProfitOn = true;
-            doubleProfitMultiplier = 2;
+            DoubleProfitMultiplier = 2;
         }
 
         public void DoubleProfitOff()
@@ -60,7 +52,7 @@ namespace DB_Game
             SetUpDoubleProfitUI();
             SaveDoubleProfit();
             isDoubleProfitOn = false;
-            doubleProfitMultiplier = 1;
+            DoubleProfitMultiplier = 1;
         }
 
         private void StartDoubleProfit(int currentDuration)
@@ -83,8 +75,7 @@ namespace DB_Game
             int remainingDuration = currentDuration;
 
             DOTween.To(() => remainingDuration, x => remainingDuration = x, 0, remainingDuration)
-                .SetEase(Ease.Linear)
-                .SetId(DBTweenTypes.DoubleProfit)
+                .SetEase(Ease.Linear).SetId(DBTweenTypes.DoubleProfit)
                 .OnUpdate(() =>
                 {
                     if (doubleProfitSaveData.CurrentDoubleProfitDuration != remainingDuration)
@@ -94,10 +85,7 @@ namespace DB_Game
                     }
                     doubleProfitTimerText.text = DBExtension.GetFormattedTimeSpan(remainingDuration);
                 })
-                .OnComplete(() =>
-                {
-                    DoubleProfitOff();
-                });
+                .OnComplete(() => DoubleProfitOff());
         }
 
         private void StartDoubleProfitAfterPause(int durationAfterPause)
@@ -108,8 +96,7 @@ namespace DB_Game
             int remainingDuration = durationAfterPause;
 
             DOTween.To(() => remainingDuration, x => remainingDuration = x, 0, remainingDuration)
-                .SetEase(Ease.Linear)
-                .SetId(DBTweenTypes.DoubleProfit)
+                .SetEase(Ease.Linear).SetId(DBTweenTypes.DoubleProfit)
                 .OnUpdate(() =>
                 {
                     if (doubleProfitSaveData.CurrentDoubleProfitDuration != remainingDuration)
@@ -119,10 +106,7 @@ namespace DB_Game
                     }
                     doubleProfitTimerText.text = DBExtension.GetFormattedTimeSpan(remainingDuration);
                 })
-                .OnComplete(() =>
-                {
-                    DoubleProfitOff();
-                });
+                .OnComplete(() => DoubleProfitOff());
         }
 
         public void ActivateDoubleProfit()

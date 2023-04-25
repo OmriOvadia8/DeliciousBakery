@@ -1,15 +1,13 @@
-using DB_Core;
-
 namespace DB_Game
 {
     public class FoodDataAccess : DBLogicMonoBehaviour
     {
-        protected FoodDataRepository foodDataRepository;
+        protected DBFoodDataRepository foodDataRepository;
 
-        protected virtual void Awake()
-        {
-            foodDataRepository = new FoodDataRepository(DBFoodManager.Foods);
-            DBDebug.Log($"FoodDataAccess: foodDataRepository initialized: {foodDataRepository != null}");
-        }
+        protected virtual void Awake() => foodDataRepository = new DBFoodDataRepository(DBFoodManager.Foods);
+
+        protected FoodData GetFoodData(int foodID) => foodDataRepository.GetFoodData(foodID);
+
+        protected void SaveFoodData() => foodDataRepository.SaveFoodData();
     }
 }

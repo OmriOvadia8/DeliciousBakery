@@ -88,7 +88,7 @@ namespace DB_Game
                     throw new ArgumentException("Invalid CookingType value");
             }
 
-            foodDataRepository.SaveFoodData();
+            SaveFoodData();
         }
 
         protected void ResetSliderAnimation(Slider slider) =>

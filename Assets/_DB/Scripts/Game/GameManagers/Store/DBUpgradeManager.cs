@@ -39,7 +39,7 @@ namespace DB_Game
                 {
                     upgradeable.CurrentLevel++;
                     DBManager.Instance.EventsManager.InvokeEvent(DBEventNames.OnCurrencySet, upgradeCost);
-                    DBManager.Instance.EventsManager.InvokeEvent(DBEventNames.OnUpgraded, typeID);
+                    DBManager.Instance.EventsManager.InvokeEvent(DBEventNames.OnUpgradeTextUpdate, typeID);
                     DBManager.Instance.SaveManager.Save(PlayerUpgradeInventoryData);
 
                     DBManager.Instance.AnalyticsManager.ReportEvent(DBEventType.upgrade_item, new Dictionary<DBDataKeys, object>()
@@ -80,7 +80,7 @@ namespace DB_Game
             if (upgradeable != null)
             {
                     upgradeable.CurrentLevel++;
-                    DBManager.Instance.EventsManager.InvokeEvent(DBEventNames.OnUpgraded, typeID);
+                    DBManager.Instance.EventsManager.InvokeEvent(DBEventNames.OnUpgradeTextUpdate, typeID);
             }
         }
 

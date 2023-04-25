@@ -8,10 +8,10 @@ namespace DB_Game
         public float CookingTime { get; set; }
         public int Profit { get; set; }
         public int UpgradeCost { get; set; }
-        public bool IsIdleFood { get; set; }  
+        public bool IsBakerUnlocked { get; set; }  
         public int HireCost { get; set; }
         public int BakersCount { get; set; }
-        public int CookFoodTimes { get; set; }
+        public int CookFoodMultiplier { get; set; }
         public bool IsFoodLocked { get; set; }
         public int UnlockCost { get; set; }
         public bool IsOnCooldown { get; set; }
@@ -29,11 +29,11 @@ namespace DB_Game
                         float cookingTime,
                         int profit,
                         int upgradeCost,
-                        bool isIdleFood,
+                        bool isBakerUnlocked,
                         int hireCost,
                         int bakersCount,
-                        int cookFoodTimes,
-                        bool isFoodUnlocked,
+                        int cookFoodMultiplier,
+                        bool isFoodlocked,
                         int unlockCost,
                         bool isOnCooldown,
                         float remainingCookingTime,
@@ -47,11 +47,11 @@ namespace DB_Game
             CookingTime = cookingTime;
             Profit = profit;
             UpgradeCost = upgradeCost;
-            IsIdleFood = isIdleFood;
+            IsBakerUnlocked = isBakerUnlocked;
             HireCost = hireCost;
             BakersCount = bakersCount;
-            CookFoodTimes = cookFoodTimes;
-            IsFoodLocked = isFoodUnlocked;
+            CookFoodMultiplier = cookFoodMultiplier;
+            IsFoodLocked = isFoodlocked;
             UnlockCost = unlockCost;
             IsOnCooldown = isOnCooldown;
             RemainingCookingTime = remainingCookingTime;

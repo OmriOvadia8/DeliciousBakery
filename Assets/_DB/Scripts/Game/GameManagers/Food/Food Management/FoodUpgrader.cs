@@ -16,41 +16,63 @@ namespace DB_Game
             this.dbManager = dbManager;
         }
 
-        public void UpgradeFood(int foodID)
+        public void UpgradeFood(int foodIndex)
+        {
+            if (!IsValidFoodData(foodIndex))
+            {
+                return;
+            }
+
+            var foodData = foodDataRepository.GetFoodData(foodIndex);
+            int initialLevel = GetCurrentFoodLevel(foodIndex);
+            int initialUpgradeCost = foodData.UpgradeCost;
+
+            UpgradeFoodItem(foodIndex, initialUpgradeCost);
+
+            if (DidFoodLevelIncrease(initialLevel, foodIndex))
+            {
+                PerformPostUpgradeActions(foodData, foodIndex);
+            }
+        }
+
+        private int GetCurrentFoodLevel(int foodIndex) => 
+            DBGameLogic.Instance.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodIndex).CurrentLevel;
+
+        private void UpgradeFoodItem(int foodIndex, int initialUpgradeCost) =>
+            DBGameLogic.Instance.UpgradeManager.UpgradeItemByID(UpgradeablesTypeID.Food, foodIndex, ScoreTags.GameCurrency, initialUpgradeCost);
+
+        private bool DidFoodLevelIncrease(int initialLevel, int foodIndex) =>
+            initialLevel < DBGameLogic.Instance.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodIndex).CurrentLevel;
+
+        private void PerformPostUpgradeActions(FoodData foodData, int foodIndex)
+        {
+            dbManager.EventsManager.InvokeEvent(DBEventNames.OnUpgradeMoneySpentToast, foodIndex);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.UpgradeParticles, foodIndex);
+            foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE);
+            foodData.UpgradeCost = (int)(foodData.UpgradeCost * COST_INCREASE);
+
+            dbManager.EventsManager.InvokeEvent(DBEventNames.OnUpgradeTextUpdate, foodIndex);
+
+            foodDataRepository.SaveFoodData();
+        }
+
+        private bool IsValidFoodData(int foodIndex)
         {
             if (!foodDataRepository.IsFoodDataLoaded())
             {
                 DBDebug.LogException("Food data not loaded");
-                return;
+                return false;
             }
 
-            var foodData = foodDataRepository.GetFoodData(foodID);
+            var foodData = foodDataRepository.GetFoodData(foodIndex);
 
             if (foodData == null)
             {
-                DBDebug.LogException("Invalid food ID: " + foodID);
-                return;
+                DBDebug.LogException("Invalid food ID: " + foodIndex);
+                return false;
             }
 
-            int initialLevel = DBGameLogic.Instance.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel;
-            int initialUpgradeCost = foodData.UpgradeCost;
-
-            DBGameLogic.Instance.UpgradeManager.UpgradeItemByID(UpgradeablesTypeID.Food, foodID, ScoreTags.GameCurrency, initialUpgradeCost);
-
-            if (initialLevel < DBGameLogic.Instance.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel)
-            {
-                dbManager.EventsManager.InvokeEvent(DBEventNames.OnUpgradeMoneySpentToast, foodID);
-                dbManager.EventsManager.InvokeEvent(DBEventNames.UpgradeParticles, foodID);
-                foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE);
-                foodData.UpgradeCost = (int)(foodData.UpgradeCost * COST_INCREASE);
-
-                dbManager.EventsManager.InvokeEvent(DBEventNames.OnUpgraded, foodID);
-
-                foodDataRepository.SaveFoodData();
-            }
-
-            DBDebug.Log(DBGameLogic.Instance.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodID).CurrentLevel);
+            return true;
         }
     }
-
 }

@@ -1,7 +1,6 @@
 using UnityEngine;
 using DB_Core;
 using TMPro;
-using UnityEngine.UI;
 
 namespace DB_Game
 {

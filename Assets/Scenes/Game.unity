@@ -6301,7 +6301,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CookingUIManager: {fileID: 598245716}
-  buttonsManager: {fileID: 122308650}
 --- !u!1001 &167831956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29056,7 +29055,7 @@ MonoBehaviour:
     - {fileID: 167831958}
     - {fileID: 1126055733}
     - {fileID: 1897932579}
-    CookFoodTimesText:
+    CookFoodMultiplierText:
     - {fileID: 8626929458048587137}
     - {fileID: 896016889}
     - {fileID: 2050835569}
@@ -53057,28 +53056,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79764c0389ac907449c847cedb92898f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LockedFoodBars:
-  - {fileID: 7045266716326481663}
-  - {fileID: 813862588}
-  - {fileID: 491233439}
-  - {fileID: 1028763182}
-  - {fileID: 18747637}
-  - {fileID: 745735740}
-  - {fileID: 2085330852}
-  - {fileID: 1868195125}
-  - {fileID: 1255990148}
-  - {fileID: 685709055}
-  LockedBakersBars:
-  - {fileID: 1190010454}
-  - {fileID: 622836913}
-  - {fileID: 262157879}
-  - {fileID: 1436772131}
-  - {fileID: 1789994080}
-  - {fileID: 1038286572}
-  - {fileID: 449315378}
-  - {fileID: 221660006}
-  - {fileID: 252379641}
-  - {fileID: 1365166693}
 --- !u!4 &1432630590
 Transform:
   m_ObjectHideFlags: 0

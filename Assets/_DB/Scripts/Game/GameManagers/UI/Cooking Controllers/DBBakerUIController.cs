@@ -14,7 +14,7 @@ namespace DB_Game
         private void BakerCookingUIStart(object foodIndex)
         {
             int index = (int)foodIndex;
-            var foodData = foodDataRepository.GetFoodData(index);
+            var foodData = GetFoodData(index);
 
             if (foodData.IsAutoOnCooldown)
             {
@@ -38,7 +38,7 @@ namespace DB_Game
 
         private void BakerCookingTimerAfterPause(int index)
         {
-            var foodData = foodDataRepository.GetFoodData(index);
+            var foodData = GetFoodData(index);
             var bakerCookingTime = foodData.BakerCookingTime;
             var bakerOfflineTime = Manager.TimerManager.GetLastOfflineTimeSeconds();
             foodData.IsAutoOnCooldown = true;
@@ -61,7 +61,7 @@ namespace DB_Game
 
         private void OnBakerTimerComplete(int index)
         {
-            var foodData = foodDataRepository.GetFoodData(index);
+            var foodData = GetFoodData(index);
             BakerCookingCompleteReward(foodData, index);
         }
 
@@ -75,40 +75,47 @@ namespace DB_Game
 
             ResetSliderAnimation(bakerSliderBar);
 
-            var profit = (foodData.Profit * DoubleProfitComponent.doubleProfitMultiplier * foodData.CookFoodTimes)
-                            + (foodData.CookFoodTimes == 0 ? foodData.Profit : 0);
+            var profit = CalculateTotalProfit(foodData);
 
             InvokeEvent(DBEventNames.AddCurrencyUpdate, profit);
             bakerTimerText.text = DBExtension.GetFormattedTimeSpan((int)foodData.BakerCookingTime);
             InvokeEvent(DBEventNames.MoneyToastOnAutoCook, index);
             BakerCookingUIStart(index);
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
-            foodDataRepository.SaveFoodData();
+            SaveFoodData();
         }
 
         private float GetBakerTimeLeftCooking(FoodData foodData, float bakerCookingTime, float bakerOfflineTime)
         {
-            if (bakerOfflineTime > foodData.RemainingBakerCookingTime)
-            {
-                float greaterOfflineBakerTime = bakerCookingTime - ((bakerOfflineTime - foodData.RemainingBakerCookingTime) % bakerCookingTime);
-                return greaterOfflineBakerTime;
-            }
-            else
-            {
-                float LessOfflineBakerTime = foodData.RemainingBakerCookingTime - bakerOfflineTime;
-                return LessOfflineBakerTime;
-            }
+            return bakerOfflineTime > foodData.RemainingBakerCookingTime
+                ? bakerCookingTime - ((bakerOfflineTime - foodData.RemainingBakerCookingTime) % bakerCookingTime)
+                : foodData.RemainingBakerCookingTime - bakerOfflineTime;
         }
 
         private void ResumeBakerCookingAfterPause()
         {
             for (int i = 0; i < DBFoodManager.FOOD_COUNT; i++)
             {
-                if (foodDataRepository.GetFoodData(i).IsIdleFood)
+                if (GetFoodData(i).IsBakerUnlocked)
                 {
                     BakerCookingTimerAfterPause(i);
                 }
             }
+        }
+
+        private int CalculateTotalProfit(FoodData foodData)
+        {
+            int baseProfit = foodData.Profit;
+            int cookFoodMultiplier = foodData.CookFoodMultiplier;
+            int profitMultiplier = DoubleProfitComponent.DoubleProfitMultiplier;
+
+            int multipliedProfit = baseProfit * profitMultiplier;
+            int totalProfit = multipliedProfit * cookFoodMultiplier;
+
+            // Add base profit only when cookFoodTimes is 0
+            totalProfit += (cookFoodMultiplier == 0) ? baseProfit : 0;
+
+            return totalProfit;
         }
 
         private void KillBakerTweensOnPause()
