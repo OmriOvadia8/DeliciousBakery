@@ -143,7 +143,7 @@ namespace DB_Game
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
             int index = (int)obj;
             int foodProfit = GetFoodData(index).Profit;
-            int totalFoodProfit = foodProfit * DoubleProfitComponent.DoubleProfitMultiplier;
+            int totalFoodProfit = foodProfit * DBDoubleProfitController.DoubleProfitMultiplier;
             toastingManager.DisplayMoneyToast(totalFoodProfit, PoolNames.MoneyToast);
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
         }
@@ -154,7 +154,7 @@ namespace DB_Game
             int foodProfit = GetFoodData(index).Profit;
             int cookFoodMultiplier = GetFoodData(index).CookFoodMultiplier;
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
-            int totalFoodProfit = foodProfit * cookFoodMultiplier * DoubleProfitComponent.DoubleProfitMultiplier;
+            int totalFoodProfit = foodProfit * cookFoodMultiplier * DBDoubleProfitController.DoubleProfitMultiplier;
             toastingManager.DisplayMoneyToast(totalFoodProfit, PoolNames.MoneyToast);
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
         }

@@ -9,7 +9,7 @@ namespace DB_Game
         public int PassedTimeFoodRewardCalc(int timePassed)
         {
             int totalReward = 0;
-            int doubleProfit = DoubleProfitComponent.DoubleProfitMultiplier;
+            int doubleProfit = DBDoubleProfitController.DoubleProfitMultiplier;
 
             // Calculate rewards for each idle food
             for (int i = 0; i < DBFoodManager.FOOD_COUNT; i++)

@@ -2075,6 +2075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d3f192a2786654aa8d5bdd2c62c06e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseMaxReward: 500
 --- !u!1 &69083085
 GameObject:
   m_ObjectHideFlags: 0
@@ -54851,13 +54852,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9074374ca1e47e849a4574ce9ada526a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doubleProfitSaveData:
-    IsDoubleProfitOn: 0
-    DoubleProfitMultiplier: 0
-    DoubleProfitDuration: 0
-    CurrentDoubleProfitDuration: 0
   doubleProfitTimerText: {fileID: 639455718}
-  timerBackground: {fileID: 2021730366}
+  timer: {fileID: 2021730366}
 --- !u!1 &1486289190
 GameObject:
   m_ObjectHideFlags: 0

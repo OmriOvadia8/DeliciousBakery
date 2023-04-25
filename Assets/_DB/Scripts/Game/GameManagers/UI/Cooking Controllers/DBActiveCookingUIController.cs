@@ -115,7 +115,7 @@ namespace DB_Game
         private void ActiveCookingCompleteReward(FoodData foodData, int index)
         {
             int profit = foodData.Profit;
-            int profitMultiplier = DoubleProfitComponent.DoubleProfitMultiplier;
+            int profitMultiplier = DBDoubleProfitController.DoubleProfitMultiplier;
             int totalProfit = profit * profitMultiplier;
 
             InvokeEvent(DBEventNames.AddCurrencyUpdate, totalProfit);

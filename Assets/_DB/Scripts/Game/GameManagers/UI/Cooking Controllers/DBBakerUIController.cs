@@ -107,7 +107,7 @@ namespace DB_Game
         {
             int baseProfit = foodData.Profit;
             int cookFoodMultiplier = foodData.CookFoodMultiplier;
-            int profitMultiplier = DoubleProfitComponent.DoubleProfitMultiplier;
+            int profitMultiplier = DBDoubleProfitController.DoubleProfitMultiplier;
 
             int multipliedProfit = baseProfit * profitMultiplier;
             int totalProfit = multipliedProfit * cookFoodMultiplier;
