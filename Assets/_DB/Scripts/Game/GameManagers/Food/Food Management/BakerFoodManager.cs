@@ -47,6 +47,8 @@ namespace DB_Game
 
             foodData.BakersCount++;
             dbManager.EventsManager.InvokeEvent(DBEventNames.OnHiredTextUpdate, foodIndex);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.CheckHiredAchievement, foodIndex);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.CheckTotalHiredAchievement, null);
         }
     }
 }

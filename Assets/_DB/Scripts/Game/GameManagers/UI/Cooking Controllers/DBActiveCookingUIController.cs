@@ -76,7 +76,7 @@ namespace DB_Game
             }
             else
             {
-                ResetActiveCookingUI(foodData, cookingSliderBar, cookingTimerText);
+                ResetActiveCookingUI(foodData, cookingSliderBar, cookingTimerText, index);
             }
 
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
@@ -88,7 +88,7 @@ namespace DB_Game
             var cookingSliderBar = CookingUIManager.uiActiveCookingComponents.CookingSliderBar[index];
             var cookingTimerText = CookingUIManager.uiActiveCookingComponents.CookingTimerText[index];
 
-            ResetActiveCookingUI(foodData, cookingSliderBar, cookingTimerText);
+            ResetActiveCookingUI(foodData, cookingSliderBar, cookingTimerText, index);
             ActiveCookingCompleteReward(foodData, index);
         }
 
@@ -117,17 +117,20 @@ namespace DB_Game
             int profit = foodData.Profit;
             int profitMultiplier = DBDoubleProfitController.DoubleProfitMultiplier;
             int totalProfit = profit * profitMultiplier;
-
+            
             InvokeEvent(DBEventNames.AddCurrencyUpdate, totalProfit);
             InvokeEvent(DBEventNames.MoneyToastOnCook, index);
         }
 
-        private void ResetActiveCookingUI(FoodData foodData, Slider cookingSlider, TMP_Text timeText)
+        private void ResetActiveCookingUI(FoodData foodData, Slider cookingSlider, TMP_Text timeText, int index)
         {
             timeText.text = DBExtension.GetFormattedTimeSpan((int)foodData.CookingTime);
             foodData.IsOnCooldown = false;
             ResetSliderAnimation(cookingSlider);
             foodData.RemainingCookingTime = foodData.CookingTime;
+            foodData.FoodCookedCount++;
+            InvokeEvent(DBEventNames.CheckCookedAchievement, index);
+            InvokeEvent(DBEventNames.CheckTotalCookedAchievement, index);
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
             SaveFoodData();
         }

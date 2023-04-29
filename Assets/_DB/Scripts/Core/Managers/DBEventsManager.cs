@@ -86,6 +86,11 @@ namespace DB_Core
         FoodBarLocked,
         UpgradeParticles,
         CookParticles,
-        CookFoodButtonCheck
+        CookFoodButtonCheck,
+        SaveAchievements,
+        CheckCookedAchievement,
+        CheckHiredAchievement,
+        CheckTotalHiredAchievement,
+        CheckTotalCookedAchievement
     }
 }

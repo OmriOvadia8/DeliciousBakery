@@ -30,7 +30,7 @@ namespace DB_Game
                     ResetCookingUI(i, CookingType.ActiveCooking);
                 }
 
-                if (foodData.IsFoodLocked)
+                if (foodData.IsFoodLocked || !foodData.IsBakerUnlocked)
                 {
                     ResetCookingUI(i, CookingType.BakerCooking);
                     uiActiveCookingComponents.CookButtonAnimation[i].alpha = 0;

@@ -25,7 +25,7 @@ namespace DB_Game
         #region Data Loading
         private void LoadData()
         {
-            DBManager.Instance.SaveManager.Load<FoodDataCollection>(data =>
+            Manager.SaveManager.Load<FoodDataCollection>(data =>
             {
                 if (data != null)
                 {
