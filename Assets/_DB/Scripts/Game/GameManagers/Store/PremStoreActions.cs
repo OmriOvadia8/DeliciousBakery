@@ -6,7 +6,7 @@ namespace DB_Game
     {
         public void WatchAd()
         {
-            DBManager.Instance.AdsManager.ShowAd(null);
+            DBExtension.WatchAd();
         }
     }
 }

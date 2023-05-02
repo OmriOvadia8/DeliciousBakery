@@ -11,7 +11,7 @@ namespace DB_Game
         private bool isDoubleProfitOn;
         public static int DoubleProfitMultiplier = 1;
         private DoubleProfitData doubleProfitSaveData;
-
+        private const string PROFIT_TWEEN = "Profit";
         [SerializeField] private TMP_Text doubleProfitTimerText;
         [SerializeField] private GameObject timer;
 
@@ -76,7 +76,7 @@ namespace DB_Game
             int remainingDuration = currentDuration;
 
             DOTween.To(() => remainingDuration, x => remainingDuration = x, 0, remainingDuration)
-                .SetEase(Ease.Linear).SetId(DBTweenTypes.DoubleProfit)
+                .SetEase(Ease.Linear).SetId(DBTweenTypes.DoubleProfit + PROFIT_TWEEN)
                 .OnUpdate(() =>
                 {
                     if (doubleProfitSaveData.CurrentDoubleProfitDuration != remainingDuration)
@@ -97,7 +97,7 @@ namespace DB_Game
             int remainingDuration = durationAfterPause;
 
             DOTween.To(() => remainingDuration, x => remainingDuration = x, 0, remainingDuration)
-                .SetEase(Ease.Linear).SetId(DBTweenTypes.DoubleProfit)
+                .SetEase(Ease.Linear).SetId(DBTweenTypes.DoubleProfit + PROFIT_TWEEN)
                 .OnUpdate(() =>
                 {
                     if (doubleProfitSaveData.CurrentDoubleProfitDuration != remainingDuration)
@@ -166,6 +166,6 @@ namespace DB_Game
             StartDoubleProfitAfterPause(currentTime);
         }
 
-        private void KillDoubleProfitTweenTimer() => DOTween.Kill(DBTweenTypes.DoubleProfit);
+        private void KillDoubleProfitTweenTimer() => DOTween.Kill(DBTweenTypes.DoubleProfit + PROFIT_TWEEN);
     }
 }

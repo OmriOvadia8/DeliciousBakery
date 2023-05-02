@@ -101,4 +101,19 @@ namespace DB_Game
         }
         #endregion
     }
+
+    public enum FoodTypes
+    {
+        Cookies,
+        Chocolates,
+        Donuts,
+        Icecreams,
+        Cupcakes,
+        Brownies,
+        Cheesecakes,
+        Pizzas,
+        ChocoCakes,
+        Teabox
+    }
+
 }

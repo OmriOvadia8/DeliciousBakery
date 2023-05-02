@@ -11,17 +11,17 @@ namespace DB_Game
 
         private AchievementData Achievements => achievementsManager.AchievementsData.Achievements;
         
-        private const int ACHIEVEMENT_COUNT_10 = 1;
-        private const int ACHIEVEMENT_COUNT_100 = 100;
-        private const int ACHIEVEMENT_COUNT_500 = 500;
-        private const int ACHIEVEMENT_COUNT_1000 = 1000;
-        private const int ACHIEVEMENT_COUNT_5000 = 5000;
+        public const int ACHIEVEMENT_COUNT_10 = 1;
+        public const int ACHIEVEMENT_COUNT_100 = 100;
+        public const int ACHIEVEMENT_COUNT_500 = 500;
+        public const int ACHIEVEMENT_COUNT_1000 = 1000;
+        public const int ACHIEVEMENT_COUNT_5000 = 5000;
 
-        private const int ACHIEVEMENT_TOTAL_100 = 3;
-        private const int ACHIEVEMENT_TOTAL_1000 = 1000;
-        private const int ACHIEVEMENT_TOTAL_5000 = 5000;
-        private const int ACHIEVEMENT_TOTAL_10000 = 10000;
-        private const int ACHIEVEMENT_TOTAL_20000 = 20000;
+        public const int ACHIEVEMENT_TOTAL_100 = 3;
+        public const int ACHIEVEMENT_TOTAL_1000 = 1000;
+        public const int ACHIEVEMENT_TOTAL_5000 = 5000;
+        public const int ACHIEVEMENT_TOTAL_10000 = 10000;
+        public const int ACHIEVEMENT_TOTAL_20000 = 20000;
 
         private readonly int[] individualAchievements =
             { ACHIEVEMENT_COUNT_10, ACHIEVEMENT_COUNT_100, ACHIEVEMENT_COUNT_500, ACHIEVEMENT_COUNT_1000, ACHIEVEMENT_COUNT_5000 };

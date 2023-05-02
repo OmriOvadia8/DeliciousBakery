@@ -3,15 +3,16 @@ using UnityEngine.Advertisements;
 
 namespace DB_Core
 {
-    public class DBAdsManager : IUnityAdsLoadListener, IUnityAdsShowListener
+    public class DBAdsManager : IUnityAdsLoadListener, IUnityAdsShowListener, IUnityAdsInitializationListener
     {
         private bool isAdLoaded;
         private Action<bool> onShowComplete;
         private Action<bool> onShowRewardedComplete;
+        private readonly string gameID = "5215648";
 
         public DBAdsManager()
         {
-            Advertisement.Initialize("5215648");
+            Advertisement.Initialize(gameID);
             LoadAd();
         }
 
@@ -90,6 +91,16 @@ namespace DB_Core
 
             onShowComplete = null;
             onShowRewardedComplete = null;
+        }
+
+        public void OnInitializationComplete()
+        {
+            DBDebug.Log("Unity Ads initialization complete.");
+        }
+
+        public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+        {
+            DBDebug.LogException($"Unity Ads initialization failed: {error} - {message}");
         }
     }
 }
