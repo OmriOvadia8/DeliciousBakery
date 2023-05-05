@@ -8,6 +8,7 @@ namespace DB_Game
         private DBManager dbManager;
 
         private const float BAKER_COST_INCREASE = 1.3f;
+        private const int PER_BAKERS = 3;
 
         public BakerFoodManager(IFoodDataRepository foodDataRepository, DBManager dbManager)
         {
@@ -40,7 +41,7 @@ namespace DB_Game
             dbManager.EventsManager.InvokeEvent(DBEventNames.StartBakerCooking, foodIndex);
             foodData.HireCost = (int)(foodData.HireCost * BAKER_COST_INCREASE);
 
-            if (foodData.BakersCount % 3 == 0)
+            if (foodData.BakersCount % PER_BAKERS == 0)
             {
                 foodData.CookFoodMultiplier++;
             }
@@ -48,6 +49,7 @@ namespace DB_Game
             foodData.BakersCount++;
             dbManager.EventsManager.InvokeEvent(DBEventNames.OnHiredTextUpdate, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.CheckHiredAchievement, foodIndex);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.CurrentHireBakerAchievementStatus, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.CheckTotalHiredAchievement, null);
         }
     }

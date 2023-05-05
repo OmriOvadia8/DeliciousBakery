@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 1554361287514531859}
   - component: {fileID: 1554361287514531860}
   m_Layer: 5
-  m_Name: AchievementStarIcon1 (2)
+  m_Name: Achievement Hire Star Icon3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -527,7 +527,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -43.6, y: -100}
-  m_SizeDelta: {x: 428.3, y: 200}
+  m_SizeDelta: {x: 500, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1554361287616144289
 GameObject:
@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 1554361287616144302}
   - component: {fileID: 1554361287616144303}
   m_Layer: 5
-  m_Name: Achievement Title
+  m_Name: Achievement Hire Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -622,8 +622,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -676,7 +676,7 @@ GameObject:
   - component: {fileID: 1554361287825530601}
   - component: {fileID: 1554361287825530602}
   m_Layer: 5
-  m_Name: AchievementStarIcon0
+  m_Name: Achievement Hire Star Icon0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -752,7 +752,7 @@ GameObject:
   - component: {fileID: 1554361288291863891}
   - component: {fileID: 1554361288291863892}
   m_Layer: 5
-  m_Name: AchievementStarIcon1
+  m_Name: Achievement Hire Star Icon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -828,7 +828,7 @@ GameObject:
   - component: {fileID: 1554361288310026403}
   - component: {fileID: 1554361288310026404}
   m_Layer: 5
-  m_Name: AchievementStarIcon1 (3)
+  m_Name: Achievement Hire Star Icon4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -904,7 +904,7 @@ GameObject:
   - component: {fileID: 1554361288496896528}
   - component: {fileID: 1554361288496896529}
   m_Layer: 5
-  m_Name: Achievement Description
+  m_Name: Achievement Hire Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -927,8 +927,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.0000038146973, y: 70}
-  m_SizeDelta: {x: 500, y: 140}
+  m_AnchoredPosition: {x: 0.0000038146973, y: 65}
+  m_SizeDelta: {x: 500, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1554361288496896528
 CanvasRenderer:
@@ -985,8 +985,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 37
+  m_fontSizeBase: 37
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1039,7 +1039,7 @@ GameObject:
   - component: {fileID: 1554361289283129815}
   - component: {fileID: 1554361289283129832}
   m_Layer: 5
-  m_Name: AchievementStarIcon1 (1)
+  m_Name: Achievement Hire Star Icon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1191,7 +1191,7 @@ GameObject:
   - component: {fileID: 8274809441316746173}
   - component: {fileID: 4068098030551323036}
   m_Layer: 5
-  m_Name: AchiementProfit.text0
+  m_Name: AchievementProfit.text0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1324,7 +1324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4088967197395120021}
   m_Layer: 5
-  m_Name: ProgressBar0
+  m_Name: Progress Hire Bar0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6237,7 +6237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4346773773742755019}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: Icons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6277,7 +6277,7 @@ GameObject:
   - component: {fileID: 4346773774324642133}
   - component: {fileID: 4346773774324642132}
   m_Layer: 5
-  m_Name: Baker Icon
+  m_Name: Achievement Hire Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6589,7 +6589,7 @@ GameObject:
   - component: {fileID: 8930636319591178373}
   - component: {fileID: 919420967254486733}
   m_Layer: 5
-  m_Name: ProgressLoad0
+  m_Name: Progress Hire Load0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6852,7 +6852,7 @@ GameObject:
   - component: {fileID: 1387408292985467592}
   - component: {fileID: 2758613871900022437}
   m_Layer: 5
-  m_Name: CountKeep.text
+  m_Name: Count Hire Keep.text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -7,27 +7,12 @@ namespace DB_Game
     // DBAchievementsController handles the logic for checking and updating achievements related to cooking and hiring bakers.
     public class DBAchievementsController : FoodDataAccess
     {
-        [SerializeField] DBAchievementsManager achievementsManager;
+        [SerializeField] DBAchievementsDataManager achievementsManager;
 
-        private AchievementData Achievements => achievementsManager.AchievementsData.Achievements;
+        public AchievementData Achievements => achievementsManager.AchievementsData.Achievements;
         
-        public const int ACHIEVEMENT_COUNT_10 = 1;
-        public const int ACHIEVEMENT_COUNT_100 = 100;
-        public const int ACHIEVEMENT_COUNT_500 = 500;
-        public const int ACHIEVEMENT_COUNT_1000 = 1000;
-        public const int ACHIEVEMENT_COUNT_5000 = 5000;
-
-        public const int ACHIEVEMENT_TOTAL_100 = 3;
-        public const int ACHIEVEMENT_TOTAL_1000 = 1000;
-        public const int ACHIEVEMENT_TOTAL_5000 = 5000;
-        public const int ACHIEVEMENT_TOTAL_10000 = 10000;
-        public const int ACHIEVEMENT_TOTAL_20000 = 20000;
-
-        private readonly int[] individualAchievements =
-            { ACHIEVEMENT_COUNT_10, ACHIEVEMENT_COUNT_100, ACHIEVEMENT_COUNT_500, ACHIEVEMENT_COUNT_1000, ACHIEVEMENT_COUNT_5000 };
-
-        private readonly int[] totalAchievements =
-            { ACHIEVEMENT_TOTAL_100, ACHIEVEMENT_TOTAL_1000, ACHIEVEMENT_TOTAL_5000, ACHIEVEMENT_TOTAL_10000, ACHIEVEMENT_TOTAL_20000 };
+        public static readonly int[] FoodItemAchievementGoals = { 1, 2, 3, 4, 5 }; //{ 1, 3, 500, 1000, 5000 };
+        public static readonly int[] GlobalAchievementGoals = { 100, 1000, 5000, 10000, 20000 };
 
         private void OnEnable() => RegisterEvents();
 
@@ -50,15 +35,14 @@ namespace DB_Game
                 index => Achievements.Cook5000[index] = true
                                                             };
 
-            for (int i = 0; i < individualAchievements.Length; i++)
+            for (int i = 0; i < FoodItemAchievementGoals.Length; i++)
             {
-                if (currentFoodCount >= individualAchievements[i])
+                if (currentFoodCount >= FoodItemAchievementGoals[i])
                 {
                     setAchievement[i](index);
+                    achievementsManager.SaveAchievementsData();
                 }
             }
-
-            achievementsManager.SaveAchievementsData();
         }
 
         private void CheckHiredBakersAchievements(object foodIndex)
@@ -75,15 +59,14 @@ namespace DB_Game
                 index => Achievements.Hire5000[index] = true
                                                             };
 
-            for (int i = 0; i < individualAchievements.Length; i++)
+            for (int i = 0; i < FoodItemAchievementGoals.Length; i++)
             {
-                if (currentBakersCount >= individualAchievements[i])
+                if (currentBakersCount >= FoodItemAchievementGoals[i])
                 {
                     setAchievement[i](index);
+                    achievementsManager.SaveAchievementsData();
                 }
             }
-
-            achievementsManager.SaveAchievementsData();
         }
         #endregion
 
@@ -103,15 +86,14 @@ namespace DB_Game
                 () => Achievements.TotalCooked20000 = true
                                                           };
 
-            for (int i = 0; i < totalAchievements.Length; i++)
+            for (int i = 0; i < GlobalAchievementGoals.Length; i++)
             {
-                if (totalCookedFoodAmount >= totalAchievements[i])
+                if (totalCookedFoodAmount >= GlobalAchievementGoals[i])
                 {
                     setAchievement[i]();
+                    achievementsManager.SaveAchievementsData();
                 }
-            }
-
-            achievementsManager.SaveAchievementsData();
+            }  
         }
 
         private void CheckTotalHiredBakersAchievements(object unusedParam = null)
@@ -126,15 +108,14 @@ namespace DB_Game
                 () => Achievements.TotalHired20000 = true
                                                          };
 
-            for (int i = 0; i < totalAchievements.Length; i++)
+            for (int i = 0; i < GlobalAchievementGoals.Length; i++)
             {
-                if (totalHiredBakersAmount >= totalAchievements[i])
+                if (totalHiredBakersAmount >= GlobalAchievementGoals[i])
                 {
                     setAchievement[i]();
+                    achievementsManager.SaveAchievementsData();
                 }
-            }
-
-            achievementsManager.SaveAchievementsData();
+            }    
         }
         #endregion
 

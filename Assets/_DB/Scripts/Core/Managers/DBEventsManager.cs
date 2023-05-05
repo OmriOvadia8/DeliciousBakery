@@ -91,6 +91,8 @@ namespace DB_Core
         CheckCookedAchievement,
         CheckHiredAchievement,
         CheckTotalHiredAchievement,
-        CheckTotalCookedAchievement
+        CheckTotalCookedAchievement,
+        CurrentMakeFoodAchievementStatus,
+        CurrentHireBakerAchievementStatus
     }
 }

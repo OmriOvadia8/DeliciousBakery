@@ -104,16 +104,17 @@ namespace DB_Game
 
     public enum FoodTypes
     {
-        Cookies,
-        Chocolates,
-        Donuts,
-        Icecreams,
-        Cupcakes,
-        Brownies,
-        Cheesecakes,
-        Pizzas,
-        ChocoCakes,
-        Teabox
+        Cookies = 0,
+        Chocolates = 1,
+        Donuts = 2,
+        Icecreams = 3,
+        Cupcakes = 4,
+        Brownies = 5,
+        Cheesecakes = 6,
+        Pizzas = 7,
+        ChocoCakes =8,
+        Teabox = 9,
+        All
     }
 
 }

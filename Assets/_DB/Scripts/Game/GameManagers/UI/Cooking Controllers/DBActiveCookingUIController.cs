@@ -132,6 +132,7 @@ namespace DB_Game
             InvokeEvent(DBEventNames.CheckCookedAchievement, index);
             InvokeEvent(DBEventNames.CheckTotalCookedAchievement, index);
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
+            InvokeEvent(DBEventNames.CurrentMakeFoodAchievementStatus, index);
             SaveFoodData();
         }
 
