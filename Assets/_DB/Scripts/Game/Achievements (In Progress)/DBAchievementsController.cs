@@ -8,11 +8,14 @@ namespace DB_Game
     public class DBAchievementsController : FoodDataAccess
     {
         [SerializeField] DBAchievementsDataManager achievementsManager;
-
         public AchievementData Achievements => achievementsManager.AchievementsData.Achievements;
+        public AchievementClaimData AchievementClaimReward => achievementsManager.AchievementClaimData;
         
         public static readonly int[] FoodItemAchievementGoals = { 1, 2, 3, 4, 5 }; //{ 1, 3, 500, 1000, 5000 };
         public static readonly int[] GlobalAchievementGoals = { 100, 1000, 5000, 10000, 20000 };
+
+        public static readonly int[] FoodItemsAchievementsRewards = { 100, 200, 300, 500, 1000 };
+        public static readonly int[] GlobalAchievementsRewards = { 200, 400, 750, 1250, 2000 };
 
         private void OnEnable() => RegisterEvents();
 

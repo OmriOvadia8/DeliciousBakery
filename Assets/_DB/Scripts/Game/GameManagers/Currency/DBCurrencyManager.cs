@@ -35,8 +35,9 @@ namespace DB_Game
 
         #region Stars
 
-        private void UpdateStars(int starIncrease)
+        private void EarnStars(object stars)
         {
+            int starIncrease = (int)stars;
             GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.PremiumCurrency, starIncrease);
 
             if (GameLogic.ScoreManager.TryGetScoreByTag(ScoreTags.PremiumCurrency, ref currencySaveData.StarsAmount))
@@ -46,7 +47,7 @@ namespace DB_Game
             }
         }
 
-        private void UpdateStarsOnAction(object obj) => UpdateStars(initialStarsAmount);
+        private void UpdateStarsOnAction(object obj) => EarnStars(initialStarsAmount);
 
         #endregion
 
@@ -69,6 +70,7 @@ namespace DB_Game
             AddListener(DBEventNames.CurrencyUpdateUI, UpdateCoinsOnAction);
             AddListener(DBEventNames.PremCurrencyUpdateUI, UpdateStarsOnAction);
             AddListener(DBEventNames.AddCurrencyUpdate, EarnCoins);
+            AddListener(DBEventNames.AddStarsUpdate, EarnStars);
         }
 
         private void UnregisterEvents()
@@ -76,6 +78,7 @@ namespace DB_Game
             RemoveListener(DBEventNames.CurrencyUpdateUI, UpdateCoinsOnAction);
             RemoveListener(DBEventNames.PremCurrencyUpdateUI, UpdateStarsOnAction);
             RemoveListener(DBEventNames.AddCurrencyUpdate, EarnCoins);
+            RemoveListener(DBEventNames.AddStarsUpdate, EarnStars);
         }
 
         #endregion

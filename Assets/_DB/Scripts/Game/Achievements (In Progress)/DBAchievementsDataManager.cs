@@ -5,6 +5,7 @@ namespace DB_Game
     public class DBAchievementsDataManager : DBLogicMonoBehaviour
     {
         public AchievementDataCollection AchievementsData;
+        public AchievementClaimData AchievementClaimData;
         private const string ACHIEVEMENTS_CONFIG_PATH = "achievements";
 
         private void OnEnable() => LoadAchievementsData();
@@ -22,6 +23,8 @@ namespace DB_Game
                     LoadDefaultAchievementsData();
                 }
             });
+
+            LoadAchievementClaims();
         }
 
         private void LoadSavedAchievementsData(AchievementDataCollection data)
@@ -46,6 +49,15 @@ namespace DB_Game
         public void SaveAchievementsData()
         {
             Manager.SaveManager.Save(AchievementsData);
+        }
+
+        private void LoadAchievementClaims() =>
+        Manager.SaveManager.Load((AchievementClaimData data) =>
+        AchievementClaimData = data ?? new AchievementClaimData(DBFoodManager.FOOD_COUNT, DBAchievementsController.FoodItemsAchievementsRewards.Length));
+
+        public void SaveAchievementClaims()
+        {
+            Manager.SaveManager.Save(AchievementClaimData);
         }
     }
 }

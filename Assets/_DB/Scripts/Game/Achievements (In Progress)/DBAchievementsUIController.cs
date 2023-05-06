@@ -12,6 +12,7 @@ namespace DB_Game
         [SerializeField] AchievementMakeFoodComponents makeFoodAchievementComponents;
         [SerializeField] AchievementHireBakerComponents hireBakerAchievementComponents;
         [SerializeField] DBAchievementsController achievementController;
+        [SerializeField] AchievementsDOTweenController achievementsDOTweenController;
         private AchievementTextProvider achievementsTextProvider;
 
         private void OnEnable()
@@ -32,14 +33,6 @@ namespace DB_Game
             InitializeCurrentAchievementsState();
         }
 
-        public void Testing()
-        {
-            DBDebug.Log(achievementController.Achievements.Cook10[0]);
-            DBDebug.Log(achievementController.Achievements.Hire10[0] + "Hired");
-            DBDebug.Log(GetCurrentFoodAchievementGoal(0));
-
-        }
-
         private void UpdateMakeFoodAchievementsText(object index)
         {
             int foodIndex = (int)index;
@@ -48,9 +41,11 @@ namespace DB_Game
             UpdateMakeFoodAchievementTitle(foodIndex, foodName, currentMilestoneIndex);
             CheckIfMakeFoodAchievementCompleted(foodIndex);
             int goal = GetCurrentFoodAchievementGoal(currentMilestoneIndex);
-
+            ClaimRewardActivation(foodIndex);
+            achievementsDOTweenController.UpdateMakeFoodProgress(foodIndex, goal);
             UpdateMakeFoodAchievementDescription(goal, foodIndex, foodName);
             UpdateMakeFoodStars(foodIndex, currentMilestoneIndex);
+            
         }
 
         private void UpdateMakeFoodAchievementTitle(int foodIndex , FoodTypes foodName, CookMilestoneIndex currentMilestoneIndex)
@@ -100,8 +95,10 @@ namespace DB_Game
             UpdateHireBakerAchievementTitle(foodIndex, foodName, currentMilestoneIndex);
             CheckIfHireBakerAchievementCompleted(foodIndex);
             int goal = GetCurrentHireBakerGoal(currentMilestoneIndex);
+            achievementsDOTweenController.UpdateHireBakerProgress(foodIndex, goal);
             UpdateHireBakerStars(foodIndex, currentMilestoneIndex);
             UpdateHireBakerAchievementDescription(goal, foodIndex, foodName);
+            ClaimRewardActivation(foodIndex);
         }
 
         private void UpdateHireBakerAchievementTitle(int foodIndex, FoodTypes foodName, HireMilestoneIndex completedMilestoneIndex)
@@ -193,6 +190,7 @@ namespace DB_Game
 
             if (achievementController.Achievements.Cook1000[foodIndex])
             {
+                
                 currentCookMilestone = CookMilestoneIndex.Cook5000;
             }
             else if (achievementController.Achievements.Cook500[foodIndex])
@@ -235,6 +233,61 @@ namespace DB_Game
 
             return currentHireMilestone;
         }
+
+        private void ClaimRewardActivation(int foodIndex)
+        {
+            if(!achievementController.AchievementClaimReward.IsMakeFoodRewardClaimed[foodIndex, 0] && achievementController.Achievements.Cook10[foodIndex])
+            {
+                achievementsDOTweenController.MakeFoodClaimButtonStatus(foodIndex, 0, true);
+            }
+
+            if (!achievementController.AchievementClaimReward.IsMakeFoodRewardClaimed[foodIndex, 1] && achievementController.Achievements.Cook100[foodIndex])
+            {
+                achievementsDOTweenController.MakeFoodClaimButtonStatus(foodIndex, 1, true);
+            }
+
+            if (!achievementController.AchievementClaimReward.IsMakeFoodRewardClaimed[foodIndex, 2] && achievementController.Achievements.Cook500[foodIndex])
+            {
+                achievementsDOTweenController.MakeFoodClaimButtonStatus(foodIndex, 2, true);
+            }
+
+            if (!achievementController.AchievementClaimReward.IsMakeFoodRewardClaimed[foodIndex, 3] && achievementController.Achievements.Cook1000[foodIndex])
+            {
+                achievementsDOTweenController.MakeFoodClaimButtonStatus(foodIndex, 3, true);
+            }
+
+            if (!achievementController.AchievementClaimReward.IsMakeFoodRewardClaimed[foodIndex, 4] && achievementController.Achievements.Cook5000[foodIndex])
+            {
+                achievementsDOTweenController.MakeFoodClaimButtonStatus(foodIndex, 4, true);
+            }
+
+            if (!achievementController.AchievementClaimReward.IsHireBakerRewardClaimed[foodIndex, 0] && achievementController.Achievements.Hire10[foodIndex])
+            {
+                achievementsDOTweenController.HireBakerClaimButtonStatus(foodIndex, 0, true);
+            }
+
+            if (!achievementController.AchievementClaimReward.IsHireBakerRewardClaimed[foodIndex, 1] && achievementController.Achievements.Hire100[foodIndex])
+            {
+                achievementsDOTweenController.HireBakerClaimButtonStatus(foodIndex, 1, true);
+            }
+
+            if (!achievementController.AchievementClaimReward.IsHireBakerRewardClaimed[foodIndex, 2] && achievementController.Achievements.Hire500[foodIndex])
+            {
+                achievementsDOTweenController.HireBakerClaimButtonStatus(foodIndex, 2, true);
+            }
+
+            if (!achievementController.AchievementClaimReward.IsHireBakerRewardClaimed[foodIndex, 3] && achievementController.Achievements.Hire1000[foodIndex])
+            {
+                achievementsDOTweenController.HireBakerClaimButtonStatus(foodIndex, 3, true);
+            }
+
+            if (!achievementController.AchievementClaimReward.IsHireBakerRewardClaimed[foodIndex, 4] && achievementController.Achievements.Hire5000[foodIndex])
+            {
+                achievementsDOTweenController.HireBakerClaimButtonStatus(foodIndex, 4, true);
+            }
+        }
+
+      
 
         private int GetCurrentAchievementGoal(int index)
         {
