@@ -114,7 +114,6 @@ namespace DB_Game
         Pizzas = 7,
         ChocoCakes =8,
         Teabox = 9,
-        All
     }
 
 }

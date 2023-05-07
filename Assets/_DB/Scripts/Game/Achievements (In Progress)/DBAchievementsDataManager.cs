@@ -31,7 +31,6 @@ namespace DB_Game
         {
             AchievementsData = data;
             DBDebug.Log("Saved achievements data loaded successfully");
-
         }
 
         private void LoadDefaultAchievementsData()

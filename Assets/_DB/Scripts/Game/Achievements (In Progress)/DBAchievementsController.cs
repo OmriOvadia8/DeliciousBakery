@@ -12,10 +12,7 @@ namespace DB_Game
         public AchievementClaimData AchievementClaimReward => achievementsManager.AchievementClaimData;
         
         public static readonly int[] FoodItemAchievementGoals = { 1, 2, 3, 4, 5 }; //{ 1, 3, 500, 1000, 5000 };
-        public static readonly int[] GlobalAchievementGoals = { 100, 1000, 5000, 10000, 20000 };
-
         public static readonly int[] FoodItemsAchievementsRewards = { 100, 200, 300, 500, 1000 };
-        public static readonly int[] GlobalAchievementsRewards = { 200, 400, 750, 1250, 2000 };
 
         private void OnEnable() => RegisterEvents();
 
@@ -73,93 +70,16 @@ namespace DB_Game
         }
         #endregion
 
-        // This region's methods check if the player has reached any total cooked food / hired bakers count achievement milestones,
-        // considering all food items, based on the total amount.
-        // It sets the corresponding achievement property to true if the milestone is reached.
-        #region Total Cooked/Hired Achievement
-        private void CheckTotalCookedFoodAchievements(object unusedParam = null)
-        {
-            int totalCookedFoodAmount = TotalCookedFoodAmount();
-
-            Action[] setAchievement = {
-                () => Achievements.TotalCooked100 = true,
-                () => Achievements.TotalCooked1000 = true,
-                () => Achievements.TotalCooked5000 = true,
-                () => Achievements.TotalCooked10000 = true,
-                () => Achievements.TotalCooked20000 = true
-                                                          };
-
-            for (int i = 0; i < GlobalAchievementGoals.Length; i++)
-            {
-                if (totalCookedFoodAmount >= GlobalAchievementGoals[i])
-                {
-                    setAchievement[i]();
-                    achievementsManager.SaveAchievementsData();
-                }
-            }  
-        }
-
-        private void CheckTotalHiredBakersAchievements(object unusedParam = null)
-        {
-            int totalHiredBakersAmount = TotalHiredBakersAmount();
-
-            Action[] setAchievement = {
-                () => Achievements.TotalHired100 = true,
-                () => Achievements.TotalHired1000 = true,
-                () => Achievements.TotalHired5000 = true,
-                () => Achievements.TotalHired10000 = true,
-                () => Achievements.TotalHired20000 = true
-                                                         };
-
-            for (int i = 0; i < GlobalAchievementGoals.Length; i++)
-            {
-                if (totalHiredBakersAmount >= GlobalAchievementGoals[i])
-                {
-                    setAchievement[i]();
-                    achievementsManager.SaveAchievementsData();
-                }
-            }    
-        }
-        #endregion
-
-        private int TotalCookedFoodAmount()
-        {
-            int totalCookedFoodAmount = 0;
-
-            for (int i = 0; i < DBFoodManager.FOOD_COUNT; i++)
-            {
-                totalCookedFoodAmount += GetFoodData(i).FoodCookedCount;
-            }
-
-            return totalCookedFoodAmount;
-        }
-
-        private int TotalHiredBakersAmount()
-        {
-            int totalHiredBakersAmount = 0;
-
-            for (int i = 0; i < DBFoodManager.FOOD_COUNT; i++)
-            {
-                totalHiredBakersAmount += GetFoodData(i).BakersCount;
-            }
-
-            return totalHiredBakersAmount;
-        }
-
         private void RegisterEvents()
         {
             AddListener(DBEventNames.CheckCookedAchievement, CheckCookedFoodAchievements);
             AddListener(DBEventNames.CheckHiredAchievement, CheckHiredBakersAchievements);
-            AddListener(DBEventNames.CheckTotalHiredAchievement, CheckTotalHiredBakersAchievements);
-            AddListener(DBEventNames.CheckTotalCookedAchievement, CheckTotalCookedFoodAchievements);
         }
 
         private void UnregisterEvents()
         {
             RemoveListener(DBEventNames.CheckCookedAchievement, CheckCookedFoodAchievements);
             RemoveListener(DBEventNames.CheckHiredAchievement, CheckHiredBakersAchievements);
-            RemoveListener(DBEventNames.CheckTotalHiredAchievement, CheckTotalHiredBakersAchievements);
-            RemoveListener(DBEventNames.CheckTotalCookedAchievement, CheckTotalCookedFoodAchievements);
         }
     }
 }
