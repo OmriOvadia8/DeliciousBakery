@@ -156,7 +156,6 @@ namespace DB_Game
                 makeFoodAchievementComponents.AchievementMakeFoodCompleteBar[foodIndex].SetActive(true);
                 makeFoodAchievementComponents.AchievementMakeFoodLoadProgressBar[foodIndex].SetActive(false);
                 makeFoodAchievementComponents.AchievementMakeFoodDescription[foodIndex].gameObject.SetActive(false);
-                makeFoodAchievementComponents.AchievementMakeFoodTitle[foodIndex].gameObject.SetActive(false);
 
                 Image[] stars = makeFoodAchievementComponents.AchievementMakeFoodStars[foodIndex].Stars;
                 for (int i = 0; i < stars.Length; i++)
@@ -173,7 +172,6 @@ namespace DB_Game
                 hireBakerAchievementComponents.AchievementHireBakerCompleteBar[foodIndex].SetActive(true);
                 hireBakerAchievementComponents.AchievementHireBakerLoadProgressBar[foodIndex].SetActive(false);
                 hireBakerAchievementComponents.AchievementHireBakerDescription[foodIndex].gameObject.SetActive(false);
-                hireBakerAchievementComponents.AchievementHireBakerTitle[foodIndex].gameObject.SetActive(false);
                 
                 Image[] stars = hireBakerAchievementComponents.AchievementHireBakerStars[foodIndex].Stars;
                 for (int i = 0; i < stars.Length; i++)

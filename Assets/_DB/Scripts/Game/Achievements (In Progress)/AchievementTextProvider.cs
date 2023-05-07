@@ -18,7 +18,7 @@ namespace DB_Game
                 foodTitles[foodName] = new string[]
                 {
                     $"{foodName} Amateur",
-                    $"{foodName} Enthusiast",
+                    $"{foodName} Fanatic",
                     $"{foodName} Expert",
                     $"{foodName} Master",
                     $"{foodName} Legend"

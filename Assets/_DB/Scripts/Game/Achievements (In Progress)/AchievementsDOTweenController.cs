@@ -50,13 +50,6 @@ namespace DB_Game
             }
         }
 
-
-
-
-
-
-
-
         public void UpdateProgress(Slider progressSlider,int progress, int goal)
         {
             float targetValue = (float)progress / goal;

@@ -89570,6 +89570,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Count Cook Keep.text0
       objectReference: {fileID: 0}
+    - target: {fileID: 3902175138171937254, guid: 708c7cb0418581a4cb46c00ee22b74ed, type: 3}
+      propertyPath: m_Name
+      value: Reward
+      objectReference: {fileID: 0}
     - target: {fileID: 4337143194430229062, guid: 708c7cb0418581a4cb46c00ee22b74ed, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

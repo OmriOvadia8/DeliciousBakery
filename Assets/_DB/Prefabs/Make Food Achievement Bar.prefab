@@ -5080,9 +5080,9 @@ RectTransform:
   m_Father: {fileID: 355529444665009813}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -70, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 44, y: 0}
   m_SizeDelta: {x: 140, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1395948388315821413
@@ -5192,7 +5192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1456376846425784176}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: Reward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5466,7 +5466,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -53.1, y: 4.4}
+  m_AnchoredPosition: {x: -53, y: 4}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7241745674564845499
@@ -10662,7 +10662,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2655857313854573811}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: Reward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10966,7 +10966,7 @@ GameObject:
   - component: {fileID: 7005586611559729478}
   - component: {fileID: 737328140800101686}
   m_Layer: 5
-  m_Name: CoinIcon
+  m_Name: Star Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10989,7 +10989,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -53.1, y: 4.4}
+  m_AnchoredPosition: {x: -53, y: 4}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7005586611559729478
@@ -11040,7 +11040,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6930187098482729367}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: Reward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11078,7 +11078,7 @@ GameObject:
   m_Component:
   - component: {fileID: 355529444665009813}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: Reward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11275,9 +11275,9 @@ RectTransform:
   m_Father: {fileID: 2655857313854573811}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -70, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 44, y: 0}
   m_SizeDelta: {x: 140, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4576675083438846978
@@ -11308,7 +11308,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000
+  m_text: 500
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cdbfeeb2da4a6084693b14c9cd43e29a, type: 2}
   m_sharedMaterial: {fileID: 8180637297357037130, guid: cdbfeeb2da4a6084693b14c9cd43e29a, type: 2}
@@ -11389,7 +11389,7 @@ GameObject:
   - component: {fileID: 6682126493798040642}
   - component: {fileID: 3252483833154757632}
   m_Layer: 5
-  m_Name: CoinIcon
+  m_Name: Star Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11412,7 +11412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -53.1, y: 4.4}
+  m_AnchoredPosition: {x: -53, y: 4}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6682126493798040642
@@ -11737,7 +11737,7 @@ GameObject:
   - component: {fileID: 3174254245343857582}
   - component: {fileID: 2725044271553309354}
   m_Layer: 5
-  m_Name: CoinIcon
+  m_Name: Star Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11760,7 +11760,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -53.1, y: 4.4}
+  m_AnchoredPosition: {x: -53, y: 4}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3174254245343857582
@@ -21832,7 +21832,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1532999133049789447}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: Reward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21893,9 +21893,9 @@ RectTransform:
   m_Father: {fileID: 1456376846425784176}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -70, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 44, y: 0}
   m_SizeDelta: {x: 140, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7611872627327820183
@@ -21926,7 +21926,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000
+  m_text: 300
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cdbfeeb2da4a6084693b14c9cd43e29a, type: 2}
   m_sharedMaterial: {fileID: 8180637297357037130, guid: cdbfeeb2da4a6084693b14c9cd43e29a, type: 2}
@@ -23055,9 +23055,9 @@ RectTransform:
   m_Father: {fileID: 6930187098482729367}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -70, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 44, y: 0}
   m_SizeDelta: {x: 140, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4283327462675881825
@@ -23088,7 +23088,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000
+  m_text: 100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cdbfeeb2da4a6084693b14c9cd43e29a, type: 2}
   m_sharedMaterial: {fileID: 8180637297357037130, guid: cdbfeeb2da4a6084693b14c9cd43e29a, type: 2}
@@ -23207,7 +23207,7 @@ GameObject:
   - component: {fileID: 4794978551376036754}
   - component: {fileID: 3496278172629659318}
   m_Layer: 5
-  m_Name: CoinIcon
+  m_Name: Star Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23230,7 +23230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -53.1, y: 4.4}
+  m_AnchoredPosition: {x: -53, y: 4}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4794978551376036754
@@ -28378,9 +28378,9 @@ RectTransform:
   m_Father: {fileID: 1532999133049789447}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -70, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 44, y: 0}
   m_SizeDelta: {x: 140, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7085238303266184951
@@ -28411,7 +28411,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000
+  m_text: 200
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cdbfeeb2da4a6084693b14c9cd43e29a, type: 2}
   m_sharedMaterial: {fileID: 8180637297357037130, guid: cdbfeeb2da4a6084693b14c9cd43e29a, type: 2}
