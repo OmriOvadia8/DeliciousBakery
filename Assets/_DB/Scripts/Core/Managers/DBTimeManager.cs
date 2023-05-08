@@ -53,8 +53,6 @@ namespace DB_Core
             dbOfflineTime.LastCheck = DateTime.UtcNow;
             DBManager.Instance.SaveManager.Save(dbOfflineTime);
 
-            DBDebug.LogException($"Last offline time is {offlineSeconds}");
-
             DBManager.Instance.EventsManager.InvokeEvent(DBEventNames.OfflineTimeRefreshed, offlineSeconds);
         }
 

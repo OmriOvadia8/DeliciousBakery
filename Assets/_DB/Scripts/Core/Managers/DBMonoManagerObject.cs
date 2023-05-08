@@ -1,6 +1,3 @@
-using System;
-using UnityEditor;
-
 namespace DB_Core
 {
     public class DBMonoManagerObject : DBMonoBehaviour

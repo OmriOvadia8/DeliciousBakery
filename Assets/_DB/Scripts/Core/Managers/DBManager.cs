@@ -66,32 +66,31 @@ namespace DB_Core
             CrashManager = new DBCrashManager();
             DBDebug.Log($"After CrashManager");
 
-            EventsManager = new DBEventsManager();
-            DBDebug.Log($"After DBEventsManager");
-
-            AnalyticsManager = new DBAnalyticsManager();
-
-            FactoryManager = new DBFactoryManager();
-            DBDebug.Log($"After DBFactoryManager");
-
-            PoolManager = new DBPoolManager();
-            DBDebug.Log($"After DBPoolManager");
-
-            SaveManager = new DBSaveManager();
-            DBDebug.Log($"After DBSaveManager");
-
-            DBDebug.Log($"Before Config Manager");
-
-            TimerManager = new DBTimeManager();
-
-            PurchaseManager = new DBInAppPurchase();
-
-            AdsManager = new DBAdsManager();
-
-            PopupManager = new DBPopupManager();
-
             ConfigManager = new DBConfigManager(delegate
             {
+                EventsManager = new DBEventsManager();
+                DBDebug.Log($"After DBEventsManager");
+
+                AnalyticsManager = new DBAnalyticsManager();
+
+                FactoryManager = new DBFactoryManager();
+                DBDebug.Log($"After DBFactoryManager");
+
+                PoolManager = new DBPoolManager();
+                DBDebug.Log($"After DBPoolManager");
+
+                SaveManager = new DBSaveManager();
+                DBDebug.Log($"After DBSaveManager");
+
+                DBDebug.Log($"Before Config Manager");
+
+                TimerManager = new DBTimeManager();
+
+                PurchaseManager = new DBInAppPurchase();
+
+                AdsManager = new DBAdsManager();
+
+                PopupManager = new DBPopupManager();
                 onInitAction.Invoke();
             });
 

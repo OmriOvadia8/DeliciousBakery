@@ -9,35 +9,30 @@ namespace DB_Core
         private Action<bool> onShowComplete;
         private Action<bool> onShowRewardedComplete;
         private readonly string gameID = "5215648";
+        private readonly string adUnit = "Interstitial_Android";
 
         public DBAdsManager()
         {
-            Advertisement.Initialize(gameID);
+            Advertisement.Initialize(gameID, false);
             LoadAd();
         }
 
         private void LoadAd()
         {
-            Advertisement.Load("Interstitial_Android", this);
+            DBDebug.Log("Loading Ad");
+            Advertisement.Load(adUnit, this);
         }
 
-        public void ShowAd(Action<bool> onShowAdComplete)
+        public void ShowAd()
         {
-            if (isAdLoaded)
-            {
-                onShowAdComplete.Invoke(false);
-                return;
-            }
-
-            onShowComplete = onShowAdComplete;
-            Advertisement.Show("Interstitial_Android", this);
+            Advertisement.Show(adUnit, this);
         }
 
         public void ShowAdReward(Action<bool> onShowAdComplete)
         {
-            if (isAdLoaded)
+            if (!isAdLoaded)
             {
-                onShowAdComplete.Invoke(false);
+                onShowAdComplete?.Invoke(false);
                 return;
             }
 
@@ -47,14 +42,18 @@ namespace DB_Core
 
         public void OnUnityAdsAdLoaded(string placementId)
         {
-            isAdLoaded = true;
-            DBDebug.Log("OnUnityAdsAdLoaded");
+            if (placementId == adUnit)
+            {
+                isAdLoaded = true;
+                DBDebug.Log("Ad loaded");
+            }
         }
 
         public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
         {
             isAdLoaded = false;
             DBManager.Instance.CrashManager.LogExceptionHandling(message);
+            DBDebug.Log($"OnUnityAdsFailedToLoad: {placementId}, Error: {error}, Message: {message}");
         }
 
         public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
@@ -66,6 +65,7 @@ namespace DB_Core
 
             onShowComplete = null;
             onShowRewardedComplete = null;
+            DBDebug.Log("OnUnityAdsShowFailure");
         }
 
         public void OnUnityAdsShowStart(string placementId)
@@ -91,11 +91,14 @@ namespace DB_Core
 
             onShowComplete = null;
             onShowRewardedComplete = null;
+
+            LoadAd(); 
         }
 
         public void OnInitializationComplete()
         {
             DBDebug.Log("Unity Ads initialization complete.");
+            LoadAd();
         }
 
         public void OnInitializationFailed(UnityAdsInitializationError error, string message)

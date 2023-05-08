@@ -55,8 +55,16 @@ namespace DB_Core
 
         public static void WatchAd()
         {
-            DBManager.Instance.AdsManager.ShowAd(null);
+            //DBManager.Instance.AdsManager.ShowAd(null);
+            DBManager.Instance.AdsManager.ShowAd();
         }
+
+        //public static void WatchAd(Action<bool> onAdCompleted)
+        //{
+        //   // DBManager.Instance.AdsManager.ShowAd(onAdCompleted);
+           
+        //}
+
 
         public static string GetFormattedTimeSpan(int seconds)
         {

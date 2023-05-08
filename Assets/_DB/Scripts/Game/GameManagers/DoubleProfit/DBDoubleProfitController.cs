@@ -112,8 +112,22 @@ namespace DB_Game
 
         public void ActivateDoubleProfit()
         {
-            DBExtension.WatchAd();
+            Manager.AdsManager.ShowAd();
+            //DBExtension.WatchAd(OnAdCompleted);
             StartDoubleProfit(doubleProfitSaveData.DoubleProfitDuration);
+        }
+
+        private void OnAdCompleted(bool adShown)
+        {
+            if (adShown)
+            {
+                StartDoubleProfit(doubleProfitSaveData.DoubleProfitDuration);
+            }
+            else
+            {
+                // Handle the case when the ad was not shown, e.g., show a message to the user
+                DBDebug.LogException("Failed to doubleprofit");
+            }
         }
 
         private void LoadDoubleProfit() =>
