@@ -96,6 +96,7 @@ namespace DB_Core
         CurrentHireBakerAchievementStatus,
         AddStarsUpdate,
         MakeFoodProgressUpdate,
-        HireBakerProgressUpdate
+        HireBakerProgressUpdate,
+        CheckBuySkinButtonUI
     }
 }

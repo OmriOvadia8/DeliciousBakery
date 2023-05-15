@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea33e37f747d42c42881e67ed3999e3e, type: 3}
+  m_Name: 0Stove
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 1cf1505741a4bd845bccb52e1dbd72bb, type: 3}
+  - {fileID: 21300000, guid: 78d9f69deff292f47970ee2e7f4c9ef3, type: 3}
+  - {fileID: 21300000, guid: 35317d9d817cc124d88484aa1c3e24e7, type: 3}

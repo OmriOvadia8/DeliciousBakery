@@ -19,6 +19,7 @@ namespace DB_Game
         [SerializeField] private TMP_Text[] learnRecipeText;
 
         int CurrentCurrency => currencyManager.currencySaveData.CoinsAmount;
+        int CurrentPremiumCurrency => currencyManager.currencySaveData.StarsAmount;
 
         private void OnEnable() => RegisterEvents();
 
@@ -97,7 +98,19 @@ namespace DB_Game
             coinIcons[index].color = isAffordable ? Color.white : Color.gray;
         }
 
+        private void UpdateBuySkinsButtonsUI(object obj = null)
+        {
+            bool canBuySkin = IsPremiumAffordable(DBSkinUnlockController.SKIN_PRICE);
+            for (int i = 0; i < buttons.BuySkinOneButtons.Length; i++)
+            {
+                buttons.BuySkinOneButtons[i].interactable = canBuySkin;
+                buttons.BuySkinTwoButtons[i].interactable = canBuySkin;
+            }
+        }
+
         private bool IsAffordable(int cost) => CurrentCurrency >= cost;
+
+        private bool IsPremiumAffordable(int cost) => CurrentPremiumCurrency >= cost;
 
         private void CookButtonAlphaOn(object index)
         {
@@ -115,10 +128,12 @@ namespace DB_Game
 
         private void RegisterEvents()
         {
+            UpdateBuySkinsButtonsUI();
             AddListener(DBEventNames.BuyButtonsCheck, BuyButtonsCheck);
             AddListener(DBEventNames.CookFoodButtonCheck, CookFoodButtonCheck);
             AddListener(DBEventNames.CookButtonAlphaOn, CookButtonAlphaOn);
             AddListener(DBEventNames.CookButtonAlphaOff, CookButtonAlphaOff);
+            AddListener(DBEventNames.CheckBuySkinButtonUI, UpdateBuySkinsButtonsUI);
         }
 
         private void UnregisterEvents()
@@ -127,6 +142,7 @@ namespace DB_Game
             RemoveListener(DBEventNames.CookFoodButtonCheck, CookFoodButtonCheck);
             RemoveListener(DBEventNames.CookButtonAlphaOn, CookButtonAlphaOn);
             RemoveListener(DBEventNames.CookButtonAlphaOff, CookButtonAlphaOff);
+            RemoveListener(DBEventNames.CheckBuySkinButtonUI, UpdateBuySkinsButtonsUI);
         }
     }
 
@@ -137,6 +153,8 @@ namespace DB_Game
         public Button[] UpgradeButtons;
         public Button[] HireButtons;
         public Button[] LearnRecipeButtons;
+        public Button[] BuySkinOneButtons;
+        public Button[] BuySkinTwoButtons;
 
         public CanvasGroup[] CookButtonAnimation;
     }
