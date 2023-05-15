@@ -2,24 +2,26 @@ using DB_Core;
 
 namespace DB_Game
 {
-    public class DeviceSkinUnlockedStatus
+    public class DeviceSkinData
     {
         public bool Color1 { get; set; }
         public bool Color2 { get; set; }
+        public int Equipped { get; set; }
 
-        public DeviceSkinUnlockedStatus()
+        public DeviceSkinData()
         {
         }
 
-        public DeviceSkinUnlockedStatus(bool color1, bool color2)
+        public DeviceSkinData(bool color1, bool color2, int equipped)
         {
             Color1 = color1;
             Color2 = color2;
+            Equipped = equipped;
         }
     }
 
     public class DeviceSkinUnlockedData : IDBSaveData
     {
-        public DeviceSkinUnlockedStatus[] Skins { get; set; }
+        public DeviceSkinData[] Skins { get; set; }
     }
 }

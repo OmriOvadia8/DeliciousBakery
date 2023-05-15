@@ -1,12 +1,41 @@
 using DB_Core;
+using System;
 using UnityEngine;
 
 namespace DB_Game
 {
-    public class DBSkinUnlockController : DBLogicMonoBehaviour
+    public class DBDeviceSkinManager : DBLogicMonoBehaviour
     {
-        [SerializeField] DBDeviceSkinStatusDataManager skinStatusManager;
-        public const int SKIN_PRICE = 100;
+        [SerializeField] DBDeviceSkinDataManager skinStatusManager;
+        [SerializeField] Device[] devices;
+        public const int SKIN_PRICE = 300;
+        private int defaultSkin;
+        private int firstSkin = 1;
+        private int secondSkin = 2;
+
+        private void Start() => ShowCurrentEquippedSkins();
+
+        private void ShowCurrentEquippedSkins()
+        {
+            int devicesAmount = devices.Length;
+            for (int i = 0; i < devicesAmount; i++)
+            {
+                if (skinStatusManager.SkinUnlockData.Skins[i].Equipped == firstSkin)
+                {
+                    devices[i].ChangeSkin(firstSkin);
+                }
+                else if (skinStatusManager.SkinUnlockData.Skins[i].Equipped == secondSkin)
+                {
+                    devices[i].ChangeSkin(secondSkin);
+                }
+                else
+                {
+                    devices[i].ChangeSkin(defaultSkin);
+                }
+
+                InvokeEvent(DBEventNames.BuySkinButtonVisibility, i);
+            }
+        }
 
         public void UnlockSkinOne(int deviceIndex)
         {
@@ -16,6 +45,7 @@ namespace DB_Game
 
                 InvokeEvent(DBEventNames.PremCurrencyUpdateUI, null);
                 InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
+                InvokeEvent(DBEventNames.BuySkinButtonVisibility, deviceIndex);
                 skinStatusManager.SaveSkinsUnlockData();
             }
         }
@@ -27,6 +57,7 @@ namespace DB_Game
                 skinStatusManager.SkinUnlockData.Skins[deviceIndex].Color2 = true;
                 InvokeEvent(DBEventNames.PremCurrencyUpdateUI, null);
                 InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
+                InvokeEvent(DBEventNames.BuySkinButtonVisibility, deviceIndex);
                 skinStatusManager.SaveSkinsUnlockData();
             }
         }

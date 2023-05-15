@@ -2,7 +2,7 @@ using DB_Core;
 
 namespace DB_Game
 {
-    public class DBDeviceSkinStatusDataManager : DBLogicMonoBehaviour
+    public class DBDeviceSkinDataManager : DBLogicMonoBehaviour
     {
         public DeviceSkinUnlockedData SkinUnlockData;
         private const string SKINS_UNLOCK_CONFIG_PATH = "skins_data";

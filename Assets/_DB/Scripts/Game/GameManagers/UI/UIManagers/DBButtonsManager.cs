@@ -13,6 +13,7 @@ namespace DB_Game
 
         [Header("Managers")]
         [SerializeField] private DBCurrencyManager currencyManager;
+        [SerializeField] DBDeviceSkinDataManager skinStatusManager;
 
         [Header("LearnRecipe")]
         [SerializeField] private Image[] coinIcons;
@@ -100,11 +101,24 @@ namespace DB_Game
 
         private void UpdateBuySkinsButtonsUI(object obj = null)
         {
-            bool canBuySkin = IsPremiumAffordable(DBSkinUnlockController.SKIN_PRICE);
+            bool canBuySkin = IsPremiumAffordable(DBDeviceSkinManager.SKIN_PRICE);
             for (int i = 0; i < buttons.BuySkinOneButtons.Length; i++)
             {
                 buttons.BuySkinOneButtons[i].interactable = canBuySkin;
                 buttons.BuySkinTwoButtons[i].interactable = canBuySkin;
+            }
+        }
+
+        private void ShowEquipSkinButtons(object index)
+        {
+            int deviceIndex = (int)index;
+            if (skinStatusManager.SkinUnlockData.Skins[deviceIndex].Color1)
+            {
+                buttons.EquipSkinOneButtons[deviceIndex].gameObject.SetActive(true);
+            }
+            if (skinStatusManager.SkinUnlockData.Skins[deviceIndex].Color2)
+            {
+                buttons.EquipSkinTwoButtons[deviceIndex].gameObject.SetActive(true);
             }
         }
 
@@ -134,6 +148,7 @@ namespace DB_Game
             AddListener(DBEventNames.CookButtonAlphaOn, CookButtonAlphaOn);
             AddListener(DBEventNames.CookButtonAlphaOff, CookButtonAlphaOff);
             AddListener(DBEventNames.CheckBuySkinButtonUI, UpdateBuySkinsButtonsUI);
+            AddListener(DBEventNames.BuySkinButtonVisibility, ShowEquipSkinButtons);
         }
 
         private void UnregisterEvents()
@@ -143,6 +158,7 @@ namespace DB_Game
             RemoveListener(DBEventNames.CookButtonAlphaOn, CookButtonAlphaOn);
             RemoveListener(DBEventNames.CookButtonAlphaOff, CookButtonAlphaOff);
             RemoveListener(DBEventNames.CheckBuySkinButtonUI, UpdateBuySkinsButtonsUI);
+            RemoveListener(DBEventNames.BuySkinButtonVisibility, ShowEquipSkinButtons);
         }
     }
 
@@ -155,6 +171,8 @@ namespace DB_Game
         public Button[] LearnRecipeButtons;
         public Button[] BuySkinOneButtons;
         public Button[] BuySkinTwoButtons;
+        public Button[] EquipSkinOneButtons;
+        public Button[] EquipSkinTwoButtons;
 
         public CanvasGroup[] CookButtonAnimation;
     }
