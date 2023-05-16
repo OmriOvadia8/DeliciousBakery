@@ -98,6 +98,7 @@ namespace DB_Core
         MakeFoodProgressUpdate,
         HireBakerProgressUpdate,
         CheckBuySkinButtonUI,
-        BuySkinButtonVisibility
+        BuySkinButtonVisibility,
+        CheckBuyTimeWrapButtonsUI
     }
 }

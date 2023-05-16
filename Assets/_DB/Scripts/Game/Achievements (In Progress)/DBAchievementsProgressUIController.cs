@@ -101,6 +101,7 @@ namespace DB_Game
             achievementsController.AchievementClaimReward.IsMakeFoodRewardClaimed[foodIndex, rewardIndex] = true;
             InvokeEvent(DBEventNames.MakeFoodProgressUpdate, foodIndex);
             InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
+            InvokeEvent(DBEventNames.CheckBuyTimeWrapButtonsUI, null);
             claimData.SaveAchievementClaims();
         }
 
@@ -114,6 +115,7 @@ namespace DB_Game
             achievementsController.AchievementClaimReward.IsHireBakerRewardClaimed[foodIndex, rewardIndex] = true;
             InvokeEvent(DBEventNames.HireBakerProgressUpdate, foodIndex);
             InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
+            InvokeEvent(DBEventNames.CheckBuyTimeWrapButtonsUI, null);
             claimData.SaveAchievementClaims();
         }
 

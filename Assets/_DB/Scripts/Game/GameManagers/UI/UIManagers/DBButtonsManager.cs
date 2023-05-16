@@ -19,12 +19,19 @@ namespace DB_Game
         [SerializeField] private Image[] coinIcons;
         [SerializeField] private TMP_Text[] learnRecipeText;
 
+        private int[] timeWrapPrices = new int[] { DBTimeWrapItem.TWO_HOURS_PRICE, DBTimeWrapItem.FOUR_HOURS_PRICE, DBTimeWrapItem.EIGHT_HOURS_PRICE };
         int CurrentCurrency => currencyManager.currencySaveData.CoinsAmount;
         int CurrentPremiumCurrency => currencyManager.currencySaveData.StarsAmount;
 
         private void OnEnable() => RegisterEvents();
 
         private void OnDisable() => UnregisterEvents();
+
+        private void Start()
+        {
+            UpdateBuyTimeWrapButtonsUI();
+            UpdateBuySkinsButtonsUI();
+        }
 
         private void BuyButtonsCheck(object obj = null)
         {
@@ -109,6 +116,14 @@ namespace DB_Game
             }
         }
 
+        private void UpdateBuyTimeWrapButtonsUI(object obj = null)
+        {
+            for (int i = 0; i < timeWrapPrices.Length; i++)
+            {
+                buttons.BuyTimeWrapButtons[i].interactable = IsPremiumAffordable(timeWrapPrices[i]);
+            }
+        }
+
         private void ShowEquipSkinButtons(object index)
         {
             int deviceIndex = (int)index;
@@ -142,13 +157,13 @@ namespace DB_Game
 
         private void RegisterEvents()
         {
-            UpdateBuySkinsButtonsUI();
             AddListener(DBEventNames.BuyButtonsCheck, BuyButtonsCheck);
             AddListener(DBEventNames.CookFoodButtonCheck, CookFoodButtonCheck);
             AddListener(DBEventNames.CookButtonAlphaOn, CookButtonAlphaOn);
             AddListener(DBEventNames.CookButtonAlphaOff, CookButtonAlphaOff);
             AddListener(DBEventNames.CheckBuySkinButtonUI, UpdateBuySkinsButtonsUI);
             AddListener(DBEventNames.BuySkinButtonVisibility, ShowEquipSkinButtons);
+            AddListener(DBEventNames.CheckBuyTimeWrapButtonsUI, UpdateBuyTimeWrapButtonsUI);
         }
 
         private void UnregisterEvents()
@@ -159,6 +174,7 @@ namespace DB_Game
             RemoveListener(DBEventNames.CookButtonAlphaOff, CookButtonAlphaOff);
             RemoveListener(DBEventNames.CheckBuySkinButtonUI, UpdateBuySkinsButtonsUI);
             RemoveListener(DBEventNames.BuySkinButtonVisibility, ShowEquipSkinButtons);
+            RemoveListener(DBEventNames.CheckBuyTimeWrapButtonsUI, UpdateBuyTimeWrapButtonsUI);
         }
     }
 
@@ -173,6 +189,7 @@ namespace DB_Game
         public Button[] BuySkinTwoButtons;
         public Button[] EquipSkinOneButtons;
         public Button[] EquipSkinTwoButtons;
+        public Button[] BuyTimeWrapButtons;
 
         public CanvasGroup[] CookButtonAnimation;
     }

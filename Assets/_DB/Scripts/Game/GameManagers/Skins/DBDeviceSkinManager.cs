@@ -45,6 +45,7 @@ namespace DB_Game
 
                 InvokeEvent(DBEventNames.PremCurrencyUpdateUI, null);
                 InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
+                InvokeEvent(DBEventNames.CheckBuyTimeWrapButtonsUI, null);
                 InvokeEvent(DBEventNames.BuySkinButtonVisibility, deviceIndex);
                 skinStatusManager.SaveSkinsUnlockData();
             }
@@ -57,16 +58,10 @@ namespace DB_Game
                 skinStatusManager.SkinUnlockData.Skins[deviceIndex].Color2 = true;
                 InvokeEvent(DBEventNames.PremCurrencyUpdateUI, null);
                 InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
+                InvokeEvent(DBEventNames.CheckBuyTimeWrapButtonsUI, null);
                 InvokeEvent(DBEventNames.BuySkinButtonVisibility, deviceIndex);
                 skinStatusManager.SaveSkinsUnlockData();
             }
-        }
-
-        public void CheckSkinStatus(int deviceIndex)
-        {
-            InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
-            DBDebug.Log(skinStatusManager.SkinUnlockData.Skins[deviceIndex].Color1);
-            DBDebug.Log(skinStatusManager.SkinUnlockData.Skins[deviceIndex].Color2);
         }
     }
 
