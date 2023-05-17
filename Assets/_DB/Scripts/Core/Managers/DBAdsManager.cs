@@ -13,7 +13,7 @@ namespace DB_Core
 
         public DBAdsManager()
         {
-            Advertisement.Initialize(gameID, false);
+            Advertisement.Initialize(gameID, false, this);
             LoadAd();
         }
 

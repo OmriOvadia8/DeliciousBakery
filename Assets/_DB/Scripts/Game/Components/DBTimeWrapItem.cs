@@ -1,9 +1,13 @@
 using DB_Core;
+using TMPro;
+using UnityEngine;
 
 namespace DB_Game
 {
     public class DBTimeWrapItem : FoodDataAccess
     {
+        [SerializeField] TMP_Text[] starsAmount;
+
         private const int TWO_HOURS = 7200;
         public const int TWO_HOURS_PRICE = 1000;
 

@@ -25,20 +25,6 @@ namespace DB_Game
 
         private void Start() => InitializeCurrentAchievementsState();
 
-        //private void UpdateMakeFoodAchievementsText(object index)
-        //{
-        //    int foodIndex = (int)index;
-        //    FoodTypes foodName = (FoodTypes)foodIndex;
-        //    CookMilestoneIndex currentMilestoneIndex = DetermineCurrentCookMilestone(foodName);
-        //    UpdateMakeFoodAchievementTitle(foodIndex, foodName, currentMilestoneIndex);
-        //    CheckIfMakeFoodAchievementCompleted(foodIndex);
-        //    int goal = GetCurrentFoodAchievementGoal(currentMilestoneIndex);
-        //    ClaimRewardActivation(foodIndex);
-        //    progressController.UpdateMakeFoodProgress(foodIndex, goal);
-        //    UpdateMakeFoodAchievementDescription(goal, foodIndex, foodName);
-        //    UpdateMakeFoodStars(foodIndex, currentMilestoneIndex);
-        //}
-
         private void UpdateMakeFoodAchievementsProgress(object index)
         {
             int foodIndex = (int)index;
@@ -85,32 +71,6 @@ namespace DB_Game
             return GetCurrentAchievementGoal(indexToAccess);
         }
 
-        //private void UpdateHireBakerAchievementsText(object index)
-        //{
-        //    int foodIndex = (int)index;
-        //    FoodTypes foodName = (FoodTypes)foodIndex;
-        //    HireMilestoneIndex currentMilestoneIndex = DetermineCurrentHireMilestone(foodName);
-        //    UpdateHireBakerAchievementTitle(foodIndex, foodName, currentMilestoneIndex);
-        //    CheckIfHireBakerAchievementCompleted(foodIndex);
-        //    int goal = GetCurrentHireBakerGoal(currentMilestoneIndex);
-        //    progressController.UpdateHireBakerProgress(foodIndex, goal);
-        //    UpdateHireBakerStars(foodIndex, currentMilestoneIndex);
-        //    UpdateHireBakerAchievementDescription(goal, foodIndex, foodName);
-        //    ClaimRewardActivation(foodIndex);
-        //}
-
-        //private void UpdateMakeFoodAchievementsText(object index)
-        //{
-        //    int foodIndex = (int)index;
-        //    FoodTypes foodName = (FoodTypes)foodIndex;
-        //    CookMilestoneIndex currentMilestoneIndex = DetermineCurrentCookMilestone(foodName);
-
-        //    UpdateMakeFoodAchievementTitle(foodIndex, foodName, currentMilestoneIndex);
-        //    int goal = GetCurrentFoodAchievementGoal(currentMilestoneIndex);
-        //    UpdateMakeFoodAchievementDescription(goal, foodIndex, foodName);
-        //    UpdateMakeFoodStars(foodIndex, currentMilestoneIndex);
-        //}
-
         private void UpdateHireBakerAchievementsText(object index)
         {
             int foodIndex = (int)index;
@@ -122,17 +82,6 @@ namespace DB_Game
             UpdateHireBakerAchievementDescription(goal, foodIndex, foodName);
             UpdateHireBakerStars(foodIndex, currentMilestoneIndex);
         }
-
-        //private void UpdateMakeFoodAchievementsProgress(object index)
-        //{
-        //    int foodIndex = (int)index;
-        //    FoodTypes foodName = (FoodTypes)foodIndex;
-        //    CookMilestoneIndex currentMilestoneIndex = DetermineCurrentCookMilestone(foodName);
-        //    CheckIfMakeFoodAchievementCompleted(foodIndex);
-        //    int goal = GetCurrentFoodAchievementGoal(currentMilestoneIndex);
-        //    ClaimRewardActivation(foodIndex);
-        //    progressController.UpdateMakeFoodProgress(foodIndex, goal);
-        //}
 
         private void UpdateHireBakerAchievementsProgress(object index)
         {
@@ -197,9 +146,7 @@ namespace DB_Game
         {
             for (int i = 0; i < DBFoodManager.FOOD_COUNT; i++)
             {
-                //UpdateMakeFoodAchievementsText(i);
                 UpdateMakeFoodAchievementsProgress(i);
-                //UpdateHireBakerAchievementsText(i);
                 UpdateHireBakerAchievementsProgress(i);
             }
 
@@ -214,11 +161,7 @@ namespace DB_Game
             for (int foodIndex = 0; foodIndex < Enum.GetValues(typeof(FoodTypes)).Length; foodIndex++)
             {
                 FoodTypes foodName = (FoodTypes)foodIndex;
-
-                // Find the current milestone index based on the claimed rewards
                 CookMilestoneIndex currentMilestoneIndex = DetermineCurrentCookMilestone(foodName);
-
-                // Update the title and description based on the current milestone index
                 UpdateMakeFoodAchievementTitle(foodIndex, foodName, currentMilestoneIndex);
                 int goal = GetCurrentFoodAchievementGoal(currentMilestoneIndex);
                 UpdateMakeFoodAchievementDescription(goal, foodIndex, foodName);
@@ -231,11 +174,7 @@ namespace DB_Game
             for (int foodIndex = 0; foodIndex < Enum.GetValues(typeof(FoodTypes)).Length; foodIndex++)
             {
                 FoodTypes foodName = (FoodTypes)foodIndex;
-
-                // Find the current milestone index based on the claimed rewards
                 HireMilestoneIndex currentMilestoneIndex = DetermineCurrentHireMilestone(foodName);
-
-                // Update the title and description based on the current milestone index
                 UpdateHireBakerAchievementTitle(foodIndex, foodName, currentMilestoneIndex);
                 int goal = GetCurrentHireBakerGoal(currentMilestoneIndex);
                 UpdateHireBakerAchievementDescription(goal, foodIndex, foodName);
@@ -249,24 +188,35 @@ namespace DB_Game
             {
                 if (isMakeFood)
                 {
-                    makeFoodAchievementComponents.AchievementMakeFoodCompleteBar[foodIndex].SetActive(true);
-                    makeFoodAchievementComponents.AchievementMakeFoodLoadProgressBar[foodIndex].SetActive(false);
-                    makeFoodAchievementComponents.AchievementMakeFoodDescription[foodIndex].gameObject.SetActive(false);
-
-                    Image[] stars = makeFoodAchievementComponents.AchievementMakeFoodStars[foodIndex].Stars;
-                    UpdateStars(stars, (int)CookMilestoneIndex.Cook5000);
+                    MakeFoodAchievementCompleted(foodIndex);
                 }
                 else
                 {
-                    hireBakerAchievementComponents.AchievementHireBakerCompleteBar[foodIndex].SetActive(true);
-                    hireBakerAchievementComponents.AchievementHireBakerLoadProgressBar[foodIndex].SetActive(false);
-                    hireBakerAchievementComponents.AchievementHireBakerDescription[foodIndex].gameObject.SetActive(false);
-
-                    Image[] stars = hireBakerAchievementComponents.AchievementHireBakerStars[foodIndex].Stars;
-                    UpdateStars(stars, (int)HireMilestoneIndex.Hire5000);
+                    HireBakerAchievementCompleted(foodIndex);
                 }
             }
         }
+
+        private void MakeFoodAchievementCompleted(int foodIndex)
+        {
+            makeFoodAchievementComponents.AchievementMakeFoodCompleteBar[foodIndex].SetActive(true);
+            makeFoodAchievementComponents.AchievementMakeFoodLoadProgressBar[foodIndex].SetActive(false);
+            makeFoodAchievementComponents.AchievementMakeFoodDescription[foodIndex].gameObject.SetActive(false);
+
+            Image[] stars = makeFoodAchievementComponents.AchievementMakeFoodStars[foodIndex].Stars;
+            UpdateStars(stars, (int)CookMilestoneIndex.Cook5000);
+        }
+
+        private void HireBakerAchievementCompleted(int foodIndex)
+        {
+            hireBakerAchievementComponents.AchievementHireBakerCompleteBar[foodIndex].SetActive(true);
+            hireBakerAchievementComponents.AchievementHireBakerLoadProgressBar[foodIndex].SetActive(false);
+            hireBakerAchievementComponents.AchievementHireBakerDescription[foodIndex].gameObject.SetActive(false);
+
+            Image[] stars = hireBakerAchievementComponents.AchievementHireBakerStars[foodIndex].Stars;
+            UpdateStars(stars, (int)HireMilestoneIndex.Hire5000);
+        }
+
 
         private void CheckIfMakeFoodAchievementCompleted(int foodIndex)
         {
@@ -293,10 +243,6 @@ namespace DB_Game
 
             return CookMilestoneIndex.Cook10;
         }
-
-
-
-
 
         private HireMilestoneIndex DetermineCurrentHireMilestone(FoodTypes foodName)
         {
@@ -326,7 +272,6 @@ namespace DB_Game
                 if (!achievementController.AchievementClaimReward.IsMakeFoodRewardClaimed[foodIndex, i] && makeFoodAchievements[i][foodIndex])
                 {
                     progressController.UpdateClaimButtonStatus(foodIndex, i, true, true);
-
                 }
 
                 if (!achievementController.AchievementClaimReward.IsHireBakerRewardClaimed[foodIndex, i] && hireBakerAchievements[i][foodIndex])
