@@ -52,6 +52,7 @@ namespace DB_Game
             foodData.UpgradeCost = (double)(foodData.UpgradeCost * COST_INCREASE);
 
             dbManager.EventsManager.InvokeEvent(DBEventNames.OnUpgradeTextUpdate, foodIndex);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.PlaySound, SoundEffectType.UpgradeButtonClick);
 
             foodDataRepository.SaveFoodData();
         }

@@ -99,6 +99,7 @@ namespace DB_Core
         HireBakerProgressUpdate,
         CheckBuySkinButtonUI,
         BuySkinButtonVisibility,
-        CheckBuyTimeWrapButtonsUI
+        CheckBuyTimeWrapButtonsUI,
+        PlaySound
     }
 }
