@@ -103,14 +103,14 @@ namespace DB_Game
             }
         }
 
-        private int CalculateTotalProfit(FoodData foodData)
+        private double CalculateTotalProfit(FoodData foodData)
         {
-            int baseProfit = foodData.Profit;
+            double baseProfit = foodData.Profit;
             int cookFoodMultiplier = foodData.CookFoodMultiplier;
             int profitMultiplier = DBDoubleProfitController.DoubleProfitMultiplier;
 
-            int multipliedProfit = baseProfit * profitMultiplier;
-            int totalProfit = multipliedProfit * cookFoodMultiplier;
+            double multipliedProfit = baseProfit * profitMultiplier;
+            double totalProfit = multipliedProfit * cookFoodMultiplier;
 
             // Add base profit only when cookFoodTimes is 0
             totalProfit += (cookFoodMultiplier == 0) ? baseProfit : 0;

@@ -15,12 +15,6 @@ namespace DB_Core
             Object.DontDestroyOnLoad(rootPools);
         }
 
-        public void InitPool(PoolNames poolName, int amount)
-        {
-            //List Of Originals 
-            //Linq where PoolNames == poolName
-        }
-
         public void InitPool(string resourceName, int amount, Transform parentTransform, int maxAmount = 100)
         {
             var original = Resources.Load<DBPoolable>(resourceName);
@@ -30,7 +24,7 @@ namespace DB_Core
         public void InitPool(DBPoolable original, int amount, Transform parentTransform, int maxAmount)
         {
             DBManager.Instance.FactoryManager.MultiCreateAsync(original, Vector3.zero, amount,
-                delegate (List<DBPoolable> list)
+                (List<DBPoolable> list) =>
                 {
                     foreach (var poolable in list)
                     {
@@ -85,7 +79,6 @@ namespace DB_Core
                 poolable.gameObject.SetActive(false);
             }
         }
-
 
         public void DestroyPool(PoolNames name)
         {

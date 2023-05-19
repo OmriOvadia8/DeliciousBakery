@@ -5,8 +5,8 @@ namespace DB_Game
 {
     public class DBCurrencyManager : DBLogicMonoBehaviour
     {
-        public int initialCoinsAmount = 0;
-        public int initialStarsAmount = 0;
+        public double initialCoinsAmount;
+        public double initialStarsAmount;
         public CurrencySaveData currencySaveData;
 
         private void Awake() => LoadCurrency();
@@ -19,7 +19,7 @@ namespace DB_Game
 
         public void EarnCoins(object foodProfit)
         {
-            int profit = (int)foodProfit;
+            double profit = (double)foodProfit;
             GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, profit);
 
             if (GameLogic.ScoreManager.TryGetScoreByTag(ScoreTags.GameCurrency, ref currencySaveData.CoinsAmount))
@@ -37,7 +37,7 @@ namespace DB_Game
 
         private void EarnStars(object stars)
         {
-            int starIncrease = (int)stars;
+            double starIncrease = (double)stars;
             GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.PremiumCurrency, starIncrease);
 
             if (GameLogic.ScoreManager.TryGetScoreByTag(ScoreTags.PremiumCurrency, ref currencySaveData.StarsAmount))
@@ -86,10 +86,10 @@ namespace DB_Game
         [Serializable]
         public class CurrencySaveData : IDBSaveData
         {
-            public int CoinsAmount;
-            public int StarsAmount;
+            public double CoinsAmount;
+            public double StarsAmount;
 
-            public CurrencySaveData(int coinsAmount, int starsAmount)
+            public CurrencySaveData(double coinsAmount, double starsAmount)
             {
                 CoinsAmount = coinsAmount;
                 StarsAmount = starsAmount;

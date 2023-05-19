@@ -32,36 +32,36 @@ namespace DB_Game
         private void UpdateCoinsAmountText()
         {
             var moneyText = texts.MoneyText;
-            int currentCurrency = currencyManager.currencySaveData.CoinsAmount;
-            moneyText.text = currentCurrency.ToCurrencyFormat();
+            double currentCurrency = currencyManager.currencySaveData.CoinsAmount;
+            moneyText.text = currentCurrency.ToReadableNumber();
         }
 
         private void UpdateStarsAmountText()
         {
             var starText = texts.StarText;
-            int currentStars = currencyManager.currencySaveData.StarsAmount;
-            starText.text = currentStars.ToCurrencyFormat();
+            double currentStars = currencyManager.currencySaveData.StarsAmount;
+            starText.text = currentStars.ToReadableNumber();
         }
 
         private void OnCoinsAmountUpdate(object obj)
         {
-            int currency = 0;
+            double currency = 0;
 
             if (GameLogic.ScoreManager.TryGetScoreByTag(ScoreTags.GameCurrency, ref currency))
             {
                 var moneyText = texts.MoneyText;
-                moneyText.text = currency.ToCurrencyFormat();
+                moneyText.text = currency.ToReadableNumber();
             }
         }
 
         private void OnStarsAmountUpdate(object obj)
         {
-            int premCurrency = 0;
+            double premCurrency = 0;
 
             if (GameLogic.ScoreManager.TryGetScoreByTag(ScoreTags.PremiumCurrency, ref premCurrency))
             {
                 var starText = texts.StarText;
-                starText.text = premCurrency.ToCurrencyFormat();
+                starText.text = premCurrency.ToReadableNumber();
             }
         }
 
@@ -74,8 +74,8 @@ namespace DB_Game
             int index = (int)obj;
             int foodLevel = GameLogic.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, index).CurrentLevel;
             var foodData = GetFoodData(index);
-            int foodProfit = foodData.Profit;
-            int upgradeCost = foodData.UpgradeCost;
+            double foodProfit = foodData.Profit;
+            double upgradeCost = foodData.UpgradeCost;
 
             UpdateUpgradeTexts(index, foodLevel, foodProfit, upgradeCost);
             UpdateCurrencyAndButtonCheck();
@@ -85,10 +85,10 @@ namespace DB_Game
         {
             int index = (int)obj;
             var foodData = GetFoodData(index);
-            int learnCost = foodData.UnlockCost;
+            double learnCost = foodData.UnlockCost;
             var learnRecipeCostText = texts.LearnRecipeCostText[index];
 
-            learnRecipeCostText.text = learnCost.ToString();
+            learnRecipeCostText.text = learnCost.ToReadableNumber();
 
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
         }
@@ -98,7 +98,7 @@ namespace DB_Game
             int index = (int)obj;
             var foodData = GetFoodData(index);
 
-            int hireCost = foodData.HireCost;
+            double hireCost = foodData.HireCost;
             int cookFoodMultiplier = foodData.CookFoodMultiplier;
             int bakersCount = foodData.BakersCount;
 
@@ -112,26 +112,26 @@ namespace DB_Game
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
         }
 
-        private void UpdateHireTexts(int index, int bakersCount, int cookFoodMultiplier, int hireCost)
+        private void UpdateHireTexts(int index, int bakersCount, int cookFoodMultiplier, double hireCost)
         {
             var bakersCountText = cookingUIManager.uiBakerComponents.BakersCountText[index];
             var cookFoodMultiplierText = cookingUIManager.uiBakerComponents.CookFoodMultiplierText[index];
             var hireCostText = texts.HireCostText[index];
 
-            bakersCountText.text = $"{bakersCount}x";
-            cookFoodMultiplierText.text = $"{cookFoodMultiplier}x";
-            hireCostText.text = $"{hireCost}";
+            bakersCountText.text = $"x{bakersCount}";
+            cookFoodMultiplierText.text = $"x{cookFoodMultiplier}";
+            hireCostText.text = hireCost.ToReadableNumber();
         }
 
-        private void UpdateUpgradeTexts(int index, int foodLevel, int foodProfit, int upgradeCost)
+        private void UpdateUpgradeTexts(int index, int foodLevel, double foodProfit, double upgradeCost)
         {
             var foodLevelText = texts.FoodLevelText[index];
             var foodProfitText = texts.FoodProfitText[index];
             var upgradeCostText = texts.UpgradeCostText[index];
 
             foodLevelText.text = $"Lv. {foodLevel}";
-            foodProfitText.text = $"{foodProfit}";
-            upgradeCostText.text = $"{upgradeCost}";
+            foodProfitText.text = foodProfit.ToReadableNumber(1);
+            upgradeCostText.text = upgradeCost.ToReadableNumber();
         }
 
         #endregion
@@ -142,8 +142,8 @@ namespace DB_Game
         {
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
             int index = (int)obj;
-            int foodProfit = GetFoodData(index).Profit;
-            int totalFoodProfit = foodProfit * DBDoubleProfitController.DoubleProfitMultiplier;
+            double foodProfit = GetFoodData(index).Profit;
+            double totalFoodProfit = foodProfit * DBDoubleProfitController.DoubleProfitMultiplier;
             toastingManager.DisplayMoneyToast(totalFoodProfit, PoolNames.MoneyToast);
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
         }
@@ -151,10 +151,10 @@ namespace DB_Game
         private void MoneyTextToastAfterBakerCooking(object obj) 
         {
             int index = (int)obj;
-            int foodProfit = GetFoodData(index).Profit;
+            double foodProfit = GetFoodData(index).Profit;
             int cookFoodMultiplier = GetFoodData(index).CookFoodMultiplier;
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
-            int totalFoodProfit = foodProfit * cookFoodMultiplier * DBDoubleProfitController.DoubleProfitMultiplier;
+            double totalFoodProfit = foodProfit * cookFoodMultiplier * DBDoubleProfitController.DoubleProfitMultiplier;
             toastingManager.DisplayMoneyToast(totalFoodProfit, PoolNames.MoneyToast);
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
         }
@@ -162,7 +162,7 @@ namespace DB_Game
         private void SpendUpgradeMoneyTextToast(object obj) 
         {
             int index = (int)obj;
-            int upgradeCost = GetFoodData(index).UpgradeCost;
+            double upgradeCost = GetFoodData(index).UpgradeCost;
             toastingManager.DisplayMoneyToast(upgradeCost, PoolNames.SpendMoneyToast);
         }
 
@@ -178,7 +178,7 @@ namespace DB_Game
         private void SpendHireMoneyTextToast(object obj) 
         {
             int index = (int)obj;
-            int hireCost = GetFoodData(index).HireCost;
+            double hireCost = GetFoodData(index).HireCost;
             toastingManager.DisplayMoneyToast(hireCost, PoolNames.SpendMoneyToast);
         }
 

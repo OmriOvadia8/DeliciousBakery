@@ -114,9 +114,9 @@ namespace DB_Game
 
         private void ActiveCookingCompleteReward(FoodData foodData, int index)
         {
-            int profit = foodData.Profit;
+            double profit = foodData.Profit;
             int profitMultiplier = DBDoubleProfitController.DoubleProfitMultiplier;
-            int totalProfit = profit * profitMultiplier;
+            double totalProfit = profit * profitMultiplier;
             
             InvokeEvent(DBEventNames.AddCurrencyUpdate, totalProfit);
             InvokeEvent(DBEventNames.MoneyToastOnCook, index);

@@ -17,9 +17,9 @@ namespace DB_Game
         private const int EIGHT_HOURS = 28800;
         public const int EIGHT_HOURS_PRICE = 3300;
 
-        private int TimeWrap(int timePassed)
+        private double TimeWrap(int timePassed)
         {
-            int totalReward = 0;
+            double totalReward = 0;
 
             for (int i = 0; i < DBFoodManager.FOOD_COUNT; i++)
             {
@@ -27,7 +27,7 @@ namespace DB_Game
 
                 if (foodData.IsBakerUnlocked)
                 {
-                    int reward = CalculateReward(timePassed, foodData);
+                    double reward = CalculateReward(timePassed, foodData);
                     totalReward += reward;
                 }
             }
@@ -35,12 +35,12 @@ namespace DB_Game
             return totalReward;
         }
 
-        private int CalculateReward(int timePassed, FoodData foodData)
+        private double CalculateReward(int timePassed, FoodData foodData)
         {
             var bakerCookingTime = foodData.BakerCookingTime;
-            int profit = foodData.Profit;
+            double profit = foodData.Profit;
 
-            int reward = (int)(timePassed / bakerCookingTime) * profit;
+            double reward = (double)(timePassed / bakerCookingTime) * profit;
 
             return reward;
         }
@@ -49,7 +49,7 @@ namespace DB_Game
         {
             if (GameLogic.ScoreManager.TryUseScore(ScoreTags.PremiumCurrency, TWO_HOURS_PRICE))
             {
-                int timeWrapReward = TimeWrap(TWO_HOURS);
+                double timeWrapReward = TimeWrap(TWO_HOURS);
                 InvokeEvent(DBEventNames.AddCurrencyUpdate, timeWrapReward);
                 InvokeEvent(DBEventNames.PremCurrencyUpdateUI, null);
                 InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
@@ -61,7 +61,7 @@ namespace DB_Game
         {
             if (GameLogic.ScoreManager.TryUseScore(ScoreTags.PremiumCurrency, FOUR_HOURS_PRICE))
             {
-                int timeWrapReward = TimeWrap(FOUR_HOURS);
+                double timeWrapReward = TimeWrap(FOUR_HOURS);
                 InvokeEvent(DBEventNames.AddCurrencyUpdate, timeWrapReward);
                 InvokeEvent(DBEventNames.PremCurrencyUpdateUI, null);
                 InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
@@ -73,7 +73,7 @@ namespace DB_Game
         {
             if (GameLogic.ScoreManager.TryUseScore(ScoreTags.PremiumCurrency, EIGHT_HOURS_PRICE))
             {
-                int timeWrapReward = TimeWrap(EIGHT_HOURS);
+                double timeWrapReward = TimeWrap(EIGHT_HOURS);
                 InvokeEvent(DBEventNames.AddCurrencyUpdate, timeWrapReward);
                 InvokeEvent(DBEventNames.PremCurrencyUpdateUI, null);
                 InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);

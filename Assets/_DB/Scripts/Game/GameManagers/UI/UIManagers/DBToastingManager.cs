@@ -8,14 +8,22 @@ namespace DB_Game
     {
         [SerializeField] private RectTransform moneyToastPosition;
         [SerializeField] private int moneyTextToastAmount = 20;
+        private DBTweenMoneyComponent currentToast;
 
         private void Start() => MoneyToastPoolInitialization();
 
-        public void DisplayMoneyToast(int moneyAmount, PoolNames poolName)
+        public void DisplayMoneyToast(double moneyAmount, PoolNames poolName)
         {
+            if (currentToast != null)
+            {
+                currentToast.HideImmediately();
+            }
+
             var moneyToast = (DBTweenMoneyComponent)Manager.PoolManager.GetPoolable(poolName);
             Vector3 toastPosition = moneyToastPosition.position;
             moneyToast.transform.position = toastPosition;
+
+            currentToast = moneyToast;
 
             switch (poolName)
             {

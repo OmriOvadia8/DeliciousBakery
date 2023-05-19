@@ -1,14 +1,15 @@
+using System;
 using UnityEngine;
 
 namespace DB_Game
 {
     public class DBPauseCurrencyManager : FoodDataAccess, IDBPauseCurrencyManager
     {
-        [SerializeField] private int baseMaxReward = 500;
+        [SerializeField] private double baseMaxReward = 500;
 
-        public int PassedTimeFoodRewardCalc(int timePassed)
+        public double PassedTimeFoodRewardCalc(int timePassed)
         {
-            int totalReward = 0;
+            double totalReward = 0;
             int doubleProfit = DBDoubleProfitController.DoubleProfitMultiplier;
 
             // Calculate rewards for each idle food
@@ -18,7 +19,7 @@ namespace DB_Game
 
                 if (!foodData.IsFoodLocked && foodData.IsBakerUnlocked)
                 {
-                    int reward = CalculateReward(timePassed, foodData);
+                    double reward = CalculateReward(timePassed, foodData);
                     totalReward += reward;
                 }
             }
@@ -26,17 +27,17 @@ namespace DB_Game
             return totalReward * doubleProfit;
         }
 
-        private int CalculateReward(int timePassed, FoodData foodData)
+        private double CalculateReward(int timePassed, FoodData foodData)
         {
             var bakerCookingTime = foodData.BakerCookingTime;
-            int profit = foodData.Profit;
+            double profit = foodData.Profit;
 
-            int reward = (int)(timePassed / bakerCookingTime) * profit;
-            int maxReward = CalculateMaxReward(foodData);
+            double reward = (double)(timePassed / bakerCookingTime) * profit;
+            double maxReward = CalculateMaxReward(foodData);
 
-            return Mathf.Min(reward, maxReward);
+            return Math.Min(reward, maxReward);
         }
 
-        private int CalculateMaxReward(FoodData foodData) => baseMaxReward * foodData.CookFoodMultiplier;
+        private double CalculateMaxReward(FoodData foodData) => baseMaxReward * foodData.CookFoodMultiplier;
     }
 }

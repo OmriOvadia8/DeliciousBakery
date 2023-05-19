@@ -29,7 +29,7 @@ namespace DB_Game
           });
         }
 
-        public void UpgradeItemByID(UpgradeablesTypeID typeID, int index, ScoreTags currencyType, int upgradeCost) // OVERLOAD orginal UpgradeItemByID method
+        public void UpgradeItemByID(UpgradeablesTypeID typeID, int index, ScoreTags currencyType, double upgradeCost) // OVERLOAD orginal UpgradeItemByID method
         {
             var upgradeable = GetUpgradeableByID(typeID, index);
 

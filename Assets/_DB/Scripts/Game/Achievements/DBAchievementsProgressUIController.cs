@@ -87,7 +87,7 @@ namespace DB_Game
    
         private void OnProgressCompletion(int currentMilestone)
         {
-            int reward = DBAchievementsController.FoodItemsAchievementsRewards[currentMilestone];
+            double reward = DBAchievementsController.FoodItemsAchievementsRewards[currentMilestone];
             InvokeEvent(DBEventNames.AddStarsUpdate, reward);
         }
 

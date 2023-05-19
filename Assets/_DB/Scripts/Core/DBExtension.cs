@@ -55,16 +55,8 @@ namespace DB_Core
 
         public static void WatchAd()
         {
-            //DBManager.Instance.AdsManager.ShowAd(null);
             DBManager.Instance.AdsManager.ShowAd();
         }
-
-        //public static void WatchAd(Action<bool> onAdCompleted)
-        //{
-        //   // DBManager.Instance.AdsManager.ShowAd(onAdCompleted);
-           
-        //}
-
 
         public static string GetFormattedTimeSpan(int seconds)
         {
@@ -79,15 +71,31 @@ namespace DB_Core
             }
         }
 
-        public static string ToCurrencyFormat(this int value)
+        public static string ToReadableNumber(this double score, int decimalPlaces = 2)
         {
-            return $"{value:N0}";
-        }
+            string result;
+            string[] scoreNames = new string[] { "", "k", "M", "B", "T", "aa", "ab", "ac", "ad", "ae", "af", "ag", "ah", "ai", "aj", "ak", "al", "am", "an", "ao", "ap", "aq", "ar", "as", "at", "au", "av", "aw", "ax", "ay", "az", "ba", "bb", "bc", "bd", "be", "bf", "bg", "bh", "bi", "bj", "bk", "bl", "bm", "bn", "bo", "bp", "bq", "br", "bs", "bt", "bu", "bv", "bw", "bx", "by", "bz", };
+            int i;
 
-        public static string ToPlainString(this int value)
-        {
-            return value.ToString();
-        }
+            for (i = 0; i < scoreNames.Length; i++)
+            {
+                if (score < 1000)
+                {
+                    break;
+                }
+                else
+                {
+                    score /= 1000;
+                }
+            }
 
+            string format = "F" + decimalPlaces.ToString();
+            result = score.ToString(format);
+
+            // Remove trailing zeros
+            result = result.IndexOf('.') < 0 ? result : result.TrimEnd('0').TrimEnd('.');
+
+            return $"{result}{scoreNames[i]}";
+        }
     }
 }

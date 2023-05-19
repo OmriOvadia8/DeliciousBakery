@@ -25,7 +25,7 @@ namespace DB_Game
 
             var foodData = foodDataRepository.GetFoodData(foodIndex);
             int initialLevel = GetCurrentFoodLevel(foodIndex);
-            int initialUpgradeCost = foodData.UpgradeCost;
+            double initialUpgradeCost = foodData.UpgradeCost;
 
             UpgradeFoodItem(foodIndex, initialUpgradeCost);
 
@@ -38,7 +38,7 @@ namespace DB_Game
         private int GetCurrentFoodLevel(int foodIndex) => 
             DBGameLogic.Instance.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodIndex).CurrentLevel;
 
-        private void UpgradeFoodItem(int foodIndex, int initialUpgradeCost) =>
+        private void UpgradeFoodItem(int foodIndex, double initialUpgradeCost) =>
             DBGameLogic.Instance.UpgradeManager.UpgradeItemByID(UpgradeablesTypeID.Food, foodIndex, ScoreTags.GameCurrency, initialUpgradeCost);
 
         private bool DidFoodLevelIncrease(int initialLevel, int foodIndex) =>
@@ -48,8 +48,8 @@ namespace DB_Game
         {
             dbManager.EventsManager.InvokeEvent(DBEventNames.OnUpgradeMoneySpentToast, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.UpgradeParticles, foodIndex);
-            foodData.Profit = (int)(foodData.Profit * PROFIT_INCREASE);
-            foodData.UpgradeCost = (int)(foodData.UpgradeCost * COST_INCREASE);
+            foodData.Profit = (double)(foodData.Profit * PROFIT_INCREASE);
+            foodData.UpgradeCost = (double)(foodData.UpgradeCost * COST_INCREASE);
 
             dbManager.EventsManager.InvokeEvent(DBEventNames.OnUpgradeTextUpdate, foodIndex);
 

@@ -15,7 +15,7 @@ namespace DB_Game
             });
         }
 
-        public bool TryGetScoreByTag(ScoreTags tag, ref int scoreOut)
+        public bool TryGetScoreByTag(ScoreTags tag, ref double scoreOut)
         {
             if (PlayerScoreData.ScoreByTag.TryGetValue(tag, out var score))
             {
@@ -26,7 +26,7 @@ namespace DB_Game
             return false;
         }
 
-        public void SetScoreByTag(ScoreTags tag, int amount = 0)
+        public void SetScoreByTag(ScoreTags tag, double amount = 0)
         {
             DBManager.Instance.EventsManager.InvokeEvent(DBEventNames.OnCurrencySet, (tag, amount));
             PlayerScoreData.ScoreByTag[tag] = amount;
@@ -34,7 +34,7 @@ namespace DB_Game
             DBManager.Instance.SaveManager.Save(PlayerScoreData);
         }
 
-        public void ChangeScoreByTagByAmount(ScoreTags tag, int amount = 0)
+        public void ChangeScoreByTagByAmount(ScoreTags tag, double amount = 0)
         {
             if (PlayerScoreData.ScoreByTag.ContainsKey(tag))
             {
@@ -46,9 +46,9 @@ namespace DB_Game
             }
         }
 
-        public bool TryUseScore(ScoreTags scoreTag, int amountToReduce)
+        public bool TryUseScore(ScoreTags scoreTag, double amountToReduce)
         {
-            var score = 0;
+            var score = 0D;
             var hasType = TryGetScoreByTag(scoreTag, ref score);
             var hasEnough = false;
 
@@ -73,7 +73,7 @@ namespace DB_Game
 
     public class DBPlayerScoreData : IDBSaveData
     {
-        public Dictionary<ScoreTags, int> ScoreByTag = new();     
+        public Dictionary<ScoreTags, double> ScoreByTag = new();
     }
 
     public enum ScoreTags

@@ -6,10 +6,10 @@ namespace DB_Game
     {
         public int Index { get; set; }
         public float CookingTime { get; set; }
-        public int Profit { get; set; }
-        public int UpgradeCost { get; set; }
+        public double Profit { get; set; }
+        public double UpgradeCost { get; set; }
         public bool IsBakerUnlocked { get; set; }  
-        public int HireCost { get; set; }
+        public double HireCost { get; set; }
         public int BakersCount { get; set; }
         public int CookFoodMultiplier { get; set; }
         public bool IsFoodLocked { get; set; }
@@ -27,10 +27,10 @@ namespace DB_Game
 
         public FoodData(int index,
                         float cookingTime,
-                        int profit,
-                        int upgradeCost,
+                        double profit,
+                        double upgradeCost,
                         bool isBakerUnlocked,
-                        int hireCost,
+                        double hireCost,
                         int bakersCount,
                         int cookFoodMultiplier,
                         bool isFoodlocked,

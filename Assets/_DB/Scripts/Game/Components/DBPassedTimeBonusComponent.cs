@@ -14,7 +14,7 @@ namespace DB_Game
         [SerializeField] Button claimButton;
         private DBPauseCurrencyManager pauseCurrencyManager;
 
-        private int totalReturnBonus = 0;
+        private double totalReturnBonus = 0;
 
         private float initialXPos;
 

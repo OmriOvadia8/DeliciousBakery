@@ -5,7 +5,7 @@ namespace DB_Game
 {
     public class PauseCurrencyAdder : DBLogicMonoBehaviour
     {
-        private int pausedReward;
+        private double pausedReward;
 
         [SerializeField] DBPauseCurrencyManager pausedCurrencyManager;
 

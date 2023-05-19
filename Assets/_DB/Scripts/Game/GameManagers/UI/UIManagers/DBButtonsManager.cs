@@ -20,8 +20,8 @@ namespace DB_Game
         [SerializeField] private TMP_Text[] learnRecipeText;
 
         private int[] timeWrapPrices = new int[] { DBTimeWrapItem.TWO_HOURS_PRICE, DBTimeWrapItem.FOUR_HOURS_PRICE, DBTimeWrapItem.EIGHT_HOURS_PRICE };
-        int CurrentCurrency => currencyManager.currencySaveData.CoinsAmount;
-        int CurrentPremiumCurrency => currencyManager.currencySaveData.StarsAmount;
+        double CurrentCurrency => currencyManager.currencySaveData.CoinsAmount;
+        double CurrentPremiumCurrency => currencyManager.currencySaveData.StarsAmount;
 
         private void OnEnable() => RegisterEvents();
 
@@ -45,7 +45,7 @@ namespace DB_Game
             for (int i = 0; i < buttons.UpgradeButtons.Length; i++)
             {
                 var upgradeButton = buttons.UpgradeButtons[i];
-                int upgradeCost = GetFoodData(i).UpgradeCost;
+                double upgradeCost = GetFoodData(i).UpgradeCost;
 
                 bool isAffordable = IsAffordable(upgradeCost);
 
@@ -65,7 +65,7 @@ namespace DB_Game
         {
             for (int i = 0; i < buttons.HireButtons.Length; i++)
             {
-                int hireCost = GetFoodData(i).HireCost;
+                double hireCost = GetFoodData(i).HireCost;
                 bool isLocked = GetFoodData(i).IsFoodLocked;
                 bool canHire = IsAffordable(hireCost) && !isLocked;
 
@@ -137,7 +137,7 @@ namespace DB_Game
             }
         }
 
-        private bool IsAffordable(int cost) => CurrentCurrency >= cost;
+        private bool IsAffordable(double cost) => CurrentCurrency >= cost;
 
         private bool IsPremiumAffordable(int cost) => CurrentPremiumCurrency >= cost;
 

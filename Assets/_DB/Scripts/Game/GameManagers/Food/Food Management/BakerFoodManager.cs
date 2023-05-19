@@ -19,7 +19,7 @@ namespace DB_Game
         public void UnlockOrUpgradeBakerCooking(int foodIndex)
         {
             var foodData = foodDataRepository.GetFoodData(foodIndex);
-            int hireCost = foodData.HireCost;
+            double hireCost = foodData.HireCost;
 
             if (DBGameLogic.Instance.ScoreManager.TryUseScore(ScoreTags.GameCurrency, hireCost))
             {
@@ -39,7 +39,7 @@ namespace DB_Game
             dbManager.EventsManager.InvokeEvent(DBEventNames.OnHireMoneySpentToast, foodIndex);
             foodData.IsBakerUnlocked = true;
             dbManager.EventsManager.InvokeEvent(DBEventNames.StartBakerCooking, foodIndex);
-            foodData.HireCost = (int)(foodData.HireCost * BAKER_COST_INCREASE);
+            foodData.HireCost = (double)(foodData.HireCost * BAKER_COST_INCREASE);
 
             if (foodData.BakersCount % PER_BAKERS == 0)
             {

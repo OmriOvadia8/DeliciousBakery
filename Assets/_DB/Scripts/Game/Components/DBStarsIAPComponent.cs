@@ -14,7 +14,7 @@ namespace DB_Game
 
         public void ThirdIAPItem() => AddStarsOnPurchase(THIRD_ITEM_STARS_GAIN);
 
-        private void AddStarsOnPurchase(int stars)
+        private void AddStarsOnPurchase(double stars)
         {
             InvokeEvent(DBEventNames.AddStarsUpdate, stars);
             InvokeEvent(DBEventNames.PremCurrencyUpdateUI, null);

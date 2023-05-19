@@ -11,36 +11,54 @@ namespace DB_Game
 
         [SerializeField] private float tweenTime = 1f;
         [SerializeField] private Vector3 moveAmount = Vector3.up;
-        [SerializeField] private float fadeTarget = 0f;
+        [SerializeField] private float fadeTarget;
 
-        [SerializeField] private float scaleStart = 0f;
+        [SerializeField] private float scaleStart;
         [SerializeField] private float scaleEnd = 1f;
 
         [SerializeField] private Ease easeTypeMove = Ease.Linear;
         [SerializeField] private AnimationCurve fadeEase;
 
-        public void Init(int amount)
+        private Tween fadeTween;
+        private Tween moveTween;
+        private Tween scaleTween;
+
+        public void Init(double amount)
         {
-            moneyToastText.text = $"+{amount:N0}";
+            moneyToastText.text = $"+{amount.ToReadableNumber()}";
             DoAnimation();
         }
 
-        public void SpendInit(int amount)
+        public void SpendInit(double amount)
         {
-            moneyToastText.text = $"-{amount:N0}";
+            moneyToastText.text = $"-{amount.ToReadableNumber()}";
             DoAnimation();
         }
 
         public void DoAnimation()
         {
-            transform.localScale = scaleStart * Vector3.one;
+            transform.DOKill();
 
+            transform.localScale = scaleStart * Vector3.one;
+            moneyToastText.color = new Color(moneyToastText.color.r, moneyToastText.color.g, moneyToastText.color.b, 1f);
+   
+            transform.DOScale(scaleEnd, tweenTime);
             moneyToastText.DOFade(fadeTarget, tweenTime).SetEase(fadeEase);
-            transform.DOLocalMove(transform.localPosition + moveAmount, tweenTime).SetEase(easeTypeMove);
-            transform.DOScale(scaleEnd * Vector3.one, tweenTime).OnComplete(() =>
-            {
-                Manager.PoolManager.ReturnPoolable(this);
-            });
+            transform.DOLocalMove(transform.localPosition + moveAmount, tweenTime).SetEase(easeTypeMove).OnComplete(() => ReturnToPool());
+        }
+
+        public void HideImmediately()
+        {
+            fadeTween?.Kill();
+            moveTween?.Kill();
+            scaleTween?.Kill();
+
+            ReturnToPool();
+        }
+
+        public void ReturnToPool()
+        {
+            Manager.PoolManager.ReturnPoolable(this);
         }
 
         public override void OnReturnedToPool()
