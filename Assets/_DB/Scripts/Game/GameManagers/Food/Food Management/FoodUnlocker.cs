@@ -36,6 +36,7 @@ namespace DB_Game
             dbManager.EventsManager.InvokeEvent(DBEventNames.DeviceAppearAnimation, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.OnLearnRecipeSpentToast, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.PlaySound, SoundEffectType.LearnButtonClick);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.BakerPing, true);
         }
     }
 }

@@ -152,8 +152,6 @@ namespace DB_Game
 
             InitializeCurrentMakeFoodAchievementsText();
             InitializeCurrentHireBakerAchievementText();
-
-
         }
 
         private void InitializeCurrentMakeFoodAchievementsText()
@@ -217,7 +215,6 @@ namespace DB_Game
             UpdateStars(stars, (int)HireMilestoneIndex.Hire5000);
         }
 
-
         private void CheckIfMakeFoodAchievementCompleted(int foodIndex)
         {
             CheckIfAchievementCompleted(foodIndex, true, achievementController.Achievements.Cook5000[foodIndex]);
@@ -272,11 +269,13 @@ namespace DB_Game
                 if (!achievementController.AchievementClaimReward.IsMakeFoodRewardClaimed[foodIndex, i] && makeFoodAchievements[i][foodIndex])
                 {
                     progressController.UpdateClaimButtonStatus(foodIndex, i, true, true);
+                    InvokeEvent(DBEventNames.AchievementPing, true);
                 }
 
                 if (!achievementController.AchievementClaimReward.IsHireBakerRewardClaimed[foodIndex, i] && hireBakerAchievements[i][foodIndex])
                 {
                     progressController.UpdateClaimButtonStatus(foodIndex, i, false, true);
+                    InvokeEvent(DBEventNames.AchievementPing, true);
                 }
             }
         }

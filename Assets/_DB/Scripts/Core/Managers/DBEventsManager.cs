@@ -100,6 +100,8 @@ namespace DB_Core
         CheckBuySkinButtonUI,
         BuySkinButtonVisibility,
         CheckBuyTimeWrapButtonsUI,
-        PlaySound
+        PlaySound,
+        AchievementPing,
+        BakerPing
     }
 }

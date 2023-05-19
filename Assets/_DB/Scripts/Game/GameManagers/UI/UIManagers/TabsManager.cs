@@ -31,6 +31,22 @@ namespace DB_Game
 
             scrollers[currentTab].SetActive(true);
             tabButtons[currentTab].interactable = false;
+
+            TurnOffPing(tabIndex);
+        }
+
+        private void TurnOffPing(int tabIndex)
+        {
+            switch (tabIndex)
+            {
+                case 1:
+                    InvokeEvent(DBEventNames.BakerPing, false);
+                    break;
+
+                case 2:
+                    InvokeEvent(DBEventNames.AchievementPing, false);
+                    break;
+            }
         }
     }
 }
