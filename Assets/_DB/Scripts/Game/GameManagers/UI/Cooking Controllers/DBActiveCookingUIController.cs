@@ -37,6 +37,7 @@ namespace DB_Game
             foodData.IsOnCooldown = true;
 
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
+            InvokeEvent(DBEventNames.PlaySound, SoundEffectType.CookButtonClick);
             var cookingSliderBar = CookingUIManager.uiActiveCookingComponents.CookingSliderBar[index];
             var cookingTimerText = CookingUIManager.uiActiveCookingComponents.CookingTimerText[index];
             var cookingTimeLeft = CookingUIManager.uiActiveCookingComponents.TimeLeftToActiveCook[index];

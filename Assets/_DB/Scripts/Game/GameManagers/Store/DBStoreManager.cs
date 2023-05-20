@@ -8,6 +8,11 @@ namespace DB_Game
     {
         public DBStoresConfigData StoresConfigData;
 
+        public DBStoreManager() => LoadStoresConfig();
+
+        private void LoadStoresConfig() => 
+            DBManager.Instance.ConfigManager.GetConfigAsync("store_config", (DBStoresConfigData config) => StoresConfigData = config);
+
         public bool TryBuyProduct(string sku, string storeID)
         {
             DBManager.Instance.PurchaseManager.Purchase(sku, isSuccess =>
@@ -34,7 +39,6 @@ namespace DB_Game
         {
             return StoresConfigData.StoreDatas.FirstOrDefault(x => x.StoreID == storeID);
         }
-
     }
 
     public class DBStoresConfigData

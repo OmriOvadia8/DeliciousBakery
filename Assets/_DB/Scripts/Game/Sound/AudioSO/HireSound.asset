@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad5bef65ad1b91a49afa7075258832f4, type: 3}
-  m_Name: ConfettiSound
+  m_Name: HireSound
   m_EditorClassIdentifier: 
-  effectType: 2
-  clip: {fileID: 8300000, guid: 88d016ee48b5bcd4d9db2b7e9ce5e8cd, type: 3}
-  volume: 0.125
+  effectType: 4
+  clip: {fileID: 8300000, guid: 25d113d6119c6c64cade5c2011c9ecbd, type: 3}
+  volume: 0.15

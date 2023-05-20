@@ -58,6 +58,9 @@ namespace DB_Game
         CookButtonClick,
         UpgradeButtonClick,
         LearnButtonClick,
-        // TODO: more sound adding
+        PingSound,
+        HireSound,
+        TabSound,
+        PopupSound
     }
 }

@@ -35,10 +35,7 @@ namespace DB_Game
 
         private void PerformBakerUnlockOrUpgrade(FoodData foodData, int foodIndex)
         {
-            dbManager.EventsManager.InvokeEvent(DBEventNames.BakerParticles, foodIndex);
-            dbManager.EventsManager.InvokeEvent(DBEventNames.OnHireMoneySpentToast, foodIndex);
             foodData.IsBakerUnlocked = true;
-            dbManager.EventsManager.InvokeEvent(DBEventNames.StartBakerCooking, foodIndex);
             foodData.HireCost = (double)(foodData.HireCost * BAKER_COST_INCREASE);
 
             if (foodData.BakersCount % PER_BAKERS == 0)
@@ -47,10 +44,19 @@ namespace DB_Game
             }
 
             foodData.BakersCount++;
+            InvokeHireEvents(foodIndex);
+        }
+
+        private void InvokeHireEvents(int foodIndex)
+        {
+            dbManager.EventsManager.InvokeEvent(DBEventNames.BakerParticles, foodIndex);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.OnHireMoneySpentToast, foodIndex);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.StartBakerCooking, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.OnHiredTextUpdate, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.CheckHiredAchievement, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.CurrentHireBakerAchievementStatus, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.CheckTotalHiredAchievement, null);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.PlaySound, SoundEffectType.HireSound);
         }
     }
 }

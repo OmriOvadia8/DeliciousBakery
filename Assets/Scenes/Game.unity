@@ -22173,11 +22173,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8841703357247634999, guid: f2adbd588842ee949ab9cf87a3b7cb0f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -32.6
+      value: -11.5
       objectReference: {fileID: 0}
     - target: {fileID: 8841703357247634999, guid: f2adbd588842ee949ab9cf87a3b7cb0f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -27.3
+      value: -10.799999
       objectReference: {fileID: 0}
     - target: {fileID: 8841703357247634999, guid: f2adbd588842ee949ab9cf87a3b7cb0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -41369,9 +41369,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3b5ca3bd574a4524fb6385d8fae0911b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b10c2803c22b49c4791f92f814bf879c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.16
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -60138,6 +60138,9 @@ MonoBehaviour:
   audioAssets:
   - {fileID: 11400000, guid: 2419a9ff52b384f41be0349ccb7ca910, type: 2}
   - {fileID: 11400000, guid: f46b2c03905f12c438602bcda822e785, type: 2}
+  - {fileID: 11400000, guid: 0980461854d889e4e95031875431fd20, type: 2}
+  - {fileID: 11400000, guid: a71cff1f8fc95b842a91a15c4eab8279, type: 2}
+  - {fileID: 11400000, guid: 0463eabd7b6245244b0ceb1ff780c2d6, type: 2}
   audioSource: {fileID: 2138473847}
 --- !u!4 &2138473846
 Transform:
@@ -62956,11 +62959,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8841703357247634999, guid: f2adbd588842ee949ab9cf87a3b7cb0f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -32.6
+      value: -11.5
       objectReference: {fileID: 0}
     - target: {fileID: 8841703357247634999, guid: f2adbd588842ee949ab9cf87a3b7cb0f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -27.3
+      value: -10.799999
       objectReference: {fileID: 0}
     - target: {fileID: 8841703357247634999, guid: f2adbd588842ee949ab9cf87a3b7cb0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
