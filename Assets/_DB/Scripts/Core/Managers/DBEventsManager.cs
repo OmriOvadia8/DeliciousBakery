@@ -35,7 +35,6 @@ namespace DB_Core
         {
             if (activeListeners.TryGetValue(eventName, out var listOfEvents))
             {
-                //TODO: Do For Loop
                 foreach (var action in listOfEvents)
                 {
                     action.Invoke(obj);
@@ -47,39 +46,25 @@ namespace DB_Core
     public enum DBEventNames
     {
         OnCurrencySet,
-        OnGameStart,
         OnUpgradeTextUpdate,
-        OnCookFood,
         MoneyToastOnCook,
         MoneyToastOnAutoCook,
         OnUpgradeMoneySpentToast,
         OnHireMoneySpentToast,
         OnHiredTextUpdate,
-        OnAutoCookFood,
         OnPause,
         OfflineTimeRefreshed,
-        OnPopupOpen,
-        OnPopupClose,
         OnLearnRecipe,
         OnLearnRecipeSpentToast,
-        MoneyToastOnDoubleReward,
-        OnAutoCookOnResume,
-        OnAutoCookAfterPause,
-        CookFoodAfterOffline,
-        Letstrythisout,
         CurrencyUpdateUI,
-        OnCompleteCookFood,
         OnPremCurrencySet,
         PremCurrencyUpdateUI,
         DeviceAppearAnimation,
-        CheckDeviceAppearance,
         AddCurrencyUpdate,
-        StartActiveCooking,
         StartBakerCooking,
         BuyButtonsCheck,
         CookButtonAlphaOn,
         CookButtonAlphaOff,
-        OnUnFocused,
         BakerParticles,
         LearnParticles,
         FoodBarReveal,
@@ -87,11 +72,8 @@ namespace DB_Core
         UpgradeParticles,
         CookParticles,
         CookFoodButtonCheck,
-        SaveAchievements,
         CheckCookedAchievement,
         CheckHiredAchievement,
-        CheckTotalHiredAchievement,
-        CheckTotalCookedAchievement,
         CurrentMakeFoodAchievementStatus,
         CurrentHireBakerAchievementStatus,
         AddStarsUpdate,

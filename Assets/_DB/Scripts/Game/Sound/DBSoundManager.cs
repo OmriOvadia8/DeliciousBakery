@@ -55,12 +55,13 @@ namespace DB_Game
 
     public enum SoundEffectType
     {
-        CookButtonClick,
+        ButtonClick,
         UpgradeButtonClick,
         LearnButtonClick,
         PingSound,
         HireSound,
         TabSound,
-        PopupSound
+        PopupSound,
+        Claim
     }
 }

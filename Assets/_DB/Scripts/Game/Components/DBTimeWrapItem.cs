@@ -6,8 +6,6 @@ namespace DB_Game
 {
     public class DBTimeWrapItem : FoodDataAccess
     {
-        [SerializeField] TMP_Text[] starsAmount;
-
         private const int TWO_HOURS = 7200;
         public const int TWO_HOURS_PRICE = 1000;
 
@@ -50,10 +48,7 @@ namespace DB_Game
             if (GameLogic.ScoreManager.TryUseScore(ScoreTags.PremiumCurrency, TWO_HOURS_PRICE))
             {
                 double timeWrapReward = TimeWrap(TWO_HOURS);
-                InvokeEvent(DBEventNames.AddCurrencyUpdate, timeWrapReward);
-                InvokeEvent(DBEventNames.PremCurrencyUpdateUI, null);
-                InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
-                InvokeEvent(DBEventNames.CheckBuyTimeWrapButtonsUI, null);
+                InvokeTimeWrapEvents(timeWrapReward);
             }
         }
 
@@ -62,10 +57,7 @@ namespace DB_Game
             if (GameLogic.ScoreManager.TryUseScore(ScoreTags.PremiumCurrency, FOUR_HOURS_PRICE))
             {
                 double timeWrapReward = TimeWrap(FOUR_HOURS);
-                InvokeEvent(DBEventNames.AddCurrencyUpdate, timeWrapReward);
-                InvokeEvent(DBEventNames.PremCurrencyUpdateUI, null);
-                InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
-                InvokeEvent(DBEventNames.CheckBuyTimeWrapButtonsUI, null);
+                InvokeTimeWrapEvents(timeWrapReward);
             }
         }
 
@@ -74,11 +66,17 @@ namespace DB_Game
             if (GameLogic.ScoreManager.TryUseScore(ScoreTags.PremiumCurrency, EIGHT_HOURS_PRICE))
             {
                 double timeWrapReward = TimeWrap(EIGHT_HOURS);
-                InvokeEvent(DBEventNames.AddCurrencyUpdate, timeWrapReward);
-                InvokeEvent(DBEventNames.PremCurrencyUpdateUI, null);
-                InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
-                InvokeEvent(DBEventNames.CheckBuyTimeWrapButtonsUI, null);
+                InvokeTimeWrapEvents(timeWrapReward);
             }
+        }
+
+        private void InvokeTimeWrapEvents(double timeWrapReward)
+        {
+            InvokeEvent(DBEventNames.AddCurrencyUpdate, timeWrapReward);
+            InvokeEvent(DBEventNames.PremCurrencyUpdateUI, null);
+            InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
+            InvokeEvent(DBEventNames.CheckBuyTimeWrapButtonsUI, null);
+            InvokeEvent(DBEventNames.PlaySound, SoundEffectType.ButtonClick);
         }
     }
 }

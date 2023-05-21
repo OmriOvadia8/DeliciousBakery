@@ -95,26 +95,17 @@ namespace DB_Core
     {
         public int Priority;
         public PopupTypes PopupType;
-
         public Action OnPopupOpen;
         public Action<DBPopupComponentBase> OnPopupClose;
-
         public string MessageContent;
-       // public string ButtonContent;
-
         public string MessageNoProfitContent;
-        //public string ButtonNoProfitContent;
 
         public static DBPopupData WelcomeBackMessage = new()
         {
             Priority = 10,
             PopupType = PopupTypes.WelcomeBackMessage,
-
             MessageContent = "Welcome Back!\r\nYour bakers worked tirelessly while \r\nyou were away. \r\nHere's a reward for their hard work!",
-           // ButtonContent = "Claim 2X",
-
             MessageNoProfitContent = "Welcome Back! \r\nNo profits earned while away.\r\nHire bakers to make money \r\nwhile offline!",
-          //  ButtonNoProfitContent = "Got it!"
         };
 
         public static DBPopupData UpgradePopupData = new()

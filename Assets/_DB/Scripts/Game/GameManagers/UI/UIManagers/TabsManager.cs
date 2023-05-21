@@ -32,6 +32,8 @@ namespace DB_Game
             scrollers[currentTab].SetActive(true);
             tabButtons[currentTab].interactable = false;
 
+            InvokeEvent(DBEventNames.PlaySound, SoundEffectType.TabSound);
+
             TurnOffPing(tabIndex);
         }
 

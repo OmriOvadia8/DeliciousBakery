@@ -37,7 +37,7 @@ namespace DB_Game
             foodData.IsOnCooldown = true;
 
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
-            InvokeEvent(DBEventNames.PlaySound, SoundEffectType.CookButtonClick);
+            InvokeEvent(DBEventNames.PlaySound, SoundEffectType.ButtonClick);
             var cookingSliderBar = CookingUIManager.uiActiveCookingComponents.CookingSliderBar[index];
             var cookingTimerText = CookingUIManager.uiActiveCookingComponents.CookingTimerText[index];
             var cookingTimeLeft = CookingUIManager.uiActiveCookingComponents.TimeLeftToActiveCook[index];
@@ -131,7 +131,6 @@ namespace DB_Game
             foodData.RemainingCookingTime = foodData.CookingTime;
             foodData.FoodCookedCount++;
             InvokeEvent(DBEventNames.CheckCookedAchievement, index);
-            InvokeEvent(DBEventNames.CheckTotalCookedAchievement, index);
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
             InvokeEvent(DBEventNames.CurrentMakeFoodAchievementStatus, index);
             SaveFoodData();

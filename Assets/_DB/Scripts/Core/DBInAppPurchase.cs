@@ -29,15 +29,11 @@ namespace DB_Core
             storeController.InitiatePurchase(productID);
         }
 
-        public void OnInitializeFailed(InitializationFailureReason error)
-        {
+        public void OnInitializeFailed(InitializationFailureReason error) =>
             DBManager.Instance.CrashManager.LogExceptionHandling(error.ToString());
-        }
 
-        public void OnInitializeFailed(InitializationFailureReason error, string message)
-        {
+        public void OnInitializeFailed(InitializationFailureReason error, string message) =>
             DBManager.Instance.CrashManager.LogExceptionHandling(error.ToString() + "   " + message);
-        }
 
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
         {

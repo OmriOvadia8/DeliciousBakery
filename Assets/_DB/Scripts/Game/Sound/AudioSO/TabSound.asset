@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad5bef65ad1b91a49afa7075258832f4, type: 3}
-  m_Name: CookSound
+  m_Name: TabSound
   m_EditorClassIdentifier: 
-  effectType: 0
-  clip: {fileID: 8300000, guid: ebb03b2b009894845b81a64051a5c698, type: 3}
-  volume: 0.15
+  effectType: 5
+  clip: {fileID: 8300000, guid: a01523ef926ad2542a8e2ac1a6211d09, type: 3}
+  volume: 0.5

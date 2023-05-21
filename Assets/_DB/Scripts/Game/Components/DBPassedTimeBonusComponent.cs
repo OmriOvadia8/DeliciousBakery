@@ -8,14 +8,12 @@ namespace DB_Game
     public class DBPassedTimeBonusComponent : DBLogicMonoBehaviour
     {
         [SerializeField] private TMP_Text rewardText;
-        [SerializeField] private float xOffsetPerDigit = 10f;
+        [SerializeField] private float xOffsetPerDigit;
         [SerializeField] private RectTransform coinRectTransform;
         [SerializeField] Button gotItButton;
         [SerializeField] Button claimButton;
         private DBPauseCurrencyManager pauseCurrencyManager;
-
-        private double totalReturnBonus = 0;
-
+        private double totalReturnBonus;
         private float initialXPos;
 
         private void Awake()
@@ -42,10 +40,7 @@ namespace DB_Game
             }
         }
 
-        private void OnDestroy()
-        {
-            Manager.EventsManager.RemoveListener(DBEventNames.OfflineTimeRefreshed, OnRefreshedTime);
-        }
+        private void OnDestroy() => Manager.EventsManager.RemoveListener(DBEventNames.OfflineTimeRefreshed, OnRefreshedTime);
 
         private void OnRefreshedTime(object timeValue)
         {
@@ -73,8 +68,8 @@ namespace DB_Game
         {
             totalReturnBonus = pauseCurrencyManager.PassedTimeFoodRewardCalc(timePassed);
 
-            rewardText.text = totalReturnBonus.ToString();
-            float xPos = initialXPos - (totalReturnBonus.ToString().Length - 1) * xOffsetPerDigit;
+            rewardText.text = totalReturnBonus.ToReadableNumber();
+            float xPos = initialXPos - (totalReturnBonus.ToReadableNumber().Length - 1) * xOffsetPerDigit;
             coinRectTransform.anchoredPosition = new Vector2(xPos, coinRectTransform.anchoredPosition.y);
 
             GivePassiveBonusAccordingToTimePassed();

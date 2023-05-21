@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HireSound
   m_EditorClassIdentifier: 
   effectType: 4
-  clip: {fileID: 8300000, guid: 25d113d6119c6c64cade5c2011c9ecbd, type: 3}
-  volume: 0.15
+  clip: {fileID: 8300000, guid: ebb03b2b009894845b81a64051a5c698, type: 3}
+  volume: 0.5
