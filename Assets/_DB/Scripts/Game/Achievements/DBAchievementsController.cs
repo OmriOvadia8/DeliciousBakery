@@ -11,7 +11,7 @@ namespace DB_Game
         public AchievementData Achievements => achievementsManager.AchievementsData.Achievements;
         public AchievementClaimData AchievementClaimReward => achievementsManager.AchievementClaimData;
         
-        public static readonly int[] FoodItemAchievementGoals = { 1, 2, 3, 4, 5 }; //{ 1, 3, 500, 1000, 5000 };
+        public static readonly int[] FoodItemAchievementGoals = { 10, 100, 500, 1000, 5000 };
         public static readonly int[] FoodItemsAchievementsRewards = { 100, 200, 300, 500, 1000 };
 
         private void OnEnable() => RegisterEvents();

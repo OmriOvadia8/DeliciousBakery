@@ -37,5 +37,11 @@ namespace DB_Game
             
             base.OnOpenPopup();
         }
+
+        protected override void OnClosePopup()
+        {
+            base.OnClosePopup();
+            InvokeEvent(DBEventNames.PlaySound, SoundEffectType.ButtonClick);
+        }
     }
 }

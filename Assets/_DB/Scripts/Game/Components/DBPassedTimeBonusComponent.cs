@@ -62,6 +62,8 @@ namespace DB_Game
             {
                 DBExtension.WatchAd();
             }
+
+            InvokeEvent(DBEventNames.PlaySound, SoundEffectType.ButtonClick);
         }
 
         private void OpenOfflineRewardWindow(int timePassed)

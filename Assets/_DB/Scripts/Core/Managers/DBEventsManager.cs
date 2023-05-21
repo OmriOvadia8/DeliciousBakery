@@ -84,6 +84,7 @@ namespace DB_Core
         CheckBuyTimeWrapButtonsUI,
         PlaySound,
         AchievementPing,
-        BakerPing
+        BakerPing,
+        SlimeAction
     }
 }

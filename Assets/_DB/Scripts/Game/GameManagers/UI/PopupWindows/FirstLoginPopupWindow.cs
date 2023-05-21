@@ -18,13 +18,8 @@ namespace DB_Game
 
         protected override void OnClosePopup()
         {
-           // Manager.PopupManager.AddPopupToQueue(DBPopupData.StorePopupData);
             base.OnClosePopup();
-        }
-
-        protected override void OnOpenPopup()
-        {
-            base.OnOpenPopup();
+            InvokeEvent(DBEventNames.PlaySound, SoundEffectType.ButtonClick);
         }
     }
 }

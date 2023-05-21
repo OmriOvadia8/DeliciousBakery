@@ -56,6 +56,7 @@ namespace DB_Game
             dbManager.EventsManager.InvokeEvent(DBEventNames.CheckHiredAchievement, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.CurrentHireBakerAchievementStatus, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.PlaySound, SoundEffectType.HireSound);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.SlimeAction, foodIndex);
         }
     }
 }
