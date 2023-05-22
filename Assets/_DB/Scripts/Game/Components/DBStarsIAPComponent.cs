@@ -17,10 +17,17 @@ namespace DB_Game
         public void TestingIAP()
         {
             var storeData = GameLogic.StoreManager.GetStoreByStoreID("1");
-            if (GameLogic.StoreManager.TryBuyProduct(storeData.StoreProducts[0].SKU, storeData.StoreID))
+            GameLogic.StoreManager.TryBuyProduct(storeData.StoreProducts[0].SKU, storeData.StoreID, isSuccess =>
             {
-                DBDebug.Log("IAP SUCCESS");
-            }
+                if (isSuccess)
+                {
+                    DBDebug.Log("IAP SUCCESS");
+                }
+                else
+                {
+                    DBDebug.Log("IAP FAILED");
+                }
+            });
         }
 
         private void AddStarsOnPurchase(double stars)
