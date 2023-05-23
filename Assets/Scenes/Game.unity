@@ -6958,6 +6958,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coins Amount 4HRS
       objectReference: {fileID: 0}
+    - target: {fileID: 7807640818517844279, guid: 72d5008a184a86d48852bba23a4f1f77, type: 3}
+      propertyPath: m_text
+      value: 4 Hours
+      objectReference: {fileID: 0}
     - target: {fileID: 7949561643970043071, guid: 72d5008a184a86d48852bba23a4f1f77, type: 3}
       propertyPath: m_text
       value: 1800
@@ -22094,6 +22098,10 @@ PrefabInstance:
     - target: {fileID: 7539757114826003291, guid: 72d5008a184a86d48852bba23a4f1f77, type: 3}
       propertyPath: m_Name
       value: Coins Amount 8HRS
+      objectReference: {fileID: 0}
+    - target: {fileID: 7807640818517844279, guid: 72d5008a184a86d48852bba23a4f1f77, type: 3}
+      propertyPath: m_text
+      value: 8 Hours
       objectReference: {fileID: 0}
     - target: {fileID: 7949561643970043071, guid: 72d5008a184a86d48852bba23a4f1f77, type: 3}
       propertyPath: m_text
