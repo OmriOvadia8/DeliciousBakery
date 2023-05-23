@@ -6,6 +6,8 @@ namespace DB_Game
 {
     public class DBTimeWrapItem : FoodDataAccess
     {
+        [SerializeField] TMP_Text[] CoinsAmountTimeWrapText;
+
         private const int TWO_HOURS = 7200;
         public const int TWO_HOURS_PRICE = 1000;
 
@@ -14,6 +16,12 @@ namespace DB_Game
 
         private const int EIGHT_HOURS = 28800;
         public const int EIGHT_HOURS_PRICE = 3300;
+
+        private void OnEnable() => AddListener(DBEventNames.TimeWrapCoinsText, UpdateCoinsAmountTimeWrapUI);
+
+        private void OnDisable() => RemoveListener(DBEventNames.TimeWrapCoinsText, UpdateCoinsAmountTimeWrapUI);
+
+        private void Start() => UpdateCoinsAmountTimeWrapUI(null);
 
         private double TimeWrap(int timePassed)
         {
@@ -68,6 +76,13 @@ namespace DB_Game
                 double timeWrapReward = TimeWrap(EIGHT_HOURS);
                 InvokeTimeWrapEvents(timeWrapReward);
             }
+        }
+
+        private void UpdateCoinsAmountTimeWrapUI(object obj)
+        {
+            CoinsAmountTimeWrapText[0].text = TimeWrap(TWO_HOURS).ToReadableNumber();
+            CoinsAmountTimeWrapText[1].text = TimeWrap(FOUR_HOURS).ToReadableNumber();
+            CoinsAmountTimeWrapText[2].text = TimeWrap(EIGHT_HOURS).ToReadableNumber();
         }
 
         private void InvokeTimeWrapEvents(double timeWrapReward)

@@ -37,6 +37,7 @@ namespace DB_Game
             InvokeEvent(DBEventNames.AddCurrencyUpdate, bonus);
             InvokeEvent(DBEventNames.CurrencyUpdateUI, null);
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
+            InvokeEvent(DBEventNames.PlaySound, SoundEffectType.UpgradeButtonClick);
         }
     }
 }

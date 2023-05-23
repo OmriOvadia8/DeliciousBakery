@@ -39,6 +39,8 @@ namespace DB_Game
             InvokeEvent(DBEventNames.AddStarsUpdate, bonus);
             InvokeEvent(DBEventNames.PremCurrencyUpdateUI, null);
             InvokeEvent(DBEventNames.CheckBuySkinButtonUI, null);
+            InvokeEvent(DBEventNames.CheckBuyTimeWrapButtonsUI, null);
+            InvokeEvent(DBEventNames.PlaySound, SoundEffectType.UpgradeButtonClick);
         }
     }
 }

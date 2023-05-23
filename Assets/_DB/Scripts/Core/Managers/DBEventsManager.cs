@@ -85,6 +85,7 @@ namespace DB_Core
         PlaySound,
         AchievementPing,
         BakerPing,
-        SlimeAction
+        SlimeAction,
+        TimeWrapCoinsText
     }
 }
