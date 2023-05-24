@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using DB_Core;
+using DG.Tweening;
 
 namespace DB_Game
 {
@@ -8,7 +9,9 @@ namespace DB_Game
     {
         private bool collected;
         [SerializeField] DBCurrencyManager currencyManager;
-        private float currencyPercentageForBonus = 0.1f;
+        [SerializeField] RectTransform statsIcon;
+        [SerializeField] Transform coinTrans;
+        private readonly float currencyPercentageForBonus = 0.1f;
         private int starterBonus = 100;
 
         private void Start() => StartCoroutine(SelfDestructAfterDelay());
@@ -28,7 +31,11 @@ namespace DB_Game
             collected = true;
             double bonus = currencyPercentageForBonus * currencyManager.currencySaveData.CoinsAmount + starterBonus;
             InvokeBonusEvents(bonus);
-            this.gameObject.SetActive(false);
+
+            coinTrans.DOMove(statsIcon.position, 1.5f).OnComplete(() => {
+                this.gameObject.SetActive(false);
+            });
+
             collected = false;
         }
 

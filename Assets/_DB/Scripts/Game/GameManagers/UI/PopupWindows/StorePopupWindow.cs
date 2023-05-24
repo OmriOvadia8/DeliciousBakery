@@ -16,9 +16,11 @@ namespace DB_Game
             anim.WaitForAnimationComplete(this, () => base.Init(popupData));
         }
 
-        protected override void OnOpenPopup()
+        protected override void OnClosePopup()
         {
-            base.OnOpenPopup();
+            InvokeEvent(DBEventNames.PlaySound, SoundEffectType.ButtonClick);
+            base.OnClosePopup();
         }
+
     }
 }

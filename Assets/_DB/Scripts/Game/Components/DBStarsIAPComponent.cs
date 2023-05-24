@@ -14,22 +14,6 @@ namespace DB_Game
 
         public void ThirdIAPItem() => AddStarsOnPurchase(THIRD_ITEM_STARS_GAIN);
 
-        public void TestingIAP()
-        {
-            var storeData = GameLogic.StoreManager.GetStoreByStoreID("1");
-            GameLogic.StoreManager.TryBuyProduct(storeData.StoreProducts[0].SKU, storeData.StoreID, isSuccess =>
-            {
-                if (isSuccess)
-                {
-                    DBDebug.Log("IAP SUCCESS");
-                }
-                else
-                {
-                    DBDebug.Log("IAP FAILED");
-                }
-            });
-        }
-
         private void AddStarsOnPurchase(double stars)
         {
             InvokeEvent(DBEventNames.AddStarsUpdate, stars);

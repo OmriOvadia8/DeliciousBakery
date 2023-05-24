@@ -1,14 +1,17 @@
 using System.Collections;
 using UnityEngine;
 using DB_Core;
+using DG.Tweening;
 
 namespace DB_Game
 {
     public class DBStarBonus : DBLogicMonoBehaviour
     {
         private bool collected;
-        private int minBonus = 5;
+        private int minBonus = 3;
         private int maxBonus = 10;
+        [SerializeField] RectTransform statsIcon; 
+        [SerializeField] Transform starTrans; 
 
         private void OnEnable()
         {
@@ -30,8 +33,11 @@ namespace DB_Game
             collected = true;
             double bonus = Random.Range(minBonus, maxBonus + 1);
             InvokeBonusEvents(bonus);
-            this.gameObject.SetActive(false);
-            collected = false;
+
+            starTrans.DOMove(statsIcon.position, 1.5f).OnComplete(() => {
+                this.gameObject.SetActive(false);
+                collected = false;
+            });
         }
 
         private void InvokeBonusEvents(double bonus)

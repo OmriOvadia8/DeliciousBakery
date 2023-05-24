@@ -21,11 +21,13 @@ namespace DB_Game
             {
                 if (!IsFirstFoodLocked())
                 {
-                    yield return new WaitForSeconds(35);
+                    float randomDelay = Random.Range(20f, 35f);
+                    yield return new WaitForSeconds(randomDelay);
 
                     Vector2 randomPositionWithinObject = GetRandomPosition();
 
-                    RectTransform coinTransform = coinPrefab.GetComponent<RectTransform>();
+                    RectTransform coinTransform = (RectTransform)coinPrefab.transform;
+
                     coinTransform.SetParent(spawnArea, false);
                     coinTransform.anchoredPosition = randomPositionWithinObject;
 
@@ -33,7 +35,7 @@ namespace DB_Game
                 }
                 else
                 {
-                    yield return null; 
+                    yield return null;
                 }
             }
         }
@@ -44,11 +46,12 @@ namespace DB_Game
             {
                 if (!IsFirstFoodLocked())
                 {
-                    yield return new WaitForSeconds(65);
+                    float randomDelay = Random.Range(40f, 65f);
+                    yield return new WaitForSeconds(randomDelay);
 
                     Vector2 randomPositionWithinObject = GetRandomPosition();
 
-                    RectTransform starTransform = starPrefab.GetComponent<RectTransform>();
+                    RectTransform starTransform = (RectTransform)starPrefab.transform;
                     starTransform.SetParent(spawnArea, false);
                     starTransform.anchoredPosition = randomPositionWithinObject;
 
@@ -56,10 +59,11 @@ namespace DB_Game
                 }
                 else
                 {
-                    yield return null; 
+                    yield return null;
                 }
             }
         }
+
 
         private Vector2 GetRandomPosition()
         {

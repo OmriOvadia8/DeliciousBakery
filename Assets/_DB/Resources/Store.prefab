@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 9.99$
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5d9befe22dfa970418b9aa15dbc9f4ba, type: 2}
-  m_sharedMaterial: {fileID: -7769912929738174819, guid: 5d9befe22dfa970418b9aa15dbc9f4ba, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b0a35d00211932b44abf8b14418a89e6, type: 2}
+  m_sharedMaterial: {fileID: -7769912929738174819, guid: b0a35d00211932b44abf8b14418a89e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -201,17 +201,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +12,000
+  m_text: 12,000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 341e685ec206ad0498552d2a4d6a245f, type: 2}
-  m_sharedMaterial: {fileID: 8309912418977583134, guid: 341e685ec206ad0498552d2a4d6a245f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b0a35d00211932b44abf8b14418a89e6, type: 2}
+  m_sharedMaterial: {fileID: -7769912929738174819, guid: b0a35d00211932b44abf8b14418a89e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4285817085
+  m_fontColor: {r: 0.9921569, g: 0.37647063, b: 0.454902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -228,8 +228,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -412,17 +412,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +6,000
+  m_text: 6,000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 341e685ec206ad0498552d2a4d6a245f, type: 2}
-  m_sharedMaterial: {fileID: 8309912418977583134, guid: 341e685ec206ad0498552d2a4d6a245f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b0a35d00211932b44abf8b14418a89e6, type: 2}
+  m_sharedMaterial: {fileID: -7769912929738174819, guid: b0a35d00211932b44abf8b14418a89e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4285817085
+  m_fontColor: {r: 0.9921569, g: 0.37647063, b: 0.454902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -439,8 +439,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -493,7 +493,6 @@ GameObject:
   - component: {fileID: 1012406186461849374}
   - component: {fileID: 8714935613215040458}
   - component: {fileID: 7183142830956967757}
-  - component: {fileID: 2674706115354331925}
   m_Layer: 5
   m_Name: Store Item
   m_TagString: Untagged
@@ -606,10 +605,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2674706115354331925}
-        m_TargetAssemblyTypeName: DB_Game.DBStarsIAPComponent, Game
-        m_MethodName: FirstIAPItem
-        m_Mode: 1
+      - m_Target: {fileID: 5574773600403537245}
+        m_TargetAssemblyTypeName: DB_Game.PremStoreActions, Game
+        m_MethodName: IAPStarsPurchase
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -618,18 +617,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2674706115354331925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712076528263704974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308eda27a103d7948bdcc640f067cf9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2041609883041921779
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +652,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -37.5}
+  m_AnchoredPosition: {x: 0, y: -71}
   m_SizeDelta: {x: 280, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &225467206037799887
@@ -822,6 +809,7 @@ GameObject:
   - component: {fileID: 7049301039954035568}
   - component: {fileID: 2026942382962792963}
   - component: {fileID: 7788133130337731616}
+  - component: {fileID: 6496772629239400191}
   m_Layer: 5
   m_Name: Store Item (1)
   m_TagString: Untagged
@@ -890,6 +878,62 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6496772629239400191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2443656516816059295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 7788133130337731616}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5574773600403537245}
+        m_TargetAssemblyTypeName: DB_Game.PremStoreActions, Game
+        m_MethodName: IAPStarsPurchase
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2647949460848332960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,6 +1157,7 @@ GameObject:
   - component: {fileID: -8043766205650962037}
   - component: {fileID: 206788096802522138}
   - component: {fileID: 6760109513177439209}
+  - component: {fileID: 5574773600403537245}
   m_Layer: 5
   m_Name: Store
   m_TagString: Untagged
@@ -1139,8 +1184,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.6978, y: 0}
-  m_SizeDelta: {x: 1008.6975, y: 790}
+  m_AnchoredPosition: {x: 2.6978, y: 32.1617}
+  m_SizeDelta: {x: 1008.6975, y: 725.6765}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &-8043766205650962037
 Animator:
@@ -1271,6 +1316,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5574773600403537245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2672678040539564373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 981f7cf1389b926408f4aedf571316da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3156876064132893387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1308,8 +1365,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -89}
-  m_SizeDelta: {x: 280, y: 75}
+  m_AnchoredPosition: {x: 0, y: 37.5}
+  m_SizeDelta: {x: 350, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5900093650361043535
 CanvasRenderer:
@@ -1392,7 +1449,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6503564459557708857}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5574773600403537245}
+        m_TargetAssemblyTypeName: DB_Game.PremStoreActions, Game
+        m_MethodName: IAPStarsPurchase
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4302611492683785511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,7 +1727,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -37.5}
+  m_AnchoredPosition: {x: 0, y: -71}
   m_SizeDelta: {x: 280, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5524802897449401799
@@ -1737,8 +1806,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1.99$
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5d9befe22dfa970418b9aa15dbc9f4ba, type: 2}
-  m_sharedMaterial: {fileID: -7769912929738174819, guid: 5d9befe22dfa970418b9aa15dbc9f4ba, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b0a35d00211932b44abf8b14418a89e6, type: 2}
+  m_sharedMaterial: {fileID: -7769912929738174819, guid: b0a35d00211932b44abf8b14418a89e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1870,17 +1939,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +2,000
+  m_text: 2,000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 341e685ec206ad0498552d2a4d6a245f, type: 2}
-  m_sharedMaterial: {fileID: 8309912418977583134, guid: 341e685ec206ad0498552d2a4d6a245f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b0a35d00211932b44abf8b14418a89e6, type: 2}
+  m_sharedMaterial: {fileID: -7769912929738174819, guid: b0a35d00211932b44abf8b14418a89e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4285817085
+  m_fontColor: {r: 0.9921569, g: 0.37647063, b: 0.454902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1897,8 +1966,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2007,8 +2076,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 4.99$
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5d9befe22dfa970418b9aa15dbc9f4ba, type: 2}
-  m_sharedMaterial: {fileID: -7769912929738174819, guid: 5d9befe22dfa970418b9aa15dbc9f4ba, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b0a35d00211932b44abf8b14418a89e6, type: 2}
+  m_sharedMaterial: {fileID: -7769912929738174819, guid: b0a35d00211932b44abf8b14418a89e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2085,6 +2154,7 @@ GameObject:
   - component: {fileID: 6732328404101457266}
   - component: {fileID: 638461610673620124}
   - component: {fileID: 8027644152710137272}
+  - component: {fileID: 1027078456833418590}
   m_Layer: 5
   m_Name: Store Item (2)
   m_TagString: Untagged
@@ -2153,6 +2223,62 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1027078456833418590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8038731209761491598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 8027644152710137272}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5574773600403537245}
+        m_TargetAssemblyTypeName: DB_Game.PremStoreActions, Game
+        m_MethodName: IAPStarsPurchase
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8330159741459652333
 GameObject:
   m_ObjectHideFlags: 0
@@ -2188,7 +2314,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -30}
+  m_AnchoredPosition: {x: 0, y: -23}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &346093575205397767
@@ -2266,8 +2392,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -89}
-  m_SizeDelta: {x: 280, y: 75}
+  m_AnchoredPosition: {x: 0, y: 37.5}
+  m_SizeDelta: {x: 350, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &936775883371504038
 CanvasRenderer:
@@ -2350,7 +2476,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2271864833009304765}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5574773600403537245}
+        m_TargetAssemblyTypeName: DB_Game.PremStoreActions, Game
+        m_MethodName: IAPStarsPurchase
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8738035198829753053
 GameObject:
   m_ObjectHideFlags: 0
@@ -2419,15 +2557,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: -15
+    m_Left: -55
     m_Right: 0
     m_Top: 125
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 300, y: 400}
-  m_Spacing: {x: 80, y: 0}
+  m_CellSize: {x: 350, y: 500}
+  m_Spacing: {x: 50, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 3
 --- !u!1 &8775295548243118808
@@ -2465,8 +2603,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -64.32541}
-  m_SizeDelta: {x: 280, y: 128.65082}
+  m_AnchoredPosition: {x: 0, y: -71}
+  m_SizeDelta: {x: 280, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3734620145299196500
 CanvasRenderer:
@@ -2513,8 +2651,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -89}
-  m_SizeDelta: {x: 280, y: 75}
+  m_AnchoredPosition: {x: 0, y: 37.5}
+  m_SizeDelta: {x: 350, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &969279373548181638
 CanvasRenderer:
@@ -2597,4 +2735,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3247696943411519464}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5574773600403537245}
+        m_TargetAssemblyTypeName: DB_Game.PremStoreActions, Game
+        m_MethodName: IAPStarsPurchase
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -14,14 +14,25 @@ namespace DB_Core
         public DBInAppPurchase()
         {
             var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+
+            // Add the products with their IDs
+            builder.AddProduct("com.omri.deliciousbakery.stars.big", ProductType.Consumable);
+            builder.AddProduct("com.omri.deliciousbakery.stars.small", ProductType.Consumable);
+            builder.AddProduct("com.omri.deliciousbakery.stars.medium", ProductType.Consumable);
+
             UnityPurchasing.Initialize(this, builder);
+
+            DBDebug.Log("DBInAppPurchase initialized.");
         }
+
 
         public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
         {
             storeController = controller;
             extensionProvider = extensions;
+            DBDebug.Log("OnInitialized called in DBInAppPurchase.");
         }
+
 
         public void Purchase(string productID, Action<bool> onPurchaseComplete)
         {

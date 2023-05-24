@@ -71,6 +71,19 @@ namespace DB_Core
             }
         }
 
+        public static string GetFormattedNumber(this double score)
+        {
+            if (score < 1000000)
+            {
+                return string.Format("{0:N0}", score); // N0 format: with commas and no decimal places
+            }
+            else
+            {
+                return score.ToReadableNumber();
+            }
+        }
+
+
         public static string ToReadableNumber(this double score, int decimalPlaces = 2)
         {
             string result;

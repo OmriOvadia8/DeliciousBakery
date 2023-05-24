@@ -40,7 +40,7 @@ namespace DB_Game
         {
             var starText = texts.StarText;
             double currentStars = currencyManager.currencySaveData.StarsAmount;
-            starText.text = currentStars.ToReadableNumber();
+            starText.text = currentStars.GetFormattedNumber();
         }
 
         private void OnCoinsAmountUpdate(object obj)
@@ -61,7 +61,7 @@ namespace DB_Game
             if (GameLogic.ScoreManager.TryGetScoreByTag(ScoreTags.PremiumCurrency, ref premCurrency))
             {
                 var starText = texts.StarText;
-                starText.text = premCurrency.ToReadableNumber();
+                starText.text = premCurrency.GetFormattedNumber();
             }
         }
 

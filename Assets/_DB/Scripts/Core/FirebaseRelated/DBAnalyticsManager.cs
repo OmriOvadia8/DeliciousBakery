@@ -81,7 +81,10 @@ namespace DB_Core
         ad_show_start,
         ad_show_click,
         ad_show_complete,
-        purchase_complete
+        purchase_complete,
+        product_unknown,
+        purchase_failed,
+        unity_services_failed
     }
 
     public enum DBDataKeys
