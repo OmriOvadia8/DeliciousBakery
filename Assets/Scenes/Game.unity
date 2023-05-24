@@ -42954,6 +42954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doubleProfitTimerText: {fileID: 639455718}
   timer: {fileID: 2021730366}
+  doubleProfitButton: {fileID: 871199936}
 --- !u!1 &1489304038
 GameObject:
   m_ObjectHideFlags: 0

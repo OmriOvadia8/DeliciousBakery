@@ -3,6 +3,8 @@ using System;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.UI;
+using System.Collections;
 
 namespace DB_Game
 {
@@ -14,6 +16,7 @@ namespace DB_Game
         private const string PROFIT_TWEEN = "Profit";
         [SerializeField] private TMP_Text doubleProfitTimerText;
         [SerializeField] private GameObject timer;
+        [SerializeField] private Button doubleProfitButton;
 
         private void Awake() => LoadDoubleProfit();
 
@@ -36,6 +39,8 @@ namespace DB_Game
             {
                 SetUpDoubleProfitUI();
             }
+
+            StartCoroutine(ActivateButtonAfterDelay(5f, doubleProfitButton));
         }
 
         private void DoubleProfitOn()
@@ -113,21 +118,7 @@ namespace DB_Game
         public void ActivateDoubleProfit()
         {
             Manager.AdsManager.ShowAd();
-            //DBExtension.WatchAd(OnAdCompleted);
             StartDoubleProfit(doubleProfitSaveData.DoubleProfitDuration);
-        }
-
-        private void OnAdCompleted(bool adShown)
-        {
-            if (adShown)
-            {
-                StartDoubleProfit(doubleProfitSaveData.DoubleProfitDuration);
-            }
-            else
-            {
-                // Handle the case when the ad was not shown, e.g., show a message to the user
-                DBDebug.LogException("Failed to doubleprofit");
-            }
         }
 
         private void LoadDoubleProfit() =>
@@ -178,6 +169,20 @@ namespace DB_Game
             SaveDoubleProfit();
 
             StartDoubleProfitAfterPause(currentTime);
+        }
+
+        private IEnumerator ActivateButtonAfterDelay(float delay, Button button)
+        {
+            button.interactable = false; 
+
+            float countdown = delay;
+            while (countdown > 0)
+            {
+                countdown -= Time.deltaTime;
+                yield return null;
+            }
+
+            button.interactable = true; 
         }
 
         private void KillDoubleProfitTweenTimer() => DOTween.Kill(DBTweenTypes.DoubleProfit + PROFIT_TWEEN);

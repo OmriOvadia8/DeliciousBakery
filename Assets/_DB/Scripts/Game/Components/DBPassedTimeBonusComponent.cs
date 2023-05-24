@@ -2,12 +2,14 @@ using DB_Core;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 
 namespace DB_Game
 {
     public class DBPassedTimeBonusComponent : DBLogicMonoBehaviour
     {
         [SerializeField] private TMP_Text rewardText;
+        [SerializeField] private TMP_Text countdownText;
         [SerializeField] private float xOffsetPerDigit;
         [SerializeField] private RectTransform coinRectTransform;
         [SerializeField] Button gotItButton;
@@ -37,6 +39,7 @@ namespace DB_Game
             {
                 gotItButton.gameObject.SetActive(false);
                 claimButton.gameObject.SetActive(true);
+                StartCoroutine(ActivateButtonAfterDelay(5.0f));
             }
         }
 
@@ -75,6 +78,22 @@ namespace DB_Game
             coinRectTransform.anchoredPosition = new Vector2(xPos, coinRectTransform.anchoredPosition.y);
 
             GivePassiveBonusAccordingToTimePassed();
+        }
+
+        private IEnumerator ActivateButtonAfterDelay(float delay)
+        {
+            claimButton.interactable = false; 
+
+            float countdown = delay;
+            while (countdown > 0)
+            {
+                countdownText.text = Mathf.Round(countdown).ToString();
+                countdown -= Time.deltaTime;
+                yield return null;
+            }
+
+            countdownText.text = ""; 
+            claimButton.interactable = true; 
         }
     }
 }

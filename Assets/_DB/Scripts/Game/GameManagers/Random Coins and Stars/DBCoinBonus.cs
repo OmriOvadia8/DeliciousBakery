@@ -24,7 +24,7 @@ namespace DB_Game
         private IEnumerator SelfDestructAfterDelay()
         {
             collected = false;
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(8);
             if (!collected)
             {
                 this.gameObject.SetActive(false);
@@ -53,10 +53,7 @@ namespace DB_Game
 
             Sequence sequence = CreateBonusAnimationSequence(moneyAmountText);
 
-            sequence.OnComplete(() =>
-            {
-                ResetAndHideText(moneyAmountText);
-            });
+            sequence.OnComplete(() => ResetAndHideText(moneyAmountText));
         }
 
         private void PrepareTextForDisplay(TMP_Text textElement, double bonus, Vector3 position)

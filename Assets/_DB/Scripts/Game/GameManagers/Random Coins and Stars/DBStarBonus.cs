@@ -50,10 +50,7 @@ namespace DB_Game
 
             Sequence sequence = CreateBonusAnimationSequence(starAmountText);
 
-            sequence.OnComplete(() =>
-            {
-                ResetAndHideText(starAmountText);
-            });
+            sequence.OnComplete(() => ResetAndHideText(starAmountText));
         }
 
         private void PrepareTextForDisplay(TMP_Text textElement, double bonus, Vector3 position)
@@ -81,7 +78,6 @@ namespace DB_Game
             textElement.gameObject.SetActive(false);
             textElement.DOKill();
         }
-
 
         private void InvokeBonusEvents(double bonus)
         {
