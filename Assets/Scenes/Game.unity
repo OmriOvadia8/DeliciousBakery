@@ -576,6 +576,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 35317d9d817cc124d88484aa1c3e24e7, type: 3}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check2
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button02
@@ -725,6 +729,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &21849414 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 21849410}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &25799381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,7 +1453,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2699.6}
+  m_AnchoredPosition: {x: 0, y: -2700}
   m_SizeDelta: {x: 1080, y: 3952.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &52667203
@@ -5032,6 +5041,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 5fb290ff42dba224d87c97cf74694563, type: 3}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check0
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5129,6 +5142,11 @@ PrefabInstance:
 --- !u!224 &205136727 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6312671639819717106, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 205136726}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &205136728 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
   m_PrefabInstance: {fileID: 205136726}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &206279507
@@ -14679,6 +14697,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 78d9f69deff292f47970ee2e7f4c9ef3, type: 3}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check1
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button11
@@ -14832,6 +14854,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &403540806 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 403540802}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &403547512
 GameObject:
   m_ObjectHideFlags: 0
@@ -22452,6 +22479,10 @@ MonoBehaviour:
   deviceImage: {fileID: 524269143}
   deviceIndex: 2
   skinStatusManager: {fileID: 1081309864}
+  checkMark:
+  - {fileID: 1909587109}
+  - {fileID: 1537134061}
+  - {fileID: 1285875079}
 --- !u!198 &525742436 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3729184850689572409, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
@@ -24891,6 +24922,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check0
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -24988,6 +25023,11 @@ PrefabInstance:
 --- !u!224 &669329493 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6312671639819717106, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 669329492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &669329494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
   m_PrefabInstance: {fileID: 669329492}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &673452815
@@ -25574,6 +25614,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check1
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button51
@@ -25727,6 +25771,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &702056903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 702056899}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &711254836
 GameObject:
   m_ObjectHideFlags: 0
@@ -28035,6 +28084,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 23119ee26ab3263438e00b3d8e5a1af9, type: 3}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check1
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button71
@@ -28188,6 +28241,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &845748689 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 845748685}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &855199195
 GameObject:
   m_ObjectHideFlags: 0
@@ -30821,6 +30879,10 @@ MonoBehaviour:
   deviceImage: {fileID: 960330351}
   deviceIndex: 1
   skinStatusManager: {fileID: 1081309864}
+  checkMark:
+  - {fileID: 1992355686}
+  - {fileID: 403540806}
+  - {fileID: 1207382919}
 --- !u!114 &965943292 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6807603997412066249, guid: 708c7cb0418581a4cb46c00ee22b74ed, type: 3}
@@ -31215,6 +31277,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check0
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -31312,6 +31378,11 @@ PrefabInstance:
 --- !u!224 &977251707 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6312671639819717106, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 977251706}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &977251708 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
   m_PrefabInstance: {fileID: 977251706}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &984030115 stripped
@@ -32539,6 +32610,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check2
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button42
@@ -32692,6 +32767,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1029993948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 1029993944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1030064027 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7352656961936788251, guid: 708c7cb0418581a4cb46c00ee22b74ed, type: 3}
@@ -33389,6 +33469,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check1
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button61
@@ -33542,6 +33626,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1088582622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 1088582618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1094204680
 GameObject:
   m_ObjectHideFlags: 0
@@ -34096,6 +34185,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check0
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -34193,6 +34286,11 @@ PrefabInstance:
 --- !u!224 &1108197919 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6312671639819717106, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 1108197918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1108197920 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
   m_PrefabInstance: {fileID: 1108197918}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1108283370
@@ -36647,6 +36745,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 35317d9d817cc124d88484aa1c3e24e7, type: 3}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check2
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button12
@@ -36800,6 +36902,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1207382919 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 1207382915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1212811614 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3435835810699061191, guid: ffb3e3e1cb6d7704da15f7767fbe0b3b, type: 3}
@@ -37335,6 +37442,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check2
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button62
@@ -37488,6 +37599,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1246793887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 1246793883}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1251882581
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37550,6 +37666,10 @@ PrefabInstance:
     - target: {fileID: 5295708473777344441, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check1
       objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
@@ -37704,6 +37824,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1251882585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 1251882581}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1252773620
 GameObject:
   m_ObjectHideFlags: 0
@@ -38210,6 +38335,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 99e4194d93e038249b7f4eaf4e8998fd, type: 3}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check2
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button22
@@ -38363,6 +38492,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1285875079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 1285875075}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1287476284
 GameObject:
   m_ObjectHideFlags: 0
@@ -39545,6 +39679,10 @@ MonoBehaviour:
   deviceImage: {fileID: 1330915120}
   deviceIndex: 3
   skinStatusManager: {fileID: 1081309864}
+  checkMark:
+  - {fileID: 1108197920}
+  - {fileID: 2031779834}
+  - {fileID: 1733172342}
 --- !u!114 &1332144756 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 45031781346865465, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
@@ -39660,6 +39798,10 @@ MonoBehaviour:
   deviceImage: {fileID: 1347072872}
   deviceIndex: 7
   skinStatusManager: {fileID: 1081309864}
+  checkMark:
+  - {fileID: 205136728}
+  - {fileID: 845748689}
+  - {fileID: 2121173709}
 --- !u!1 &1348161818
 GameObject:
   m_ObjectHideFlags: 0
@@ -43629,6 +43771,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 80b48f3ea6a986a449a26228e3ab48d1, type: 3}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check1
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button21
@@ -43782,6 +43928,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1537134061 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 1537134057}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1542550378
 GameObject:
   m_ObjectHideFlags: 0
@@ -44451,6 +44602,10 @@ MonoBehaviour:
   deviceImage: {fileID: 1565320734}
   deviceIndex: 0
   skinStatusManager: {fileID: 1081309864}
+  checkMark:
+  - {fileID: 6312671640630934103}
+  - {fileID: 2136483271}
+  - {fileID: 21849414}
 --- !u!114 &1566090752 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8065938450795461241, guid: 708c7cb0418581a4cb46c00ee22b74ed, type: 3}
@@ -44577,6 +44732,10 @@ MonoBehaviour:
   deviceImage: {fileID: 1576225169}
   deviceIndex: 6
   skinStatusManager: {fileID: 1081309864}
+  checkMark:
+  - {fileID: 977251708}
+  - {fileID: 1088582622}
+  - {fileID: 1246793887}
 --- !u!1 &1579988083
 GameObject:
   m_ObjectHideFlags: 0
@@ -45783,6 +45942,10 @@ MonoBehaviour:
   deviceImage: {fileID: 1642027941}
   deviceIndex: 4
   skinStatusManager: {fileID: 1081309864}
+  checkMark:
+  - {fileID: 669329494}
+  - {fileID: 1251882585}
+  - {fileID: 1029993948}
 --- !u!1 &1642858436
 GameObject:
   m_ObjectHideFlags: 0
@@ -47678,6 +47841,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check2
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button52
@@ -47831,6 +47998,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1732385276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 1732385272}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1733172338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47893,6 +48065,10 @@ PrefabInstance:
     - target: {fileID: 5295708473777344441, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check2
       objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
@@ -48047,6 +48223,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1733172342 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 1733172338}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1737224795 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 427986047473880449, guid: 708c7cb0418581a4cb46c00ee22b74ed, type: 3}
@@ -51029,6 +51210,10 @@ MonoBehaviour:
   deviceImage: {fileID: 1862966607}
   deviceIndex: 5
   skinStatusManager: {fileID: 1081309864}
+  checkMark:
+  - {fileID: 2063029123}
+  - {fileID: 702056903}
+  - {fileID: 1732385276}
 --- !u!114 &1868154581 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 699470078955636176, guid: c3b1f5cdad41a0a498d9c84fc612178c, type: 3}
@@ -51699,6 +51884,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: d70d5ae6db76e524f8cb3850406a1104, type: 3}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check0
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -51796,6 +51985,11 @@ PrefabInstance:
 --- !u!224 &1909587108 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6312671639819717106, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 1909587107}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1909587109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
   m_PrefabInstance: {fileID: 1909587107}
   m_PrefabAsset: {fileID: 0}
 --- !u!225 &1909824941 stripped
@@ -53490,6 +53684,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check0
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -53587,6 +53785,11 @@ PrefabInstance:
 --- !u!224 &1992355685 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6312671639819717106, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 1992355684}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1992355686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
   m_PrefabInstance: {fileID: 1992355684}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2005863445
@@ -54081,6 +54284,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check1
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button31
@@ -54234,6 +54441,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2031779834 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 2031779830}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2032269641
 GameObject:
   m_ObjectHideFlags: 0
@@ -55358,6 +55570,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check0
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -55455,6 +55671,11 @@ PrefabInstance:
 --- !u!224 &2063029122 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6312671639819717106, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 2063029121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2063029123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
   m_PrefabInstance: {fileID: 2063029121}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2066841505
@@ -56452,6 +56673,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: d9f8d497c994eb147a0ccf5a42752ed2, type: 3}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check2
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button72
@@ -56605,6 +56830,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2121173709 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 2121173705}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2122312496
 GameObject:
   m_ObjectHideFlags: 0
@@ -61607,6 +61837,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 78d9f69deff292f47970ee2e7f4c9ef3, type: 3}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check1
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_Name
       value: Buy Button01
@@ -61756,6 +61990,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2136483271 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 2136483267}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2138473844
 GameObject:
   m_ObjectHideFlags: 0
@@ -63970,6 +64209,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+      propertyPath: m_Name
+      value: Check0
+      objectReference: {fileID: 0}
     - target: {fileID: 5863886288213504751, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -64068,6 +64311,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+--- !u!1 &6312671640630934103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
+  m_PrefabInstance: {fileID: 6312671640630934102}
+  m_PrefabAsset: {fileID: 0}
 --- !u!222 &6379479330816590783
 CanvasRenderer:
   m_ObjectHideFlags: 0
