@@ -169,7 +169,7 @@ namespace DB_Game
         private void SpendLearnRecipeMoneyTextToast(object obj) 
         {
             int index = (int)obj;
-            int learnCost = GetFoodData(index).UnlockCost;
+            double learnCost = GetFoodData(index).UnlockCost;
             InvokeEvent(DBEventNames.CookButtonAlphaOn, index);
             toastingManager.DisplayMoneyToast(learnCost, PoolNames.SpendMoneyToast);
             UpdateCurrencyAndButtonCheck();

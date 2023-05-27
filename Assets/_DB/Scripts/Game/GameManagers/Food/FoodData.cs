@@ -13,7 +13,7 @@ namespace DB_Game
         public int BakersCount { get; set; }
         public int CookFoodMultiplier { get; set; }
         public bool IsFoodLocked { get; set; }
-        public int UnlockCost { get; set; }
+        public double UnlockCost { get; set; }
         public bool IsOnCooldown { get; set; }
         public float RemainingCookingTime { get; set; }
         public float BakerCookingTime { get; set; }
@@ -34,7 +34,7 @@ namespace DB_Game
                         int bakersCount,
                         int cookFoodMultiplier,
                         bool isFoodlocked,
-                        int unlockCost,
+                        double unlockCost,
                         bool isOnCooldown,
                         float remainingCookingTime,
                         float bakerCookingTime,

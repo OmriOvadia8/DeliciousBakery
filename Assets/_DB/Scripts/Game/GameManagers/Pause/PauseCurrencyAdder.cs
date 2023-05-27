@@ -6,7 +6,6 @@ namespace DB_Game
     public class PauseCurrencyAdder : DBLogicMonoBehaviour
     {
         private double pausedReward;
-
         [SerializeField] DBPauseCurrencyManager pausedCurrencyManager;
 
         private void OnEnable() => AddListener(DBEventNames.OfflineTimeRefreshed, OnPausedEarning);
@@ -20,6 +19,7 @@ namespace DB_Game
 
             GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, pausedReward);
             InvokeEvent(DBEventNames.CurrencyUpdateUI, null);
+            InvokeEvent(DBEventNames.BuyButtonsCheck, null);
         }
     }
 }

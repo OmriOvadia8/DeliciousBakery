@@ -66,6 +66,7 @@ namespace DB_Game
                 DBExtension.WatchAd();
             }
 
+            InvokeEvent(DBEventNames.BuyButtonsCheck, null);
             InvokeEvent(DBEventNames.PlaySound, SoundEffectType.ButtonClick);
         }
 

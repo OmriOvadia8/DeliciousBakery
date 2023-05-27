@@ -84,7 +84,8 @@ namespace DB_Core
         purchase_complete,
         product_unknown,
         purchase_failed,
-        unity_services_failed
+        unity_services_failed,
+        hire_baker
     }
 
     public enum DBDataKeys

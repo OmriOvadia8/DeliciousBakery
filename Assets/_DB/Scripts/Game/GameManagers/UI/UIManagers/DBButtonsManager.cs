@@ -98,7 +98,7 @@ namespace DB_Game
 
         private void UpdateLearnRecipeButtonUI(int index)
         {
-            int learnCost = GetFoodData(index).UnlockCost;
+            double learnCost = GetFoodData(index).UnlockCost;
             bool isAffordable = IsAffordable(learnCost);
 
             buttons.LearnRecipeButtons[index].interactable = isAffordable;

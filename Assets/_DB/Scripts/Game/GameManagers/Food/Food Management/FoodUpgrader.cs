@@ -1,4 +1,5 @@
 using DB_Core;
+using System;
 
 namespace DB_Game
 {
@@ -7,8 +8,11 @@ namespace DB_Game
         private IFoodDataRepository foodDataRepository;
         private DBManager dbManager;
 
-        private const float PROFIT_INCREASE = 1.1f;
-        private const float COST_INCREASE = 1.15f;
+        private const int LEVEL_MILESTONE = 10;
+        private const float COST_INCREASE = 1.5f;
+        private const float MILESTONE_INCREASE_PERCENTAGE = 1.2f; // previously 1.5
+        private const float PROFIT_GROWTH_FACTOR = 1.15f; // previously 1.25
+        private const float PROFIT_INCREASE = 1.1f; // previously 1.2
 
         public FoodUpgrader(IFoodDataRepository foodDataRepository, DBManager dbManager)
         {
@@ -46,15 +50,24 @@ namespace DB_Game
 
         private void PerformPostUpgradeActions(FoodData foodData, int foodIndex)
         {
-            foodData.Profit = (double)(foodData.Profit * PROFIT_INCREASE);
-            foodData.UpgradeCost = (double)(foodData.UpgradeCost * COST_INCREASE);
+            dbManager.EventsManager.InvokeEvent(DBEventNames.OnUpgradeMoneySpentToast, foodIndex);
+            int level = DBGameLogic.Instance.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodIndex).CurrentLevel;
+            double profitIncrease = PROFIT_INCREASE * Math.Pow(PROFIT_GROWTH_FACTOR, level / LEVEL_MILESTONE); 
+            double costIncrease = Math.Pow(COST_INCREASE, level / LEVEL_MILESTONE);
+
+            if (level % LEVEL_MILESTONE == 0)
+            {
+                profitIncrease *= MILESTONE_INCREASE_PERCENTAGE;
+            }
+
+            foodData.Profit *= profitIncrease;
+            foodData.UpgradeCost *= costIncrease;
             InvokeFoodUpgradeEvents(foodIndex);
             foodDataRepository.SaveFoodData();
         }
 
         private void InvokeFoodUpgradeEvents(int foodIndex)
         {
-            dbManager.EventsManager.InvokeEvent(DBEventNames.OnUpgradeMoneySpentToast, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.UpgradeParticles, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.OnUpgradeTextUpdate, foodIndex);
             dbManager.EventsManager.InvokeEvent(DBEventNames.TimeWrapCoinsText, null);
