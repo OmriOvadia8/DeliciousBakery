@@ -8,7 +8,7 @@ namespace DB_Game
     {
         [SerializeField] DBDeviceSkinDataManager skinStatusManager;
         [SerializeField] Device[] devices;
-        public const int SKIN_PRICE = 300;
+        public const int SKIN_PRICE = 400;
         private int defaultSkin;
         private int firstSkin = 1;
         private int secondSkin = 2;

@@ -106,7 +106,7 @@ namespace DB_Game
         private double CalculateTotalProfit(FoodData foodData)
         {
             double baseProfit = foodData.Profit;
-            int cookFoodMultiplier = foodData.CookFoodMultiplier;
+            double cookFoodMultiplier = foodData.CookFoodMultiplier;
             int profitMultiplier = DBDoubleProfitController.DoubleProfitMultiplier;
 
             double multipliedProfit = baseProfit * profitMultiplier;

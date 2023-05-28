@@ -7,13 +7,8 @@ namespace DB_Game
     {
         private IFoodDataRepository foodDataRepository;
         private DBManager dbManager;
-
-        private const float BAKER_COST_BASE_INCREASE = 1.2f;
-        private const float BAKER_COST_GROWTH_FACTOR = 1.3f; // can tweak this to adjust the rate of growth
-        private const int HIRE_COST_MILESTONE = 10;
-        private const int SPECIAL_BAKER = 5;
-        private const float BAKER_COST_INCREASE_SPECIAL = 2f; // multiplier for special bakers
-
+        private const double BAKER_COST_GROWTH = 1.045;
+        private const double BAKER_MULTIPLE_INCREASE = 0.25;
 
         public BakerFoodManager(IFoodDataRepository foodDataRepository, DBManager dbManager)
         {
@@ -38,33 +33,27 @@ namespace DB_Game
             foodDataRepository.SaveFoodData();
         }
 
-
         private void PerformBakerUnlockOrUpgrade(FoodData foodData, int foodIndex)
         {
             foodData.IsBakerUnlocked = true;
             dbManager.EventsManager.InvokeEvent(DBEventNames.OnHireMoneySpentToast, foodIndex);
 
-            double hireCostIncrease = BAKER_COST_BASE_INCREASE * Math.Pow(BAKER_COST_GROWTH_FACTOR, foodData.BakersCount / HIRE_COST_MILESTONE);
+            // Calculate the new hire cost
+            foodData.HireCost *= Math.Pow(BAKER_COST_GROWTH, foodData.BakersCount + 1);
 
-            if ((foodData.BakersCount + 2) % SPECIAL_BAKER == 0)
+            foodData.BakersCount++;
+
+            if (foodData.BakersCount == 1)
             {
-                hireCostIncrease *= BAKER_COST_INCREASE_SPECIAL;
+                foodData.CookFoodMultiplier = 1;
+            }
+            else
+            {
+                // Increase the efficiency of each baker by 5% over the previous level
+                foodData.CookFoodMultiplier += BAKER_MULTIPLE_INCREASE;
             }
 
-            foodData.HireCost *= hireCostIncrease;
-            foodData.BakersCount++;
-            foodData.CookFoodMultiplier = CalculateCookFoodMultiplier(foodData.BakersCount);
-
             InvokeHireEvents(foodIndex);
-        }
-        
-        private int CalculateCookFoodMultiplier(int bakerCount)
-        {
-            if (bakerCount < 1) return 0;
-            if (bakerCount < 2) return 1;
-            if (bakerCount < 5) return 2;
-            if (bakerCount < 10) return 3;
-            return 2 + (bakerCount / 5);
         }
 
         private void InvokeHireEvents(int foodIndex)

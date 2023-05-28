@@ -6,7 +6,7 @@ namespace DB_Core
 {
     public class DBTimeManager
     {
-        private bool isLooping = false;
+        private bool isLooping;
 
         private Dictionary<int, List<DBTimerData>> timerActions = new();
         private List<DBAlarmData> activeAlarms = new();
@@ -35,10 +35,7 @@ namespace DB_Core
             DBManager.Instance.EventsManager.AddListener(DBEventNames.OnPause, OnPause);
         }
 
-        private void OnPause(object pauseStatus)
-        {
-            CheckOfflineTime();
-        }
+        private void OnPause(object pauseStatus) => CheckOfflineTime();
 
         ~DBTimeManager()
         {
@@ -52,7 +49,7 @@ namespace DB_Core
             offlineSeconds = (int)timePassed.TotalSeconds;
             dbOfflineTime.LastCheck = DateTime.UtcNow;
             DBManager.Instance.SaveManager.Save(dbOfflineTime);
-
+            DBDebug.Log(offlineSeconds);
             DBManager.Instance.EventsManager.InvokeEvent(DBEventNames.OfflineTimeRefreshed, offlineSeconds);
         }
 
@@ -148,10 +145,7 @@ namespace DB_Core
             return dbOfflineTime.LeftOverTimes[timeType];
         }
 
-        public void SetLeftOverTime(OfflineTimes timeType, int timeAmount)
-        {
-            dbOfflineTime.LeftOverTimes[timeType] = timeAmount;
-        }
+        public void SetLeftOverTime(OfflineTimes timeType, int timeAmount) => dbOfflineTime.LeftOverTimes[timeType] = timeAmount;
     }
 
     public class DBTimerData

@@ -4,8 +4,8 @@ namespace DB_Game
 {
     public class DBPauseCurrencyManager : FoodDataAccess, IDBPauseCurrencyManager
     {
-        private const int MAX_OFFLINE_TIME = 4000;
-        private const float NERF_REWARD = 2.5f;
+        private const int MAX_OFFLINE_TIME = 15000;
+        private const double NERF_REWARD = 2.5;
 
         public double PassedTimeFoodRewardCalc(int timePassed)
         {

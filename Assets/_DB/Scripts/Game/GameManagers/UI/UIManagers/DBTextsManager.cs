@@ -99,7 +99,7 @@ namespace DB_Game
             var foodData = GetFoodData(index);
 
             double hireCost = foodData.HireCost;
-            int cookFoodMultiplier = foodData.CookFoodMultiplier;
+            double cookFoodMultiplier = foodData.CookFoodMultiplier;
             int bakersCount = foodData.BakersCount;
 
             UpdateHireTexts(index, bakersCount, cookFoodMultiplier, hireCost);
@@ -112,14 +112,14 @@ namespace DB_Game
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
         }
 
-        private void UpdateHireTexts(int index, int bakersCount, int cookFoodMultiplier, double hireCost)
+        private void UpdateHireTexts(int index, int bakersCount, double cookFoodMultiplier, double hireCost)
         {
             var bakersCountText = cookingUIManager.uiBakerComponents.BakersCountText[index];
             var cookFoodMultiplierText = cookingUIManager.uiBakerComponents.CookFoodMultiplierText[index];
             var hireCostText = texts.HireCostText[index];
 
             bakersCountText.text = $"x{bakersCount}";
-            cookFoodMultiplierText.text = $"x{cookFoodMultiplier}";
+            cookFoodMultiplierText.text = $"x{cookFoodMultiplier.ToReadableNumber()}";
             hireCostText.text = hireCost.ToReadableNumber();
         }
 
@@ -152,7 +152,7 @@ namespace DB_Game
         {
             int index = (int)obj;
             double foodProfit = GetFoodData(index).Profit;
-            int cookFoodMultiplier = GetFoodData(index).CookFoodMultiplier;
+            double cookFoodMultiplier = GetFoodData(index).CookFoodMultiplier;
             InvokeEvent(DBEventNames.CookFoodButtonCheck, null);
             double totalFoodProfit = foodProfit * cookFoodMultiplier * DBDoubleProfitController.DoubleProfitMultiplier;
             toastingManager.DisplayMoneyToast(totalFoodProfit, PoolNames.MoneyToast);
