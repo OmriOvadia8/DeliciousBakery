@@ -6,6 +6,6 @@ namespace DB_Game
     {
         public void OpenStorePopup() => Manager.PopupManager.AddPopupToQueue(DBPopupData.StorePopupData);
   
-        // TODO: Add more popups to open when you create them... 
+        // I'll add more popups to open here if I create more
     }
 }

@@ -18,7 +18,7 @@ namespace DB_Game
             {
                 var foodData = GetFoodData(i);
 
-                if (!foodData.IsFoodLocked && foodData.IsBakerUnlocked)
+                if (foodData.IsBakerUnlocked)
                 {
                     double reward = CalculateReward(effectiveTimePassed, foodData);
                     totalReward += reward;

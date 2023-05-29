@@ -7,7 +7,7 @@ namespace DB_Game
     {
         private IFoodDataRepository foodDataRepository;
         private DBManager dbManager;
-        private const double UPGRADE_COST_GROWTH = 1.04; 
+        private const double UPGRADE_COST_GROWTH = 1.034; 
         private const double PROFIT_GROWTH = 1.02; 
 
         public FoodUpgrader(IFoodDataRepository foodDataRepository, DBManager dbManager)
@@ -44,7 +44,6 @@ namespace DB_Game
         private bool DidFoodLevelIncrease(int initialLevel, int foodIndex) =>
             initialLevel < DBGameLogic.Instance.UpgradeManager.GetUpgradeableByID(UpgradeablesTypeID.Food, foodIndex).CurrentLevel;
 
-
         private void PerformPostUpgradeActions(FoodData foodData, int foodIndex)
         {
             dbManager.EventsManager.InvokeEvent(DBEventNames.OnUpgradeMoneySpentToast, foodIndex);
@@ -56,7 +55,6 @@ namespace DB_Game
             InvokeFoodUpgradeEvents(foodIndex);
             foodDataRepository.SaveFoodData();
         }
-
 
         private void InvokeFoodUpgradeEvents(int foodIndex)
         {

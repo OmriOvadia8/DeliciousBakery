@@ -7,7 +7,7 @@ namespace DB_Game
     {
         private IFoodDataRepository foodDataRepository;
         private DBManager dbManager;
-        private const double BAKER_COST_GROWTH = 1.045;
+        private const double BAKER_COST_GROWTH = 1.04;
         private const double BAKER_MULTIPLE_INCREASE = 0.25;
 
         public BakerFoodManager(IFoodDataRepository foodDataRepository, DBManager dbManager)

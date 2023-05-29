@@ -21,7 +21,7 @@ namespace DB_Core
         {
             _ = TimerLoop();
 
-            DBManager.Instance.SaveManager.Load(delegate (DBOfflineTime data)
+            DBManager.Instance.SaveManager.Load((DBOfflineTime data) =>
             {
                 dbOfflineTime = data ?? new DBOfflineTime
                 {
