@@ -7,7 +7,7 @@ namespace DB_Game
     {
         private IFoodDataRepository foodDataRepository;
         private DBManager dbManager;
-        private const double BAKER_COST_GROWTH = 1.04;
+        private const double BAKER_COST_GROWTH = 1.0215;
         private const double BAKER_MULTIPLE_INCREASE = 0.25;
 
         public BakerFoodManager(IFoodDataRepository foodDataRepository, DBManager dbManager)
@@ -38,7 +38,6 @@ namespace DB_Game
             foodData.IsBakerUnlocked = true;
             dbManager.EventsManager.InvokeEvent(DBEventNames.OnHireMoneySpentToast, foodIndex);
 
-            // Calculate the new hire cost
             foodData.HireCost *= Math.Pow(BAKER_COST_GROWTH, foodData.BakersCount + 1);
 
             foodData.BakersCount++;
@@ -49,7 +48,6 @@ namespace DB_Game
             }
             else
             {
-                // Increase the efficiency of each baker by 5% over the previous level
                 foodData.CookFoodMultiplier += BAKER_MULTIPLE_INCREASE;
             }
 
