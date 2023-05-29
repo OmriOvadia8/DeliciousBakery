@@ -21,7 +21,7 @@ namespace DB_Game
             {
                 if (!IsFirstFoodLocked())
                 {
-                    float randomDelay = Random.Range(15f, 25f);
+                    float randomDelay = Random.Range(15f, 30f);
                     yield return new WaitForSeconds(randomDelay);
 
                     Vector2 randomPositionWithinObject = GetRandomPosition();
@@ -46,7 +46,7 @@ namespace DB_Game
             {
                 if (!IsFirstFoodLocked())
                 {
-                    float randomDelay = Random.Range(35f, 50f);
+                    float randomDelay = Random.Range(30f, 50f);
                     yield return new WaitForSeconds(randomDelay);
 
                     Vector2 randomPositionWithinObject = GetRandomPosition();
