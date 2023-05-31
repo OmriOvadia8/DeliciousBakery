@@ -108,12 +108,6 @@ namespace DB_Core
             MessageNoProfitContent = "Welcome Back! \r\nNo profits earned while away.\r\nHire bakers to make money \r\nwhile offline!",
         };
 
-        public static DBPopupData UpgradePopupData = new()
-        {
-            Priority = 0,
-            PopupType = PopupTypes.UpgradePopupMenu
-        };
-
         public static DBPopupData StorePopupData = new()
         {
             Priority = 1,
@@ -125,6 +119,18 @@ namespace DB_Core
             Priority = 10,
             PopupType = PopupTypes.FirstLoginMessage
         };
+
+        public static DBPopupData LoadingAd = new()
+        {
+            Priority = 1,
+            PopupType = PopupTypes.LoadingAd
+        };
+
+        public static DBPopupData LoadingAdFailed = new()
+        {
+            Priority = 5,
+            PopupType = PopupTypes.LoadingAdFailed
+        };
     }
 
     public enum PopupTypes
@@ -132,6 +138,8 @@ namespace DB_Core
         WelcomeBackMessage,
         Store,
         UpgradePopupMenu,
-        FirstLoginMessage
+        FirstLoginMessage,
+        LoadingAd,
+        LoadingAdFailed
     }
 }

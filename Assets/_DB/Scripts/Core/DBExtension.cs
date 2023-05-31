@@ -58,6 +58,12 @@ namespace DB_Core
             DBManager.Instance.AdsManager.ShowAd();
         }
 
+        public static void WatchRewardedAd(Action<bool> onShowAdComplete)
+        {
+            DBManager.Instance.AdsManager.ShowRewardedAd(onShowAdComplete);
+        }
+
+
         public static string GetFormattedTimeSpan(int seconds)
         {
             TimeSpan timeSpan = TimeSpan.FromSeconds(seconds);

@@ -39,7 +39,7 @@ namespace DB_Game
             {
                 gotItButton.gameObject.SetActive(false);
                 claimButton.gameObject.SetActive(true);
-                StartCoroutine(ActivateButtonAfterDelay(5.0f));
+                StartCoroutine(ActivateButtonAfterDelay(5));
             }
         }
 
@@ -59,15 +59,48 @@ namespace DB_Game
 
         public void GiveDoubleBonusAccordingToTimePassed()
         {
-            GivePassiveBonusAccordingToTimePassed();
+            InvokeEvent(DBEventNames.BuyButtonsCheck, null);
+            InvokeEvent(DBEventNames.PlaySound, SoundEffectType.ButtonClick);
 
             if (totalReturnBonus > 0)
             {
-                DBExtension.WatchAd();
+                Manager.PopupManager.OpenPopup(DBPopupData.LoadingAd);
+                StartCoroutine(WaitForAdToLoadAndShow());
+            }
+        }
+
+        private IEnumerator WaitForAdToLoadAndShow()
+        {
+            float delayInSeconds = 10f;
+            float timer = 0f;
+
+            while (!Manager.AdsManager.IsRewardedAdReady() && timer < delayInSeconds)
+            {
+                timer += Time.deltaTime;
+                yield return null;
             }
 
-            InvokeEvent(DBEventNames.BuyButtonsCheck, null);
-            InvokeEvent(DBEventNames.PlaySound, SoundEffectType.ButtonClick);
+            if (Manager.AdsManager.IsRewardedAdReady())
+            {
+                Manager.AdsManager.ShowRewardedAd(success =>
+                {
+                    Manager.PopupManager.ClosePopup();
+
+                    if (success)
+                    {
+                        GivePassiveBonusAccordingToTimePassed();
+                    }
+                    else
+                    {
+                        Manager.PopupManager.OpenPopup(DBPopupData.LoadingAdFailed);
+                    }
+                });
+            }
+            else
+            {
+                Manager.PopupManager.ClosePopup();
+                Manager.PopupManager.OpenPopup(DBPopupData.LoadingAdFailed);
+            }
         }
 
         private void OpenOfflineRewardWindow(int timePassed)
@@ -75,7 +108,7 @@ namespace DB_Game
             totalReturnBonus = pauseCurrencyManager.PassedTimeFoodRewardCalc(timePassed);
 
             rewardText.text = totalReturnBonus.ToReadableNumber();
-            float xPos = initialXPos - (totalReturnBonus.ToReadableNumber().Length - 1) * xOffsetPerDigit;
+            float xPos = initialXPos - ((totalReturnBonus.ToReadableNumber().Length - 1) * xOffsetPerDigit);
             coinRectTransform.anchoredPosition = new Vector2(xPos, coinRectTransform.anchoredPosition.y);
 
             GivePassiveBonusAccordingToTimePassed();

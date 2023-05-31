@@ -6,7 +6,7 @@ namespace DB_Game
     public class PauseCurrencyAdder : DBLogicMonoBehaviour
     {
         private double pausedReward;
-        private const int NERF_REWARD = 3;  
+        private const int NERF_REWARD = 4;  
         [SerializeField] DBPauseCurrencyManager pausedCurrencyManager;
 
         private void OnEnable() => AddListener(DBEventNames.OfflineTimeRefreshed, OnPausedEarning);

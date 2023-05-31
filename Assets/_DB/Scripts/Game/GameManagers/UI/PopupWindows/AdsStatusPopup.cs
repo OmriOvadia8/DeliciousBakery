@@ -1,9 +1,9 @@
-using UnityEngine;
 using DB_Core;
+using UnityEngine;
 
 namespace DB_Game
 {
-    public class StorePopupWindow : DBPopupComponentBase
+    public class AdsStatusPopup : DBPopupComponentBase
     {
         [SerializeField]
         private Animator anim;

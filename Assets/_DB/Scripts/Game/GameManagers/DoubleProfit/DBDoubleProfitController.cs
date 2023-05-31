@@ -117,8 +117,42 @@ namespace DB_Game
 
         public void ActivateDoubleProfit()
         {
-            Manager.AdsManager.ShowAd();
-            StartDoubleProfit(doubleProfitSaveData.DoubleProfitDuration);
+            Manager.PopupManager.OpenPopup(DBPopupData.LoadingAd);
+            StartCoroutine(WaitForAdToLoadAndShow());
+        }
+
+        private IEnumerator WaitForAdToLoadAndShow()
+        {
+            float delayInSeconds = 10f; 
+            float timer = 0f;
+
+            while (!Manager.AdsManager.IsRewardedAdReady() && timer < delayInSeconds)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+
+            if (Manager.AdsManager.IsRewardedAdReady())
+            {
+                Manager.AdsManager.ShowRewardedAd(success =>
+                {
+                    Manager.PopupManager.ClosePopup();
+
+                    if (success)
+                    {
+                        StartDoubleProfit(doubleProfitSaveData.DoubleProfitDuration);
+                    }
+                    else
+                    {
+                        Manager.PopupManager.OpenPopup(DBPopupData.LoadingAdFailed);
+                    }
+                });
+            }
+            else
+            {
+                Manager.PopupManager.ClosePopup();
+                Manager.PopupManager.OpenPopup(DBPopupData.LoadingAdFailed);
+            }
         }
 
         private void LoadDoubleProfit() =>

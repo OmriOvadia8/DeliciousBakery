@@ -8,7 +8,7 @@ namespace DB_Core
     {
         private IStoreController storeController;
         private IExtensionProvider extensionProvider;
-
+        private bool isInitialized;
         private Action<bool> purchaseCompleteAction;
 
         public DBInAppPurchase()
@@ -28,11 +28,17 @@ namespace DB_Core
         {
             storeController = controller;
             extensionProvider = extensions;
+            isInitialized = true;
             DBDebug.Log("OnInitialized called in DBInAppPurchase.");
         }
 
         public void Purchase(string productID, Action<bool> onPurchaseComplete)
         {
+            if (!isInitialized)
+            {
+                DBDebug.Log("Attempted to purchase before initialization completed.");
+                return;
+            }
             purchaseCompleteAction = onPurchaseComplete;
             storeController.InitiatePurchase(productID);
         }
