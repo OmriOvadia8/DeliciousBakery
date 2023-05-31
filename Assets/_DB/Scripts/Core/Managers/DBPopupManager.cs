@@ -13,10 +13,7 @@ namespace DB_Core
 
         private Dictionary<PopupTypes, DBPopupComponentBase> cachedPopups = new();
 
-        public DBPopupManager()
-        {
-            CreateCanvas();
-        }
+        public DBPopupManager() => CreateCanvas();
 
         private void CreateCanvas()
         {
@@ -44,10 +41,7 @@ namespace DB_Core
             OpenPopup(PopupsData[0]);
         }
 
-        public void SortPopups()
-        {
-            PopupsData = PopupsData.OrderBy(x => x.Priority).ToList();
-        }
+        public void SortPopups() => PopupsData = PopupsData.OrderBy(x => x.Priority).ToList();
 
         public void OpenPopup(DBPopupData dbPopupData)
         {
@@ -83,11 +77,17 @@ namespace DB_Core
             if (cachedPopups.Count > 0)
             {
                 var lastPopup = cachedPopups.Values.LastOrDefault(popup => popup.gameObject.activeSelf);
-                if (lastPopup != null)
-                {
-                    lastPopup.ClosePopup();
-                }
+                lastPopup?.ClosePopup();
             }
+        }
+        public bool IsPopupActive(DBPopupData popupData)
+        {
+            if (cachedPopups.TryGetValue(popupData.PopupType, out DBPopupComponentBase popupComponent))
+            {
+                return popupComponent.gameObject.activeSelf;
+            }
+
+            return false;
         }
     }
 
@@ -128,7 +128,7 @@ namespace DB_Core
 
         public static DBPopupData LoadingAdFailed = new()
         {
-            Priority = 5,
+            Priority = 11,
             PopupType = PopupTypes.LoadingAdFailed
         };
     }

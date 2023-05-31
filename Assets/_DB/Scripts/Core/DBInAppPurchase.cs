@@ -67,8 +67,16 @@ namespace DB_Core
 
         public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
         {
-            DBManager.Instance.CrashManager.LogBreadcrumb(product.receipt);
-            DBManager.Instance.CrashManager.LogExceptionHandling(failureReason.ToString());
+            if (!string.IsNullOrEmpty(product.receipt))
+            {
+                DBManager.Instance.CrashManager.LogBreadcrumb(product.receipt);
+            }
+
+            string failureMessage = failureReason.ToString();
+            if (!string.IsNullOrEmpty(failureMessage))
+            {
+                DBManager.Instance.CrashManager.LogExceptionHandling(failureMessage);
+            }
 
             purchaseCompleteAction?.Invoke(false);
             purchaseCompleteAction = null;

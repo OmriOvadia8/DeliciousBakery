@@ -64,28 +64,16 @@ namespace DB_Game
 
             if (totalReturnBonus > 0)
             {
-                Manager.PopupManager.OpenPopup(DBPopupData.LoadingAd);
-                StartCoroutine(WaitForAdToLoadAndShow());
+                ShowAdOrDisplayFailure();
             }
         }
 
-        private IEnumerator WaitForAdToLoadAndShow()
+        private void ShowAdOrDisplayFailure()
         {
-            float delayInSeconds = 10f;
-            float timer = 0f;
-
-            while (!Manager.AdsManager.IsRewardedAdReady() && timer < delayInSeconds)
-            {
-                timer += Time.deltaTime;
-                yield return null;
-            }
-
             if (Manager.AdsManager.IsRewardedAdReady())
             {
                 Manager.AdsManager.ShowRewardedAd(success =>
                 {
-                    Manager.PopupManager.ClosePopup();
-
                     if (success)
                     {
                         GivePassiveBonusAccordingToTimePassed();
@@ -98,7 +86,6 @@ namespace DB_Game
             }
             else
             {
-                Manager.PopupManager.ClosePopup();
                 Manager.PopupManager.OpenPopup(DBPopupData.LoadingAdFailed);
             }
         }
