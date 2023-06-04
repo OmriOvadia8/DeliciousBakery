@@ -13,6 +13,7 @@ namespace DB_Core
 
         private DBOfflineTime dbOfflineTime;
 
+        private bool isPaused;
         private int counter;
         private int alarmCounter;
         private int offlineSeconds;
@@ -35,7 +36,23 @@ namespace DB_Core
             DBManager.Instance.EventsManager.AddListener(DBEventNames.OnPause, OnPause);
         }
 
-        private void OnPause(object pauseStatus) => CheckOfflineTime();
+        private void OnPause(object pauseStatus)
+        {
+            bool isNowPaused = (bool)pauseStatus;
+            if (isNowPaused)
+            {
+                // Game just got paused, save the current time
+                dbOfflineTime.LastCheck = DateTime.UtcNow;
+                DBManager.Instance.SaveManager.Save(dbOfflineTime);
+            }
+            else
+            {
+                // Game just got resumed, calculate the offline time
+                CheckOfflineTime();
+            }
+        }
+
+
 
         ~DBTimeManager()
         {
@@ -47,9 +64,12 @@ namespace DB_Core
         {
             var timePassed = DateTime.UtcNow - dbOfflineTime.LastCheck;
             offlineSeconds = (int)timePassed.TotalSeconds;
+
+            // Now reset the LastCheck time
             dbOfflineTime.LastCheck = DateTime.UtcNow;
             DBManager.Instance.SaveManager.Save(dbOfflineTime);
-            DBDebug.Log(offlineSeconds);
+
+            DBDebug.Log("OFFLINE TIME: " + offlineSeconds);
             DBManager.Instance.EventsManager.InvokeEvent(DBEventNames.OfflineTimeRefreshed, offlineSeconds);
         }
 

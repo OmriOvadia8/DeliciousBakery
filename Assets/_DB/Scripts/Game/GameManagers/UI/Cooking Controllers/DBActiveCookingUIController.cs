@@ -78,6 +78,7 @@ namespace DB_Game
             else
             {
                 ResetActiveCookingUI(foodData, cookingSliderBar, cookingTimerText, index);
+                ActiveCookingCompleteReward(foodData);
             }
 
             InvokeEvent(DBEventNames.BuyButtonsCheck, null);
@@ -90,7 +91,8 @@ namespace DB_Game
             var cookingTimerText = CookingUIManager.uiActiveCookingComponents.CookingTimerText[index];
 
             ResetActiveCookingUI(foodData, cookingSliderBar, cookingTimerText, index);
-            ActiveCookingCompleteReward(foodData, index);
+            ActiveCookingCompleteReward(foodData);
+            InvokeEvent(DBEventNames.MoneyToastOnCook, index);
         }
 
         private void KillActiveCookingTweensOnPause()
@@ -113,14 +115,13 @@ namespace DB_Game
             }
         }
 
-        private void ActiveCookingCompleteReward(FoodData foodData, int index)
+        private void ActiveCookingCompleteReward(FoodData foodData)
         {
             double profit = foodData.Profit;
             int profitMultiplier = DBDoubleProfitController.DoubleProfitMultiplier;
             double totalProfit = profit * profitMultiplier;
             
             InvokeEvent(DBEventNames.AddCurrencyUpdate, totalProfit);
-            InvokeEvent(DBEventNames.MoneyToastOnCook, index);
         }
 
         private void ResetActiveCookingUI(FoodData foodData, Slider cookingSlider, TMP_Text timeText, int index)

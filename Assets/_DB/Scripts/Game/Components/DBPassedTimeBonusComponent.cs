@@ -55,34 +55,26 @@ namespace DB_Game
         {
             GameLogic.ScoreManager.ChangeScoreByTagByAmount(ScoreTags.GameCurrency, totalReturnBonus);
             InvokeEvent(DBEventNames.CurrencyUpdateUI, null);
+            InvokeEvent(DBEventNames.BuyButtonsCheck, null);
         }
 
         public void GiveDoubleBonusAccordingToTimePassed()
         {
-            InvokeEvent(DBEventNames.BuyButtonsCheck, null);
             InvokeEvent(DBEventNames.PlaySound, SoundEffectType.ButtonClick);
 
             if (totalReturnBonus > 0)
             {
+                GivePassiveBonusAccordingToTimePassed();
                 ShowAdOrDisplayFailure();
+                InvokeEvent(DBEventNames.BuyButtonsCheck, null);
             }
         }
 
         private void ShowAdOrDisplayFailure()
         {
-            if (Manager.AdsManager.IsRewardedAdReady())
+            if (Manager.AdsManager.IsAdReady())
             {
-                Manager.AdsManager.ShowRewardedAd(success =>
-                {
-                    if (success)
-                    {
-                        GivePassiveBonusAccordingToTimePassed();
-                    }
-                    else
-                    {
-                        Manager.PopupManager.OpenPopup(DBPopupData.LoadingAdFailed);
-                    }
-                });
+                Manager.AdsManager.ShowAd();
             }
             else
             {

@@ -10,8 +10,8 @@ namespace DB_Game
     public class DBStarBonus : DBLogicMonoBehaviour
     {
         private bool collected;
-        private int minBonus = 3;
-        private int maxBonus = 10;
+        private int minBonus = 5;
+        private int maxBonus = 15;
         [SerializeField] RectTransform statsIcon; 
         [SerializeField] Transform starTrans;
         [SerializeField] Button starButton;

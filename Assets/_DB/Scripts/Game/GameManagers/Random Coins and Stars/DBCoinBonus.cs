@@ -35,7 +35,7 @@ namespace DB_Game
         {
             collected = true;
             coinButton.interactable = false;
-            currencyPercentageForBonus = Random.Range(0.011f, 0.025f);
+            currencyPercentageForBonus = Random.Range(0.005f, 0.016f);
             double bonus = currencyPercentageForBonus * currencyManager.currencySaveData.CoinsAmount + starterBonus;
             InvokeBonusEvents(bonus);
             coinTrans.DOMove(statsIcon.position, 2f).OnComplete(() =>
