@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace DB_Core
 {
@@ -41,18 +42,14 @@ namespace DB_Core
             bool isNowPaused = (bool)pauseStatus;
             if (isNowPaused)
             {
-                // Game just got paused, save the current time
                 dbOfflineTime.LastCheck = DateTime.UtcNow;
                 DBManager.Instance.SaveManager.Save(dbOfflineTime);
             }
             else
             {
-                // Game just got resumed, calculate the offline time
                 CheckOfflineTime();
             }
         }
-
-
 
         ~DBTimeManager()
         {
@@ -63,9 +60,8 @@ namespace DB_Core
         private void CheckOfflineTime()
         {
             var timePassed = DateTime.UtcNow - dbOfflineTime.LastCheck;
-            offlineSeconds = (int)timePassed.TotalSeconds;
+            offlineSeconds = Mathf.Clamp((int)timePassed.TotalSeconds, 0, 48.HoursToSeconds());
 
-            // Now reset the LastCheck time
             dbOfflineTime.LastCheck = DateTime.UtcNow;
             DBManager.Instance.SaveManager.Save(dbOfflineTime);
 

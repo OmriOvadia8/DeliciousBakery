@@ -112,7 +112,6 @@ namespace DB_Game
             double multipliedProfit = baseProfit * profitMultiplier;
             double totalProfit = multipliedProfit * cookFoodMultiplier;
 
-            // Add base profit only when cookFoodTimes is 0
             totalProfit += (cookFoodMultiplier == 0) ? baseProfit : 0;
 
             return totalProfit;
