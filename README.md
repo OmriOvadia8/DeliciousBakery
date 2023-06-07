@@ -1,5 +1,8 @@
 # DeliciousBakery
 
+# Download on Google Play
+https://play.google.com/store/apps/details?id=com.omri.deliciousbakery
+
 # Summary
 "Delicious Bakery" is an interactive idle mobile game where players cook food items for money,
 hire bakers for idle income, and upgrade their menu.
@@ -28,7 +31,5 @@ A custom Events System was incorporated in 'Delicious Bakery' as a means to enha
 This application of the Observer design pattern enabled loose coupling among game components, improving manageability and efficiency.
 It allowed game elements to respond to events when they occur, reducing complexity and contributing to a scalable and maintainable codebase.
 
-# Download on Google Play
-https://play.google.com/store/apps/details?id=com.omri.deliciousbakery
 
 
