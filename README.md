@@ -18,6 +18,7 @@ Firebase's configurations were also used to add flexibility to different aspects
 # Miro
 In the pre-production phase of 'Delicious Bakery',Miro was utilized for brainstorming and visualizing gameplay mechanics.
 Its collaborative features significantly aided in the game's initial planning and design process.
+Miro Link : https://miro.com/app/board/uXjVPuFCfdo=/?share_link_id=501987364080
 
 # DOTween
 In "Delicious Bakery", DoTween has been instrumental for managing all the timer states and bar filling animations in the game.
