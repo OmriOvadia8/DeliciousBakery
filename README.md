@@ -36,7 +36,7 @@ It allowed game elements to respond to events when they occur, reducing complexi
 https://youtu.be/98PKuoKXue8
 
 # Media Pictures
-![Cooking Menu Progress](./Assets/ProjectImages/Cooking Menu Progress.png)
+[![Cooking Menu Progress](./Assets/ProjectImages/Cooking%20Menu%20Progress.png)](./Assets/ProjectImages/Cooking%20Menu%20Progress.png)
 
 ![Bakers Menu Progress](./Assets/ProjectImages/Bakers Menu Progress.png)
 
