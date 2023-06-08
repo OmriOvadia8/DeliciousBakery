@@ -36,14 +36,14 @@ It allowed game elements to respond to events when they occur, reducing complexi
 https://youtu.be/98PKuoKXue8
 
 # Media Pictures
-![Cooking Menu Progress](./Assets/ProjectImages/CookingMenuProgress.png)
+![Cooking Menu Progress](./Assets/ProjectImages/Cooking Menu Progress.png)
 
-![Bakers Menu Progress](./Assets/ProjectImages/BakersMenuProgress.png)
+![Bakers Menu Progress](./Assets/ProjectImages/Bakers Menu Progress.png)
 
-![Starting Menu](./Assets/ProjectImages/StartingMenu.png)
+![Starting Menu](./Assets/ProjectImages/Starting Menu.png)
 
-![Achievement Progress](./Assets/ProjectImages/AchievementProgress.png)
+![Achievement Progress](./Assets/ProjectImages/Achievement Progress.png)
 
-![Premium Shop Skins](./Assets/ProjectImages/PremiumShopSkins.png)
+![Premium Shop Skins](./Assets/ProjectImages/Premium Shop Skins.png)
 
-![Game Loop MIRO](./Assets/ProjectImages/GameLoopMIRO.png)
+![Game Loop MIRO](./Assets/ProjectImages/Game Loop MIRO.png)
