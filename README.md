@@ -38,12 +38,12 @@ https://youtu.be/98PKuoKXue8
 # Media Pictures
 [![Cooking Menu Progress](./Assets/ProjectImages/Cooking%20Menu%20Progress.png)](./Assets/ProjectImages/Cooking%20Menu%20Progress.png)
 
-![Bakers Menu Progress](./Assets/ProjectImages/Bakers Menu Progress.png)
+[![Bakers Menu Progress](./Assets/ProjectImages/Bakers%20Menu%20Progress.png)](./Assets/ProjectImages/Bakers%20Menu%20Progress.png)
 
-![Starting Menu](./Assets/ProjectImages/Starting Menu.png)
+[![Starting Menu](./Assets/ProjectImages/Starting%20Menu.png)](./Assets/ProjectImages/Starting%20Menu.png)
 
-![Achievement Progress](./Assets/ProjectImages/Achievement Progress.png)
+[![Achievement Progress](./Assets/ProjectImages/Achievement%20Progress.png)](./Assets/ProjectImages/Achievement%20Progress.png)
 
-![Premium Shop Skins](./Assets/ProjectImages/Premium Shop Skins.png)
+[![Premium Shop Skins](./Assets/ProjectImages/Premium%20Shop%20Skins.png)](./Assets/ProjectImages/Premium%20Shop%20Skins.png)
 
-![Game Loop MIRO](./Assets/ProjectImages/Game Loop MIRO.png)
+[![Game Loop MIRO](./Assets/ProjectImages/Game%20Loop%20MIRO.png)](./Assets/ProjectImages/Game%20Loop%20MIRO.png)
