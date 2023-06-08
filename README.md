@@ -7,7 +7,7 @@ https://play.google.com/store/apps/details?id=com.omri.deliciousbakery
 "Delicious Bakery" is an interactive idle mobile game where players cook food items for money,
 hire bakers for idle income, and upgrade their menu.
 
-#Miro Board Usage
+# Miro Board Usage
 Utilized Miro during pre-production and mid-production of 'Delicious Bakery' for organizing script relationships and visualizing gameplay mechanics.
 Valuable tool for logical planning and understanding project flow.
 Miro Link: https://miro.com/app/board/uXjVPuFCfdo=/?share_link_id=439482013692
