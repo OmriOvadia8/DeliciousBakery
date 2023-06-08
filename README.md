@@ -31,3 +31,12 @@ This led to a more immersive, visually pleasing, and intuitive gameplay experien
 A custom Events System was incorporated in 'Delicious Bakery' as a means to enhance script communication.
 This application of the Observer design pattern enabled loose coupling among game components, improving manageability and efficiency.
 It allowed game elements to respond to events when they occur, reducing complexity and contributing to a scalable and maintainable codebase.
+
+# Media
+Video Trailer of the game: https://youtu.be/98PKuoKXue8
+![Game Kitchen and Active Cooking Menu](https://ibb.co/fpsLqCD)
+![Game Bakers Menu Progress](https://ibb.co/jDrVKRR)
+![Game Starting Menu](https://ibb.co/kGs9B6D)
+![Game Achievement Menu Progress](https://ibb.co/0Q5Yb6s)
+![Game Premium Shop Menu and Skins](https://ibb.co/fG7nYYx)
+![Game Loop Graph](https://ibb.co/ctV2Wzk)
