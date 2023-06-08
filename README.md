@@ -33,7 +33,7 @@ This application of the Observer design pattern enabled loose coupling among gam
 It allowed game elements to respond to events when they occur, reducing complexity and contributing to a scalable and maintainable codebase.
 
 # Trailer Video
-[![Game Trailer]((https://www.youtube.com/watch?v=98PKuoKXue8)]
+[![Delicious Bakery Trailer](http://img.youtube.com/vi/98PKuoKXue8/0.jpg)](http://www.youtube.com/watch?v=98PKuoKXue8 "Delicious Bakery Trailer")
 
 # Media Pictures
 [![Cooking Menu Progress](./Assets/ProjectImages/Cooking%20Menu%20Progress.png)](./Assets/ProjectImages/Cooking%20Menu%20Progress.png)
