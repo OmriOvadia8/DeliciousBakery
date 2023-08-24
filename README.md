@@ -33,17 +33,17 @@ This application of the Observer design pattern enabled loose coupling among gam
 It allowed game elements to respond to events when they occur, reducing complexity and contributing to a scalable and maintainable codebase.
 
 # Trailer Video
-https://youtu.be/98PKuoKXue8
+[![Delicious Bakery Trailer](http://img.youtube.com/vi/98PKuoKXue8/0.jpg)](http://www.youtube.com/watch?v=98PKuoKXue8 "Delicious Bakery Trailer")
 
 # Media Pictures
-![Game Kitchen and Active Cooking Menu](https://ibb.co/fpsLqCD) ,
+[![Cooking Menu Progress](./Assets/ProjectImages/Cooking%20Menu%20Progress.png)](./Assets/ProjectImages/Cooking%20Menu%20Progress.png)
 
-![Game Bakers Menu Progress](https://ibb.co/jDrVKRR) ,
+[![Bakers Menu Progress](./Assets/ProjectImages/Bakers%20Menu%20Progress.png)](./Assets/ProjectImages/Bakers%20Menu%20Progress.png)
 
-![Game Starting Menu](https://ibb.co/kGs9B6D) ,
+[![Starting Menu](./Assets/ProjectImages/Starting%20Menu.png)](./Assets/ProjectImages/Starting%20Menu.png)
 
-![Game Achievement Menu Progress](https://ibb.co/0Q5Yb6s) ,
+[![Achievement Progress](./Assets/ProjectImages/Achievement%20Progress.png)](./Assets/ProjectImages/Achievement%20Progress.png)
 
-![Game Premium Shop Menu and Skins](https://ibb.co/fG7nYYx) ,
+[![Premium Shop Skins](./Assets/ProjectImages/Premium%20Shop%20Skins.png)](./Assets/ProjectImages/Premium%20Shop%20Skins.png)
 
-![Game Loop Graph](https://ibb.co/ctV2Wzk) ,
+[![Game Loop MIRO](./Assets/ProjectImages/Game%20Loop%20MIRO.png)](./Assets/ProjectImages/Game%20Loop%20MIRO.png)
