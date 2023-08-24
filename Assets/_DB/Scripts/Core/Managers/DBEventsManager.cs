@@ -86,6 +86,9 @@ namespace DB_Core
         AchievementPing,
         BakerPing,
         SlimeAction,
-        TimeWrapCoinsText
+        TimeWrapCoinsText,
+        Match3ScoreTextIncrease,
+        Match3MovesTextUpdate,
+        Match3GameOverScreen
     }
 }
