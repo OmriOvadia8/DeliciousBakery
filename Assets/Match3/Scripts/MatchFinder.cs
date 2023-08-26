@@ -71,6 +71,7 @@ public class MatchFinder : MonoBehaviour
         }
 
         CheckForBombs();
+        board.roundMan.CheckWinState();
     }
 
     public void CheckForBombs()

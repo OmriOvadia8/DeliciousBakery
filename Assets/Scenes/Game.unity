@@ -3480,9 +3480,10 @@ MonoBehaviour:
   board: {fileID: 2035261375}
   Match3Score: 0
   Match3ScoreGoal: 100
-  MovesCount: 4
+  MovesCount: 2
   playerInitiatedMove: 0
   isResolvingBoard: 0
+  playerWon: 0
 --- !u!1 &166926201
 GameObject:
   m_ObjectHideFlags: 0

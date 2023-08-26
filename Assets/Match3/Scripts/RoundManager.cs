@@ -57,11 +57,13 @@ public class RoundManager : DBMonoBehaviour
             {
                 // Do whatever you want when the game is won, like transitioning scenes or displaying a message
                 Debug.Log("You Won!");
+                board.currentState = BoardSystem.BoardState.Wait;
             }
             else // If moves are zero and the player hasn't reached the score goal, they lose
             {
                 // Do whatever you want when the game is lost, like transitioning scenes or displaying a message
                 Debug.Log("You Lost!");
+                board.currentState = BoardSystem.BoardState.Wait;
             }
         }
     }
@@ -72,6 +74,11 @@ public class RoundManager : DBMonoBehaviour
         {
             Debug.Log("You Won!");
             playerWon = true;   
+            
+        }
+
+        if(playerWon == true)
+        {
             board.currentState = BoardSystem.BoardState.Wait;
         }
     }

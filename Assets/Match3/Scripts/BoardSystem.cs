@@ -2,6 +2,7 @@ using DB_Core;
 using DB_Game;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class BoardSystem : DBMonoBehaviour
@@ -34,7 +35,12 @@ public class BoardSystem : DBMonoBehaviour
     private void Start()
     {
         AllGems = new Gem[Width, Height];
-        layoutStore = new Gem[Width, Height];   
+        layoutStore = new Gem[Width, Height];
+        //Manager.PoolManager.InitPool("YourGemResourceName", Height * Width, this.transform, 100);
+        //Manager.PoolManager.InitPool("YourBGTileResourceName", Height * Width, this.transform, 100);
+
+        //Make all instantiations and destroys to 
+
         SetUp();
 
     }
@@ -198,6 +204,8 @@ public class BoardSystem : DBMonoBehaviour
             {
                 roundMan.CheckGameState();
             }
+
+            roundMan.CheckWinState();
         }
 
     }
