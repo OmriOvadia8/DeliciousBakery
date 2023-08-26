@@ -3479,9 +3479,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 2035261375}
   Match3Score: 0
-  Match3ScoreGoal: 30
-  MovesCount: 10
+  Match3ScoreGoal: 100
+  MovesCount: 4
   playerInitiatedMove: 0
+  isResolvingBoard: 0
 --- !u!1 &166926201
 GameObject:
   m_ObjectHideFlags: 0

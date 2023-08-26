@@ -82,13 +82,12 @@ public class Gem : DBMonoBehaviour
         {
             MovePieces();
         }
-
     }
-
 
     private void MovePieces()
     {
         previousPos = PosIndex;
+        Board.roundMan.isResolvingBoard = true;
 
         if (Board.roundMan.MovesCount > 0)
         {
@@ -103,7 +102,6 @@ public class Gem : DBMonoBehaviour
                 Board.AllGems[PosIndex.x, PosIndex.y] = this;
                 Board.AllGems[otherGem.PosIndex.x, otherGem.PosIndex.y] = otherGem;
 
-                Board.roundMan.MovesDecrease();
             }
 
             else if ((swipeAngle > 135 || swipeAngle < -135) && PosIndex.x > 0) // left
@@ -115,7 +113,6 @@ public class Gem : DBMonoBehaviour
                 Board.AllGems[PosIndex.x, PosIndex.y] = this;
                 Board.AllGems[otherGem.PosIndex.x, otherGem.PosIndex.y] = otherGem;
 
-                Board.roundMan.MovesDecrease();
             }
 
             else if (swipeAngle > 45 && swipeAngle <= 135 && PosIndex.y < Board.Height - 1) // swipe up
@@ -127,7 +124,6 @@ public class Gem : DBMonoBehaviour
                 Board.AllGems[PosIndex.x, PosIndex.y] = this;
                 Board.AllGems[otherGem.PosIndex.x, otherGem.PosIndex.y] = otherGem;
 
-                Board.roundMan.MovesDecrease();
             }
 
             else if (swipeAngle < 45 && swipeAngle >= -135 && PosIndex.y > 0) // swipe down
@@ -138,8 +134,6 @@ public class Gem : DBMonoBehaviour
 
                 Board.AllGems[PosIndex.x, PosIndex.y] = this;
                 Board.AllGems[otherGem.PosIndex.x, otherGem.PosIndex.y] = otherGem;
-
-                Board.roundMan.MovesDecrease();
             }
         }
 
@@ -154,10 +148,11 @@ public class Gem : DBMonoBehaviour
 
         Board.MatchFinder.FindAllMatches();
 
-        if(otherGem != null)
+        if (otherGem != null)
         {
-            if(!IsMatched && !otherGem.IsMatched)
+            if (!IsMatched && !otherGem.IsMatched)
             {
+                // Reverting the move, so we shouldn't decrement the moves count.
                 Board.roundMan.playerInitiatedMove = false;
                 otherGem.PosIndex = PosIndex;
                 PosIndex = previousPos;
@@ -171,9 +166,16 @@ public class Gem : DBMonoBehaviour
             }
             else
             {
+                if (Board.roundMan.playerInitiatedMove)
+                {
+                    Board.roundMan.MovesDecrease();
+                }
+
                 Board.DestroyMatches();
             }
         }
     }
+
+
 
 }

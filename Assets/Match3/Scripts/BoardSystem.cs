@@ -140,9 +140,8 @@ public class BoardSystem : DBMonoBehaviour
                 ScoreCheck(MatchFinder.currentMatches[i]);
                 DestroyMatchedGemsAt(MatchFinder.currentMatches[i].PosIndex);
             }
-
         }
-
+        roundMan.CheckWinState();
         StartCoroutine(DecreaseRowCo());
     }
 
@@ -192,6 +191,13 @@ public class BoardSystem : DBMonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             currentState = BoardState.Move;
+
+            // Assuming that DestroyMatches sets the Board to 'Move' state,
+            // perform your game state check here
+            if (MatchFinder.currentMatches.Count == 0 && roundMan.MovesCount == 0)
+            {
+                roundMan.CheckGameState();
+            }
         }
 
     }
