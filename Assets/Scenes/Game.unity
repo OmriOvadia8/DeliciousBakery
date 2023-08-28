@@ -51168,12 +51168,12 @@ MonoBehaviour:
   - {fileID: 4429871997900261283, guid: 22d4378ec479ee448bf361a7a88fd8a2, type: 3}
   - {fileID: 5809447658739835403, guid: c3f8a1f6de3ae954a98a6cd1cf86f9a1, type: 3}
   - {fileID: 42251804603633837, guid: e77e968ef9eb9b74eb525679454261ad, type: 3}
-  GemSpeed: 7
-  MatchFinder: {fileID: 1515887506}
   Bomb: {fileID: 3973014927335985915, guid: bd3c9338aa870174fb7bd292b65f4dba, type: 3}
+  GemSpeed: 7
   bombChance: 2
   boardLayout: {fileID: 2035261377}
   roundMan: {fileID: 154606507}
+  MatchFinder: {fileID: 1515887506}
   currentState: 1
 --- !u!4 &2035261376
 Transform:

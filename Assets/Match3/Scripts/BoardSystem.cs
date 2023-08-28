@@ -1,126 +1,144 @@
 using DB_Core;
-using DB_Game;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.EditorTools;
 using UnityEngine;
+using static Gem;
 
 public class BoardSystem : DBMonoBehaviour
 {
+    [Header("Board Settings")]
     public int Width;
     public int Height;
 
+    [Header("Prefab Settings")]
     public GameObject bgTilePrefab;
     public Gem[] Gems;
-    public Gem[,] AllGems;
-
-    public float GemSpeed;
-    public MatchFinder MatchFinder;
-
     public Gem Bomb;
+
+    [Header("Gameplay Settings")]
+    public float GemSpeed;
     public float bombChance = 2f;
 
-    [SerializeField] BoardLayout boardLayout;
+    [Header("Dependencies")]
+    [SerializeField] private BoardLayout boardLayout;
     public RoundManager roundMan;
+    public MatchFinder MatchFinder;
+
+    public Gem[,] AllGems;
     private Gem[,] layoutStore;
 
-    public enum BoardState
-    {
-        Wait,
-        Move
-    }
-
+    public enum BoardState { Wait, Move }
     public BoardState currentState = BoardState.Move;
 
-    private void Start()
+    private void Start() => InitializeBoard();
+
+    private void InitializeBoard()
     {
-        AllGems = new Gem[Width, Height];
-        layoutStore = new Gem[Width, Height];
-        //Manager.PoolManager.InitPool("YourGemResourceName", Height * Width, this.transform, 100);
-        //Manager.PoolManager.InitPool("YourBGTileResourceName", Height * Width, this.transform, 100);
-
-        //Make all instantiations and destroys to 
-
-        SetUp();
-
+        InitializeGemArrays();
+        PopulateBoard();
     }
 
-    private void SetUp()
+    private void InitializeGemArrays()
     {
-        if(boardLayout != null)
-        {
-            layoutStore = boardLayout.GetLayout();
-        }
+        AllGems = new Gem[Width, Height];
+        layoutStore = boardLayout?.GetLayout();
+    }
 
+    private void PopulateBoard()
+    {
         for (int x = 0; x < Width; x++)
         {
             for (int y = 0; y < Height; y++)
             {
-                SpawnTilesBG(x, y);
-
-                if (layoutStore[x,y] != null)
-                {
-                    SpawnGems(new Vector2Int(x, y), layoutStore[x, y]);
-                }
-
-                else
-                {
-                    int gemToUse = Random.Range(0, Gems.Length);
-
-                    int iterations = 0;
-                    while (MatchesAt(new Vector2Int(x, y), Gems[gemToUse]) && iterations < 100)
-                    {
-                        gemToUse = Random.Range(0, Gems.Length);
-                        iterations++;
-                    }
-
-                    SpawnGems(new Vector2Int(x, y), Gems[gemToUse]);
-                }
+                SpawnBackgroundTile(x, y);
+                SpawnInitialGems(x, y);
             }
         }
     }
 
-    private void SpawnTilesBG(int x, int y)
+    private void FillBoard(List<Gem> gemList = null)
     {
-        Vector2 pos = new Vector2(x, y);
-        GameObject bgTile = Instantiate(bgTilePrefab, pos, Quaternion.identity);
-        bgTile.transform.parent = transform;
+        for (int x = 0; x < Width; x++)
+        {
+            for (int y = 0; y < Height; y++)
+            {
+                if (AllGems[x, y] == null)
+                {
+                    Gem gemToUse = gemList != null ? gemList[Random.Range(0, gemList.Count)] : GetRandomGem(x, y);
+                    SpawnGemAtPosition(new Vector2Int(x, y), gemToUse);
+
+                    if (gemList != null)
+                    {
+                        gemList.Remove(gemToUse);
+                    }
+                }
+            }
+        }
+
+        CheckMisplacedGems();
+    }
+
+    private Gem GetGemAtPosition(Vector2Int position)
+    {
+        if (position.x < 0 || position.x >= Width || position.y < 0 || position.y >= Height)
+        {
+            return null;
+        }
+        return AllGems[position.x, position.y];
+    }
+
+    private void SpawnBackgroundTile(int x, int y)
+    {
+        Vector2 position = new Vector2(x, y);
+        GameObject bgTile = Instantiate(bgTilePrefab, position, Quaternion.identity, transform);
         bgTile.name = $"Tile ({x},{y})";
     }
 
-    private void SpawnGems(Vector2Int pos , Gem gemToSpawn)
+    private void SpawnInitialGems(int x, int y)
     {
-        if(Random.Range(0, 100f) < bombChance)
-        {
-            gemToSpawn = Bomb;
-        }
-
-        Gem gem = Instantiate(gemToSpawn, new Vector3(pos.x,pos.y + Height,0), Quaternion.identity);
-        gem.transform.parent = transform;
-        gem.name = $"Gem ({pos.x},{pos.y})";
-        AllGems[pos.x, pos.y] = gem;
-
-        gem.SetUpGem(pos, this);
+        Gem gemToSpawn = layoutStore?[x, y] ?? GetRandomGem(x, y);
+        SpawnGemAtPosition(new Vector2Int(x, y), gemToSpawn);
     }
 
-    private bool MatchesAt(Vector2Int posToCheck, Gem gemToCheck)
+    private Gem GetRandomGem(int x, int y)
     {
-        if(posToCheck.x > 1)
-        {
-            if (AllGems[posToCheck.x - 1, posToCheck.y].type == gemToCheck.type && AllGems[posToCheck.x - 2, posToCheck.y].type == gemToCheck.type)
-            {
-                return true;
-            }
-        }
+        int iterations = 0;
+        int randomIndex;
 
-        if (posToCheck.y > 1)
+        do
         {
-            if (AllGems[posToCheck.x, posToCheck.y - 1].type == gemToCheck.type && AllGems[posToCheck.x, posToCheck.y - 2].type == gemToCheck.type)
-            {
-                return true;
-            }
-        }
+            randomIndex = Random.Range(0, Gems.Length);
+            iterations++;
+        } while (HasMatchAt(new Vector2Int(x, y), Gems[randomIndex]) && iterations < 100);
 
+        return Gems[randomIndex];
+    }
+
+    private void SpawnGemAtPosition(Vector2Int position, Gem gemToSpawn)
+    {
+        if (Random.Range(0, 100f) < bombChance) gemToSpawn = Bomb;
+
+        Vector3 spawnPosition = new Vector3(position.x, position.y + Height, 0);
+        Gem newGem = Instantiate(gemToSpawn, spawnPosition, Quaternion.identity, transform);
+        newGem.name = $"Gem ({position.x},{position.y})";
+        newGem.SetUpGem(position, this);
+
+        AllGems[position.x, position.y] = newGem;
+    }
+
+    private bool HasMatchAt(Vector2Int position, Gem gem)
+    {
+        Gem left1 = GetGemAtPosition(new Vector2Int(position.x - 1, position.y));
+        Gem left2 = GetGemAtPosition(new Vector2Int(position.x - 2, position.y));
+
+        Gem down1 = GetGemAtPosition(new Vector2Int(position.x, position.y - 1));
+        Gem down2 = GetGemAtPosition(new Vector2Int(position.x, position.y - 2));
+
+        if ((left1?.type == gem.type && left2?.type == gem.type) ||
+            (down1?.type == gem.type && down2?.type == gem.type))
+        {
+            return true;
+        }
         return false;
     }
 
@@ -207,26 +225,9 @@ public class BoardSystem : DBMonoBehaviour
 
             roundMan.CheckWinState();
         }
-
     }
 
-    private void RefillBoard()
-    {
-        for (int x = 0; x < Width; x++)
-        {
-            for (int y = 0; y < Height; y++)
-            {
-                if(AllGems[x, y] == null)
-                {
-                    int gemToUse = Random.Range(0, Gems.Length);
-
-                    SpawnGems(new Vector2Int(x, y), Gems[gemToUse]);
-                }
-            }
-        }
-
-        CheckMisplacedGems();
-    }
+    private void RefillBoard() => FillBoard();
 
     private void CheckMisplacedGems()
     {
@@ -271,34 +272,16 @@ public class BoardSystem : DBMonoBehaviour
 
             List<Gem> gemsFromBoard = new List<Gem>();
 
-
             for (int x = 0; x < Width; x++)
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    gemsFromBoard.Add(AllGems[x, y]);
+                    gemsFromBoard.Add(GetGemAtPosition(new Vector2Int(x, y)));
                     AllGems[x, y] = null;
                 }
             }
 
-            for (int x = 0; x < Width; x++)
-            {
-                for (int y = 0; y < Height; y++)
-                {
-                    int gemToUse = Random.Range(0, gemsFromBoard.Count);
-                    int iterations = 0;
-
-                    while(MatchesAt(new Vector2Int(x,y), gemsFromBoard[gemToUse]) && iterations < 100 && gemsFromBoard.Count > 1)
-                    {
-                        gemToUse = Random.Range(0, gemsFromBoard.Count);
-                        iterations++;   
-                    }
-
-                    gemsFromBoard[gemToUse].SetUpGem(new Vector2Int(x, y), this);
-                    AllGems[x, y] = gemsFromBoard[gemToUse];
-                    gemsFromBoard.RemoveAt(gemToUse);
-                }
-            }
+            FillBoard(gemsFromBoard);
 
             StartCoroutine(FillBoardCo());
         }
