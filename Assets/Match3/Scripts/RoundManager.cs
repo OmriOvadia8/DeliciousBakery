@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RoundManager : DBMonoBehaviour
 {
-    [SerializeField] BoardSystem board;
+    [SerializeField] private BoardSystem board;
     public int Match3Score;
     public int Match3ScoreGoal = 30;
     public int MovesCount = 2;
@@ -16,29 +16,30 @@ public class RoundManager : DBMonoBehaviour
         Match3GameOver(false);
     }
 
+    /// <summary>
+    /// Decreases the remaining moves count when initiated by the player.
+    /// </summary>
     public void MovesDecrease()
     {
-        Debug.Log("Inside MovesDecrease method");  // Debugging line
         if (playerInitiatedMove && MovesCount > 0)
         {
-            Debug.Log("Decreasing moves");  // Debugging line
             MovesCount--;
             InvokeEvent(DBEventNames.Match3MovesTextUpdate, MovesCount);
-            playerInitiatedMove = false; // reset the flag
-        }
-        else
-        {
-            Debug.Log("Not decreasing moves because some condition is not met"); // Debugging line
+            playerInitiatedMove = false; // Reset the flag
         }
     }
 
-
+    /// <summary>
+    /// Handles the game-over state.
+    /// </summary>
     public void Match3GameOver(bool value)
     {
-        // Simplify the logic for invoking the game over screen
         InvokeEvent(DBEventNames.Match3GameOverScreen, value);
     }
 
+    /// <summary>
+    /// Restarts the Match-3 game.
+    /// </summary>
     public void RestartMatch3()
     {
         board.ShuffleBoard();
@@ -47,39 +48,64 @@ public class RoundManager : DBMonoBehaviour
         Match3GameOver(false);
     }
 
+    /// <summary>
+    /// Checks the overall game state.
+    /// </summary>
     public void CheckGameState()
     {
-        // Only check for game state when there are 0 moves and the board is in 'Move' state
         if (board.currentState == BoardSystem.BoardState.Move)
         {
-            // If player reaches the score goal, they win
-            if (Match3Score >= Match3ScoreGoal && playerWon == false)
+            if (Match3Score >= Match3ScoreGoal && !playerWon)
             {
-                // Do whatever you want when the game is won, like transitioning scenes or displaying a message
-                Debug.Log("You Won!");
-                board.currentState = BoardSystem.BoardState.Wait;
+                DisplayWinMessage();
             }
-            else // If moves are zero and the player hasn't reached the score goal, they lose
+            else
             {
-                // Do whatever you want when the game is lost, like transitioning scenes or displaying a message
-                Debug.Log("You Lost!");
-                board.currentState = BoardSystem.BoardState.Wait;
+                DisplayLoseMessage();
             }
         }
     }
 
+    /// <summary>
+    /// Checks the win state based on the current score.
+    /// </summary>
     public void CheckWinState()
     {
-        if(Match3Score >= Match3ScoreGoal && playerWon == false)
+        if (Match3Score >= Match3ScoreGoal && !playerWon)
         {
-            Debug.Log("You Won!");
-            playerWon = true;   
-            
+            DisplayWinMessage();
+            playerWon = true;
         }
 
-        if(playerWon == true)
+        if (playerWon)
         {
-            board.currentState = BoardSystem.BoardState.Wait;
+            SetBoardStateToWait();
         }
+    }
+
+    /// <summary>
+    /// Displays a win message and sets the board state to Wait.
+    /// </summary>
+    private void DisplayWinMessage()
+    {
+        Debug.Log("You Won!");
+        SetBoardStateToWait();
+    }
+
+    /// <summary>
+    /// Displays a lose message and sets the board state to Wait.
+    /// </summary>
+    private void DisplayLoseMessage()
+    {
+        Debug.Log("You Lost!");
+        SetBoardStateToWait();
+    }
+
+    /// <summary>
+    /// Sets the board state to Wait.
+    /// </summary>
+    private void SetBoardStateToWait()
+    {
+        board.currentState = BoardSystem.BoardState.Wait;
     }
 }

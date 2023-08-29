@@ -1,134 +1,102 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
 public class MatchFinder : MonoBehaviour
 {
-    [SerializeField] BoardSystem board;
-
+    [SerializeField] private BoardSystem board;
     public List<Gem> currentMatches = new List<Gem>();
 
     public void FindAllMatches()
     {
         currentMatches.Clear();
-
         for (int x = 0; x < board.Width; x++)
         {
             for (int y = 0; y < board.Height; y++)
             {
                 Gem currentGem = board.AllGems[x, y];
-                if(currentGem != null)
-                {
-                    if(x > 0 && x < board.Width - 1)
-                    {
-                        Gem leftGem = board.AllGems[x - 1, y];
-                        Gem rightGem = board.AllGems[x + 1, y];
+                if (currentGem == null) continue;
 
-                        if(leftGem != null && rightGem != null)
-                        {
-                            if(leftGem.type == currentGem.type && rightGem.type == currentGem.type && currentGem.type != Gem.GemType.Stone)
-                            {
-                                currentGem.IsMatched = true;
-                                leftGem.IsMatched = true;
-                                rightGem.IsMatched = true;
-
-                                currentMatches.Add(currentGem);
-                                currentMatches.Add(leftGem);
-                                currentMatches.Add(rightGem);
-                            }
-                        }
-                    }
-
-                    if (y > 0 && y < board.Height - 1)
-                    {
-                        Gem aboveGem = board.AllGems[x, y + 1];
-                        Gem belowGem = board.AllGems[x, y - 1];
-
-                        if (aboveGem != null && belowGem != null)
-                        {
-                            if (aboveGem.type == currentGem.type && belowGem.type == currentGem.type && currentGem.type != Gem.GemType.Stone)
-                            {
-                                currentGem.IsMatched = true;
-                                aboveGem.IsMatched = true;
-                                belowGem.IsMatched = true;
-
-                                currentMatches.Add(currentGem);
-                                currentMatches.Add(aboveGem);
-                                currentMatches.Add(belowGem);
-                            }
-                        }
-                    }
-                }
-
-
+                CheckHorizontalMatches(x, y, currentGem);
+                CheckVerticalMatches(x, y, currentGem);
             }
         }
 
-        if(currentMatches.Count > 0)
-        {
-            currentMatches = currentMatches.Distinct().ToList();
-        }
-
+        RemoveDuplicateMatches();
         CheckForBombs();
         board.roundMan.CheckWinState();
     }
 
+    private void CheckHorizontalMatches(int x, int y, Gem currentGem)
+    {
+        if (x <= 0 || x >= board.Width - 1) return;
+
+        Gem leftGem = board.AllGems[x - 1, y];
+        Gem rightGem = board.AllGems[x + 1, y];
+
+        if (leftGem != null && rightGem != null &&
+            leftGem.type == currentGem.type && rightGem.type == currentGem.type &&
+            currentGem.type != Gem.GemType.Stone)
+        {
+            MarkAsMatched(currentGem, leftGem, rightGem);
+        }
+    }
+
+    private void CheckVerticalMatches(int x, int y, Gem currentGem)
+    {
+        if (y <= 0 || y >= board.Height - 1) return;
+
+        Gem aboveGem = board.AllGems[x, y + 1];
+        Gem belowGem = board.AllGems[x, y - 1];
+
+        if (aboveGem != null && belowGem != null &&
+            aboveGem.type == currentGem.type && belowGem.type == currentGem.type &&
+            currentGem.type != Gem.GemType.Stone)
+        {
+            MarkAsMatched(currentGem, aboveGem, belowGem);
+        }
+    }
+
+    private void MarkAsMatched(params Gem[] gems)
+    {
+        foreach (Gem gem in gems)
+        {
+            gem.IsMatched = true;
+            currentMatches.Add(gem);
+        }
+    }
+
+    private void RemoveDuplicateMatches()
+    {
+        if (currentMatches.Count > 0)
+        {
+            currentMatches = currentMatches.Distinct().ToList();
+        }
+    }
+
     public void CheckForBombs()
     {
-        for (int i = 0; i < currentMatches.Count; i++)
+        foreach (Gem gem in currentMatches)
         {
-            Gem gem = currentMatches[i];
-
             int x = gem.PosIndex.x;
             int y = gem.PosIndex.y;
 
-            if(gem.PosIndex.x > 0)
+            CheckForAdjacentBomb(x - 1, y);
+            CheckForAdjacentBomb(x + 1, y);
+            CheckForAdjacentBomb(x, y - 1);
+            CheckForAdjacentBomb(x, y + 1);
+        }
+    }
+
+    private void CheckForAdjacentBomb(int x, int y)
+    {
+        if (x >= 0 && x < board.Width && y >= 0 && y < board.Height)
+        {
+            Gem adjacentGem = board.AllGems[x, y];
+            if (adjacentGem != null && adjacentGem.type == Gem.GemType.Bomb)
             {
-                if (board.AllGems[x-1,y] != null)
-                {
-                    if (board.AllGems[x-1,y].type == Gem.GemType.Bomb)
-                    {
-                        MarkBombArea(new Vector2Int (x-1, y), board.AllGems[x-1,y]);
-                    }
-                }
+                MarkBombArea(new Vector2Int(x, y), adjacentGem);
             }
-
-
-            if (gem.PosIndex.x < board.Width - 1)
-            {
-                if (board.AllGems[x + 1, y] != null)
-                {
-                    if (board.AllGems[x + 1, y].type == Gem.GemType.Bomb)
-                    {
-                        MarkBombArea(new Vector2Int(x + 1, y), board.AllGems[x + 1, y]);
-                    }
-                }
-            }
-
-            if (gem.PosIndex.y > 0)
-            {
-                if (board.AllGems[x, y - 1] != null)
-                {
-                    if (board.AllGems[x, y - 1].type == Gem.GemType.Bomb)
-                    {
-                        MarkBombArea(new Vector2Int(x, y - 1), board.AllGems[x, y - 1]);
-                    }
-                }
-            }
-
-
-            if (gem.PosIndex.y < board.Height - 1)
-            {
-                if (board.AllGems[x, y + 1] != null)
-                {
-                    if (board.AllGems[x, y + 1].type == Gem.GemType.Bomb)
-                    {
-                        MarkBombArea(new Vector2Int(x, y + 1), board.AllGems[x, y + 1]);
-                    }
-                }
-            }
-
         }
     }
 
@@ -138,17 +106,17 @@ public class MatchFinder : MonoBehaviour
         {
             for (int y = bombPos.y - bomb.BlastSize; y <= bombPos.y + bomb.BlastSize; y++)
             {
-                if(x >= 0 && x < board.Width && y >= 0 && y < board.Height)
+                if (x < 0 || x >= board.Width || y < 0 || y >= board.Height) continue;
+
+                Gem targetGem = board.AllGems[x, y];
+                if (targetGem != null)
                 {
-                    if (board.AllGems[x,y] != null)
-                    {
-                        board.AllGems[x, y].IsMatched = true;
-                        currentMatches.Add(board.AllGems[x, y]);
-                    }
+                    targetGem.IsMatched = true;
+                    currentMatches.Add(targetGem);
                 }
-            }   
+            }
         }
 
-        currentMatches = currentMatches.Distinct().ToList();
+        RemoveDuplicateMatches();
     }
 }

@@ -2,25 +2,24 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 
-// Your existing BoardLayout class
 public class BoardLayout : MonoBehaviour
 {
-    public LayoutRaw[] allRows;
+    public LayoutRow[] allRows;
 
     public Gem[,] GetLayout()
     {
-        Gem[,] theLayout = new Gem[allRows[0].gemsInRow.Length, allRows.Length];
+        int width = allRows[0].gemsInRow.Length;
+        int height = allRows.Length;
+        Gem[,] theLayout = new Gem[width, height];
 
-        for (int y = 0; y < allRows.Length; y++)
+        for (int y = 0; y < height; y++)
         {
-            for (int x = 0; x < allRows[y].gemsInRow.Length; x++)
+            for (int x = 0; x < width; x++)
             {
-                if (x < theLayout.GetLength(0))
+                Gem gem = allRows[y].gemsInRow[x];
+                if (gem != null)
                 {
-                    if (allRows[y].gemsInRow[x] != null)
-                    {
-                        theLayout[x, allRows.Length - 1 - y] = allRows[y].gemsInRow[x];
-                    }
+                    theLayout[x, height - 1 - y] = gem;
                 }
             }
         }
@@ -30,7 +29,7 @@ public class BoardLayout : MonoBehaviour
 }
 
 [System.Serializable]
-public class LayoutRaw
+public class LayoutRow
 {
     public Gem[] gemsInRow;
 }
@@ -44,72 +43,62 @@ public class BoardLayoutEditor : Editor
         BoardLayout boardLayout = (BoardLayout)target;
 
         GUILayout.Space(10);
-
-        if (GUILayout.Button("Add Row"))
-        {
-            AddRow(boardLayout);
-        }
-
-        if (GUILayout.Button("Remove Row"))
-        {
-            RemoveRow(boardLayout);
-        }
-
-        if (GUILayout.Button("Add Column"))
-        {
-            AddColumn(boardLayout);
-        }
-
-        if (GUILayout.Button("Remove Column"))
-        {
-            RemoveColumn(boardLayout);
-        }
-
-        // Add some space before drawing the grid
+        DrawButtons(boardLayout);
         GUILayout.Space(30);
+        DrawGrid(boardLayout);
 
-        for (int y = 0; y < boardLayout.allRows.Length; y++)
-        {
-            LayoutRaw row = boardLayout.allRows[y];
-            EditorGUILayout.BeginHorizontal();
-            for (int x = 0; x < row.gemsInRow.Length; x++)
-            {
-                Rect rect = EditorGUILayout.GetControlRect(false, 60);
-                row.gemsInRow[x] = (Gem)EditorGUI.ObjectField(rect, row.gemsInRow[x], typeof(Gem), true);
-                if (row.gemsInRow[x] != null && row.gemsInRow[x].gemSprite != null)
-                {
-                    GUI.DrawTexture(rect, row.gemsInRow[x].gemSprite.sprite.texture, ScaleMode.ScaleToFit);
-                }
-
-            }
-            EditorGUILayout.EndHorizontal();
-        }
-
-        // Add "Clear Assignments" button
         if (GUILayout.Button("Clear Assignments"))
         {
             ClearAssignments(boardLayout);
         }
 
-        // Save changes
         EditorUtility.SetDirty(boardLayout);
+    }
+
+    private void DrawButtons(BoardLayout boardLayout)
+    {
+        if (GUILayout.Button("Add Row")) AddRow(boardLayout);
+        if (GUILayout.Button("Remove Row")) RemoveRow(boardLayout);
+        if (GUILayout.Button("Add Column")) AddColumn(boardLayout);
+        if (GUILayout.Button("Remove Column")) RemoveColumn(boardLayout);
+    }
+
+    private void DrawGrid(BoardLayout boardLayout)
+    {
+        foreach (LayoutRow row in boardLayout.allRows)
+        {
+            EditorGUILayout.BeginHorizontal();
+            for (int x = 0; x < row.gemsInRow.Length; x++)
+            {
+                DrawGemField(row.gemsInRow[x], row, x);
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+    }
+
+    private void DrawGemField(Gem gem, LayoutRow row, int x)
+    {
+        Rect rect = EditorGUILayout.GetControlRect(false, 60);
+        row.gemsInRow[x] = (Gem)EditorGUI.ObjectField(rect, gem, typeof(Gem), true);
+        if (gem?.gemSprite != null)
+        {
+            GUI.DrawTexture(rect, gem.gemSprite.sprite.texture, ScaleMode.ScaleToFit);
+        }
     }
 
     private void AddRow(BoardLayout boardLayout)
     {
-        List<LayoutRaw> rows = new List<LayoutRaw>(boardLayout.allRows);
-
+        List<LayoutRow> rows = new List<LayoutRow>(boardLayout.allRows);
         if (rows.Count > 0)
         {
             int rowLength = rows[0].gemsInRow.Length;
-            LayoutRaw newRow = new LayoutRaw { gemsInRow = new Gem[rowLength] };
+            LayoutRow newRow = new LayoutRow { gemsInRow = new Gem[rowLength] };
             rows.Add(newRow);
         }
         else
         {
-            rows.Add(new LayoutRaw { gemsInRow = new Gem[0] });
+            rows.Add(new LayoutRow { gemsInRow = new Gem[0] });
         }
-
         boardLayout.allRows = rows.ToArray();
     }
 
@@ -117,7 +106,7 @@ public class BoardLayoutEditor : Editor
     {
         if (boardLayout.allRows.Length > 0)
         {
-            List<LayoutRaw> rows = new List<LayoutRaw>(boardLayout.allRows);
+            List<LayoutRow> rows = new List<LayoutRow>(boardLayout.allRows);
             rows.RemoveAt(rows.Count - 1);
             boardLayout.allRows = rows.ToArray();
         }
@@ -145,6 +134,7 @@ public class BoardLayoutEditor : Editor
             }
         }
     }
+
     private void ClearAssignments(BoardLayout boardLayout)
     {
         for (int y = 0; y < boardLayout.allRows.Length; y++)
