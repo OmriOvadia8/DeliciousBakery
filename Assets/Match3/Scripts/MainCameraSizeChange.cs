@@ -1,25 +1,28 @@
 using UnityEngine;
 
-public class MainCameraSizeChange : MonoBehaviour
+namespace DB_Match3
 {
-    [SerializeField] Camera mainCamera;
-    [SerializeField] BoardSystem boardSystem;
-
-    private void Start()
+    public class MainCameraSizeChange : MonoBehaviour
     {
-        Vector3 newPosition = new Vector3(
-            mainCamera.transform.position.x + (int)(boardSystem.Width / 2f),
-            mainCamera.transform.position.y + (int)(boardSystem.Height / 2f),
-            mainCamera.transform.position.z
-        );
+        [SerializeField] Camera mainCamera;
+        [SerializeField] BoardSystem boardSystem;
 
-        mainCamera.transform.position = newPosition;
-        mainCamera.orthographicSize = boardSystem.Width + 1;
-    }
+        private void Start()
+        {
+            Vector3 newPosition = new Vector3(
+                mainCamera.transform.position.x + (int)(boardSystem.Width / 2f),
+                mainCamera.transform.position.y + (int)(boardSystem.Height / 2f),
+                mainCamera.transform.position.z
+            );
 
-    private void LogMsg(object msg)
-    {
-        string mesg = (string)msg;
-        Debug.Log(mesg);    
+            mainCamera.transform.position = newPosition;
+            mainCamera.orthographicSize = boardSystem.Width + 1;
+        }
+
+        private void LogMsg(object msg)
+        {
+            string mesg = (string)msg;
+            Debug.Log(mesg);
+        }
     }
 }

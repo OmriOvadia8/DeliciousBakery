@@ -13,7 +13,7 @@ namespace MobileDependencyResolverLP.Installer.Editor
     {
         const string k_UnityMediationPackage = "com.unity.services.mediation";
         const string k_PackageUrl   = @"https://s3.amazonaws.com/ssa.public/MDR/mobile-dependency-resolver.unitypackage";
-        const string k_DownloadPath = @"Temp/MDR.unitypackage";
+        const string k_DownloadPath = @"Temp/mdr.unitypackage";
 
         const string k_DoNotAskAgain = "Unity.Mediation.MobileDependencyResolver.DoNotAskAgain";
         const string k_DialogTitle = "Mobile Dependency Resolver required";

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DB_Match3 { 
 public class GameTransferManager : MonoBehaviour
 {
     [SerializeField] GameObject MiniGameScene;
@@ -13,4 +14,5 @@ public class GameTransferManager : MonoBehaviour
         MiniGameScene.SetActive(!value);
     }
 
+}
 }

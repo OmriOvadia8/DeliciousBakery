@@ -3490,8 +3490,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 2035261375}
   Match3Score: 0
-  Match3ScoreGoal: 100
-  MovesCount: 2
+  Match3ScoreGoal: 350
+  MovesCount: 10
   playerInitiatedMove: 0
   isResolvingBoard: 0
   playerWon: 0
@@ -51286,13 +51286,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allRows:
   - gemsInRow:
-    - {fileID: 4257373039174406282, guid: be8c575dc71f65b4cab77522c6cd500b, type: 3}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 4257373039174406282, guid: be8c575dc71f65b4cab77522c6cd500b, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+  - gemsInRow:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - gemsInRow:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   - gemsInRow:
     - {fileID: 0}
     - {fileID: 0}
@@ -51313,14 +51329,6 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 4257373039174406282, guid: be8c575dc71f65b4cab77522c6cd500b, type: 3}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - gemsInRow:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -51333,14 +51341,6 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-  - gemsInRow:
-    - {fileID: 4257373039174406282, guid: be8c575dc71f65b4cab77522c6cd500b, type: 3}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 4257373039174406282, guid: be8c575dc71f65b4cab77522c6cd500b, type: 3}
 --- !u!114 &2037036991 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6807603997412066249, guid: 708c7cb0418581a4cb46c00ee22b74ed, type: 3}
