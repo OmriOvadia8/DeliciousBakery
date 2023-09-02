@@ -1,3 +1,4 @@
+using Codice.CM.Client.Differences;
 using DB_Core;
 using System.Collections;
 using System.Collections.Generic;
@@ -216,8 +217,6 @@ namespace DB_Match3
                 yield return new WaitForSeconds(0.5f);
                 currentState = BoardState.Move;
 
-                // Assuming that DestroyMatches sets the Board to 'Move' state,
-                // perform your game state check here
                 if (MatchFinder.currentMatches.Count == 0 && roundMan.MovesCount == 0)
                 {
                     roundMan.CheckGameState();
@@ -227,8 +226,6 @@ namespace DB_Match3
                 {
                     roundMan.CheckGameState();
                 }
-
-                // roundMan.CheckWinState();
             }
         }
 
@@ -269,27 +266,25 @@ namespace DB_Match3
             }
         }
 
-        public void ShuffleBoard()
+        public void RestartBoardAfterWin()
         {
-            if (currentState != BoardState.Wait)
+            for (int x = 0; x < Width; x++)
             {
-                currentState = BoardState.Wait;
-
-                List<Gem> gemsFromBoard = new List<Gem>();
-
-                for (int x = 0; x < Width; x++)
+                for (int y = 0; y < Height; y++)
                 {
-                    for (int y = 0; y < Height; y++)
+                    Gem gem = GetGemAtPosition(new Vector2Int(x, y));
+                    if (gem != null)
                     {
-                        gemsFromBoard.Add(GetGemAtPosition(new Vector2Int(x, y)));
+                        Destroy(gem.gameObject);
                         AllGems[x, y] = null;
                     }
                 }
-
-                FillBoard(gemsFromBoard);
-
-                StartCoroutine(FillBoardCo());
             }
+
+            InitializeBoard();
+
+            StartCoroutine(FillBoardCo());
+            currentState = BoardState.Move;
         }
     }
 }

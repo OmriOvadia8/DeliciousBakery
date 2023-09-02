@@ -3490,8 +3490,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 2035261375}
   Match3Score: 0
-  Match3ScoreGoal: 350
-  MovesCount: 10
+  Match3ScoreGoal: 60
+  MovesCount: 3
   playerInitiatedMove: 0
   isResolvingBoard: 0
   playerWon: 0
@@ -20302,9 +20302,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2035261375}
-        m_TargetAssemblyTypeName: BoardSystem, Assembly-CSharp
-        m_MethodName: ShuffleBoard
+      - m_Target: {fileID: 154606507}
+        m_TargetAssemblyTypeName: DB_Match3.RoundManager, DB_Match3
+        m_MethodName: RestartMatch3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

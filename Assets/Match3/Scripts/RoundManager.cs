@@ -1,5 +1,6 @@
 using DB_Core;
 using UnityEngine;
+using static DB_Match3.BoardSystem;
 
 namespace DB_Match3
 {
@@ -44,10 +45,19 @@ namespace DB_Match3
         /// </summary>
         public void RestartMatch3()
         {
-            board.ShuffleBoard();
-            Match3Score = 0;
-            MovesCount = 20;
-            Match3GameOver(false);
+            if (board.currentState == BoardState.Wait && playerWon == true)
+            {
+                board.RestartBoardAfterWin();
+                Match3Score = 0;
+                MovesCount = 10;
+                Match3GameOver(false);
+                InvokeEvent(DBEventNames.Match3ScoreTextIncrease, Match3Score);
+                InvokeEvent(DBEventNames.Match3MovesTextUpdate, MovesCount);
+                playerWon = false;
+                board.currentState = BoardState.Move;
+                Debug.Log("Do Something");
+            }
+            Debug.Log("Do nothing");
         }
 
         /// <summary>
@@ -76,7 +86,6 @@ namespace DB_Match3
             if (Match3Score >= Match3ScoreGoal && !playerWon)
             {
                 DisplayWinMessage();
-                playerWon = true;
             }
 
             else if (playerWon)
@@ -91,6 +100,7 @@ namespace DB_Match3
         private void DisplayWinMessage()
         {
             Debug.Log("You Won!");
+            playerWon = true;
             SetBoardStateToWait();
         }
 
