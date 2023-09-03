@@ -65,7 +65,7 @@ namespace DB_Match3
         /// </summary>
         public void CheckGameState()
         {
-            if (board.currentState == BoardSystem.BoardState.Move)
+            if (board.currentState == BoardState.Move)
             {
                 if (Match3Score >= Match3ScoreGoal && !playerWon)
                 {

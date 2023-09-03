@@ -1,23 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4733467256355495606
+--- !u!1001 &8961228339864684984
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1941884966837600326, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 842ad060401c3dc4884a1a540983b89c, type: 3}
+      objectReference: {fileID: 21300000, guid: b147207d22c7052488bdb56ebcaa34ea, type: 3}
     - target: {fileID: 4694647120840871451, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}
       propertyPath: type
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4694647120840871451, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}
+      propertyPath: DestroyEffect
+      value: 
+      objectReference: {fileID: 5354131949644195390, guid: f993cc42b99a1de4d8e3dfcdaeaf6603, type: 3}
     - target: {fileID: 5483271802925682439, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}
       propertyPath: m_Name
-      value: Gem - Yellow Variant
+      value: Gem - Purple Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6193661568725226869, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -72,4 +77,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}

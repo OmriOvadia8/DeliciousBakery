@@ -151,6 +151,7 @@ namespace DB_Match3
             {
                 if (gem.IsMatched)
                 {
+                    Instantiate(gem.DestroyEffect, new Vector2(position.x, position.y), Quaternion.identity);
                     Destroy(gem.gameObject);
                     gem = null;
                 }

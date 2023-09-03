@@ -21,6 +21,7 @@ namespace DB_Match3
         public int ScoreValue = 10;
         public SpriteRenderer gemSprite;
         public int BlastSize = 2;
+        public GameObject DestroyEffect;
 
         public enum GemType
         {
