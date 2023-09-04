@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using DB_Core;
 
 namespace DB_Match3
 {
-    public class MatchFinder : MonoBehaviour
+    public class MatchFinder : DBMonoBehaviour
     {
         [SerializeField] private BoardSystem board;
         public List<Gem> currentMatches = new List<Gem>();
@@ -12,6 +13,7 @@ namespace DB_Match3
         public void FindAllMatches()
         {
             currentMatches.Clear();
+            
             for (int x = 0; x < board.Width; x++)
             {
                 for (int y = 0; y < board.Height; y++)

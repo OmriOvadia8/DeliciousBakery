@@ -89,6 +89,7 @@ namespace DB_Core
         TimeWrapCoinsText,
         Match3ScoreTextIncrease,
         Match3MovesTextUpdate,
-        Match3GameOverScreen
+        Match3GameOverScreen,
+        Match3ScoreToast
     }
 }

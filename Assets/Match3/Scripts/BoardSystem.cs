@@ -160,14 +160,18 @@ namespace DB_Match3
 
         public void DestroyMatches()
         {
+            int totalScore = 0;
             for (int i = 0; i < MatchFinder.currentMatches.Count; i++)
             {
                 if (MatchFinder.currentMatches[i] != null)
                 {
                     ScoreCheck(MatchFinder.currentMatches[i]);
                     DestroyMatchedGemsAt(MatchFinder.currentMatches[i].PosIndex);
+                    totalScore += MatchFinder.currentMatches[i].ScoreValue;
                 }
             }
+
+            InvokeEvent(DBEventNames.Match3ScoreToast, totalScore);
             StartCoroutine(DecreaseRowCo());
         }
 
