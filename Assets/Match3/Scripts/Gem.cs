@@ -145,6 +145,7 @@ namespace DB_Match3
             {
                 RevertMove();
                 yield return new WaitForSeconds(0.5f);
+                InvokeEvent(DBEventNames.Match3ReturnButton, true);
                 Board.currentState = BoardSystem.BoardState.Move;
             }
             else

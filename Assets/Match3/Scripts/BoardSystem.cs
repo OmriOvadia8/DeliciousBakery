@@ -161,14 +161,31 @@ namespace DB_Match3
         public void DestroyMatches()
         {
             int totalScore = 0;
+            int gemScoreValue = MatchFinder.currentMatches[0].ScoreValue;
+            bool isBomb = false;
+            List<Vector2Int> matchedPositions = new List<Vector2Int>();
+
             for (int i = 0; i < MatchFinder.currentMatches.Count; i++)
             {
                 if (MatchFinder.currentMatches[i] != null)
                 {
                     ScoreCheck(MatchFinder.currentMatches[i]);
+                    matchedPositions.Add(MatchFinder.currentMatches[i].PosIndex);
                     DestroyMatchedGemsAt(MatchFinder.currentMatches[i].PosIndex);
-                    totalScore += MatchFinder.currentMatches[i].ScoreValue;
+                    totalScore += gemScoreValue;
+                    if (MatchFinder.currentMatches[i].type == Gem.GemType.Bomb) 
+                    {
+                        isBomb = true;
+                    }
                 }
+            }
+
+            if ((totalScore >= (gemScoreValue * 4)) && isBomb == false)
+            {
+                int randomIndex = UnityEngine.Random.Range(0, matchedPositions.Count);
+                Vector2Int bombPosition = matchedPositions[randomIndex];
+
+                SpawnGemAtPosition(bombPosition, Bomb);
             }
 
             InvokeEvent(DBEventNames.Match3ScoreToast, totalScore);
