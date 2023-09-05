@@ -136,6 +136,7 @@ namespace DB_Match3
         public IEnumerator CheckMoveCo()
         {
             Board.currentState = BoardSystem.BoardState.Wait;
+            InvokeEvent(DBEventNames.Match3ReturnButton, false);
             yield return new WaitForSeconds(0.5f);
 
             Board.MatchFinder.FindAllMatches();

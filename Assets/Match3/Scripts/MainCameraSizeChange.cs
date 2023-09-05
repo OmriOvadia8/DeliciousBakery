@@ -18,11 +18,5 @@ namespace DB_Match3
             mainCamera.transform.position = newPosition;
             mainCamera.orthographicSize = boardSystem.Width + 1;
         }
-
-        private void LogMsg(object msg)
-        {
-            string mesg = (string)msg;
-            Debug.Log(mesg);
-        }
     }
 }

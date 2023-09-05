@@ -90,6 +90,10 @@ namespace DB_Core
         Match3ScoreTextIncrease,
         Match3MovesTextUpdate,
         Match3GameOverScreen,
-        Match3ScoreToast
+        Match3ScoreToast,
+        Match3RestartButtonVisibility,
+        Match3CanvasOrder,
+        Match3GameEndText,
+        Match3ReturnButton
     }
 }

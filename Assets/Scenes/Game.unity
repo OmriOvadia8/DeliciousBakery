@@ -3623,11 +3623,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 2035261375}
   Match3Score: 0
-  Match3ScoreGoal: 60
-  MovesCount: 3
+  Match3ScoreGoal: 100
+  MovesCount: 1
   playerInitiatedMove: 0
   isResolvingBoard: 0
   playerWon: 0
+  IsGameOver: 0
 --- !u!1 &166926201
 GameObject:
   m_ObjectHideFlags: 0
@@ -20422,7 +20423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &464579037
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20439,7 +20440,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -180, y: 101}
+  m_AnchoredPosition: {x: 0, y: 60}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &464579038
@@ -27667,12 +27668,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000b84e0311d17c45bfabef2a35bb131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  match3Canvas: {fileID: 832167203}
   roundManager: {fileID: 154606507}
   scoreText: {fileID: 8842690837280363700}
   movesLeftText: {fileID: 858997579}
   scoreGoalText: {fileID: 1489859542}
   gameOverScreen: {fileID: 2000689436}
   scoreToastText: {fileID: 464579038}
+  restartButton: {fileID: 1470372}
+  gameEndText: {fileID: 1863296813}
+  returnButton: {fileID: 482914187}
 --- !u!4 &859381324
 Transform:
   m_ObjectHideFlags: 0
@@ -46898,7 +46903,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EXIT
+  m_text: RETURN
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 341e685ec206ad0498552d2a4d6a245f, type: 2}
   m_sharedMaterial: {fileID: 8309912418977583134, guid: 341e685ec206ad0498552d2a4d6a245f, type: 2}

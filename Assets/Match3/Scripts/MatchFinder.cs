@@ -93,7 +93,6 @@ namespace DB_Match3
             RemoveDuplicateMatches();
         }
 
-
         private void CheckForAdjacentBomb(int x, int y)
         {
             if (x >= 0 && x < board.Width && y >= 0 && y < board.Height)

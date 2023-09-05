@@ -221,6 +221,7 @@ namespace DB_Match3
             {
                 yield return new WaitForSeconds(0.5f);
                 currentState = BoardState.Move;
+                InvokeEvent(DBEventNames.Match3ReturnButton, true);
 
                 if (MatchFinder.currentMatches.Count == 0 && roundMan.MovesCount == 0)
                 {

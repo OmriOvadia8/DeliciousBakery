@@ -8,11 +8,12 @@ namespace DB_Match3
     {
         [SerializeField] private BoardSystem board;
         public int Match3Score;
-        public int Match3ScoreGoal = 30;
+        public int Match3ScoreGoal = 200;
         public int MovesCount = 2;
         public bool playerInitiatedMove;
         public bool isResolvingBoard;
         public bool playerWon;
+        public bool IsGameOver;
 
         private void Start()
         {
@@ -28,7 +29,7 @@ namespace DB_Match3
             {
                 MovesCount--;
                 InvokeEvent(DBEventNames.Match3MovesTextUpdate, MovesCount);
-                playerInitiatedMove = false; // Reset the flag
+                playerInitiatedMove = false;
             }
         }
 
@@ -38,6 +39,16 @@ namespace DB_Match3
         public void Match3GameOver(bool value)
         {
             InvokeEvent(DBEventNames.Match3GameOverScreen, value);
+            InvokeEvent(DBEventNames.Match3RestartButtonVisibility, value);
+
+            if(value)
+            {
+                InvokeEvent(DBEventNames.Match3CanvasOrder, 2);
+            }
+            else
+            {
+                InvokeEvent(DBEventNames.Match3CanvasOrder, 0);
+            }
         }
 
         /// <summary>
@@ -45,19 +56,18 @@ namespace DB_Match3
         /// </summary>
         public void RestartMatch3()
         {
-            if (board.currentState == BoardState.Wait && playerWon == true)
+            if (board.currentState == BoardState.Wait && IsGameOver)
             {
                 board.RestartBoardAfterWin();
                 Match3Score = 0;
                 MovesCount = 10;
-                Match3GameOver(false);
                 InvokeEvent(DBEventNames.Match3ScoreTextIncrease, Match3Score);
                 InvokeEvent(DBEventNames.Match3MovesTextUpdate, MovesCount);
                 playerWon = false;
+                IsGameOver = false;
                 board.currentState = BoardState.Move;
-                Debug.Log("Do Something");
+                Match3GameOver(false);
             }
-            Debug.Log("Do nothing");
         }
 
         /// <summary>
@@ -101,7 +111,10 @@ namespace DB_Match3
         {
             Debug.Log("You Won!");
             playerWon = true;
+            IsGameOver = true; // Set game over to true
             SetBoardStateToWait();
+            InvokeEvent(DBEventNames.Match3GameEndText, true);
+            Match3GameOver(true);
         }
 
         /// <summary>
@@ -110,7 +123,10 @@ namespace DB_Match3
         private void DisplayLoseMessage()
         {
             Debug.Log("You Lost!");
+            IsGameOver = true; // Set game over to true
             SetBoardStateToWait();
+            InvokeEvent(DBEventNames.Match3GameEndText, false);
+            Match3GameOver(true);
         }
 
         /// <summary>
