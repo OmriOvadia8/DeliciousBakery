@@ -52126,7 +52126,7 @@ MonoBehaviour:
   - {fileID: 42251804603633837, guid: e77e968ef9eb9b74eb525679454261ad, type: 3}
   Bomb: {fileID: 3973014927335985915, guid: bd3c9338aa870174fb7bd292b65f4dba, type: 3}
   GemSpeed: 7
-  bombChance: 0
+  bombChance: 0.5
   boardLayout: {fileID: 2035261377}
   roundMan: {fileID: 154606507}
   MatchFinder: {fileID: 1515887506}
@@ -52160,17 +52160,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allRows:
   - gemsInRow:
-    - {fileID: 4694647120840871451, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}
-    - {fileID: 4694647120840871451, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}
-    - {fileID: 0}
-    - {fileID: 4694647120840871451, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-  - gemsInRow:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 4694647120840871451, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -52204,17 +52196,25 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 4694647120840871451, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
   - gemsInRow:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 4694647120840871451, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}
     - {fileID: 0}
-    - {fileID: 4694647120840871451, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}
-    - {fileID: 4694647120840871451, guid: 25560aaac23971d42a20f3cca8564a4c, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - gemsInRow:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!114 &2037036991 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6807603997412066249, guid: 708c7cb0418581a4cb46c00ee22b74ed, type: 3}
@@ -59160,6 +59160,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0463eabd7b6245244b0ceb1ff780c2d6, type: 2}
   - {fileID: 11400000, guid: 0980461854d889e4e95031875431fd20, type: 2}
   - {fileID: 11400000, guid: f805d9f64e8a4134bb3b2994b8be9f42, type: 2}
+  - {fileID: 11400000, guid: 79c2c7068a1cdd0468a1a371e1ef738f, type: 2}
+  - {fileID: 11400000, guid: 4a4fd9b46445e954eb55358df826629b, type: 2}
   audioSource: {fileID: 2138473847}
 --- !u!4 &2138473846
 Transform:

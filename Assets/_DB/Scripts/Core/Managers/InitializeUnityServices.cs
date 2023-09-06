@@ -23,6 +23,7 @@ namespace DB_Core
                 Manager.AnalyticsManager.ReportEvent(DBEventType.unity_services_failed);
             }
         }
+
         private void Start()
         {
             DontDestroyOnLoad(gameObject);

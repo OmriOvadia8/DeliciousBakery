@@ -62,6 +62,8 @@ namespace DB_Game
         HireSound,
         TabSound,
         PopupSound,
-        Claim
+        Claim,
+        Match3GemBreak,
+        Match3Bomb
     }
 }

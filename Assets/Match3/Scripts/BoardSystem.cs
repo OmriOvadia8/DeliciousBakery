@@ -1,8 +1,8 @@
-using Codice.CM.Client.Differences;
 using DB_Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DB_Game;
 
 namespace DB_Match3
 {
@@ -151,6 +151,14 @@ namespace DB_Match3
             {
                 if (gem.IsMatched)
                 {
+                    if(gem.type == Gem.GemType.Bomb)
+                    {
+                        InvokeEvent(DBEventNames.PlaySound, SoundEffectType.Match3Bomb);
+                    }
+                    else
+                    {
+                        InvokeEvent(DBEventNames.PlaySound, SoundEffectType.Match3GemBreak);
+                    }
                     Instantiate(gem.DestroyEffect, new Vector2(position.x, position.y), Quaternion.identity);
                     Destroy(gem.gameObject);
                     gem = null;
