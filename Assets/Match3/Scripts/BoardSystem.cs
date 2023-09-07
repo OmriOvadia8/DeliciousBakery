@@ -169,121 +169,181 @@ namespace DB_Match3
         public void DestroyMatches()
         {
             int totalScore = 0;
-            int gemScoreValue = MatchFinder.currentMatches[0].ScoreValue;
-            bool isBomb = false;
             List<Vector2Int> matchedPositions = new List<Vector2Int>();
+            bool isBomb = ProcessMatchesAndGatherInfo(ref totalScore, matchedPositions);
 
-            for (int i = 0; i < MatchFinder.currentMatches.Count; i++)
+            if (ShouldSpawnBomb(totalScore, isBomb))
             {
-                if (MatchFinder.currentMatches[i] != null)
-                {
-                    ScoreCheck(MatchFinder.currentMatches[i]);
-                    matchedPositions.Add(MatchFinder.currentMatches[i].PosIndex);
-                    DestroyMatchedGemsAt(MatchFinder.currentMatches[i].PosIndex);
-                    totalScore += gemScoreValue;
-                    if (MatchFinder.currentMatches[i].type == Gem.GemType.Bomb) 
-                    {
-                        isBomb = true;
-                    }
-                }
-            }
-
-            if ((totalScore >= (gemScoreValue * 4)) && isBomb == false)
-            {
-                int randomIndex = UnityEngine.Random.Range(0, matchedPositions.Count);
-                Vector2Int bombPosition = matchedPositions[randomIndex];
-
-                SpawnGemAtPosition(bombPosition, Bomb);
+                SpawnRandomBomb(matchedPositions);
             }
 
             InvokeEvent(DBEventNames.Match3ScoreToast, totalScore);
             StartCoroutine(DecreaseRowCo());
         }
 
+        private bool ProcessMatchesAndGatherInfo(ref int totalScore, List<Vector2Int> matchedPositions)
+        {
+            bool isBomb = false;
+            int gemScoreValue = MatchFinder.currentMatches[0].ScoreValue; // Assuming list is not empty
+
+            foreach (var match in MatchFinder.currentMatches)
+            {
+                if (match == null) continue;
+
+                ScoreCheck(match);
+                matchedPositions.Add(match.PosIndex);
+                DestroyMatchedGemsAt(match.PosIndex);
+
+                totalScore += gemScoreValue;
+                if (match.type == Gem.GemType.Bomb)
+                {
+                    isBomb = true;
+                }
+            }
+            return isBomb;
+        }
+
+        private bool ShouldSpawnBomb(int totalScore, bool isBomb)
+        {
+            int gemScoreValue = MatchFinder.currentMatches[0].ScoreValue; // Assuming list is not empty
+            return (totalScore >= (gemScoreValue * 4)) && !isBomb;
+        }
+
+        private void SpawnRandomBomb(List<Vector2Int> matchedPositions)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, matchedPositions.Count);
+            Vector2Int bombPosition = matchedPositions[randomIndex];
+            SpawnGemAtPosition(bombPosition, Bomb);
+        }
+
+
         private IEnumerator DecreaseRowCo()
         {
             yield return new WaitForSeconds(.2f);
 
-            int nullCounter = 0;
-
             for (int x = 0; x < Width; x++)
             {
-                for (int y = 0; y < Height; y++)
-                {
-                    if (AllGems[x, y] == null)
-                    {
-                        nullCounter++;
-                    }
-                    else if (nullCounter > 0)
-                    {
-                        AllGems[x, y].PosIndex.y -= nullCounter;
-                        AllGems[x, y - nullCounter] = AllGems[x, y];
-                        AllGems[x, y] = null;
-                    }
-
-                }
-
-                nullCounter = 0;
+                ShiftColumnDown(x);
             }
 
             StartCoroutine(FillBoardCo());
         }
 
+        private void ShiftColumnDown(int columnIndex)
+        {
+            int nullCounter = 0;
+
+            for (int y = 0; y < Height; y++)
+            {
+                if (AllGems[columnIndex, y] == null)
+                {
+                    nullCounter++;
+                }
+                else if (nullCounter > 0)
+                {
+                    MoveGemDown(columnIndex, y, nullCounter);
+                }
+            }
+        }
+
+        private void MoveGemDown(int x, int y, int nullCounter)
+        {
+            AllGems[x, y].PosIndex.y -= nullCounter;
+            AllGems[x, y - nullCounter] = AllGems[x, y];
+            AllGems[x, y] = null;
+        }
+
+
         private IEnumerator FillBoardCo()
         {
             yield return new WaitForSeconds(.5f);
             RefillBoard();
+            yield return new WaitForSeconds(.5f);
 
-            yield return new WaitForSeconds(0.5f);
             MatchFinder.FindAllMatches();
 
-            if (MatchFinder.currentMatches.Count > 0)
+            if (HasMatches())
             {
-                yield return new WaitForSeconds(1);
-                DestroyMatches();
+                yield return HandleMatches();
             }
             else
             {
-                yield return new WaitForSeconds(0.5f);
-                currentState = BoardState.Move;
-                InvokeEvent(DBEventNames.Match3ReturnButton, true);
-
-                if (MatchFinder.currentMatches.Count == 0 && roundMan.MovesCount == 0)
-                {
-                    roundMan.CheckGameState();
-                }
-
-                if(roundMan.Match3Score >= roundMan.Match3ScoreGoal)
-                {
-                    roundMan.CheckGameState();
-                }
+                yield return HandleNoMatches();
             }
         }
+
+        private bool HasMatches()
+        {
+            return MatchFinder.currentMatches.Count > 0;
+        }
+
+        private IEnumerator HandleMatches()
+        {
+            yield return new WaitForSeconds(1);
+            DestroyMatches();
+        }
+
+        private IEnumerator HandleNoMatches()
+        {
+            yield return new WaitForSeconds(.5f);
+            currentState = BoardState.Move;
+            InvokeEvent(DBEventNames.Match3ReturnButton, true);
+
+            if (IsEndOfRound())
+            {
+                roundMan.CheckGameState();
+            }
+
+            if (IsScoreGoalReached())
+            {
+                roundMan.CheckGameState();
+            }
+        }
+
+        private bool IsEndOfRound()
+        {
+            return MatchFinder.currentMatches.Count == 0 && roundMan.MovesCount == 0;
+        }
+
+        private bool IsScoreGoalReached()
+        {
+            return roundMan.Match3Score >= roundMan.Match3ScoreGoal;
+        }
+
 
         private void RefillBoard() => FillBoard();
 
         private void CheckMisplacedGems()
         {
-            List<Gem> foundGems = new List<Gem>();
+            List<Gem> foundGems = GetAllSceneGems();
+            RemoveBoardGemsFromList(foundGems);
+            DestroyGemsInList(foundGems);
+        }
 
-            foundGems.AddRange(FindObjectsOfType<Gem>());
+        private List<Gem> GetAllSceneGems()
+        {
+            return new List<Gem>(FindObjectsOfType<Gem>());
+        }
 
+        private void RemoveBoardGemsFromList(List<Gem> gemList)
+        {
             for (int x = 0; x < Width; x++)
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    if (foundGems.Contains(AllGems[x, y]))
-                    {
-                        foundGems.Remove(AllGems[x, y]);
-                    }
+                    gemList.Remove(AllGems[x, y]);
                 }
             }
+        }
 
-            foreach (var gems in foundGems)
+        private void DestroyGemsInList(List<Gem> gemList)
+        {
+            foreach (var gem in gemList)
             {
-                Destroy(gems.gameObject);
+                Destroy(gem.gameObject);
             }
         }
+
 
         private void ScoreCheck(Gem gemToCheck)
         {

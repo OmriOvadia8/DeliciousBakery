@@ -107,22 +107,39 @@ namespace DB_Match3
 
         public void MarkBombArea(Vector2Int bombPos, Gem bomb)
         {
-            for (int x = bombPos.x - bomb.BlastSize; x <= bombPos.x + bomb.BlastSize; x++)
-            {
-                for (int y = bombPos.y - bomb.BlastSize; y <= bombPos.y + bomb.BlastSize; y++)
-                {
-                    if (x < 0 || x >= board.Width || y < 0 || y >= board.Height) continue;
+            int startX = bombPos.x - bomb.BlastSize;
+            int endX = bombPos.x + bomb.BlastSize;
+            int startY = bombPos.y - bomb.BlastSize;
+            int endY = bombPos.y + bomb.BlastSize;
 
-                    Gem targetGem = board.AllGems[x, y];
-                    if (targetGem != null)
+            for (int x = startX; x <= endX; x++)
+            {
+                for (int y = startY; y <= endY; y++)
+                {
+                    if (IsWithinBoardBounds(x, y))
                     {
-                        targetGem.IsMatched = true;
-                        currentMatches.Add(targetGem);
+                        MarkGemAsMatchedIfNotNull(x, y);
                     }
                 }
             }
 
             RemoveDuplicateMatches();
         }
+
+        private bool IsWithinBoardBounds(int x, int y)
+        {
+            return x >= 0 && x < board.Width && y >= 0 && y < board.Height;
+        }
+
+        private void MarkGemAsMatchedIfNotNull(int x, int y)
+        {
+            Gem targetGem = board.AllGems[x, y];
+            if (targetGem != null)
+            {
+                targetGem.IsMatched = true;
+                currentMatches.Add(targetGem);
+            }
+        }
+
     }
 }

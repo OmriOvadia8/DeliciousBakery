@@ -22,73 +22,51 @@ namespace DB_Match3
 
         private void OnEnable()
         {
+            UpdateUIElements();
+            AddEvents();
+        }
+
+        private void OnDisable() => RemoveEvents();
+
+        private void UpdateUIElements()
+        {
             ScoreTextIncrease(roundManager.Match3Score);
             MovesTextUpdate(roundManager.MovesCount);
             scoreGoalText.text = $"{roundManager.Match3ScoreGoal}";
-            AddListener(DBEventNames.Match3ScoreTextIncrease, ScoreTextIncrease);
-            AddListener(DBEventNames.Match3MovesTextUpdate, MovesTextUpdate);
-            AddListener(DBEventNames.Match3GameOverScreen, GameOverScreenShow);
-            AddListener(DBEventNames.Match3ScoreToast, ScoreToastTextIncrease);
-            AddListener(DBEventNames.Match3RestartButtonVisibility, Match3RestartButtonVisibility);
-            AddListener(DBEventNames.Match3CanvasOrder, Match3CanvasOrder);
-            AddListener(DBEventNames.Match3GameEndText, GameOverText);
-            AddListener(DBEventNames.Match3ReturnButton, Match3ReturnButtonInteractable);
         }
 
-        private void OnDisable()
+        private void ScoreTextIncrease(object score) => scoreText.text = $"{score}";
+
+        private void MovesTextUpdate(object movesCount) => movesLeftText.text = $"{movesCount}";
+
+        private void GameOverScreenShow(object show) => gameOverScreen.SetActive((bool)show);
+
+        private void GameOverText(object won) => gameEndText.text = (bool)won ? "You Win!" : "Game Over!";
+
+        private void ReturnButtonInteractable(object enabled) => returnButton.interactable = (bool)enabled;
+
+        private void CanvasOrder(object order) => match3Canvas.sortingOrder = (int)order;
+
+        private void RestartButtonVisibility(object show) => restartButton.SetActive((bool)show);
+
+        private void SetToastDefaults()
         {
-            RemoveListener(DBEventNames.Match3ScoreTextIncrease, ScoreTextIncrease);
-            RemoveListener(DBEventNames.Match3MovesTextUpdate, MovesTextUpdate);
-            RemoveListener(DBEventNames.Match3GameOverScreen, GameOverScreenShow);
-            RemoveListener(DBEventNames.Match3ScoreToast, ScoreToastTextIncrease);
-            RemoveListener(DBEventNames.Match3RestartButtonVisibility, Match3RestartButtonVisibility);
-            RemoveListener(DBEventNames.Match3CanvasOrder, Match3CanvasOrder);
-            RemoveListener(DBEventNames.Match3GameEndText, GameOverText);
-            RemoveListener(DBEventNames.Match3ReturnButton, Match3ReturnButtonInteractable);
+            scoreToastText.transform.localScale = Vector3.one;
+            scoreToastText.color = new Color(scoreToastText.color.r, scoreToastText.color.g, scoreToastText.color.b, 1);
+            scoreToastText.transform.localPosition = new Vector3(0, 60, 0);
+            scoreToastText.gameObject.SetActive(true);
         }
 
-        private void ScoreTextIncrease(object score)
+        private void AnimateToast()
         {
-            int currentScore = (int)score;
-            scoreText.text = $"{currentScore}";
-        }
-
-        private void MovesTextUpdate(object movesCount)
-        {
-            int currentMovesCount = (int)movesCount;
-            movesLeftText.text = $"{currentMovesCount}";
-        }
-
-        private void GameOverScreenShow(object boolValue)
-        {
-            bool value = (bool)boolValue;
-            gameOverScreen.SetActive(value);
-        }
-
-        private void GameOverText(object winLoseText)
-        {
-            bool winOrLose = (bool)winLoseText;
-
-            if(winOrLose)
-            {
-                gameEndText.text = "You Win!";
-            }
-            else
-            {
-                gameEndText.text = "Game Over!";
-            }
-        }
-
-        private void Match3ReturnButtonInteractable(object boolValue)
-        {
-            bool value = (bool)boolValue;
-            returnButton.interactable = value;
-        }
-
-        private void Match3CanvasOrder(object orderNum)
-        {
-            int sortingOrderNumber = (int)orderNum;
-            match3Canvas.sortingOrder = sortingOrderNumber;
+            scoreToastText.transform.DOScale(1.2f, 0.3f);
+            scoreToastText.transform.DOLocalMoveY(90f, 1f);
+            DOTween.To(
+                () => scoreToastText.color,
+                x => scoreToastText.color = x,
+                new Color(scoreToastText.color.r, scoreToastText.color.g, scoreToastText.color.b, 0),
+                1f
+            ).OnComplete(() => StartCoroutine(ToastDestruction()));
         }
 
         private void ScoreToastTextIncrease(object score)
@@ -96,41 +74,40 @@ namespace DB_Match3
             int scoreGain = (int)score;
             scoreToastText.text = $"+{scoreGain}";
 
-            // Set to start state before animating
-            scoreToastText.transform.localScale = Vector3.one;
-            scoreToastText.color = new Color(scoreToastText.color.r, scoreToastText.color.g, scoreToastText.color.b, 1);
-            scoreToastText.transform.localPosition = new Vector3(0, 60, 0);
-
-            scoreToastText.gameObject.SetActive(true);
-
-            // DOTween animations
-            // Scale up
-            scoreToastText.transform.DOScale(1.2f, 0.3f);
-
-            // Move up by 50 units from the current position and fade out over 1 second
-            scoreToastText.transform.DOLocalMoveY(60f + 30f, 1f);
-
-            // Fade out
-            DOTween.To(() => scoreToastText.color, x => scoreToastText.color = x, new Color(scoreToastText.color.r, scoreToastText.color.g, scoreToastText.color.b, 0), 1f).OnComplete(() => StartCoroutine(ToastDestruction()));
+            SetToastDefaults();
+            AnimateToast();
         }
 
         private IEnumerator ToastDestruction()
         {
-            // Reset to starting states, just in case you'll use the object again later
-            scoreToastText.transform.localScale = Vector3.one;
-            scoreToastText.color = new Color(scoreToastText.color.r, scoreToastText.color.g, scoreToastText.color.b, 1);
-            scoreToastText.transform.localPosition = new Vector3(0, 60, 0);
-
+            SetToastDefaults(); 
             scoreToastText.gameObject.SetActive(false);
 
             yield return null;
         }
 
-        private void Match3RestartButtonVisibility(object boolValue)
+        private void AddEvents()
         {
-            bool value = (bool)boolValue;
-            restartButton.SetActive(value);
+            AddListener(DBEventNames.Match3ScoreTextIncrease, ScoreTextIncrease);
+            AddListener(DBEventNames.Match3MovesTextUpdate, MovesTextUpdate);
+            AddListener(DBEventNames.Match3GameOverScreen, GameOverScreenShow);
+            AddListener(DBEventNames.Match3ScoreToast, ScoreToastTextIncrease);
+            AddListener(DBEventNames.Match3RestartButtonVisibility, RestartButtonVisibility);
+            AddListener(DBEventNames.Match3CanvasOrder, CanvasOrder);
+            AddListener(DBEventNames.Match3GameEndText, GameOverText);
+            AddListener(DBEventNames.Match3ReturnButton, ReturnButtonInteractable);
         }
 
+        private void RemoveEvents()
+        {
+            RemoveListener(DBEventNames.Match3ScoreTextIncrease, ScoreTextIncrease);
+            RemoveListener(DBEventNames.Match3MovesTextUpdate, MovesTextUpdate);
+            RemoveListener(DBEventNames.Match3GameOverScreen, GameOverScreenShow);
+            RemoveListener(DBEventNames.Match3ScoreToast, ScoreToastTextIncrease);
+            RemoveListener(DBEventNames.Match3RestartButtonVisibility, RestartButtonVisibility);
+            RemoveListener(DBEventNames.Match3CanvasOrder, CanvasOrder);
+            RemoveListener(DBEventNames.Match3GameEndText, GameOverText);
+            RemoveListener(DBEventNames.Match3ReturnButton, ReturnButtonInteractable);
+        }
     }
 }

@@ -3625,9 +3625,9 @@ MonoBehaviour:
   Match3Score: 0
   Match3ScoreGoal: 10000
   MovesCount: 1
-  playerInitiatedMove: 0
-  isResolvingBoard: 0
-  playerWon: 0
+  PlayerInitiatedMove: 0
+  IsResolvingBoard: 0
+  PlayerWon: 0
   IsGameOver: 0
 --- !u!1 &166926201
 GameObject:
@@ -30138,7 +30138,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -30163,7 +30163,7 @@ Transform:
   m_GameObject: {fileID: 971390280}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 3, y: 3, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35538,7 +35538,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2035261376}
-  - {fileID: 1541738908}
   - {fileID: 1515887507}
   - {fileID: 832167200}
   - {fileID: 154606506}
@@ -41861,52 +41860,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5379417878096019856, guid: b68869071c065a241a02bbebe10f8e01, type: 3}
   m_PrefabInstance: {fileID: 1537134057}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1541738906
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1541738908}
-  - component: {fileID: 1541738907}
-  m_Layer: 0
-  m_Name: camerachange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1541738907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1541738906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bae66c0b854cf0d44901d847b310c9a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 971390282}
-  boardSystem: {fileID: 2035261375}
---- !u!4 &1541738908
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1541738906}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.79842657, y: -0.48113337, z: -80.41503}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1233466544}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1547699664
 GameObject:
   m_ObjectHideFlags: 0
