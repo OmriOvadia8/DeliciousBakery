@@ -20,6 +20,7 @@ namespace DB_Match3
         [Header("Gameplay Settings")]
         public float GemSpeed;
         public float bombChance = 2f;
+        public double reward;
 
         [Header("Dependencies")]
         [SerializeField] private BoardLayout boardLayout;
@@ -190,7 +191,7 @@ namespace DB_Match3
             {
                 if (match == null) continue;
 
-                ScoreCheck(match);
+                roundMan.ScoreCheck(match);
                 matchedPositions.Add(match.PosIndex);
                 DestroyMatchedGemsAt(match.PosIndex);
 
@@ -341,19 +342,6 @@ namespace DB_Match3
             foreach (var gem in gemList)
             {
                 Destroy(gem.gameObject);
-            }
-        }
-
-
-        private void ScoreCheck(Gem gemToCheck)
-        {
-            roundMan.Match3Score += gemToCheck.ScoreValue;
-            InvokeEvent(DBEventNames.Match3ScoreTextIncrease, roundMan.Match3Score);
-
-            double reward = 12345678910;
-            if (roundMan.Match3Score >= roundMan.Match3ScoreGoal)
-            {
-                InvokeEvent(DBEventNames.AddCurrencyUpdate, reward);
             }
         }
 

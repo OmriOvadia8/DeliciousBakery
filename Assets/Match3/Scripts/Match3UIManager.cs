@@ -4,6 +4,7 @@ using DB_Core;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine.UI;
+using DB_Game;
 
 namespace DB_Match3
 {
@@ -19,6 +20,8 @@ namespace DB_Match3
         [SerializeField] GameObject restartButton;
         [SerializeField] TMP_Text gameEndText;
         [SerializeField] Button returnButton;
+        [SerializeField] TMP_Text rewardText;
+        [SerializeField] ParticleSystem winCoinsParticles;
 
         private void OnEnable()
         {
@@ -32,12 +35,13 @@ namespace DB_Match3
         {
             ScoreTextIncrease(roundManager.Match3Score);
             MovesTextUpdate(roundManager.MovesCount);
-            scoreGoalText.text = $"{roundManager.Match3ScoreGoal}";
         }
 
         private void ScoreTextIncrease(object score) => scoreText.text = $"{score}";
 
         private void MovesTextUpdate(object movesCount) => movesLeftText.text = $"{movesCount}";
+
+        private void ScoreGoalTextUpdate(object scoreGoal) => scoreGoalText.text = $"{scoreGoal}";
 
         private void GameOverScreenShow(object show) => gameOverScreen.SetActive((bool)show);
 
@@ -48,6 +52,14 @@ namespace DB_Match3
         private void CanvasOrder(object order) => match3Canvas.sortingOrder = (int)order;
 
         private void RestartButtonVisibility(object show) => restartButton.SetActive((bool)show);
+
+        private void RewardWonMatch3Particles(object obj = null) => winCoinsParticles.Play();
+
+        private void RewardText(object reward)
+        {
+            double match3Reward = (double)reward;
+            rewardText.text = $"Reward: {match3Reward.ToReadableNumber()}";
+        }
 
         private void SetToastDefaults()
         {
@@ -96,6 +108,9 @@ namespace DB_Match3
             AddListener(DBEventNames.Match3CanvasOrder, CanvasOrder);
             AddListener(DBEventNames.Match3GameEndText, GameOverText);
             AddListener(DBEventNames.Match3ReturnButton, ReturnButtonInteractable);
+            AddListener(DBEventNames.RewardTextMatch3, RewardText);
+            AddListener(DBEventNames.Match3WinCoinsParticles, RewardWonMatch3Particles);
+            AddListener(DBEventNames.Match3ScoreGoalText, ScoreGoalTextUpdate);
         }
 
         private void RemoveEvents()
@@ -108,6 +123,9 @@ namespace DB_Match3
             RemoveListener(DBEventNames.Match3CanvasOrder, CanvasOrder);
             RemoveListener(DBEventNames.Match3GameEndText, GameOverText);
             RemoveListener(DBEventNames.Match3ReturnButton, ReturnButtonInteractable);
+            RemoveListener(DBEventNames.RewardTextMatch3, RewardText);
+            RemoveListener(DBEventNames.Match3WinCoinsParticles, RewardWonMatch3Particles);
+            RemoveListener(DBEventNames.Match3ScoreGoalText, ScoreGoalTextUpdate);
         }
     }
 }

@@ -64,6 +64,7 @@ namespace DB_Game
         PopupSound,
         Claim,
         Match3GemBreak,
-        Match3Bomb
+        Match3Bomb,
+        Match3Win
     }
 }

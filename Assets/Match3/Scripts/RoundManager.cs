@@ -1,25 +1,31 @@
 using DB_Core;
 using UnityEngine;
 using static DB_Match3.BoardSystem;
+using DB_Game;
 
 namespace DB_Match3
 {
     public class RoundManager : DBMonoBehaviour
     {
         [SerializeField] private BoardSystem board;
+        [SerializeField] DBPauseCurrencyManager rewardsManager;
 
         public int Match3Score;
-        public int Match3ScoreGoal = 200;
-        public int MovesCount = 2;
+        public int Match3ScoreGoal;
+        public int MovesCount;
+        private double reward;
+        private double minimumReward = 1000;
 
         public bool PlayerInitiatedMove;
         public bool IsResolvingBoard;
         public bool PlayerWon;
         public bool IsGameOver;
+        private bool gotReward;
 
         private void Start()
         {
             SetGameOverState(false);
+            Match3VarsReset();
         }
 
         public void DecreaseMoves()
@@ -51,14 +57,11 @@ namespace DB_Match3
         private void ResetGameParameters()
         {
             board.RestartBoardAfterWin();
-            Match3Score = 0;
-            MovesCount = 10;
+            Match3VarsReset();
             PlayerWon = false;
             IsGameOver = false;
+            gotReward = false;
             board.currentState = BoardState.Move;
-
-            InvokeEvent(DBEventNames.Match3ScoreTextIncrease, Match3Score);
-            InvokeEvent(DBEventNames.Match3MovesTextUpdate, MovesCount);
         }
 
         public void CheckGameState()
@@ -68,6 +71,8 @@ namespace DB_Match3
             if (Match3Score >= Match3ScoreGoal && !PlayerWon)
             {
                 EndGame(true);
+                InvokeEvent(DBEventNames.PlaySound, SoundEffectType.UpgradeButtonClick);
+                InvokeEvent(DBEventNames.Match3WinCoinsParticles, null);
             }
             else
             {
@@ -82,6 +87,42 @@ namespace DB_Match3
             board.currentState = BoardState.Wait;
             InvokeEvent(DBEventNames.Match3GameEndText, isWon);
             SetGameOverState(true);
+        }
+
+        public void Match3RewardDecider()
+        {
+            reward = rewardsManager.Match3Reward() + minimumReward;
+            InvokeEvent(DBEventNames.RewardTextMatch3, reward);
+        }
+
+        public void ScoreCheck(Gem gemToCheck)
+        {
+            Match3Score += gemToCheck.ScoreValue;
+            InvokeEvent(DBEventNames.Match3ScoreTextIncrease, Match3Score);
+
+            if (Match3Score >= Match3ScoreGoal && !gotReward)
+            {
+                InvokeEvent(DBEventNames.AddCurrencyUpdate, reward);
+                InvokeEvent(DBEventNames.CurrencyUpdateUI, null);
+                InvokeEvent(DBEventNames.BuyButtonsCheck, null);
+                
+                gotReward = true;
+            }
+        }
+
+        private void Match3VarsReset()
+        {
+            var matchScore = board.AllGems[0,0].ScoreValue * 5;
+            var minMoves = 10;
+            var maxMoves = 15;
+            var minimumScore = minMoves * matchScore;
+            var maximumScore = maxMoves * matchScore;
+            Match3ScoreGoal = Random.Range(minimumScore, maximumScore).RoundUpToNearestTen();
+            MovesCount = Random.Range(minMoves, maxMoves);
+            Match3Score = 0;
+            InvokeEvent(DBEventNames.Match3ScoreGoalText, Match3ScoreGoal);
+            InvokeEvent(DBEventNames.Match3MovesTextUpdate, MovesCount);
+            InvokeEvent(DBEventNames.Match3ScoreTextIncrease, Match3Score);
         }
     }
 }

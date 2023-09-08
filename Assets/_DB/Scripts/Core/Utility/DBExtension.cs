@@ -117,5 +117,10 @@ namespace DB_Core
 
             return $"{result}{scoreNames[i]}";
         }
+
+        public static int RoundUpToNearestTen(this int number)
+        {
+            return (int)Math.Ceiling(number / 10.0) * 10;
+        }
     }
 }

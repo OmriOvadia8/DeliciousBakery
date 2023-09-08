@@ -37,5 +37,32 @@ namespace DB_Game
 
             return reward;
         }
+
+        public double Match3Reward()
+        {
+            double totalReward = 0;
+            int avgTime = 120;
+
+            for (int i = 0; i < DBFoodManager.FOOD_COUNT; i++)
+            {
+                var foodData = GetFoodData(i);
+                if(!foodData.IsFoodLocked)
+                {
+                    var profit = foodData.Profit;
+                    var timeToCook = foodData.CookingTime;
+                    var foodProfit = (avgTime / timeToCook) * profit;
+                    totalReward += foodProfit;
+                }
+
+                if(foodData.IsBakerUnlocked)
+                {
+                    var bakerProfit = CalculateReward(avgTime, foodData);
+                    totalReward += bakerProfit; 
+                }
+               
+            }
+
+            return totalReward / 3;
+        }
     }
 }

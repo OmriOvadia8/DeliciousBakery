@@ -94,6 +94,9 @@ namespace DB_Core
         Match3RestartButtonVisibility,
         Match3CanvasOrder,
         Match3GameEndText,
-        Match3ReturnButton
+        Match3ReturnButton,
+        RewardTextMatch3,
+        Match3WinCoinsParticles,
+        Match3ScoreGoalText
     }
 }
