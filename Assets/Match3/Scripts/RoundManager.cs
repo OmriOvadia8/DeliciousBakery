@@ -112,7 +112,7 @@ namespace DB_Match3
 
         private void Match3VarsReset()
         {
-            var matchScore = board.AllGems[0,0].ScoreValue * 5;
+            int matchScore = (int)(board.AllGems[0,0].ScoreValue * 5.25f);
             var minMoves = 10;
             var maxMoves = 15;
             var minimumScore = minMoves * matchScore;
