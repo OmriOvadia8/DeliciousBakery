@@ -140,6 +140,5 @@ namespace DB_Match3
                 currentMatches.Add(targetGem);
             }
         }
-
     }
 }

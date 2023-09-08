@@ -54,15 +54,9 @@ namespace DB_Match3
             return Board.currentState == BoardSystem.BoardState.Move;
         }
 
-        private void SetFirstTouchPosition()
-        {
-            firstTouchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
+        private void SetFirstTouchPosition() => firstTouchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        private void Update()
-        {
-            HandleMovement();
-        }
+        private void Update() => HandleMovement();
 
         private void HandleMovement()
         {
@@ -81,10 +75,7 @@ namespace DB_Match3
             return Vector2.Distance(transform.position, PosIndex) > 0.01f;
         }
 
-        private void SmoothMoveGem()
-        {
-            transform.position = Vector2.Lerp(transform.position, PosIndex, Board.GemSpeed * Time.deltaTime);
-        }
+        private void SmoothMoveGem() => transform.position = Vector2.Lerp(transform.position, PosIndex, Board.GemSpeed * Time.deltaTime);
 
         private void SnapGemToGrid()
         {
@@ -92,10 +83,7 @@ namespace DB_Match3
             Board.AllGems[PosIndex.x, PosIndex.y] = this;
         }
 
-        private void OnMouseUp()
-        {
-            HandleMouseUp();
-        }
+        private void OnMouseUp() => HandleMouseUp();
 
         private void HandleMouseUp()
         {
@@ -106,10 +94,7 @@ namespace DB_Match3
             }
         }
 
-        private void SetFinalTouchPosition()
-        {
-            finalTouchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
+        private void SetFinalTouchPosition() => finalTouchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         private void CalculateSwipeAngleAndMovePieces()
         {
@@ -120,10 +105,7 @@ namespace DB_Match3
             }
         }
 
-        private void CalculateSwipeAngle()
-        {
-            swipeAngle = Mathf.Atan2(finalTouchPos.y - firstTouchPos.y, finalTouchPos.x - firstTouchPos.x) * 180 / Mathf.PI;
-        }
+        private void CalculateSwipeAngle() => swipeAngle = Mathf.Atan2(finalTouchPos.y - firstTouchPos.y, finalTouchPos.x - firstTouchPos.x) * 180 / Mathf.PI;
 
         private bool IsSwipeLongEnough()
         {
@@ -136,10 +118,7 @@ namespace DB_Match3
             StartCoroutine(CheckMoveCo());
         }
 
-        private void SetPreviousPosition()
-        {
-            previousPos = PosIndex;
-        }
+        private void SetPreviousPosition() => previousPos = PosIndex;
 
         private void PrepareBoardForMove()
         {
@@ -180,7 +159,6 @@ namespace DB_Match3
         private bool SwipeLeft() => (swipeAngle > 135 || swipeAngle <= -135) && PosIndex.x > 0;
         private bool SwipeUp() => swipeAngle > 45 && swipeAngle <= 135 && PosIndex.y < Board.Height - 1;
         private bool SwipeDown() => swipeAngle > -135 && swipeAngle <= -45 && PosIndex.y > 0;
-
 
         private void SwapPositions(int x, int y)
         {
