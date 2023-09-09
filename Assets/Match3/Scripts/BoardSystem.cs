@@ -21,7 +21,6 @@ namespace DB_Match3
         public float GemSpeed;
         public float bombChance = 2f;
         public double reward;
-        private int gemScoreValue;
 
         [Header("Dependencies")]
         [SerializeField] private BoardLayout boardLayout;
@@ -58,8 +57,6 @@ namespace DB_Match3
                     SpawnInitialGems(x, y);
                 }
             }
-
-            gemScoreValue = MatchFinder.currentMatches[0].ScoreValue;
         }
 
         private void FillBoard(List<Gem> gemList = null)
@@ -188,6 +185,7 @@ namespace DB_Match3
         private bool ProcessMatchesAndGatherInfo(ref int totalScore, List<Vector2Int> matchedPositions)
         {
             bool isBomb = false;
+            int gemScoreValue = MatchFinder.currentMatches[0].ScoreValue; // Assuming list is not empty
 
             foreach (var match in MatchFinder.currentMatches)
             {
@@ -208,15 +206,17 @@ namespace DB_Match3
 
         private bool ShouldSpawnBomb(int totalScore, bool isBomb)
         {
+            int gemScoreValue = MatchFinder.currentMatches[0].ScoreValue; // Assuming list is not empty
             return (totalScore >= (gemScoreValue * 4)) && !isBomb;
         }
 
         private void SpawnRandomBomb(List<Vector2Int> matchedPositions)
         {
-            int randomIndex = Random.Range(0, matchedPositions.Count);
+            int randomIndex = UnityEngine.Random.Range(0, matchedPositions.Count);
             Vector2Int bombPosition = matchedPositions[randomIndex];
             SpawnGemAtPosition(bombPosition, Bomb);
         }
+
 
         private IEnumerator DecreaseRowCo()
         {
@@ -253,6 +253,7 @@ namespace DB_Match3
             AllGems[x, y - nullCounter] = AllGems[x, y];
             AllGems[x, y] = null;
         }
+
 
         private IEnumerator FillBoardCo()
         {
@@ -309,6 +310,7 @@ namespace DB_Match3
         {
             return roundMan.Match3Score >= roundMan.Match3ScoreGoal;
         }
+
 
         private void RefillBoard() => FillBoard();
 
