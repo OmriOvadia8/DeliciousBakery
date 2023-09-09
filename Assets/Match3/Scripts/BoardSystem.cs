@@ -185,7 +185,7 @@ namespace DB_Match3
         private bool ProcessMatchesAndGatherInfo(ref int totalScore, List<Vector2Int> matchedPositions)
         {
             bool isBomb = false;
-            int gemScoreValue = MatchFinder.currentMatches[0].ScoreValue; // Assuming list is not empty
+            int gemScoreValue = MatchFinder.currentMatches[0].ScoreValue; 
 
             foreach (var match in MatchFinder.currentMatches)
             {
@@ -206,7 +206,7 @@ namespace DB_Match3
 
         private bool ShouldSpawnBomb(int totalScore, bool isBomb)
         {
-            int gemScoreValue = MatchFinder.currentMatches[0].ScoreValue; // Assuming list is not empty
+            int gemScoreValue = MatchFinder.currentMatches[0].ScoreValue;
             return (totalScore >= (gemScoreValue * 4)) && !isBomb;
         }
 
