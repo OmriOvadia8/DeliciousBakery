@@ -6,6 +6,9 @@ using DB_Game;
 
 namespace DB_Match3
 {
+    /// <summary>
+    /// Controls the main logic and interactions on the match-3 game board.
+    /// </summary>
     public class BoardSystem : DBMonoBehaviour
     {
         [Header("Board Settings")]
